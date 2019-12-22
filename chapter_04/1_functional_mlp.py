@@ -13,3 +13,10 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='multilayer_perceptron_graph.png')
+
+# %%
+from PIL import Image
+from IPython.display import display # to display images
+
+image = Image.open('multilayer_perceptron_graph.png')
+display(image)

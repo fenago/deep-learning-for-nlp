@@ -17,3 +17,10 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='convolutional_neural_network.png')
+
+# %%
+from PIL import Image
+from IPython.display import display # to display images
+
+image = Image.open('convolutional_neural_network.png')
+display(image)

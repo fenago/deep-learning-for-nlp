@@ -13,3 +13,10 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='recurrent_neural_network.png')
+
+# %%
+from PIL import Image
+from IPython.display import display # to display images
+
+image = Image.open('recurrent_neural_network.png')
+display(image)
