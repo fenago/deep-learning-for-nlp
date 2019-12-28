@@ -1,4 +1,7 @@
 from gensim.models import Word2Vec
+import warnings
+warnings.simplefilter("ignore")
+
 # define training data
 sentences = [['this', 'is', 'the', 'first', 'sentence', 'for', 'word2vec'],
 			['this', 'is', 'the', 'second', 'sentence'],

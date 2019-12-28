@@ -12,6 +12,8 @@ from keras.layers import Embedding
 from keras.layers.convolutional import Conv1D
 from keras.layers.convolutional import MaxPooling1D
 from keras.layers.merge import concatenate
+from PIL import Image
+from IPython.display import display # to display images
 
 # load a clean dataset
 def load_dataset(filename):
@@ -69,6 +71,8 @@ def define_model(length, vocab_size):
 	# summarize
 	model.summary()
 	plot_model(model, show_shapes=True, to_file='model.png')
+	image = Image.open('model.png')
+	display(image)
 	return model
 
 # load training dataset

@@ -10,6 +10,11 @@ from keras.layers import Dense
 from PIL import Image
 from IPython.display import display # to display images
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import warnings
+warnings.simplefilter("ignore")
+
 # load doc into memory
 def load_doc(filename):
 	# open the file as read only

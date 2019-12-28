@@ -11,6 +11,13 @@ from keras.layers import Flatten
 from keras.layers import Embedding
 from keras.layers.convolutional import Conv1D
 from keras.layers.convolutional import MaxPooling1D
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import warnings
+warnings.simplefilter("ignore")
+
+from PIL import Image
+from IPython.display import display # to display images
 
 # load doc into memory
 def load_doc(filename):
@@ -93,6 +100,8 @@ def define_model(vocab_size, max_length):
 	# summarize defined model
 	model.summary()
 	plot_model(model, to_file='model.png', show_shapes=True)
+	image = Image.open('model.png')
+	display(image)
 	return model
 
 # load the vocabulary

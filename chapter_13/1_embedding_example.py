@@ -5,6 +5,11 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Flatten
 from keras.layers.embeddings import Embedding
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import warnings
+warnings.simplefilter("ignore")
+
 # define documents
 docs = ['Well done!',
 		'Good work',

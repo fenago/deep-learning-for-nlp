@@ -11,6 +11,8 @@ from keras.layers import Embedding
 from keras.layers import RepeatVector
 from keras.layers import TimeDistributed
 from keras.callbacks import ModelCheckpoint
+from PIL import Image
+from IPython.display import display # to display images
 
 # load a clean dataset
 def load_clean_sentences(filename):
@@ -57,6 +59,8 @@ def define_model(src_vocab, tar_vocab, src_timesteps, tar_timesteps, n_units):
 	# summarize defined model
 	model.summary()
 	plot_model(model, to_file='model.png', show_shapes=True)
+	image = Image.open('model.png')
+	display(image)
 	return model
 
 # load datasets

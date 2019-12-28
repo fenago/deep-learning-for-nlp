@@ -10,6 +10,11 @@ from pandas import DataFrame
 %matplotlib inline
 from matplotlib import pyplot
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import warnings
+warnings.simplefilter("ignore")
+
 # load doc into memory
 def load_doc(filename):
 	# open the file as read only

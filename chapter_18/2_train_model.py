@@ -5,6 +5,8 @@ from keras.utils.vis_utils import plot_model
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from PIL import Image
+from IPython.display import display # to display images
 
 # load doc into memory
 def load_doc(filename):
@@ -26,6 +28,8 @@ def define_model(X):
 	# summarize defined model
 	model.summary()
 	plot_model(model, to_file='model.png', show_shapes=True)
+	image = Image.open('model.png')
+	display(image)
 	return model
 
 # load

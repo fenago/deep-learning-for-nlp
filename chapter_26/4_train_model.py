@@ -12,6 +12,8 @@ from keras.layers import Embedding
 from keras.layers import Dropout
 from keras.layers.merge import add
 from keras.callbacks import ModelCheckpoint
+from PIL import Image
+from IPython.display import display # to display images
 
 # load doc into memory
 def load_doc(filename):
@@ -130,6 +132,8 @@ def define_model(vocab_size, max_length):
 	# summarize model
 	model.summary()
 	plot_model(model, to_file='model.png', show_shapes=True)
+	image = Image.open('model.png')
+	display(image)
 	return model
 
 # load training dataset (6K)

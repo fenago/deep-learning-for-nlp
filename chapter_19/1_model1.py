@@ -6,6 +6,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers import Embedding
+from PIL import Image
+from IPython.display import display # to display images
 
 # generate a sequence from the model
 def generate_seq(model, tokenizer, seed_text, n_words):
@@ -38,6 +40,8 @@ def define_model(vocab_size):
 	# summarize defined model
 	model.summary()
 	plot_model(model, to_file='model.png', show_shapes=True)
+	image = Image.open('model.png')
+	display(image)
 	return model
 
 # source text
