@@ -7,6 +7,7 @@ from keras.preprocessing.text import Tokenizer
 from keras.models import Sequential
 from keras.layers import Dense
 from pandas import DataFrame
+%matplotlib inline
 from matplotlib import pyplot
 
 # load doc into memory

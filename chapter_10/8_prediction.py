@@ -7,6 +7,8 @@ from keras.preprocessing.text import Tokenizer
 from keras.utils.vis_utils import plot_model
 from keras.models import Sequential
 from keras.layers import Dense
+from PIL import Image
+from IPython.display import display # to display images
 
 # load doc into memory
 def load_doc(filename):
@@ -84,7 +86,9 @@ def define_model(n_words):
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# summarize defined model
 	model.summary()
-	plot_model(model, to_file='model.png', show_shapes=True)
+	plot_model(model, to_file='model2.png', show_shapes=True)
+	image = Image.open('model2.png')
+	display(image)
 	return model
 
 # classify a review as negative or positive
