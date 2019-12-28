@@ -10,8 +10,9 @@ echo 'Installing Dependencies'
 
 pip install numpy==1.16.0
 
-pip install -U nltk
-pip install -U gensim
+sudo pip install -U nltk
+sudo pip install -U gensim
+
 # pip install --upgrade keras==2.0.8
 
 
