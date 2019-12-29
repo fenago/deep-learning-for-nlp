@@ -13,6 +13,8 @@ from keras.layers import TimeDistributed
 from keras.callbacks import ModelCheckpoint
 from PIL import Image
 from IPython.display import display # to display images
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 # load a clean dataset
 def load_clean_sentences(filename):
@@ -91,4 +93,4 @@ testY = encode_output(testY, eng_vocab_size)
 model = define_model(ger_vocab_size, eng_vocab_size, ger_length, eng_length, 256)
 # fit model
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-model.fit(trainX, trainY, epochs=30, batch_size=64, validation_data=(testX, testY), callbacks=[checkpoint], verbose=2)
+model.fit(trainX, trainY, epochs=5, batch_size=64, validation_data=(testX, testY), callbacks=[checkpoint], verbose=2)

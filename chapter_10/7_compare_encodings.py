@@ -10,8 +10,8 @@ from pandas import DataFrame
 %matplotlib inline
 from matplotlib import pyplot
 
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 import warnings
 warnings.simplefilter("ignore")
 
@@ -99,7 +99,7 @@ def evaluate_mode(Xtrain, ytrain, Xtest, ytest):
 		# define network
 		model = define_model(n_words)
 		# fit network
-		model.fit(Xtrain, ytrain, epochs=10, verbose=0)
+		model.fit(Xtrain, ytrain, epochs=1, verbose=0)
 		# evaluate
 		_, acc = model.evaluate(Xtest, ytest, verbose=0)
 		scores.append(acc)

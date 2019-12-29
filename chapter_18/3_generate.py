@@ -3,6 +3,8 @@ from numpy import array
 from keras.models import load_model
 from keras.utils import to_categorical
 from keras.preprocessing.sequence import pad_sequences
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 # generate a sequence of characters with a language model
 def generate_seq(model, mapping, seq_length, seed_text, n_chars):

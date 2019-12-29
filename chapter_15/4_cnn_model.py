@@ -11,8 +11,8 @@ from keras.layers import Flatten
 from keras.layers import Embedding
 from keras.layers.convolutional import Conv1D
 from keras.layers.convolutional import MaxPooling1D
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 import warnings
 warnings.simplefilter("ignore")
 
@@ -123,7 +123,7 @@ Xtrain = encode_docs(tokenizer, max_length, train_docs)
 # define model
 model = define_model(vocab_size, max_length)
 # fit network
-model.fit(Xtrain, ytrain, epochs=10, verbose=2)
+model.fit(Xtrain, ytrain, epochs=3, verbose=2)
 # save the model
 model.save('model.h5')
 

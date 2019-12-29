@@ -9,6 +9,8 @@ from keras.layers import LSTM
 from keras.layers import Embedding
 from PIL import Image
 from IPython.display import display # to display images
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 # generate a sequence from a language model
 def generate_seq(model, tokenizer, max_length, seed_text, n_words):
@@ -40,9 +42,9 @@ def define_model(vocab_size, max_length):
 	# compile network
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# summarize defined model
-	model.summary()
-	plot_model(model, to_file='model.png', show_shapes=True)
-	image = Image.open('model.png')
+	# model.summary()
+	# plot_model(model, to_file='model.png', show_shapes=True)
+	# image = Image.open('model.png')
 	display(image)
 	return model
 
@@ -75,7 +77,7 @@ y = to_categorical(y, num_classes=vocab_size)
 # define model
 model = define_model(vocab_size, max_length)
 # fit network
-model.fit(X, y, epochs=500, verbose=2)
+model.fit(X, y, epochs=100, verbose=2)
 # evaluate model
 print(generate_seq(model, tokenizer, max_length-1, 'Jack and', 5))
 print(generate_seq(model, tokenizer, max_length-1, 'And Jill', 3))

@@ -7,6 +7,8 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from PIL import Image
 from IPython.display import display # to display images
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 # load doc into memory
 def load_doc(filename):

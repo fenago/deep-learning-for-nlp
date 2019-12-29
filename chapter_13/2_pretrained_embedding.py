@@ -8,8 +8,8 @@ from keras.layers import Dense
 from keras.layers import Flatten
 from keras.layers import Embedding
 
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 import warnings
 warnings.simplefilter("ignore")
 

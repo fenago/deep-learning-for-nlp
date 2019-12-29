@@ -1,5 +1,8 @@
 # cumulative BLEU scores
 from nltk.translate.bleu_score import sentence_bleu
+import warnings
+warnings.simplefilter("ignore")
+
 reference = [['this', 'is', 'small', 'test']]
 candidate = ['this', 'is', 'a', 'test']
 print('Cumulative 1-gram: %f' % sentence_bleu(reference, candidate, weights=(1, 0, 0, 0)))

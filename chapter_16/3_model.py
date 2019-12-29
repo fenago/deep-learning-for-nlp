@@ -90,7 +90,7 @@ trainX = encode_text(tokenizer, trainLines, length)
 # define model
 model = define_model(length, vocab_size)
 # fit model
-model.fit([trainX,trainX,trainX], array(trainLabels), epochs=7, batch_size=16)
+model.fit([trainX,trainX,trainX], array(trainLabels), epochs=3, batch_size=16)
 # save the model
 model.save('model.h5')
 

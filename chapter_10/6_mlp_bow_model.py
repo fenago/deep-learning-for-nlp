@@ -10,8 +10,8 @@ from keras.layers import Dense
 from PIL import Image
 from IPython.display import display # to display images
 
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 import warnings
 warnings.simplefilter("ignore")
 

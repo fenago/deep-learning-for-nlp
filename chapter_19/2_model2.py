@@ -9,6 +9,8 @@ from keras.layers import LSTM
 from keras.layers import Embedding
 from PIL import Image
 from IPython.display import display # to display images
+import tensorflow.python.util.deprecation as deprecation
+deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 # generate a sequence from a language model
 def generate_seq(model, tokenizer, max_length, seed_text, n_words):
@@ -76,7 +78,7 @@ y = to_categorical(y, num_classes=vocab_size)
 # define model
 model = define_model(vocab_size, max_length)
 # fit network
-model.fit(X, y, epochs=500, verbose=2)
+model.fit(X, y, epochs=250, verbose=2)
 # evaluate model
 print(generate_seq(model, tokenizer, max_length-1, 'Jack', 4))
 print(generate_seq(model, tokenizer, max_length-1, 'Jill', 4))
