@@ -25,40 +25,38 @@ captioning and translation.
 Labs for this course are available at path shared below. Elev8ed Notebooks (powered by Jupyter) will be accessible at the port given to you by your instructor. 
 
 1. ##### How to Develop Deep Learning Models With Keras
-		* <host-ip>:<port>/lab/workspaces/lab1_TextAnalysisTechniques 
+		* <host-ip>:<port>/lab/workspaces/lab1_Deep_Learning_Models_Keras 
 2. ##### How to Clean Text Manually and with NLTK
-		* <host-ip>:<port>/lab/workspaces/lab2_Clustering_Topic_Modeling
+		* <host-ip>:<port>/lab/workspaces/lab2_Clean_Text_Manually_NLTK
 3. ##### How to Prepare Text Data with scikit-learn
-		* <host-ip>:<port>/lab/workspaces/lab3_Naive_Bayes
+		* <host-ip>:<port>/lab/workspaces/lab3_Prepare_Text_Data_scikit-learn
 4. ##### How to Prepare Text Data With Keras
-		* <host-ip>:<port>/lab/workspaces/lab4_Support_Vector 
+		* <host-ip>:<port>/lab/workspaces/lab4_Prepare_Text_Data_Keras 
 5. ##### How to Prepare Movie Review Data for Sentiment Analysis
-		* <host-ip>:<port>/lab/workspaces/lab5_Tree_Algorithms
+		* <host-ip>:<port>/lab/workspaces/lab5_Movie_Review_Sentiment_Analysis
 6. ##### Project: Develop a Neural Bag-of-Words Model for Sentiment Analysis
-		* <host-ip>:<port>/lab/workspaces/lab6_Logistic_Regression
+		* <host-ip>:<port>/lab/workspaces/lab6_Neural_Bag-of-Words_Model_Sentiment_Analysis
 7. ##### How to Develop Word Embeddings with Gensim
-		* <host-ip>:<port>/lab/workspaces/lab7_Prediction
+		* <host-ip>:<port>/lab/workspaces/lab7_Word_Embeddings_Gensim
 8. ##### How to Learn and Load Word Embeddings in Keras
-		* <host-ip>:<port>/lab/workspaces/lab8_Regression_Algorithms
-9. ##### How to Learn and Load Word Embeddings in Keras
-		* <host-ip>:<port>/lab/workspaces/lab9_Machine_Learning
-10. ##### Project: Develop an Embedding + CNN Model for Sentiment Analysis
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### Project: Develop an n-gram CNN Model for Sentiment Analysis
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### How to Develop a Character-Based Neural Language Model
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### How to Develop a Word-Based Neural Language Model
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### Project: Develop a Neural Language Model for Text Generation
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### How to Load and Use a Pre-Trained Object Recognition Model
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### How to Evaluate Generated Text With the BLEU Score
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### How to Prepare a Photo Caption Dataset For Modeling
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### Project: Develop a Neural Image Caption Generation Model
-		* <host-ip>:<port>/lab/workspaces/1
-1. ##### Project: Develop a Neural Machine Translation Model
-		* <host-ip>:<port>/lab/workspaces/1
+		* <host-ip>:<port>/lab/workspaces/lab8_Word_Embeddings_Keras
+9. ##### Project: Develop an Embedding + CNN Model for Sentiment Analysis
+		* <host-ip>:<port>/lab/workspaces/lab9_Embedding_CNN_Model_Sentiment_Analysis
+10. ##### Project: Develop an n-gram CNN Model for Sentiment Analysis
+		* <host-ip>:<port>/lab/workspaces/lab10_n-gram_CNN_Model_Sentiment_Analysis
+11. ##### How to Develop a Character-Based Neural Language Model
+		* <host-ip>:<port>/lab/workspaces/lab11_Character_Based_Neural_Language_Model
+12. ##### How to Develop a Word-Based Neural Language Model
+		* <host-ip>:<port>/lab/workspaces/lab12_Word_Based_Neural_Language_Model
+13. ##### Project: Develop a Neural Language Model for Text Generation
+		* <host-ip>:<port>/lab/workspaces/lab13_Neural_Language_Model_Text_Generation
+14. ##### How to Load and Use a Pre-Trained Object Recognition Model
+		* <host-ip>:<port>/lab/workspaces/lab14_Pre-Trained_Object_Recognition_Model
+15. ##### How to Evaluate Generated Text With the BLEU Score
+		* <host-ip>:<port>/lab/workspaces/lab15_Generated_Text_BLEU_Score
+16. ##### How to Prepare a Photo Caption Dataset For Modeling
+		* <host-ip>:<port>/lab/workspaces/lab16_Photo_Caption_Dataset
+17. ##### Project: Develop a Neural Image Caption Generation Model
+		* <host-ip>:<port>/lab/workspaces/lab17_Neural_Image_Caption
+18. ##### Project: Develop a Neural Machine Translation Model
+		* <host-ip>:<port>/lab/workspaces/lab18_NeuralMachine_Translation_Model
