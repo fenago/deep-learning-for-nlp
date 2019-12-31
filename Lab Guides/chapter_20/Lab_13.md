@@ -27,15 +27,8 @@ This tutorial is divided into the following parts:
 3. Train Language Model
 4. Use Language Model
 
-225
 
-20.2. The Republic by Plato
-
-20.2
-
-226
-
-The Republic by Plato
+## The Republic by Plato
 
 The Republic is the classical Greek philosopher Plato's most famous work. It is structured as a
 dialog (e.g. conversation) on the topic of order and justice within a city state The entire text is
@@ -128,17 +121,13 @@ model to predict the next word across sentences, paragraphs, and even books or c
 text. Now that we have a model design, we can look at transforming the raw text into sequences
 of 100 input words to 1 output word, ready to fit a model.
 
-20.3. Data Preparation
-
-20.3.3
-
-228
-
 Load Text
 
 The first step is to load the text into memory. We can develop a small function to load the
 entire text file into memory and return it. The function is called load doc() and is listed below.
 Given a filename, it returns a sequence of loaded text.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -152,6 +141,8 @@ return text
 
 Using this function, we can load the cleaner version of the document in the file
 republic clean.txt as follows:
+
+```
 # load document
 in_filename = 'republic_clean.txt'
 doc = load_doc(in_filename)
@@ -160,6 +151,8 @@ print(doc[:200])
 
 Running this snippet loads the document and prints the first 200 characters as a sanity
 check.
+
+```
 BOOK I.
 I went down yesterday to the Piraeus with Glaucon the son of Ariston,
 that I might offer up my prayers to the goddess (Bendis, the Thracian
@@ -192,6 +185,8 @@ Vocabulary size is a big deal with language modeling. A smaller vocabulary resul
 smaller model that trains faster. We can implement each of these cleaning operations in this
 order in a function. Below is the function clean doc() that takes a loaded document as an
 argument and returns an array of clean tokens.
+
+```
 # turn a doc into clean tokens
 def clean_doc(doc):
 # replace '--' with a space ' '
@@ -211,6 +206,8 @@ return tokens
 
 We can run this cleaning operation on our loaded document and print out some of the tokens
 and statistics as a sanity check.
+
+```
 # clean document
 tokens = clean_doc(doc)
 print(tokens[:200])
@@ -220,6 +217,8 @@ print('Unique Tokens: %d' % len(set(tokens)))
 
 First, we can see a nice list of tokens that look cleaner than the raw text. We could remove
 the 'Book I' chapter markers and more, but this is a good start.
+
+```
 ['book', 'i', 'i', 'went', 'down', 'yesterday', 'to', 'the', 'piraeus', 'with', 'glaucon',
 'the', 'son', 'of', 'ariston', 'that', 'i', 'might', 'offer', 'up', 'my', 'prayers',
 'to', 'the', 'goddess', 'bendis', 'the', 'thracian', 'artemis', 'and', 'also',
@@ -238,11 +237,6 @@ the 'Book I' chapter markers and more, but this is a good start.
 'he', 'is', 'said', 'the', 'youth', 'coming', 'after', 'you', 'if', 'you', 'will',
 'only', 'wait', 'certainly', 'we', 'will', 'said', 'glaucon', 'and', 'in', 'a', 'few',
 'minutes', 'polemarchus', 'appeared', 'and', 'with', 'him', 'adeimantus', 'glaucons',
-
-20.3. Data Preparation
-
-230
-
 'brother', 'niceratus', 'the', 'son', 'of', 'nicias', 'and', 'several', 'others',
 'who', 'had', 'been', 'at', 'the', 'procession', 'polemarchus', 'said']
 ```
@@ -250,6 +244,8 @@ the 'Book I' chapter markers and more, but this is a good start.
 We also get some statistics about the clean document. We can see that there are just under
 120,000 words in the clean text and a vocabulary of just under 7,500 words. This is smallish
 and models fit on this data should be manageable on modest hardware.
+
+```
 Total Tokens: 118684
 Unique Tokens: 7409
 ```
@@ -266,6 +262,8 @@ onwards and taking the prior 50 tokens as a sequence, then repeating this proces
 the list of tokens. We will transform the tokens into space-separated strings for later storage
 in a file. The code to split the list of clean tokens into sequences with a length of 51 tokens is
 listed below.
+
+```
 # organize into sequences of tokens
 length = 50 + 1
 sequences = list()
@@ -281,25 +279,27 @@ print('Total Sequences: %d' % len(sequences))
 
 Running this piece creates a long list of lines. Printing statistics on the list, we can see that
 we will have exactly 118,633 training patterns to fit our model.
+
+```
 Total Sequences: 118633
 ```
 
 Next, we can save the sequences to a new file for later loading. We can define a new function
 for saving lines of text to a file. This new function is called save doc() and is listed below. It
 takes as input a list of lines and a filename. The lines are written, one per line, in ASCII format.
+
+```
 # save tokens to file, one dialog per line
 def save_doc(lines, filename):
 data = '\n'.join(lines)
 file = open(filename, 'w')
 file.write(data)
 file.close()
-
-20.3. Data Preparation
-
-231
 ```
 
 We can call this function and save our training sequences to the file republic sequences.txt.
+
+```
 # save sequences to file
 out_filename = 'republic_sequences.txt'
 save_doc(sequences, out_filename)
@@ -308,18 +308,19 @@ save_doc(sequences, out_filename)
 Take a look at the file with your text editor. You will see that each line is shifted along one
 word, with a new word at the end to be predicted; for example, here are the first 3 lines in
 truncated form:
+
+```
 book i i ... catch sight of
 i i went ... sight of us
 i went down ... of us from
 ...
 ```
 
-
-20.3.6
-
 Complete Example
 
 Tying all of this together, the complete code listing is provided below.
+
+```
 import string
 import re
 # load doc into memory
@@ -347,11 +348,6 @@ tokens = [word for word in tokens if word.isalpha()]
 tokens = [word.lower() for word in tokens]
 return tokens
 # save tokens to file, one dialog per line
-
-20.4. Train Language Model
-
-232
-
 def save_doc(lines, filename):
 data = '\n'.join(lines)
 file = open(filename, 'w')
@@ -413,6 +409,8 @@ We can load our training data using the load doc() function we developed in the 
 section. Once loaded, we can split the data into separate training sequences by splitting based
 on new lines. The snippet below will load the republic sequences.txt data file from the
 current working directory.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -443,6 +441,8 @@ First, the Tokenizer must be trained on the entire training dataset, which means
 all of the unique words in the data and assigns each a unique integer. We can then use the fit
 Tokenizer to encode all of the training sequences, converting each sequence from a list of words
 to a list of integers.
+
+```
 # integer encode sequences of words
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(lines)
@@ -459,10 +459,7 @@ of the vocabulary will be 7,409; that means the array must be 7,409 + 1 in lengt
 when specifying the vocabulary size to the Embedding layer, we specify it as 1 larger than the
 actual vocabulary.
 
-20.4. Train Language Model
-
-234
-
+```
 # vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
 ```
@@ -486,6 +483,8 @@ that there are 50 words because we designed the model, but a good generic way to
 is to use the second dimension (number of columns) of the input data's shape. That way, if
 you change the length of sequences when preparing data, you do not need to change this data
 loading code; it is generic.
+
+```
 # separate into input and output
 sequences = array(sequences)
 X, y = sequences[:,:-1], sequences[:,-1]
@@ -510,15 +509,12 @@ interpret the features extracted from the sequence. The output layer predicts th
 a single vector the size of the vocabulary with a probability for each word in the vocabulary. A
 softmax activation function is used to ensure the outputs have the characteristics of normalized
 probabilities.
+
+```
 # define the model
 def define_model(vocab_size, seq_length):
 model = Sequential()
 model.add(Embedding(vocab_size, 50, input_length=seq_length))
-
-20.4. Train Language Model
-
-235
-
 model.add(LSTM(100, return_sequences=True))
 model.add(LSTM(100))
 model.add(Dense(100, activation='relu'))
@@ -533,6 +529,8 @@ return model
 
 A summary of the defined network is printed as a sanity check to ensure we have constructed
 what we intended.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -566,11 +564,8 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-20.4. Train Language Model
-
-236
-
 Figure 20.1: Plot of the defined word-based language model.
+
 The model is compiled specifying the categorical cross entropy loss needed to fit the model.
 Technically, the model is learning a multiclass classification and this is the suitable loss function
 for this type of problem. The efficient Adam implementation to mini-batch gradient descent
@@ -583,17 +578,14 @@ evaluated from the training data at the end of each batch update. You will get d
 but perhaps an accuracy of just over 50% of predicting the next word in the sequence, which is
 not bad. We are not aiming for 100% accuracy (e.g. a model that memorized the text), but
 rather a model that captures the essence of the text.
+
+```
 ...
 Epoch 96/100
 118633/118633 [==============================] - 265s - loss: 2.0324 - acc: 0.5187
 Epoch 97/100
 118633/118633 [==============================] - 265s - loss: 2.0136 - acc: 0.5247
 Epoch 98/100
-
-20.4. Train Language Model
-
-237
-
 118633/118633 [==============================] - 267s - loss: 1.9956 - acc: 0.5262
 Epoch 99/100
 118633/118633 [==============================] - 266s - loss: 1.9812 - acc: 0.5291
@@ -610,6 +602,8 @@ At the end of the run, the trained model is saved to file. Here, we use the Kera
 save the model to the file model.h5 in the current working directory. Later, when we load the
 model to make predictions, we will also need the mapping of words to integers. This is in the
 Tokenizer object, and we can save that too using Pickle.
+
+```
 # save the model to file
 model.save('model.h5')
 # save the tokenizer
@@ -617,12 +611,12 @@ dump(tokenizer, open('tokenizer.pkl', 'wb'))
 ```
 
 
-20.4.6
-
 Complete Example
 
 We can put all of this together; the complete example for fitting the language model is listed
 below.
+
+```
 from
 from
 from
@@ -712,6 +706,8 @@ Load Data
 
 We can use the same code from the previous section to load the training data sequences of text.
 Specifically, the load doc() function.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -719,11 +715,6 @@ file = open(filename, 'r')
 # read all text
 text = file.read()
 # close the file
-
-20.5. Use Language Model
-
-239
-
 file.close()
 return text
 # load cleaned text sequences
@@ -737,6 +728,8 @@ a new sequence of text. The model will require 50 words as input. Later, we will
 the expected length of input. We can determine this from the input sequences by calculating
 the length of one line of the loaded data and subtracting 1 for the expected output word that is
 also on the same line.
+
+```
 seq_length = len(lines[0].split()) - 1
 ```
 
@@ -747,11 +740,15 @@ Load Model
 
 We can now load the model from file. Keras provides the load model() function for loading
 the model, ready for use.
+
+```
 # load the model
 model = load_model('model.h5')
 ```
 
 We can also load the tokenizer from file using the Pickle API.
+
+```
 # load the tokenizer
 tokenizer = load(open('tokenizer.pkl', 'rb'))
 ```
@@ -782,11 +779,15 @@ encoded = tokenizer.texts_to_sequences([seed_text])[0]
 
 The model can predict the next word directly by calling model.predict classes() that
 will return the index of the word with the highest probability.
+
+```
 # predict probabilities for each word
 yhat = model.predict_classes(encoded, verbose=0)
 ```
 
 We can then look up the index in the Tokenizer's mapping to get the associated word.
+
+```
 out_word = ''
 for word, index in tokenizer.word_index.items():
 if index == yhat:
@@ -798,12 +799,16 @@ We can then append this word to the seed text and repeat the process. Importantl
 input sequence is going to get too long. We can truncate it to the desired length after the input
 sequence has been encoded to integers. Keras provides the pad sequences() function that we
 can use to perform this truncation.
+
+```
 encoded = pad_sequences([encoded], maxlen=seq_length, truncating='pre')
 ```
 
 We can wrap all of this into a function called generate seq() that takes as input the model,
 the tokenizer, input sequence length, the seed text, and the number of words to generate. It
 then returns a sequence of words generated by the model.
+
+```
 # generate a sequence from a language model
 def generate_seq(model, tokenizer, seq_length, seed_text, n_words):
 result = list()
@@ -830,16 +835,15 @@ return ' '.join(result)
 
 We are now ready to generate a sequence of new words given some seed text.
 
-20.5. Use Language Model
-
-241
-
+```
 # generate new text
 generated = generate_seq(model, tokenizer, seq_length, seed_text, 50)
 print(generated)
 ```
 
 Putting this all together, the complete code listing for generating text from the learnedlanguage model is listed below.
+
+```
 from
 from
 from
@@ -890,11 +894,6 @@ seq_length = len(lines[0].split()) - 1
 model = load_model('model.h5')
 # load the tokenizer
 tokenizer = load(open('tokenizer.pkl', 'rb'))
-
-20.6. Extensions
-
-242
-
 # select a seed text
 seed_text = lines[randint(0,len(lines))]
 print(seed_text + '\n')
@@ -904,14 +903,19 @@ print(generated)
 ```
 
 Running the example first prints the seed text.
+
+```
 when he said that a man when he grows old may learn many things for he can no more learn
 much than he can run much youth is the time for any extraordinary toil of course and
 therefore calculation and geometry and all the other elements of instruction which are a
 ```
 
 Then 50 words of generated text are printed.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 preparation for dialectic should be presented to the name of idle spendthrifts of whom the
 other is the manifold and the unjust and is the best and the other which delighted to
 be the opening of the soul of the soul and the embroiderer will have to be said at
@@ -982,15 +986,3 @@ embedding and a recurrent neural network. Specifically, you learned:
 hidden layer.
 - How to use the learned language model to generate new text with similar statistical
 properties as the source text.
-
-20.8.1
-
-Next
-
-This is the final chapter in the language modeling part. In the next part you will discover how
-to develop automatic caption generation for photographs.
-
-Part VIII
-Image Captioning
-
-244

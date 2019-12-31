@@ -109,6 +109,8 @@ NLTK provides the sentence bleu() function for evaluating a candidate sentence a
 or more reference sentences. The reference sentences must be provided as a list of sentences
 where each reference is a list of tokens. The candidate sentence is provided as a list of tokens.
 For example:
+
+```
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['this', 'is', 'a', 'test'], ['this', 'is' 'test']]
 candidate = ['this', 'is', 'a', 'test']
@@ -119,18 +121,14 @@ print(score)
 
 Running this example prints a perfect score as the candidate matches one of the references
 exactly.
+
+```
 1.0
 
 ```
 
 
-24.4. Cumulative and Individual BLEU Scores
-
-24.3.2
-
-270
-
-Corpus BLEU Score
+# Corpus BLEU Score
 
 NLTK also provides a function called corpus bleu() for calculating the BLEU score for multiple
 sentences such as a paragraph or a document. The references must be specified as a list of
@@ -138,6 +136,8 @@ documents where each document is a list of references and each alternative refer
 tokens, e.g. a list of lists of lists of tokens. The candidate documents must be specified as a list
 where each document is a list of tokens, e.g. a list of lists of tokens. This is a little confusing;
 here is an example of two references for one document.
+
+```
 # two references for one document
 from nltk.translate.bleu_score import corpus_bleu
 references = [[['this', 'is', 'a', 'test'], ['this', 'is' 'test']]]
@@ -148,6 +148,8 @@ print(score)
 ```
 
 Running the example prints a perfect score as before.
+
+```
 1.0
 
 ```
@@ -169,6 +171,8 @@ An individual n-gram score is the evaluation of just matching grams of a specifi
 as single words (1-gram) or word pairs (2-gram or bigram). The weights are specified as a
 tuple where each index refers to the gram order. To calculate the BLEU score only for 1-gram
 matches, you can specify a weight of 1 for 1-gram and 0 for 2, 3 and 4 (1, 0, 0, 0). For example:
+
+```
 # 1-gram individual BLEU
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['this', 'is', 'small', 'test']]
@@ -179,14 +183,15 @@ print(score)
 ```
 
 Running this example prints a score of 0.5.
+
+```
 0.75
 
 ```
 
 We can repeat this example for individual n-grams from 1 to 4 as follows:
 
-24.4. Cumulative and Individual BLEU Scores
-
+```
 # n-gram individual BLEU
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['this', 'is', 'a', 'test']]
@@ -226,6 +231,8 @@ weights=(0,
 ```
 
 Running the example gives the following results.
+
+```
 Individual
 Individual
 Individual
@@ -255,6 +262,8 @@ weighting them by calculating the weighted geometric mean. By default, the sente
 and corpus bleu() scores calculate the cumulative 4-gram BLEU score, also called BLEU-4.
 The weights for the BLEU-4 are 1/4 (25%) or 0.25 for each of the 1-gram, 2-gram, 3-gram and
 4-gram scores. For example:
+
+```
 # 4-gram cumulative BLEU
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['this', 'is', 'small', 'test']]
@@ -265,6 +274,8 @@ print(score)
 ```
 
 Running this example prints the following score:
+
+```
 0.707106781187
 
 ```
@@ -273,16 +284,13 @@ The cumulative and individual 1-gram BLEU use the same weights, e.g. (1, 0, 0, 0
 2-gram weights assign a 50% to each of 1-gram and 2-gram and the 3-gram weights are 33%
 for each of the 1, 2 and 3-gram scores. Let's make this concrete by calculating the cumulative
 scores for BLEU-1, BLEU-2, BLEU-3 and BLEU-4:
+
+```
 # cumulative BLEU scores
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['this', 'is', 'small', 'test']]
 candidate = ['this', 'is', 'a', 'test']
 print('Cumulative 1-gram: %f' % sentence_bleu(reference, candidate, weights=(1, 0, 0, 0)))
-
-24.5. Worked Examples
-
-272
-
 print('Cumulative 2-gram: %f' % sentence_bleu(reference, candidate, weights=(0.5, 0.5, 0,
 0)))
 print('Cumulative 3-gram: %f' % sentence_bleu(reference, candidate, weights=(0.33, 0.33,
@@ -295,6 +303,8 @@ print('Cumulative 4-gram: %f' % sentence_bleu(reference, candidate, weights=(0.2
 Running the example prints the following scores. They are quite different and more expressive
 than the They are quite different and more expressive than the standalone individual n-gram
 scores.
+
+```
 Cumulative
 Cumulative
 Cumulative
@@ -321,11 +331,15 @@ Worked Examples
 
 In this section, we try to develop further intuition for the BLEU score with some examples. We
 work at the sentence level with a single reference sentence of the following:
+
+```
 the quick brown fox jumped over the lazy dog
 
 ```
 
 First, let's look at a perfect score.
+
+```
 # prefect match
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -336,11 +350,15 @@ print(score)
 ```
 
 Running the example prints a perfect match.
+
+```
 1.0
 
 ```
 
 Next, let's change one word, 'quick ' to 'fast'.
+
+```
 # one word different
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -350,17 +368,16 @@ print(score)
 
 ```
 
-
-24.5. Worked Examples
-
-273
-
 This result is a slight drop in score.
+
+```
 0.7506238537503395
 
 ```
 
 Try changing two words, both 'quick ' to 'fast' and 'lazy' to 'sleepy'.
+
+```
 # two words different
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -371,11 +388,15 @@ print(score)
 ```
 
 Running the example, we can see a linear drop in skill.
+
+```
 0.4854917717073234
 
 ```
 
 What about if all words are different in the candidate?
+
+```
 # all words different
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -386,12 +407,16 @@ print(score)
 ```
 
 We get the worse possible score.
+
+```
 0.0
 
 ```
 
 Now, let's try a candidate that has fewer words than the reference (e.g. drop the last two
 words), but the words are all correct.
+
+```
 # shorter candidate
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -402,16 +427,15 @@ print(score)
 ```
 
 The score is much like the score when two words were wrong above.
+
+```
 0.7514772930752859
 
 ```
 
 How about if we make the candidate two words longer than the reference?
 
-24.6. Further Reading
-
-274
-
+```
 # longer candidate
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -423,11 +447,15 @@ print(score)
 ```
 
 Again, we can see that our intuition holds and the score is something like two words wrong.
+
+```
 0.7860753021519787
 
 ```
 
 Finally, let's compare a candidate that is way too short: only two words in length.
+
+```
 # very short
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -440,6 +468,8 @@ print(score)
 Running this example first prints a warning message indicating that the 3-gram and above
 part of the evaluation (up to 4-gram) cannot be performed. This is fair given we only have
 2-grams to work with in the candidate.
+
+```
 UserWarning:
 Corpus/Sentence contains 0 counts of 3-gram overlaps.
 BLEU scores might be undesirable; use SmoothingFunction().
@@ -448,6 +478,8 @@ warnings.warn(_msg)
 ```
 
 Next, we can a score that is very low indeed.
+
+```
 0.0301973834223185
 
 ```
@@ -456,28 +488,20 @@ I encourage you to continue to play with examples. The math is pretty simple and
 also encourage you to read the paper and explore calculating the sentence-level score yourself in
 a spreadsheet.
 
-24.6
 
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - BLEU on Wikipedia.
 https://en.wikipedia.org/wiki/BLEU
 - BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
 http://www.aclweb.org/anthology/P02-1040.pdf
-
-24.7. Summary
-
-275
-
 - Source code for nltk.translate.bleu score.
 http://www.nltk.org/_modules/nltk/translate/bleu_score.html
 - nltk.translate package API Documentation.
 http://www.nltk.org/api/nltk.translate.html
 
-24.7
-
-Summary
+# Summary
 
 In this tutorial, you discovered the BLEU score for evaluating and scoring candidate text to
 reference text in machine translation and other language generation tasks. Specifically, you
@@ -487,10 +511,3 @@ learned:
 documents.
 - How to can use a suite of small examples to develop an intuition for how differences
 between a candidate and reference text impact the final BLEU score.
-
-24.7.1
-
-Next
-
-In the next chapter, you will discover how you can prepare data for training a caption generation
-model.
