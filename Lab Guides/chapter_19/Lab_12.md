@@ -1,5 +1,5 @@
 
-Chapter 19
+Chapter 19
 How to Develop a Word-Based Neural
 Language Model
 Language modeling involves predicting the next word in a sequence given the sequence of words
@@ -29,7 +29,7 @@ This tutorial is divided into the following parts:
 
 210
 
-19.2. Framing Language Modeling
+19.2. Framing Language Modeling
 
 19.2
 
@@ -93,7 +93,7 @@ and
 Jill
 went
 
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
 212
 
@@ -149,7 +149,7 @@ X, y = sequences[:,0],sequences[:,1]
 ```
 
 
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
 213
 
@@ -213,7 +213,7 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
 214
 
@@ -248,7 +248,7 @@ model and the seed word.
 # generate a sequence from the model
 def generate_seq(model, tokenizer, seed_text, n_words):
 
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+19.4. Model 1: One-Word-In, One-Word-Out Sequences
 in_text, result = seed_text, seed_text
 # generate a fixed number of words
 for _ in range(n_words):
@@ -316,7 +316,7 @@ model.add(Dense(vocab_size, activation='softmax'))
 
 215
 
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
 216
 
@@ -382,7 +382,7 @@ Epoch 500/500
 We can see that the model does not memorize the source sequences, likely because there is
 some ambiguity in the input sequences, for example:
 
-19.5. Model 2: Line-by-Line Sequence
+19.5. Model 2: Line-by-Line Sequence
 
 217
 
@@ -446,7 +446,7 @@ print('Total Sequences: %d' % len(sequences))
 ```
 
 
-19.5. Model 2: Line-by-Line Sequence
+19.5. Model 2: Line-by-Line Sequence
 
 218
 
@@ -505,7 +505,7 @@ out_word = ''
 for word, index in tokenizer.word_index.items():
 if index == yhat:
 
-19.5. Model 2: Line-by-Line Sequence
+19.5. Model 2: Line-by-Line Sequence
 out_word = word
 break
 # append to input
@@ -573,7 +573,7 @@ To fetch a pail of water\n
 
 219
 
-19.5. Model 2: Line-by-Line Sequence
+19.5. Model 2: Line-by-Line Sequence
 
 220
 
@@ -639,7 +639,7 @@ The first generated line looks good, directly matching the source text. The seco
 strange. This makes sense, because the network only ever saw Jill within an input sequence,
 not at the beginning of the sequence, so it has forced an output to use the word Jill, i.e. the
 
-19.6. Model 3: Two-Words-In, One-Word-Out Sequence
+19.6. Model 3: Two-Words-In, One-Word-Out Sequence
 
 221
 
@@ -706,7 +706,7 @@ yhat = model.predict_classes(encoded, verbose=0)
 # map predicted word index to word
 out_word = ''
 
-19.6. Model 3: Two-Words-In, One-Word-Out Sequence
+19.6. Model 3: Two-Words-In, One-Word-Out Sequence
 for word, index in tokenizer.word_index.items():
 if index == yhat:
 out_word = word
@@ -764,7 +764,7 @@ print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
 
 222
 
-19.7. Further Reading
+19.7. Further Reading
 
 223
 
@@ -827,7 +827,7 @@ https://en.wikipedia.org/wiki/Language_model
 - Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
 
-19.8. Summary
+19.8. Summary
 
 224
 

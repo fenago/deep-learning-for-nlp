@@ -1,5 +1,5 @@
 
-Chapter 9
+Chapter 9
 How to Prepare Movie Review Data
 for Sentiment Analysis
 Text data preparation is different for each problem. Preparation starts with simple steps, like
@@ -28,7 +28,7 @@ This tutorial is divided into the following parts:
 
 69
 
-9.2. Movie Review Dataset
+9.2. Movie Review Dataset
 
 9.2
 
@@ -72,7 +72,7 @@ After unzipping the file, you will have a directory called txt sentoken with two
 one per file with a naming convention from cv000 to cv999 for each of neg and pos. Next, let’s
 look at loading the text data.
 
-9.3. Load Text Data
+9.3. Load Text Data
 
 9.3
 
@@ -703,7 +703,7 @@ return lines
 We can then call process docs() for both the directories of positive and negative reviews,
 then call save list() from the previous section to save each list of processed reviews to a file.
 
-9.6. Save Prepared Data
+9.6. Save Prepared Data
 The complete code listing is provided below.
 
 ```

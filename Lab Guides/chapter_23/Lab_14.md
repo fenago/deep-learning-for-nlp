@@ -1,5 +1,5 @@
 
-Chapter 23
+Chapter 23
 How to Load and Use a Pre-Trained
 Object Recognition Model
 Convolutional neural networks are now capable of outperforming humans on some computer
@@ -30,7 +30,7 @@ images. Installation on your system may vary.
 
 256
 
-23.2. ImageNet
+23.2. ImageNet
 
 23.2
 
@@ -55,7 +55,7 @@ these challenges and results on the tasks have exceeded human performance.
 Figure 23.1: Sample of Images from the ImageNet Dataset used in the ILSVRC Challenge.
 Taken From ImageNet Large Scale Visual Recognition Challenge.
 
-23.3. The Oxford VGG Models
+23.3. The Oxford VGG Models
 
 23.3
 
@@ -94,7 +94,7 @@ Load the VGG Model in Keras
 The VGG model can be loaded and used in the Keras deep learning library. Keras provides an
 Applications interface for loading and using pre-trained models. Using this interface, you can
 
-23.4. Load the VGG Model in Keras
+23.4. Load the VGG Model in Keras
 
 259
 
@@ -170,7 +170,7 @@ block4_conv1 (Conv2D)
 1180160
 _________________________________________________________________
 
-23.4. Load the VGG Model in Keras
+23.4. Load the VGG Model in Keras
 
 260
 
@@ -232,13 +232,13 @@ plot_model(model, to_file='vgg.png')
 Again, because the model is large, the plot is a little too large and perhaps unreadable.
 Nevertheless, it is provided below.
 
-23.4. Load the VGG Model in Keras
+23.4. Load the VGG Model in Keras
 
 Figure 23.3: Plot of Layers in the VGG Model.
 
 261
 
-23.5. Develop a Simple Photo Classifier
+23.5. Develop a Simple Photo Classifier
 
 262
 
@@ -273,7 +273,7 @@ mug from Flickr.
 Figure 23.4: Coffee Mug. Photo by jfanaian, some rights reserved.
 Download the image and save it to your current working directory with the filename mug.jpg.
 
-23.5. Develop a Simple Photo Classifier
+23.5. Develop a Simple Photo Classifier
 
 23.5.2
 
@@ -327,7 +327,7 @@ image = preprocess_input(image)
 
 We are now ready to make a prediction for our loaded and prepared image.
 
-23.5. Develop a Simple Photo Classifier
+23.5. Develop a Simple Photo Classifier
 
 23.5.4
 
@@ -389,7 +389,7 @@ label = decode_predictions(yhat)
 label = label[0][0]
 # print the classification
 
-23.6. Further Reading
+23.6. Further Reading
 
 265
 
@@ -436,7 +436,7 @@ classification. Specifically, you learned:
 - How to load the VGG model in Keras and summarize its structure.
 - How to use the loaded VGG model to classifying objects in ad hoc photographs.
 
-23.7. Summary
+23.7. Summary
 
 23.7.1
 

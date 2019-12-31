@@ -1,6 +1,6 @@
 
 
-Chapter 25
+Chapter 25
 How to Prepare a Photo Caption
 Dataset For Modeling
 Automatic photo captioning is a problem where a model must generate a human-readable textual
@@ -33,7 +33,7 @@ This tutorial is divided into the following parts:
 8. Progressive Loading
 276
 
-25.2. Download the Flickr8K Dataset
+25.2. Download the Flickr8K Dataset
 
 25.2
 
@@ -74,7 +74,7 @@ the photographs.
 
 Next, let’s look at how to load the images.
 
-25.3. How to Load Photographs
+25.3. How to Load Photographs
 
 25.3
 
@@ -134,7 +134,7 @@ image_id = filename.split('.')[0]
 ```
 
 
-25.4. Pre-Calculate Photo Features
+25.4. Pre-Calculate Photo Features
 
 279
 
@@ -198,7 +198,7 @@ in the previous section to load all photos, extract their features using a pre-t
 and store the extracted features to a new file that can be loaded and used to train the language
 model. The first step is to load the VGG model. This model is provided directly in Keras and
 
-25.4. Pre-Calculate Photo Features
+25.4. Pre-Calculate Photo Features
 
 280
 
@@ -265,7 +265,7 @@ return features
 # extract features from all images
 directory = 'Flicker8k_Dataset'
 
-25.5. How to Load Descriptions
+25.5. How to Load Descriptions
 
 281
 
@@ -325,7 +325,7 @@ def load_doc(filename):
 # open the file as read only
 file = open(filename, 'r')
 
-25.5. How to Load Descriptions
+25.5. How to Load Descriptions
 
 282
 
@@ -383,7 +383,7 @@ if len(line) < 2:
 continue
 # take the first token as the image id, the rest as the description
 
-25.6. Prepare Description Text
+25.6. Prepare Description Text
 
 283
 
@@ -438,7 +438,7 @@ desc = desc.split()
 desc = [word.lower() for word in desc]
 # remove punctuation from each word
 
-25.6. Prepare Description Text
+25.6. Prepare Description Text
 
 284
 
@@ -496,7 +496,7 @@ image_desc = ' '.join(image_desc)
 # store the first description for each image
 if image_id not in mapping:
 
-25.6. Prepare Description Text
+25.6. Prepare Description Text
 
 285
 
@@ -553,7 +553,7 @@ Vocabulary Size: 4484
 Open the new file descriptions.txt in a text editor and review the contents. You should
 see somewhat readable descriptions of photos ready for modeling.
 
-25.7. Whole Description Sequence Model
+25.7. Whole Description Sequence Model
 
 286
 
@@ -609,7 +609,7 @@ for line in doc.split('\n'):
 # split line by white space
 tokens = line.split()
 
-25.7. Whole Description Sequence Model
+25.7. Whole Description Sequence Model
 
 287
 
@@ -667,7 +667,7 @@ padded = pad_sequences(sequences, maxlen=max_length, padding='post')
 ```
 
 
-25.7. Whole Description Sequence Model
+25.7. Whole Description Sequence Model
 
 288
 
@@ -724,7 +724,7 @@ print('Vocabulary Size: %d' % vocab_size)
 sequences = tokenizer.texts_to_sequences(desc_text)
 # pad all sequences to a fixed length
 
-25.8. Word-By-Word Model
+25.8. Word-By-Word Model
 
 289
 
@@ -780,7 +780,7 @@ STARTDESC boy rides horse ENDDESC
 And would be fed to the model with the same image input to result in the following
 input-output word sequence pairs:
 
-25.8. Word-By-Word Model
+25.8. Word-By-Word Model
 
 290
 
@@ -842,7 +842,7 @@ out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
 ```
 
 
-25.8. Word-By-Word Model
+25.8. Word-By-Word Model
 
 291
 
@@ -904,7 +904,7 @@ in_seq = pad_sequences([in_seq], maxlen=max_length)[0]
 # encode output sequence
 out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
 
-25.9. Progressive Loading
+25.9. Progressive Loading
 
 292
 
@@ -960,7 +960,7 @@ word. Let’s design a data generator that given a loaded dictionary of image id
 descriptions, a trained tokenizer, and a maximum sequence length will load one-image worth of
 examples for each batch.
 
-25.9. Progressive Loading
+25.9. Progressive Loading
 
 293
 
@@ -1018,7 +1018,7 @@ image = images[j]
 # integer encode
 seq = tokenizer.texts_to_sequences([seq])[0]
 
-25.9. Progressive Loading
+25.9. Progressive Loading
 
 294
 
@@ -1087,7 +1087,7 @@ image_id, image_desc = tokens[0], tokens[1:]
 descriptions[image_id] = ' '.join(image_desc)
 return descriptions
 
-25.9. Progressive Loading
+25.9. Progressive Loading
 
 # fit a tokenizer given caption descriptions
 def create_tokenizer(descriptions):
@@ -1143,7 +1143,7 @@ yield [[in_img, in_seq], out_word]
 
 295
 
-25.10. Further Reading
+25.10. Further Reading
 
 296
 
@@ -1202,7 +1202,7 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-25.11. Summary
+25.11. Summary
 
 25.10.1
 

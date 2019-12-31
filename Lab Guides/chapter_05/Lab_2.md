@@ -1,5 +1,5 @@
 
-Chapter 5
+Chapter 5
 How to Clean Text Manually and with
 NLTK
 You cannot go straight from raw text to fitting a machine learning or deep learning model. You
@@ -27,7 +27,7 @@ This tutorial is divided into the following parts:
 
 35
 
-5.2. Metamorphosis by Franz Kafka
+5.2. Metamorphosis by Franz Kafka
 
 5.2
 
@@ -72,7 +72,7 @@ I see:
 - There’s a lot of use of the em dash (-) to continue sentences (maybe replace with commas?).
 - There are names (e.g. Mr. Samsa)
 
-5.4. Manual Tokenization
+5.4. Manual Tokenization
 
 37
 
@@ -186,7 +186,7 @@ two words What and s (not great).
 'about', 'helplessly', 'as', 'he', 'looked', 'What', 's', 'happened', 'to', 'me', 'he',
 'thought', 'It', 'wasn', 't', 'a', 'dream', 'His', 'room']
 
-5.4. Manual Tokenization
+5.4. Manual Tokenization
 
 39
 ```
@@ -242,7 +242,7 @@ print(stripped[:100])
 We can see that this has had the desired effect, mostly. Contractions like What’s have
 become Whats but armour-like has become armourlike.
 
-5.4. Manual Tokenization
+5.4. Manual Tokenization
 
 ```
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
@@ -304,7 +304,7 @@ Running the example, we can see that all words are now lowercase.
 ```
 
 
-5.5. Tokenization and Cleaning with NLTK
+5.5. Tokenization and Cleaning with NLTK
 
 Note on Cleaning Text
 
@@ -425,7 +425,7 @@ We can filter out all tokens that we are not interested in, such as all standalo
 can be done by iterating over all tokens and only keeping those tokens that are all alphabetic.
 Python has the function isalpha() that can be used. For example:
 
-5.5. Tokenization and Cleaning with NLTK
+5.5. Tokenization and Cleaning with NLTK
 
 ```
 from nltk.tokenize import word_tokenize

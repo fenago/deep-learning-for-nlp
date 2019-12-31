@@ -1,5 +1,5 @@
 
-Chapter 16
+Chapter 16
 Project: Develop an n-gram CNN
 Model for Sentiment Analysis
 A standard deep learning model for text classification and sentiment analysis uses a word
@@ -33,7 +33,7 @@ In this tutorial, we will use the Movie Review Dataset. This dataset designed fo
 analysis was described previously in Chapter 9. You can download the dataset from here:
 174
 
-16.3. Data Preparation
+16.3. Data Preparation
 
 175
 
@@ -84,7 +84,7 @@ down too much in the details, we will prepare the data using the following way:
 - Remove all words that are known stop words.
 - Remove all words that have a length ≤ 1 character.
 
-16.3. Data Preparation
+16.3. Data Preparation
 
 176
 
@@ -142,7 +142,7 @@ we may want to explore and I leave them as further exercises.
 ```
 
 
-16.3. Data Preparation
+16.3. Data Preparation
 
 16.3.3
 
@@ -202,7 +202,7 @@ API for saving objects in Python).
 # save a dataset to file
 def save_dataset(dataset, filename):
 
-16.3. Data Preparation
+16.3. Data Preparation
 
 178
 
@@ -261,7 +261,7 @@ continue
 # create the full path of the file to open
 path = directory + '/' + filename
 
-16.4. Develop Multichannel Model
+16.4. Develop Multichannel Model
 
 179
 
@@ -315,7 +315,7 @@ Encode Data
 The first step is to load the cleaned training dataset. The function below-named load dataset()
 can be called to load the pickled training dataset.
 
-16.4. Develop Multichannel Model
+16.4. Develop Multichannel Model
 
 180
 
@@ -374,7 +374,7 @@ A standard model for document classification is to use an Embedding layer as inp
 a one-dimensional convolutional neural network, pooling layer, and then a prediction output
 layer. The kernel size in the convolutional layer defines the number of words to consider as
 
-16.4. Develop Multichannel Model
+16.4. Develop Multichannel Model
 
 181
 
@@ -425,7 +425,7 @@ drop3 = Dropout(0.5)(conv3)
 pool3 = MaxPooling1D(pool_size=2)(drop3)
 flat3 = Flatten()(pool3)
 
-16.4. Develop Multichannel Model
+16.4. Develop Multichannel Model
 # merge
 merged = concatenate([flat1, flat2, flat3])
 # interpretation
@@ -498,7 +498,7 @@ return padded
 
 182
 
-16.4. Develop Multichannel Model
+16.4. Develop Multichannel Model
 
 # define the model
 def define_model(length, vocab_size):
@@ -556,7 +556,7 @@ model.save('model.h5')
 
 183
 
-16.4. Develop Multichannel Model
+16.4. Develop Multichannel Model
 
 184
 
@@ -595,7 +595,7 @@ model.
 Figure 16.1: Plot of the Multichannel Convolutional Neural Network For Text.
 The model is fit for a number of epochs and saved to the file model.h5 for later evaluation.
 
-16.5. Evaluate Model
+16.5. Evaluate Model
 
 16.5
 
@@ -657,7 +657,7 @@ encoded = tokenizer.texts_to_sequences(lines)
 padded = pad_sequences(encoded, maxlen=length, padding='post')
 return padded
 
-16.6. Extensions
+16.6. Extensions
 
 186
 
@@ -711,7 +711,7 @@ how it impacts model skill.
 - Shared Embedding. Explore configurations where each channel shares the same word
 embedding and report on the impact on model skill.
 
-16.7. Further Reading
+16.7. Further Reading
 
 187
 
@@ -758,7 +758,7 @@ sentiment prediction on text movie review data. Specifically, you learned:
 - How to develop a multichannel convolutional neural network for text in Keras.
 - How to evaluate a fit model on unseen movie review data.
 
-16.8. Summary
+16.8. Summary
 
 16.8.1
 
@@ -769,7 +769,7 @@ Next
 This chapter is the last in the text classification part. In the next part, you will discover how to
 develop neural language models.
 
-Part VII
+Part VII
 Language Modeling
 
 189

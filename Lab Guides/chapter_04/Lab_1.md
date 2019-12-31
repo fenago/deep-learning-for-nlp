@@ -30,7 +30,7 @@ Below is an overview of the 5 steps in the neural network model life-cycle in Ke
 5. Make Predictions.
 21
 
-4.1. Keras Model Life-Cycle
+4.1. Keras Model Life-Cycle
 
 
 Figure 4.1: 5 Step Life-Cycle for Neural Network Models in Keras.
@@ -265,7 +265,7 @@ visible = Input(shape=(2,))
 ```
 
 
-
+
 Connecting Layers
 
 The layers in the model are connected pairwise. This is done by specifying where the input

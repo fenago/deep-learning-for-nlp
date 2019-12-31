@@ -1,4 +1,4 @@
-Chapter 18
+Chapter 18
 How to Develop a Character-Based
 Neural Language Model
 A language model predicts the next word in the sequence based on the specific words that have
@@ -27,7 +27,7 @@ This tutorial is divided into the following parts:
 
 197
 
-18.2. Sing a Song of Sixpence
+18.2. Sing a Song of Sixpence
 
 18.2
 
@@ -83,7 +83,7 @@ We will use an arbitrary length of 10 characters for this model. There is not a 
 10 characters is a few words. We can now transform the raw text into a form that our model
 can learn; specifically, input and output sequences of characters.
 
-18.3. Data Preparation
+18.3. Data Preparation
 
 18.3.2
 
@@ -146,7 +146,7 @@ for i in range(length, len(raw_text)):
 # select sequence of tokens
 seq = raw_text[i-length:i+1]
 
-18.3. Data Preparation
+18.3. Data Preparation
 
 200
 
@@ -207,7 +207,7 @@ def save_doc(lines, filename):
 data = '\n'.join(lines)
 file = open(filename, 'w')
 
-18.4. Train Language Model
+18.4. Train Language Model
 
 201
 
@@ -268,7 +268,7 @@ Load Data
 The first step is to load the prepared character sequence data from char sequences.txt. We
 can use the same load doc() function developed in the previous section. Once loaded, we split
 
-18.4. Train Language Model
+18.4. Train Language Model
 
 202
 
@@ -329,7 +329,7 @@ Vocabulary Size: 38
 ```
 
 
-18.4. Train Language Model
+18.4. Train Language Model
 
 18.4.3
 
@@ -389,7 +389,7 @@ The model is learning a multiclass classification problem, therefore we use the 
 loss intended for this type of problem. The efficient Adam implementation of gradient descent
 is used to optimize the model and accuracy is reported at the end of each batch update. The
 
-18.4. Train Language Model
+18.4. Train Language Model
 
 204
 
@@ -439,7 +439,7 @@ dump(mapping, open('mapping.pkl', 'wb'))
 ```
 
 
-18.4. Train Language Model
+18.4. Train Language Model
 
 18.4.6
 
@@ -507,7 +507,7 @@ X, y = sequences[:,:-1], sequences[:,-1]
 sequences = [to_categorical(x, num_classes=vocab_size) for x in X]
 X = array(sequences)
 
-18.5. Generate Text
+18.5. Generate Text
 
 206
 
@@ -575,7 +575,7 @@ mapping = load(open('mapping.pkl', 'rb'))
 
 We are now ready to use the loaded model.
 
-18.5. Generate Text
+18.5. Generate Text
 
 18.5.2
 
@@ -634,7 +634,7 @@ encoded = pad_sequences([encoded], maxlen=seq_length, truncating='pre')
 # one hot encode
 encoded = to_categorical(encoded, num_classes=len(mapping))
 
-18.5. Generate Text
+18.5. Generate Text
 
 208
 
@@ -701,7 +701,7 @@ mapping = load(open('mapping.pkl', 'rb'))
 print(generate_seq(model, mapping, 10, 'Sing a son', 20))
 # test mid-line
 
-18.6. Further Reading
+18.6. Further Reading
 
 209
 

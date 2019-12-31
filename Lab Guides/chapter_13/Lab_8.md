@@ -1,7 +1,6 @@
 
-Chapter 13
-How to Learn and Load Word
-Embeddings in Keras
+Chapter 13
+# How to Learn and Load Word Embeddings in Keras
 Word embeddings provide a dense representation of words and their relative meanings. They are
 an improvement over sparse representations used in simpler bag of word model representations.
 Word embeddings can be learned from text data and reused among projects. They can also be
@@ -25,14 +24,6 @@ This tutorial is divided into the following parts:
 3. Example of Learning an Embedding
 4. Example of Using Pre-Trained GloVe Embedding
 5. Tips for Cleaning Text for Word Embedding
-
-133
-
-13.2. Word Embedding
-
-13.2
-
-134
 
 Word Embedding
 
@@ -77,7 +68,7 @@ arguments:
 is integer encoded to values between 0-10, then the size of the vocabulary would be 11
 words.
 
-13.4. Example of Learning an Embedding
+13.4. Example of Learning an Embedding
 
 135
 
@@ -91,8 +82,9 @@ words, this would be 1000.
 For example, below we define an Embedding layer with a vocabulary of 200 (e.g. integer
 encoded words from 0 to 199, inclusive), a vector space of 32 dimensions in which words will be
 embedded, and input documents that have 50 words each.
-e = Embedding(200, 32, input_length=50)
 
+```
+e = Embedding(200, 32, input_length=50)
 ```
 
 The Embedding layer has weights that are learned. If you save your model to file, this will
@@ -111,6 +103,8 @@ network on a text classification problem. We will define a small problem where w
 text documents, each with a comment about a piece of work a student submitted. Each text
 document is classified as positive 1 or negative 0. This is a simple sentiment analysis problem.
 First, we will define the documents and their class labels.
+
+```
 # define documents
 docs = ['Well done!',
 'Good work',
@@ -133,10 +127,9 @@ model encoding like counts or TF-IDF. Keras provides the one hot() function that
 hash of each word as an efficient integer encoding. We will estimate the vocabulary size of 50,
 which is much larger than needed to reduce the probability of collisions from the hash function.
 
-13.4. Example of Learning an Embedding
+13.4. Example of Learning an Embedding
 
-136
-
+```
 # integer encode the documents
 vocab_size = 50
 encoded_docs = [one_hot(d, vocab_size) for d in docs]
@@ -147,6 +140,8 @@ print(encoded_docs)
 The sequences have different lengths and Keras prefers inputs to be vectorized and all inputs
 to have the same length. We will pad all input sequences to have the length of 4. Again, we can
 do this with a built in Keras function, in this case the pad sequences() function.
+
+```
 # pad documents to a max length of 4 words
 max_length = 4
 padded_docs = pad_sequences(encoded_docs, maxlen=max_length, padding='post')
@@ -159,6 +154,8 @@ The Embedding layer has a vocabulary of 50 and an input length of 4. We will cho
 small embedding space of 8 dimensions. The model is a simple binary classification model.
 Importantly, the output from the Embedding layer will be 4 vectors of 8 dimensions each, one
 for each word. We flatten this to a one 32-element vector to pass on to the Dense output layer.
+
+```
 # define the model
 model = Sequential()
 model.add(Embedding(vocab_size, 8, input_length=max_length))
@@ -172,6 +169,8 @@ model.summary()
 ```
 
 Finally, we can fit and evaluate the classification model.
+
+```
 # fit the model
 model.fit(padded_docs, labels, epochs=50, verbose=0)
 # evaluate the model
@@ -181,6 +180,8 @@ print('Accuracy: %f' % (accuracy*100))
 ```
 
 The complete code listing is provided below.
+
+```
 from numpy import array
 from keras.preprocessing.text import one_hot
 from keras.preprocessing.sequence import pad_sequences
@@ -190,11 +191,6 @@ from keras.layers import Flatten
 from keras.layers.embeddings import Embedding
 # define documents
 docs = ['Well done!',
-
-13.4. Example of Learning an Embedding
-
-137
-
 'Good work',
 'Great effort',
 'nice work',
@@ -232,12 +228,14 @@ print('Accuracy: %f' % (accuracy*100))
 ```
 
 Running the example first prints the integer encoded documents.
+```
 [[6, 16], [42, 24], [2, 17], [42, 24], [18], [17], [22, 17], [27, 42], [22, 24], [49, 46,
 16, 34]]
 
 ```
 
 Then the padded versions of each document are printed, making them all uniform length.
+```
 [[ 6
 [42
 [ 2
@@ -285,13 +283,13 @@ Then the padded versions of each document are printed, making them all uniform l
 ```
 
 
-13.5. Example of Using Pre-Trained GloVe Embedding
-
-138
+13.5. Example of Using Pre-Trained GloVe Embedding
 
 After the network is defined, a summary of the layers is printed. We can see that as expected,
 the output of the Embedding layer is a 4 × 8 matrix and this is squashed to a 32-element vector
 by the Flatten layer.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -320,6 +318,8 @@ Finally, the accuracy of the trained model is printed, showing that it learned t
 dataset perfectly (which is not surprising).
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 Accuracy: 100.000000
 
 ```
@@ -348,10 +348,7 @@ which contains a 100-dimensional version of the embedding. If you peek inside th
 see a token (word) followed by the weights (100 numbers) on each line. For example, below are
 the first line of the embedding ASCII text file showing the embedding for the.
 
-13.5. Example of Using Pre-Trained GloVe Embedding
-
-139
-
+```
 the -0.038194 -0.24487 0.72812 -0.39961 0.083172 0.043953 -0.39141 0.3344 -0.57545 0.087459
 0.28787 -0.06731 0.30906 -0.26384 -0.13231 -0.20757 0.33395 -0.33848 -0.31743 -0.48336
 0.1464 -0.37304 0.34577 0.052041 0.44946 -0.46971 0.02628 -0.54155 -0.15518 -0.14107
@@ -371,6 +368,8 @@ integers as well as integers to words. Keras provides a Tokenizer class that can
 training data, can convert text to sequences consistently by calling the texts to sequences()
 method on the Tokenizer class, and provides access to the dictionary mapping of words to
 integers in a word index attribute.
+
+```
 # define documents
 docs = ['Well done!',
 'Good work',
@@ -400,17 +399,14 @@ print(padded_docs)
 
 Next, we need to load the entire GloVe word embedding file into memory as a dictionary of
 word to embedding array.
+
+```
 # load the whole embedding into memory
 embeddings_index = dict()
 f = open('glove.6B.100d.txt')
 for line in f:
 values = line.split()
 word = values[0]
-
-13.5. Example of Using Pre-Trained GloVe Embedding
-
-140
-
 coefs = asarray(values[1:], dtype='float32')
 embeddings_index[word] = coefs
 f.close()
@@ -423,6 +419,8 @@ training data. Next, we need to create a matrix of one embedding for each word i
 dataset. We can do that by enumerating all unique words in the Tokenizer.word index and
 locating the embedding weight vector from the loaded GloVe embedding. The result is a matrix
 of weights only for words we will see during training.
+
+```
 # create a weight matrix for words in training docs
 embedding_matrix = zeros((vocab_size, 100))
 for word, i in t.word_index.items():
@@ -437,11 +435,14 @@ the Embedding layer can be seeded with the GloVe word embedding weights. We chos
 100-dimensional version, therefore the Embedding layer must be defined with output dim set to
 100. Finally, we do not want to update the learned word weights in this model, therefore we
 will set the trainable attribute for the model to be False.
-e = Embedding(vocab_size, 100, weights=[embedding_matrix], input_length=4, trainable=False)
 
+```
+e = Embedding(vocab_size, 100, weights=[embedding_matrix], input_length=4, trainable=False)
 ```
 
 The complete worked example is listed below.
+
+```
 from numpy import array
 from numpy import asarray
 from numpy import zeros
@@ -465,11 +466,6 @@ docs = ['Well done!',
 # define class labels
 labels = array([1,1,1,1,1,0,0,0,0,0])
 # prepare tokenizer
-
-13.5. Example of Using Pre-Trained GloVe Embedding
-
-141
-
 t = Tokenizer()
 t.fit_on_texts(docs)
 vocab_size = len(t.word_index) + 1
@@ -516,18 +512,14 @@ print('Accuracy: %f' % (accuracy*100))
 
 Running the example may take a bit longer, but then demonstrates that it is just as capable
 of fitting this simple problem.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
-...
-Accuracy: 100.000000
 
 ```
-
-layer.
-
-13.6. Tips for Cleaning Text for Word Embedding
-
-142
+...
+Accuracy: 100.000000
+```
 
 In practice, I would encourage you to experiment with learning a word embedding using
 a pre-trained embedding that is fixed and trying to perform learning on top of a pre-trained
@@ -574,9 +566,7 @@ https://en.wikipedia.org/wiki/Word_embedding
 - Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
 
-13.8. Summary
-
-143
+13.8. Summary
 
 - Using pre-trained word embeddings in a Keras model, 2016.
 https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html
@@ -591,9 +581,7 @@ http://blog.aylien.com/overview-word-embeddings-history-word2vec-cbow-glove/
 - Deep Learning, NLP, and Representations, 2014.
 http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/
 
-13.8
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to use word embeddings for deep learning in Python with
 Keras. Specifically, you learned:
@@ -601,15 +589,3 @@ Keras. Specifically, you learned:
 layer.
 - How to learn a word embedding while fitting a neural network.
 - How to use a pre-trained word embedding in a neural network.
-
-13.8.1
-
-Next
-
-This is the end of the part on word embeddings. In the next part you will discover neural text
-classification.
-
-Part VI
-Text Classification
-
-144

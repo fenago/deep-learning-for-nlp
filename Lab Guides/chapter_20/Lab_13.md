@@ -1,5 +1,5 @@
 
-Chapter 20
+Chapter 20
 Project: Develop a Neural Language
 Model for Text Generation
 A language model can predict the probability of the next word in the sequence, based on the
@@ -29,7 +29,7 @@ This tutorial is divided into the following parts:
 
 225
 
-20.2. The Republic by Plato
+20.2. The Republic by Plato
 
 20.2
 
@@ -81,7 +81,7 @@ were starting on our way home, and told his servant to run and bid us wait for h
 The servant took hold of me by the cloak behind, and said: Polemarchus desires you
 to wait.
 
-20.3. Data Preparation
+20.3. Data Preparation
 
 227
 
@@ -128,7 +128,7 @@ model to predict the next word across sentences, paragraphs, and even books or c
 text. Now that we have a model design, we can look at transforming the raw text into sequences
 of 100 input words to 1 output word, ready to fit a model.
 
-20.3. Data Preparation
+20.3. Data Preparation
 
 20.3.3
 
@@ -182,7 +182,7 @@ yourself as an extension.
 ‘What’).
 - Remove all words that are not alphabetic to remove standalone punctuation tokens.
 
-20.3. Data Preparation
+20.3. Data Preparation
 
 229
 
@@ -239,7 +239,7 @@ the ’Book I’ chapter markers and more, but this is a good start.
 'only', 'wait', 'certainly', 'we', 'will', 'said', 'glaucon', 'and', 'in', 'a', 'few',
 'minutes', 'polemarchus', 'appeared', 'and', 'with', 'him', 'adeimantus', 'glaucons',
 
-20.3. Data Preparation
+20.3. Data Preparation
 
 230
 
@@ -294,7 +294,7 @@ file = open(filename, 'w')
 file.write(data)
 file.close()
 
-20.3. Data Preparation
+20.3. Data Preparation
 
 231
 ```
@@ -348,7 +348,7 @@ tokens = [word.lower() for word in tokens]
 return tokens
 # save tokens to file, one dialog per line
 
-20.4. Train Language Model
+20.4. Train Language Model
 
 232
 
@@ -401,7 +401,7 @@ Specifically, we will use an Embedding Layer to learn the representation of word
 Long Short-Term Memory (LSTM) recurrent neural network to learn to predict words based on
 their context. Let’s start by loading our training data.
 
-20.4. Train Language Model
+20.4. Train Language Model
 
 20.4.1
 
@@ -459,7 +459,7 @@ of the vocabulary will be 7,409; that means the array must be 7,409 + 1 in lengt
 when specifying the vocabulary size to the Embedding layer, we specify it as 1 larger than the
 actual vocabulary.
 
-20.4. Train Language Model
+20.4. Train Language Model
 
 234
 
@@ -515,7 +515,7 @@ def define_model(vocab_size, seq_length):
 model = Sequential()
 model.add(Embedding(vocab_size, 50, input_length=seq_length))
 
-20.4. Train Language Model
+20.4. Train Language Model
 
 235
 
@@ -566,7 +566,7 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-20.4. Train Language Model
+20.4. Train Language Model
 
 236
 
@@ -590,7 +590,7 @@ Epoch 97/100
 118633/118633 [==============================] - 265s - loss: 2.0136 - acc: 0.5247
 Epoch 98/100
 
-20.4. Train Language Model
+20.4. Train Language Model
 
 237
 
@@ -660,7 +660,7 @@ model.add(LSTM(100, return_sequences=True))
 model.add(LSTM(100))
 model.add(Dense(100, activation='relu'))
 
-20.5. Use Language Model
+20.5. Use Language Model
 
 238
 
@@ -720,7 +720,7 @@ file = open(filename, 'r')
 text = file.read()
 # close the file
 
-20.5. Use Language Model
+20.5. Use Language Model
 
 239
 
@@ -776,7 +776,7 @@ encoded = tokenizer.texts_to_sequences([seed_text])[0]
 ```
 
 
-20.5. Use Language Model
+20.5. Use Language Model
 
 240
 
@@ -830,7 +830,7 @@ return ' '.join(result)
 
 We are now ready to generate a sequence of new words given some seed text.
 
-20.5. Use Language Model
+20.5. Use Language Model
 
 241
 
@@ -891,7 +891,7 @@ model = load_model('model.h5')
 # load the tokenizer
 tokenizer = load(open('tokenizer.pkl', 'rb'))
 
-20.6. Extensions
+20.6. Extensions
 
 242
 
@@ -939,7 +939,7 @@ cells in the hidden layer, to see if you can develop a better model.
 - Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
 dropout to see if you can develop a better model.
 
-20.7. Further Reading
+20.7. Further Reading
 
 243
 
@@ -990,7 +990,7 @@ Next
 This is the final chapter in the language modeling part. In the next part you will discover how
 to develop automatic caption generation for photographs.
 
-Part VIII
+Part VIII
 Image Captioning
 
 244

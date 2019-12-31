@@ -1,4 +1,4 @@
-Chapter 15
+Chapter 15
 Project: Develop an Embedding +
 CNN Model for Sentiment Analysis
 Word embeddings are a technique for representing text where different words with similar
@@ -24,17 +24,10 @@ This tutorial is divided into the following parts:
 3. Train CNN With Embedding Layer
 4. Evaluate Model
 
-15.2
-
-Movie Review Dataset
+# Movie Review Dataset
 
 In this tutorial, we will use the Movie Review Dataset. This dataset designed for sentiment
 analysis was described previously in Chapter 9. You can download the dataset from here:
-153
-
-15.3. Data Preparation
-
-154
 
 - Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
@@ -43,9 +36,7 @@ gz
 After unzipping the file, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
 one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
-15.3
-
-Data Preparation
+# Data Preparation
 
 Note: The preparation of the movie review dataset was first described in Chapter 9. In this
 section, we will look at 3 things:
@@ -83,7 +74,7 @@ down too much in the details, we will prepare the data using the following way:
 - Remove all words that are known stop words.
 - Remove all words that have a length ≤ 1 character.
 
-15.3. Data Preparation
+15.3. Data Preparation
 
 155
 
@@ -91,6 +82,8 @@ We can put all of these steps into a function called clean doc() that takes as a
 the raw text loaded from a file and returns a list of cleaned tokens. We can also define a function
 load doc() that loads a document from file ready for use with the clean doc() function. An
 example of cleaning the first positive review is listed below.
+
+```
 from nltk.corpus import stopwords
 import string
 import re
@@ -129,6 +122,8 @@ print(tokens)
 
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
+
+```
 ...
 'creepy', 'place', 'even', 'acting', 'hell', 'solid', 'dreamy', 'depp', 'turning',
 'typically', 'strong', 'performance', 'deftly', 'handling', 'british', 'accent',
@@ -141,13 +136,8 @@ we may want to explore and I leave them as further exercises.
 ```
 
 
-15.3. Data Preparation
 
-15.3.3
-
-156
-
-Define a Vocabulary
+# Define a Vocabulary
 
 It is important to define a vocabulary of known words when using a text model. The more
 words, the larger the representation of documents, therefore it is important to constrain the
@@ -160,6 +150,8 @@ their count that allows us to easily update and query. Each document can be adde
 counter (a new function called add doc to vocab()) and we can step over all of the reviews in
 the negative directory and then the positive directory (a new function called process docs()).
 The complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -197,11 +189,6 @@ doc = load_doc(filename)
 # clean doc
 tokens = clean_doc(doc)
 # update counts
-
-15.3. Data Preparation
-
-157
-
 vocab.update(tokens)
 # load all docs in a directory
 def process_docs(directory, vocab):
@@ -229,6 +216,8 @@ print(vocab.most_common(50))
 Running the example shows that we have a vocabulary of 44,276 words. We also can see
 a sample of the top 50 most used words in the movie reviews. Note that this vocabulary was
 constructed based on only those reviews in the training dataset.
+
+```
 44276
 [('film', 7983), ('one', 4946), ('movie', 4826), ('like', 3201), ('even', 2262), ('good',
 2080), ('time', 2041), ('story', 1907), ('films', 1873), ('would', 1844), ('much',
@@ -246,6 +235,8 @@ constructed based on only those reviews in the training dataset.
 We can step through the vocabulary and remove all words that have a low occurrence, such
 as only being used once or twice in all reviews. For example, the following snippet will retrieve
 only the tokens that appear 2 or more times in all reviews.
+
+```
 # keep tokens with a min occurrence
 min_occurrence = 2
 tokens = [k for k,c in vocab.items() if c >= min_occurrence]
@@ -255,12 +246,9 @@ print(len(tokens))
 
 Finally, the vocabulary can be saved to a new file called vocab.txt that we can later load
 and use to filter movie reviews prior to encoding them for modeling. We define a new function
-
-15.3. Data Preparation
-
-158
-
 called save list() that saves the vocabulary to file, with one word per line. For example:
+
+```
 # save list to file
 def save_list(lines, filename):
 # convert lines to a single blob of text
@@ -277,6 +265,8 @@ save_list(tokens, 'vocab.txt')
 ```
 
 Pulling all of this together, the complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -312,7 +302,7 @@ def add_doc_to_vocab(filename, vocab):
 # load doc
 doc = load_doc(filename)
 
-15.3. Data Preparation
+15.3. Data Preparation
 
 159
 
@@ -369,7 +359,7 @@ in your file will differ, but should look something like the following:
 aberdeen
 dupe
 
-15.4. Train CNN With Embedding Layer
+15.4. Train CNN With Embedding Layer
 
 160
 
@@ -404,6 +394,8 @@ first step is to load the vocabulary. We will use it to filter out words from mo
 we are not interested in. If you have worked through the previous section, you should have a
 local file called vocab.txt with one word per line. We can load that file and build a vocabulary
 as a set for checking the validity of tokens.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -427,10 +419,7 @@ easy encoding as a sequence of integers later. Cleaning the document involves sp
 review based on white space, removing punctuation, and then filtering out all tokens not in the
 vocabulary. The updated clean doc() function is listed below.
 
-15.4. Train CNN With Embedding Layer
-
-161
-
+```
 # turn a doc into clean tokens
 def clean_doc(doc, vocab):
 # split into tokens by white space
@@ -448,6 +437,8 @@ return tokens
 
 The updated process docs() can then call the clean doc() for each document in a given
 directory.
+
+```
 # load all docs in a directory
 def process_docs(directory, vocab, is_train):
 documents = list()
@@ -474,6 +465,8 @@ We can call the process docs function for both the neg and pos directories and c
 the reviews into a single train or test dataset. We also can define the class labels for the dataset.
 The load clean dataset() function below will load all reviews and prepare class labels for the
 training or test dataset.
+
+```
 # load and clean a dataset
 def load_clean_dataset(vocab, is_train):
 # load documents
@@ -486,11 +479,6 @@ return docs, labels
 
 ```
 
-
-15.4. Train CNN With Embedding Layer
-
-162
-
 The next step is to encode each document as a sequence of integers. The Keras Embedding
 layer requires integer inputs where each integer maps to a single token that has a specific
 real-valued vector representation within the embedding. These vectors are random at the
@@ -501,6 +489,8 @@ dataset. In this case, it develops a vocabulary of all tokens in the training da
 a consistent mapping from words in the vocabulary to unique integers. We could just as easily
 develop this mapping ourselves using our vocabulary file. The create tokenizer() function
 below will prepare a Tokenizer from the training data.
+
+```
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
@@ -518,6 +508,8 @@ we will pad all reviews to the length of the longest review in the training data
 find the longest review using the max() function on the training dataset and take its length.
 We can then call the Keras function pad sequences() to pad the sequences to the maximum
 length by adding 0 values on the end.
+
+```
 max_length = max([len(s.split()) for s in train_docs])
 print('Maximum length: %d' % max_length)
 
@@ -525,6 +517,8 @@ print('Maximum length: %d' % max_length)
 
 We can then use the maximum length as a parameter to a function to integer encode and
 pad the sequences.
+
+```
 # integer encode and pad documents
 def encode_docs(tokenizer, max_length, docs):
 # integer encode
@@ -542,10 +536,7 @@ vocabulary size is the total number of words in our vocabulary, plus one for unk
 This could be the vocab set length or the size of the vocab within the tokenizer used to integer
 encode the documents, for example:
 
-15.4. Train CNN With Embedding Layer
-
-163
-
+```
 # define vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary size: %d' % vocab_size)
@@ -560,10 +551,13 @@ at document classification problems. A conservative CNN configuration is used wi
 (parallel fields for processing words) and a kernel size of 8 with a rectified linear (relu) activation
 function. This is followed by a pooling layer that reduces the output of the convolutional layer
 by half.
+
 Next, the 2D output from the CNN part of the model is flattened to one long 2D vector to
 represent the features extracted by the CNN. The back-end of the model is a standard Multilayer
 Perceptron layers to interpret the CNN features. The output layer uses a sigmoid activation
 function to output a value between 0 and 1 for the negative and positive sentiment in the review.
+
+```
 # define the model
 def define_model(vocab_size, max_length):
 model = Sequential()
@@ -585,6 +579,8 @@ return model
 Running just this piece provides a summary of the defined network. We can see that the
 Embedding layer expects documents with a length of 1,317 words as input and encodes each
 word in the document as a 100 element vector.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -610,10 +606,6 @@ dense_1 (Dense)
 209610
 _________________________________________________________________
 
-15.4. Train CNN With Embedding Layer
-
-164
-
 dense_2 (Dense)
 (None, 1)
 11
@@ -635,20 +627,24 @@ to loss during training. The model is trained for 10 epochs, or 10 passes throug
 data. The network configuration and training schedule were found with a little trial and error,
 but are by no means optimal for this problem. If you can get better results with a different
 configuration, let me know.
+
+```
 # fit network
 model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 
 ```
 
 After the model is fit, it is saved to a file named model.h5 for later evaluation.
+
+```
 # save the model
 model.save('model.h5')
-
-15.4. Train CNN With Embedding Layer
 
 ```
 
 We can tie all of this together. The complete code listing is provided below.
+
+```
 import string
 import re
 from os import listdir
@@ -697,10 +693,6 @@ continue
 path = directory + '/' + filename
 # load the doc
 doc = load_doc(path)
-
-165
-
-15.4. Train CNN With Embedding Layer
 # clean doc
 tokens = clean_doc(doc, vocab)
 # add to list
@@ -752,13 +744,6 @@ train_docs, ytrain = load_clean_dataset(vocab, True)
 tokenizer = create_tokenizer(train_docs)
 # define vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
-
-166
-
-15.5. Evaluate Model
-
-167
-
 print('Vocabulary size: %d' % vocab_size)
 # calculate the maximum sequence length
 max_length = max([len(s.split()) for s in train_docs])
@@ -777,6 +762,8 @@ model.save('model.h5')
 Running the example will first provide a summary of the training dataset vocabulary (25,768)
 and maximum input sequence length in words (1,317). The example should run in a few minutes
 and the fit model will be saved to file.
+
+```
 ...
 Vocabulary size: 25768
 Maximum length: 1317
@@ -812,13 +799,10 @@ In this section, we will evaluate the trained model and use it to make predictio
 First, we can use the built-in evaluate() function to estimate the skill of the model on both
 the training and test dataset. This requires that we load and encode both the training and test
 datasets.
+
+```
 # load all reviews
 train_docs, ytrain = load_clean_dataset(vocab, True)
-
-15.5. Evaluate Model
-
-168
-
 test_docs, ytest = load_clean_dataset(vocab, False)
 # create the tokenizer
 tokenizer = create_tokenizer(train_docs)
@@ -835,6 +819,8 @@ Xtest = encode_docs(tokenizer, max_length, test_docs)
 ```
 
 We can then load the model and evaluate it on both datasets and print the accuracy.
+
+```
 # load the model
 model = load_model('model.h5')
 # evaluate model on training dataset
@@ -850,6 +836,8 @@ New data must then be prepared using the same text encoding and encoding schemes
 used on the training dataset. Once prepared, a prediction can be made by calling the predict()
 function on the model. The function below named predict sentiment() will encode and pad
 a given movie review text and return a prediction in terms of both the percentage and a label.
+
+```
 # classify a review as negative or positive
 def predict_sentiment(review, vocab, tokenizer, max_length, model):
 # clean review
@@ -868,13 +856,15 @@ return percent_pos, 'POSITIVE'
 
 We can test out this model with two ad hoc movie reviews. The complete example is listed
 below.
+
+```
 import string
 import re
 from os import listdir
 from numpy import array
 from keras.preprocessing.text import Tokenizer
 
-15.5. Evaluate Model
+15.5. Evaluate Model
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 # load doc into memory
@@ -926,10 +916,6 @@ docs = neg + pos
 # prepare labels
 labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
 return docs, labels
-
-169
-
-15.5. Evaluate Model
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
@@ -982,13 +968,6 @@ print('Train Accuracy: %.2f' % (acc*100))
 _, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %.2f' % (acc*100))
 # test positive text
-
-170
-
-15.6. Extensions
-
-171
-
 text = 'Everyone will enjoy this film. I love it, recommended!'
 percent, sentiment = predict_sentiment(text, vocab, tokenizer, max_length, model)
 print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
@@ -1002,12 +981,15 @@ print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 Running the example first prints the skill of the model on the training and test dataset. We
 can see that the model achieves 100% accuracy on the training dataset and 87.5% on the test
 dataset, an impressive score.
+
 Next, we can see that the model makes the correct prediction on two contrived movie reviews.
 We can see that the percentage or confidence of the prediction is close to 50% for both, this
 may be because the two contrived reviews are very short and the model is expecting sequences
 of 1,000 or more words.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 Train Accuracy: 100.00
 Test Accuracy: 87.50
 Review: [Everyone will enjoy this film. I love it, recommended!]
@@ -1037,7 +1019,7 @@ skill and were not tuned. Explore tuning these two CNN parameters.
 alternate configurations of the number of training epochs and batch size and use the test
 dataset as a validation set to pick a better stopping point for training the model.
 
-15.7. Further Reading
+15.7. Further Reading
 
 172
 
@@ -1054,7 +1036,6 @@ on real ad hoc movie reviews from the internet.
 
 If you explore any of these extensions, I’d love to know.
 
-15.7
 
 Further Reading
 
@@ -1084,13 +1065,7 @@ https://keras.io/preprocessing/text/#tokenizer
 - Embedding Keras API.
 https://keras.io/layers/embeddings/
 
-15.8. Summary
-
-15.8
-
-173
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop word embeddings for the classification of movie
 reviews. Specifically, you learned:
@@ -1098,10 +1073,3 @@ reviews. Specifically, you learned:
 - How to develop a neural classification model with word embedding and convolutional
 layers.
 - How to evaluate the developed a neural classification model.
-
-15.8.1
-
-Next
-
-In the next chapter, you will discover how you can develop an n-gram multichannel convolutional
-neural network for text classification.

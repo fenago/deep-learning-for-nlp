@@ -1,6 +1,6 @@
 
 
-Chapter 10
+Chapter 10
 Project: Develop a Neural
 Bag-of-Words Model for Sentiment
 Analysis
@@ -28,15 +28,9 @@ This tutorial is divided into the following parts:
 4. Sentiment Analysis Models
 5. Comparing Word Scoring Methods
 6. Predicting Sentiment for New Reviews
-85
 
-10.2. Movie Review Dataset
 
-10.2
-
-86
-
-Movie Review Dataset
+# Movie Review Dataset
 
 In this tutorial, we will use the Movie Review Dataset. This dataset designed for sentiment
 analysis was described previously in Chapter 9. You can download the dataset from here:
@@ -84,7 +78,7 @@ The text data is already pretty clean, so not much preparation is required. With
 much into the details, we will prepare the data using the following method:
 - Split tokens on white space.
 
-10.3. Data Preparation
+10.3. Data Preparation
 
 87
 
@@ -97,6 +91,8 @@ We can put all of these steps into a function called clean doc() that takes as a
 the raw text loaded from a file and returns a list of cleaned tokens. We can also define a function
 load doc() that loads a document from file ready for use with the clean doc() function. An
 example of cleaning the first positive review is listed below.
+
+```
 from nltk.corpus import stopwords
 import string
 import re
@@ -137,10 +133,9 @@ Running the example prints a long list of clean tokens. There are many more clea
 we may want to explore, and I leave them as further exercises. I’d love to see what you can
 come up with.
 
-10.3. Data Preparation
+10.3. Data Preparation
 
-88
-
+```
 ...
 'creepy', 'place', 'even', 'acting', 'hell', 'solid', 'dreamy', 'depp', 'turning',
 'typically', 'strong', 'performance', 'deftly', 'handling', 'british', 'accent',
@@ -168,6 +163,8 @@ their count that allows us to easily update and query. Each document can be adde
 counter (a new function called add doc to vocab()) and we can step over all of the reviews in
 the negative directory and then the positive directory (a new function called process docs()).
 The complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -193,11 +190,6 @@ tokens = [re_punc.sub('', w) for w in tokens]
 # remove remaining tokens that are not alphabetic
 tokens = [word for word in tokens if word.isalpha()]
 # filter out stop words
-
-10.3. Data Preparation
-
-89
-
 stop_words = set(stopwords.words('english'))
 tokens = [w for w in tokens if not w in stop_words]
 # filter out short tokens
@@ -237,6 +229,8 @@ print(vocab.most_common(50))
 Running the example shows that we have a vocabulary of 44,276 words. We also can see
 a sample of the top 50 most used words in the movie reviews. Note that this vocabulary was
 constructed based on only those reviews in the training dataset.
+
+```
 44276
 [('film', 7983), ('one', 4946), ('movie', 4826), ('like', 3201), ('even', 2262), ('good',
 2080), ('time', 2041), ('story', 1907), ('films', 1873), ('would', 1844), ('much',
@@ -248,17 +242,15 @@ constructed based on only those reviews in the training dataset.
 ('doesnt', 1118), ('know', 1092), ('dont', 1086), ('hes', 1024), ('great', 1014),
 ('another', 992), ('action', 985), ('love', 977), ('us', 967), ('go', 952),
 ('director', 948), ('end', 946), ('something', 945), ('still', 936)]
-
 ```
 
-
-10.3. Data Preparation
-
-90
+10.3. Data Preparation
 
 We can step through the vocabulary and remove all words that have a low occurrence, such
 as only being used once or twice in all reviews. For example, the following snippet will retrieve
 only the tokens that appear 2 or more times in all reviews.
+
+```
 # keep tokens with a min occurrence
 min_occurrence = 2
 tokens = [k for k,c in vocab.items() if c >= min_occurrence]
@@ -269,6 +261,8 @@ print(len(tokens))
 Finally, the vocabulary can be saved to a new file called vocab.txt that we can later load
 and use to filter movie reviews prior to encoding them for modeling. We define a new function
 called save list() that saves the vocabulary to file, with one word per line. For example:
+
+```
 # save list to file
 def save_list(lines, filename):
 # convert lines to a single blob of text
@@ -285,6 +279,8 @@ save_list(tokens, 'vocab.txt')
 ```
 
 Pulling all of this together, the complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -307,8 +303,6 @@ tokens = doc.split()
 re_punc = re.compile('[%s]' % re.escape(string.punctuation))
 # remove punctuation from each word
 tokens = [re_punc.sub('', w) for w in tokens]
-
-10.3. Data Preparation
 # remove remaining tokens that are not alphabetic
 tokens = [word for word in tokens if word.isalpha()]
 # filter out stop words
@@ -363,21 +357,20 @@ save_list(tokens, 'vocab.txt')
 ```
 
 
-91
-
-10.4. Bag-of-Words Representation
-
-92
+10.4. Bag-of-Words Representation
 
 Running the above example with this addition shows that the vocabulary size drops by a
 little more than half its size, from about 44,000 to about 25,000 words.
-25767
 
+```
+25767
 ```
 
 Running the min occurrence filter on the vocabulary and saving it to file, you should now
 have a new file called vocab.txt with only the words we are interested in.
 The order of words in your file will differ, but should look something like the following:
+
+```
 aberdeen
 dupe
 burt
@@ -421,13 +414,15 @@ Before we can convert reviews to vectors for modeling, we must first clean them 
 involves loading them, performing the cleaning operation developed above, filtering out words
 not in the chosen vocabulary, and converting the remaining tokens into a single string or line
 
-10.4. Bag-of-Words Representation
+10.4. Bag-of-Words Representation
 
 93
 
 ready for encoding. First, we need a function to prepare one document. Below lists the function
 doc to line() that will load a document, clean it, filter out tokens not in the vocabulary, then
 return the document as a string of white space separated tokens.
+
+```
 # load doc, clean and return line of tokens
 def doc_to_line(filename, vocab):
 # load the doc
@@ -437,13 +432,14 @@ tokens = clean_doc(doc)
 # filter by vocab
 tokens = [w for w in tokens if w in vocab]
 return ' '.join(tokens)
-
 ```
 
 Next, we need a function to work through all documents in a directory (such as pos and
 neg) to convert the documents into lines. Below lists the process docs() function that does
 just this, expecting a directory name and a vocabulary set as input arguments and returning a
 list of processed documents.
+
+```
 # load all docs in a directory
 def process_docs(directory, vocab):
 lines = list()
@@ -465,6 +461,8 @@ return lines
 We can call the process docs() consistently for positive and negative reviews to construct
 a dataset of review text and their associated output labels, 0 for negative and 1 for positive.
 The load clean dataset() function below implements this behavior.
+
+```
 # load and clean a dataset
 def load_clean_dataset(vocab):
 # load documents
@@ -479,10 +477,9 @@ return docs, labels
 
 Finally, we need to load the vocabulary and turn it into a set for use in cleaning reviews.
 
-10.4. Bag-of-Words Representation
+10.4. Bag-of-Words Representation
 
-94
-
+```
 # load the vocabulary
 vocab_filename = 'vocab.txt'
 vocab = load_doc(vocab_filename)
@@ -493,6 +490,8 @@ vocab = set(vocab.split())
 We can put all of this together, reusing the loading and cleaning functions developed in
 previous sections. The complete example is listed below, demonstrating how to prepare the
 positive and negative reviews from the training dataset.
+
+```
 import string
 import re
 from os import listdir
@@ -534,11 +533,6 @@ return ' '.join(tokens)
 # load all docs in a directory
 def process_docs(directory, vocab):
 lines = list()
-
-10.4. Bag-of-Words Representation
-
-95
-
 # walk through all files in the folder
 for filename in listdir(directory):
 # skip any reviews in the test set
@@ -573,8 +567,9 @@ print(len(docs), len(labels))
 ```
 
 Running this example loads and cleans the review text and returns the labels.
-1800 1800
 
+```
+1800 1800
 ```
 
 constrained vocabulary.
@@ -590,11 +585,13 @@ and why. Nevertheless, the Tokenizer class is convenient and will easily transfo
 into encoded vectors. First, the Tokenizer must be created, then fit on the text documents
 in the training dataset. In this case, these are the aggregation of the positive lines and
 negative lines arrays developed in the previous section.
+
+```
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
 
-10.4. Bag-of-Words Representation
+10.4. Bag-of-Words Representation
 
 96
 
@@ -610,6 +607,8 @@ function takes both a list of documents to encode and an encoding mode, which is
 used to score words in the document. Here we specify freq to score words based on their
 frequency in the document. This can be used to encode the loaded training and test data, for
 example:
+
+```
 # encode data
 Xtrain = tokenizer.texts_to_matrix(train_docs, mode='freq')
 Xtest = tokenizer.texts_to_matrix(test_docs, mode='freq')
@@ -621,6 +620,8 @@ Next, the process docs() function from the previous section needs to be modified
 selectively process reviews in the test or train dataset. We support the loading of both the
 training and test datasets by adding an is train argument and using that to decide what
 review file names to skip.
+
+```
 # load all docs in a directory
 def process_docs(directory, vocab, is_train):
 lines = list()
@@ -630,7 +631,7 @@ for filename in listdir(directory):
 if is_train and filename.startswith('cv9'):
 continue
 if not is_train and not filename.startswith('cv9'):
-continue
+con0tinue
 # create the full path of the file to open
 path = directory + '/' + filename
 # load and clean the doc
@@ -652,7 +653,7 @@ docs = neg + pos
 # prepare labels
 labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
 
-10.4. Bag-of-Words Representation
+10.4. Bag-of-Words Representation
 return docs, labels
 
 ```
@@ -708,7 +709,7 @@ if is_train and filename.startswith('cv9'):
 
 97
 
-10.5. Sentiment Analysis Models
+10.5. Sentiment Analysis Models
 
 98
 
@@ -767,7 +768,7 @@ Sentiment Analysis Models
 In this section, we will develop Multilayer Perceptron (MLP) models to classify encoded
 documents as either positive or negative. The models will be simple feedforward network models
 
-10.5. Sentiment Analysis Models
+10.5. Sentiment Analysis Models
 
 99
 
@@ -820,7 +821,7 @@ model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 Finally, once the model is trained, we can evaluate its performance by making predictions in
 the test dataset and printing the accuracy.
 
-10.5. Sentiment Analysis Models
+10.5. Sentiment Analysis Models
 
 # evaluate
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
@@ -876,7 +877,7 @@ return ' '.join(tokens)
 
 100
 
-10.5. Sentiment Analysis Models
+10.5. Sentiment Analysis Models
 def process_docs(directory, vocab, is_train):
 lines = list()
 # walk through all files in the folder
@@ -932,7 +933,7 @@ tokenizer = create_tokenizer(train_docs)
 
 101
 
-10.5. Sentiment Analysis Models
+10.5. Sentiment Analysis Models
 
 102
 
@@ -980,7 +981,7 @@ original paper. Although, it is important to note that this is not an apples-to-
 as the original paper used 10-fold cross-validation to estimate model skill instead of a single
 train/test split.
 
-10.6. Comparing Word Scoring Methods
+10.6. Comparing Word Scoring Methods
 
 103
 
@@ -1028,6 +1029,8 @@ encoding of the loaded documents based on a chosen scoring model. The function c
 tokenizer, fits it on the training documents, then creates the train and test encodings using the
 chosen model. The function prepare data() implements this behavior given lists of train and
 test documents.
+
+```
 # prepare bag-of-words encoding of docs
 def prepare_data(train_docs, test_docs, mode):
 # create the tokenizer
@@ -1038,11 +1041,6 @@ tokenizer.fit_on_texts(train_docs)
 Xtrain = tokenizer.texts_to_matrix(train_docs, mode=mode)
 # encode training data set
 Xtest = tokenizer.texts_to_matrix(test_docs, mode=mode)
-
-10.6. Comparing Word Scoring Methods
-
-104
-
 return Xtrain, Xtest
 
 ```
@@ -1055,6 +1053,8 @@ and we should estimate model skill based on an average of multiple runs. The fun
 named evaluate mode(), takes encoded documents and evaluates the MLP by training it on
 the train set and estimating skill on the test set 10 times and returns a list of the accuracy
 scores across all of these runs.
+
+```
 # evaluate a neural network model
 def evaluate_mode(Xtrain, ytrain, Xtest, ytest):
 scores = list()
@@ -1079,6 +1079,8 @@ return scores
 
 We are now ready to evaluate the performance of the 4 different word scoring methods.
 Pulling all of this together, the complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -1096,8 +1098,6 @@ file = open(filename, 'r')
 # read all text
 text = file.read()
 # close the file
-
-10.6. Comparing Word Scoring Methods
 file.close()
 return text
 # turn a doc into clean tokens
@@ -1150,10 +1150,6 @@ pos = process_docs('txt_sentoken/pos', vocab, is_train)
 docs = neg + pos
 # prepare labels
 labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
-
-105
-
-10.6. Comparing Word Scoring Methods
 return docs, labels
 # define the model
 def define_model(n_words):
@@ -1206,13 +1202,6 @@ Xtrain, Xtest = prepare_data(train_docs, test_docs, mode)
 # evaluate model on data for mode
 results[mode] = evaluate_mode(Xtrain, ytrain, Xtest, ytest)
 # summarize results
-
-106
-
-10.6. Comparing Word Scoring Methods
-
-107
-
 print(results.describe())
 # plot results
 results.boxplot()
@@ -1226,6 +1215,8 @@ see that the mean score of both the count and binary methods appear to be better
 and tfidf.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 binary
 count
 tfidf
@@ -1252,7 +1243,7 @@ A box and whisker plot of the results is also presented, summarizing the accurac
 per configuration. We can see that binary achieved the best results with a modest spread and
 might be the preferred approach for this dataset.
 
-10.7. Predicting Sentiment for New Reviews
+10.7. Predicting Sentiment for New Reviews
 
 108
 
@@ -1274,16 +1265,13 @@ by calling predict() that will return an integer of 0 for a negative review and 
 review. All of these steps can be put into a new function called predict sentiment() that
 requires the review text, the vocabulary, the tokenizer, and the fit model and returns the
 predicted sentiment and an associated percentage or confidence-like output.
+
+```
 # classify a review as negative or positive
 def predict_sentiment(review, vocab, tokenizer, model):
 # clean
 tokens = clean_doc(review)
 # filter by vocab
-
-10.7. Predicting Sentiment for New Reviews
-
-109
-
 tokens = [w for w in tokens if w in vocab]
 # convert to line
 line = ' '.join(tokens)
@@ -1302,6 +1290,8 @@ return percent_pos, 'POSITIVE'
 We can now make predictions for new review texts. Below is an example with both a clearly
 positive and a clearly negative review using the simple MLP developed above with the frequency
 word scoring mode.
+
+```
 # test positive text
 text = 'Best movie ever! It was great, I recommend it.'
 percent, sentiment = predict_sentiment(text, vocab, tokenizer, model)
@@ -1315,6 +1305,8 @@ print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
 Pulling this all together, the complete example for making predictions for new reviews is
 listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -1338,7 +1330,7 @@ def clean_doc(doc):
 # split into tokens by white space
 tokens = doc.split()
 
-10.7. Predicting Sentiment for New Reviews
+10.7. Predicting Sentiment for New Reviews
 # prepare regex for char filtering
 re_punc = re.compile('[%s]' % re.escape(string.punctuation))
 # remove punctuation from each word
@@ -1390,10 +1382,6 @@ return tokenizer
 def define_model(n_words):
 # define network
 model = Sequential()
-
-110
-
-10.7. Predicting Sentiment for New Reviews
 model.add(Dense(50, input_shape=(n_words,), activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 # compile network
@@ -1449,12 +1437,7 @@ print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
 Running the example correctly classifies these reviews.
 
-111
-
-10.8. Extensions
-
-112
-
+```
 Review: [Best movie ever! It was great, I recommend it.]
 Sentiment: POSITIVE (57.124%)
 Review: [This is a bad movie.]
@@ -1500,13 +1483,7 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-10.10. Summary
-
-10.9.1
-
-113
-
-Dataset
+10.10. Summary
 
 - Movie Review Data.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/
@@ -1550,7 +1527,7 @@ Next
 This is the final chapter in the bag-of-words part. In the next part, you will discover how to
 develop word embedding models.
 
-Part V
+Part V
 Word Embeddings
 
 114

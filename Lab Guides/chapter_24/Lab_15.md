@@ -1,6 +1,6 @@
 
 
-Chapter 24
+Chapter 24
 How to Evaluate Generated Text With
 the BLEU Score
 BLEU, or the Bilingual Evaluation Understudy, is a score for comparing a candidate translation
@@ -35,7 +35,7 @@ generated sentence to a reference sentence. A perfect match results in a score o
 perfect mismatch results in a score of 0.0. The score was developed for evaluating the predictions
 267
 
-24.2. Bilingual Evaluation Understudy Score
+24.2. Bilingual Evaluation Understudy Score
 
 268
 
@@ -76,7 +76,7 @@ exactly. This is not even possible by human translators. The number and quality 
 references used to calculate the BLEU score means that comparing scores across datasets can
 be troublesome.
 
-24.3. Calculate BLEU Scores
+24.3. Calculate BLEU Scores
 
 269
 
@@ -124,7 +124,7 @@ exactly.
 ```
 
 
-24.4. Cumulative and Individual BLEU Scores
+24.4. Cumulative and Individual BLEU Scores
 
 24.3.2
 
@@ -185,7 +185,7 @@ Running this example prints a score of 0.5.
 
 We can repeat this example for individual n-grams from 1 to 4 as follows:
 
-24.4. Cumulative and Individual BLEU Scores
+24.4. Cumulative and Individual BLEU Scores
 
 # n-gram individual BLEU
 from nltk.translate.bleu_score import sentence_bleu
@@ -279,7 +279,7 @@ reference = [['this', 'is', 'small', 'test']]
 candidate = ['this', 'is', 'a', 'test']
 print('Cumulative 1-gram: %f' % sentence_bleu(reference, candidate, weights=(1, 0, 0, 0)))
 
-24.5. Worked Examples
+24.5. Worked Examples
 
 272
 
@@ -351,7 +351,7 @@ print(score)
 ```
 
 
-24.5. Worked Examples
+24.5. Worked Examples
 
 273
 
@@ -408,7 +408,7 @@ The score is much like the score when two words were wrong above.
 
 How about if we make the candidate two words longer than the reference?
 
-24.6. Further Reading
+24.6. Further Reading
 
 274
 
@@ -466,7 +466,7 @@ https://en.wikipedia.org/wiki/BLEU
 - BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
 http://www.aclweb.org/anthology/P02-1040.pdf
 
-24.7. Summary
+24.7. Summary
 
 275
 

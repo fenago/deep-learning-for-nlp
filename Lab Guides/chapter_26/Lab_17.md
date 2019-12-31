@@ -1,6 +1,6 @@
 
 
-Chapter 26
+Chapter 26
 Project: Develop a Neural Image
 Caption Generation Model
 Caption generation is a challenging artificial intelligence problem where a textual description
@@ -34,7 +34,7 @@ This tutorial is divided into the following parts:
 6. Generate New Captions
 298
 
-26.2. Photo and Caption Dataset
+26.2. Photo and Caption Dataset
 
 26.2
 
@@ -74,7 +74,7 @@ in an Image Caption Generator ):
 We describe the BLEU metric more later when we work on evaluating our model. Next, let’s
 look at how to load the images.
 
-26.3. Prepare Photo Data
+26.3. Prepare Photo Data
 
 26.3
 
@@ -131,7 +131,7 @@ image = preprocess_input(image)
 feature = model.predict(image, verbose=0)
 # get image id
 
-26.3. Prepare Photo Data
+26.3. Prepare Photo Data
 
 301
 
@@ -199,7 +199,7 @@ print('Extracted Features: %d' % len(features))
 # save to file
 dump(features, open('features.pkl', 'wb'))
 
-26.4. Prepare Text Data
+26.4. Prepare Text Data
 
 302
 
@@ -255,7 +255,7 @@ image_id = image_id.split('.')[0]
 image_desc = ' '.join(image_desc)
 # create the list if needed
 
-26.4. Prepare Text Data
+26.4. Prepare Text Data
 
 303
 
@@ -308,7 +308,7 @@ that is both expressive and as small as possible. A smaller vocabulary will resu
 model that will train faster. For reference, we can transform the clean descriptions into a set
 and print its size to get an idea of the size of our dataset vocabulary.
 
-26.4. Prepare Text Data
+26.4. Prepare Text Data
 
 304
 
@@ -363,7 +363,7 @@ mapping = dict()
 for line in doc.split('\n'):
 # split line by white space
 
-26.4. Prepare Text Data
+26.4. Prepare Text Data
 tokens = line.split()
 if len(line) < 2:
 continue
@@ -419,7 +419,7 @@ filename = 'Flickr8k_text/Flickr8k.token.txt'
 
 305
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 306
 
@@ -481,7 +481,7 @@ Loading Data
 First, we must load the prepared photo and text data so that we can use it to fit the model.
 We are going to train the data on all of the photos and captions in the training dataset. While
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 307
 
@@ -537,7 +537,7 @@ for line in doc.split('\n'):
 tokens = line.split()
 # split id from description
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 308
 
@@ -595,7 +595,7 @@ identifier = line.split('.')[0]
 dataset.append(identifier)
 return set(dataset)
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 309
 
@@ -652,7 +652,7 @@ The description text will need to be encoded to numbers before it can be present
 the model as in input or compared to the model’s predictions. The first step in encoding the
 data is to create a consistent mapping from words to unique integer values. Keras provides
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 310
 
@@ -721,7 +721,7 @@ photo features will be fed directly to another part of the model. The model will
 prediction, which will be a probability distribution over all words in the vocabulary. The
 output data will therefore be a one hot encoded version of each word, representing an idealized
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 311
 
@@ -777,7 +777,7 @@ layer) and will use the extracted features predicted by this model as input.
 - Sequence Processor. This is a word embedding layer for handling the text input,
 followed by a Long Short-Term Memory (LSTM) recurrent neural network layer.
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 312
 
@@ -826,7 +826,7 @@ return model
 A plot of the model is created and helps to better understand the structure of the network
 and the two streams of input.
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 313
 
@@ -861,7 +861,7 @@ validation_data=([X1test, X2test], ytest))
 ```
 
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 
 26.5.4
 
@@ -936,7 +936,7 @@ tokens = line.split()
 image_id, image_desc = tokens[0], tokens[1:]
 # skip images not in the set
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 if image_id in dataset:
 # create list
 if image_id not in descriptions:
@@ -991,7 +991,7 @@ X1.append(photos[key][0])
 
 315
 
-26.5. Develop Deep Learning Model
+26.5. Develop Deep Learning Model
 X2.append(in_seq)
 y.append(out_seq)
 return array(X1), array(X2), array(y)
@@ -1048,7 +1048,7 @@ print('Descriptions: test=%d' % len(test_descriptions))
 
 316
 
-26.6. Evaluate Model
+26.6. Evaluate Model
 
 317
 
@@ -1105,7 +1105,7 @@ generate desc() implements this behavior and generates a textual description giv
 model, and a given prepared photo as input. It calls the function word for id() in order to
 map an integer prediction back to a word.
 
-26.6. Evaluate Model
+26.6. Evaluate Model
 
 318
 
@@ -1164,7 +1164,7 @@ We will generate predictions for all photos in the test dataset. The function be
 evaluate model() will evaluate a trained model against a given dataset of photo descriptions
 and photo features. The actual and predicted descriptions are collected and evaluated collectively
 
-26.6. Evaluate Model
+26.6. Evaluate Model
 
 319
 
@@ -1228,7 +1228,7 @@ return text
 # load a pre-defined list of photo identifiers
 def load_set(filename):
 
-26.6. Evaluate Model
+26.6. Evaluate Model
 doc = load_doc(filename)
 dataset = list()
 # process line by line
@@ -1283,7 +1283,7 @@ return tokenizer
 
 320
 
-26.6. Evaluate Model
+26.6. Evaluate Model
 def max_length(descriptions):
 lines = to_lines(descriptions)
 return max(len(d.split()) for d in lines)
@@ -1339,7 +1339,7 @@ yhat = generate_desc(model, tokenizer, photos[key], max_length)
 
 321
 
-26.6. Evaluate Model
+26.6. Evaluate Model
 # clean up prediction
 yhat = cleanup_summary(yhat)
 # store actual and predicted
@@ -1401,7 +1401,7 @@ running the example a few times.
 BLEU-1: 0.438805
 BLEU-2: 0.230646
 
-26.7. Generate New Captions
+26.7. Generate New Captions
 
 323
 
@@ -1458,7 +1458,7 @@ for line in doc.split('\n'):
 # split line by white space
 tokens = line.split()
 
-26.7. Generate New Captions
+26.7. Generate New Captions
 
 324
 
@@ -1507,7 +1507,7 @@ photograph that I chose randomly on Flickr (available under a permissive license
 
 https://www.flickr.com/photos/bambe1964/7837618434/
 
-26.7. Generate New Captions
+26.7. Generate New Captions
 
 325
 
@@ -1548,7 +1548,7 @@ image = img_to_array(image)
 # reshape data for the model
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 
-26.7. Generate New Captions
+26.7. Generate New Captions
 
 326
 
@@ -1615,7 +1615,7 @@ def cleanup_summary(summary):
 index = summary.find('startseq ')
 if index > -1:
 
-26.7. Generate New Captions
+26.7. Generate New Captions
 
 327
 
@@ -1673,7 +1673,7 @@ dog is running across the beach
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-26.8. Extensions
+26.8. Extensions
 
 26.8
 
@@ -1720,7 +1720,7 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-26.9. Further Reading
+26.9. Further Reading
 
 26.9.1
 
@@ -1769,7 +1769,7 @@ https://keras.io/preprocessing/text/#tokenizer
 - Keras VGG16 API.
 https://keras.io/applications/#vgg16
 
-26.10. Summary
+26.10. Summary
 
 330
 
@@ -1796,7 +1796,7 @@ Next
 This is the last chapter in the image captioning part. In the next part you will discover how to
 develop neural machine translation models.
 
-Part IX
+Part IX
 Machine Translation
 
 331

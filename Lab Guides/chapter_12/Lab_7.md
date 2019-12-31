@@ -1,4 +1,4 @@
-Chapter 12
+Chapter 12
 How to Develop Word Embeddings
 with Gensim
 Word embeddings are a modern approach for representing text in natural language processing.
@@ -28,7 +28,7 @@ This tutorial is divided into the following parts:
 
 122
 
-12.2. Word Embeddings
+12.2. Word Embeddings
 
 12.2
 
@@ -67,8 +67,9 @@ It also provides tools for loading pre-trained word embeddings in a few formats 
 making use and querying a loaded embedding. We will use the Gensim library in this tutorial.
 Gensim can be installed easily using pip or easy install. For example, you can install Gensim
 with pip by typing the following on your command line:
-sudo pip install -U gensim
 
+```
+sudo pip install -U gensim
 ```
 
 If you need help installing Gensim on your system, you can see the Gensim Installation
@@ -85,7 +86,7 @@ that they generally look at a window of words for each target word to provide co
 turn meaning for words. The approach was developed by Tomas Mikolov, formerly at Google
 and currently at Facebook.
 
-12.4. Develop Word2Vec Embedding
+12.4. Develop Word2Vec Embedding
 
 124
 
@@ -95,6 +96,8 @@ Word2Vec class for working with a Word2Vec model. Learning a word embedding from
 involves loading and organizing the text into sentences and providing them to the constructor
 of a new Word2Vec() instance. For example:
 sentences = ...
+
+```
 model = Word2Vec(sentences)
 
 ```
@@ -118,12 +121,16 @@ most modern computers do, I strongly encourage you to increase workers to match 
 of cores (e.g. 8). After the model is trained, it is accessible via the wv attribute. This is the
 actual word vector model in which queries can be made. For example, you can print the learned
 vocabulary of tokens (words) as follows:
+
+```
 words = list(model.wv.vocab)
 print(words)
 
 ```
 
 You can review the embedded vector for a specific token as follows:
+
+```
 print(model['word'])
 
 ```
@@ -131,24 +138,27 @@ print(model['word'])
 Finally, a trained model can then be saved to file by calling the save word2vec format()
 function on the word vector model. By default, the model is saved in a binary format to save
 space. For example:
+
+```
 model.wv.save_word2vec_format('model.bin')
 
 ```
 
 
-12.4. Develop Word2Vec Embedding
-
-125
+12.4. Develop Word2Vec Embedding
 
 When getting started, you can save the learned model in ASCII format and review the
 contents. You can do this by setting binary=False when calling the save word2vec format()
 function, for example:
-model.wv.save_word2vec_format('model.txt', binary=False)
 
+```
+model.wv.save_word2vec_format('model.txt', binary=False)
 ```
 
 The saved model can then be loaded again by calling the Word2Vec.load() function. For
 example:
+
+```
 model = Word2Vec.load('model.bin')
 
 ```
@@ -159,6 +169,8 @@ sentences. The model is trained and the minimum count for words is set to 1 so t
 are ignored. After the model is learned, we summarize, print the vocabulary, then print a single
 vector for the word “sentence”. Finally, the model is saved to a file in binary format, loaded,
 and then summarized.
+
+```
 from gensim.models import Word2Vec
 # define training data
 sentences = [['this', 'is', 'the', 'first', 'sentence', 'for', 'word2vec'],
@@ -186,16 +198,13 @@ print(new_model)
 Running the example prints the following output.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 Word2Vec(vocab=14, size=100, alpha=0.025)
 ['second', 'sentence', 'and', 'this', 'final', 'word2vec', 'for', 'another', 'one',
 'first', 'more', 'the', 'yet', 'is']
 [ -4.61881841e-03 -4.88735968e-03 -3.19508743e-03 4.08568839e-03
 -3.38211656e-03 1.93076557e-03 3.90265253e-03 -1.04349572e-03
-
-12.5. Visualize Word Embedding
-
-126
-
 4.14286414e-03 1.55219622e-03 3.85653134e-03 2.22428422e-03
 -3.52565176e-03 2.82056746e-03 -2.11121864e-03 -1.38054823e-03
 -1.12888147e-03 -2.87318649e-03 -7.99703528e-04 3.67874932e-03
@@ -234,8 +243,9 @@ After you learn word embedding for your text data, it can be nice to explore it 
 You can use classical projection methods to reduce the high-dimensional word vectors to twodimensional plots and plot them on a graph. The visualizations can provide a qualitative
 diagnostic for your learned model. We can retrieve all of the vectors from a trained model as
 follows:
-X = model[model.wv.vocab]
 
+```
+X = model[model.wv.vocab]
 ```
 
 We can then train a projection method on the vectors, such as those methods offered in
@@ -248,23 +258,24 @@ Plot Word Vectors Using PCA
 
 We can create a 2-dimensional PCA model of the word vectors using the scikit-learn PCA class
 as follows.
+
+```
 pca = PCA(n_components=2)
 result = pca.fit_transform(X)
-
-12.5. Visualize Word Embedding
-
-127
-
 ```
 
 The resulting projection can be plotted using Matplotlib as follows, pulling out the two
 dimensions as x and y coordinates.
+
+```
 pyplot.scatter(result[:, 0], result[:, 1])
 
 ```
 
 We can go one step further and annotate the points on the graph with the words themselves.
 A crude version without any nice offsets looks as follows.
+
+```
 words = list(model.wv.vocab)
 for i, word in enumerate(words):
 pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
@@ -273,6 +284,8 @@ pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
 
 Putting this all together with the model from the previous section, the complete example is
 listed below.
+
+```
 from gensim.models import Word2Vec
 from sklearn.decomposition import PCA
 from matplotlib import pyplot
@@ -302,10 +315,6 @@ hard to pull much meaning out of the graph given such a tiny corpus was used to 
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-12.6. Load Google’s Word2Vec Embedding
-
-128
-
 Figure 12.1: Scatter Plot of PCA Projection of Word2Vec Model
 
 12.6
@@ -329,10 +338,9 @@ Gensim library provides tools to load this file. Specifically, you can call the
 KeyedVectors.load word2vec format() function to load this model into memory, for example:
 from gensim.models import KeyedVectors
 
-12.7. Load Stanford’s GloVe Embedding
+12.7. Load Stanford’s GloVe Embedding
 
-129
-
+```
 filename = 'GoogleNews-vectors-negative300.bin'
 model = KeyedVectors.load_word2vec_format(filename, binary=True)
 
@@ -342,8 +350,9 @@ Note, this example may require a workstation with 8 or more Gigabytes of RAM to 
 On my modern workstation, it takes about 43 seconds to load. Another interesting thing that
 you can do is do a little linear algebra arithmetic with words. For example, a popular example
 described in lectures and introduction papers is:
-queen = (king - man) + woman
 
+```
+queen = (king - man) + woman
 ```
 
 That is the word queen is the closest word given the subtraction of the notion of man from
@@ -351,11 +360,14 @@ king and adding the word woman. The man-ness in king is replaced with woman-ness
 us queen. A very cool concept. Gensim provides an interface for performing these types of
 operations in the most similar() function on the trained or loaded model. For example:
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
-print(result)
 
+```
+print(result)
 ```
 
 We can put all of this together as follows.
+
+```
 from gensim.models import KeyedVectors
 # load the google word2vec model
 filename = 'GoogleNews-vectors-negative300.bin'
@@ -363,14 +375,14 @@ model = KeyedVectors.load_word2vec_format(filename, binary=True)
 # calculate: (king - man) + woman = ?
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
 print(result)
-
 ```
 
 Running the example loads the Google pre-trained Word2Vec model and then calculates the
 (king - man) + woman = ? operation on the word vectors for those words. The answer, as we
 would expect, is queen.
-[('queen', 0.7118192315101624)]
 
+```
+[('queen', 0.7118192315101624)]
 ```
 
 See some of the articles in the further reading section for more interesting arithmetic examples
@@ -387,7 +399,7 @@ the moment based on results.
 Like Word2Vec, the GloVe researchers also provide pre-trained word vectors, in this case, a
 great selection to choose from. You can download the GloVe pre-trained word vectors and load
 
-12.7. Load Stanford’s GloVe Embedding
+12.7. Load Stanford’s GloVe Embedding
 
 130
 
@@ -395,11 +407,12 @@ them easily with Gensim. The first step is to convert the GloVe file format to t
 format. The only difference is the addition of a small header line. This can be done by calling
 the glove2word2vec() function. For example (note, this example is just a demonstration with
 a mock input filename):
+
+```
 from gensim.scripts.glove2word2vec import glove2word2vec
 glove_input_file = 'glove.txt'
 word2vec_output_file = 'word2vec.txt'
 glove2word2vec(glove_input_file, word2vec_output_file)
-
 ```
 
 Once converted, the file can be loaded just like Word2Vec file above. Let’s make this concrete
@@ -412,6 +425,8 @@ http://nlp.stanford.edu/data/glove.6B.zip
 
 Working with the 100-dimensional version of the model, we can convert the file to Word2Vec
 format as follows:
+
+```
 from gensim.scripts.glove2word2vec import glove2word2vec
 glove_input_file = 'glove.6B.100d.txt'
 word2vec_output_file = 'glove.6B.100d.txt.word2vec'
@@ -423,6 +438,8 @@ You now have a copy of the GloVe model in Word2Vec format with the filename
 glove.6B.100d.txt.word2vec. Now we can load it and perform the same (king - man) +
 woman = ? test as in the previous section. The complete code listing is provided below. Note
 that the converted file is ASCII format, not binary, so we set binary=False when loading.
+
+```
 from gensim.models import KeyedVectors
 # load the Stanford GloVe model
 filename = 'glove.6B.100d.txt.word2vec'
@@ -430,18 +447,17 @@ model = KeyedVectors.load_word2vec_format(filename, binary=False)
 # calculate: (king - man) + woman = ?
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
 print(result)
-
 ```
 
 Pulling all of this together, the complete example is listed below.
+
+```
 from gensim.models import KeyedVectors
 from gensim.scripts.glove2word2vec import glove2word2vec
 # convert glove to word2vec format
 glove_input_file = 'glove.6B.100d.txt'
 word2vec_output_file = 'glove.6B.100d.txt.word2vec'
 glove2word2vec(glove_input_file, word2vec_output_file)
-
-12.8. Further Reading
 # load the converted model
 filename = 'glove.6B.100d.txt.word2vec'
 model = KeyedVectors.load_word2vec_format(filename, binary=False)
@@ -491,13 +507,8 @@ https://radimrehurek.com/gensim/models/keyedvectors.html
 - scripts.glove2word2vec Gensim API.
 https://radimrehurek.com/gensim/scripts/glove2word2vec.html
 
-131
 
-12.9. Summary
-
-12.8.3
-
-132
+12.9. Summary
 
 Articles
 
@@ -508,9 +519,7 @@ http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html
 - Gensim Word2Vec Tutorial, 2014.
 https://rare-technologies.com/word2vec-tutorial/
 
-12.9
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop and load word embedding layers in Python using
 Gensim. Specifically, you learned:
@@ -518,10 +527,3 @@ Gensim. Specifically, you learned:
 - How to visualize a trained word embedding model using Principal Component Analysis.
 - How to load pre-trained Word2Vec and GloVe word embedding models from Google and
 Stanford.
-
-12.9.1
-
-Next
-
-In the next chapter, you will discover how you can develop a neural network model with a
-learned word embedding.

@@ -1,6 +1,6 @@
 
 
-Chapter 6
+Chapter 6
 How to Prepare Text Data with
 scikit-learn
 Text data requires special preparation before you can start using it for predictive modeling. The
@@ -36,7 +36,7 @@ document.
 
 48
 
-6.2. Word Counts with CountVectorizer
+6.2. Word Counts with CountVectorizer
 
 49
 
@@ -94,7 +94,7 @@ print(vectorizer.vocabulary_)
 ```
 
 
-6.3. Word Frequencies with TfidfVectorizer
+6.3. Word Frequencies with TfidfVectorizer
 
 50
 
@@ -153,7 +153,7 @@ Without going into the math, TF-IDF are word frequency scores that try to highli
 words that are more interesting, e.g. frequent in a document but not across documents.
 The TfidfVectorizer will tokenize documents, learn the vocabulary and inverse document
 
-6.4. Hashing with HashingVectorizer
+6.4. Hashing with HashingVectorizer
 
 51
 
@@ -215,7 +215,7 @@ documents and impose large requirements on memory and slow down algorithms. A cl
 around is to use a one way hash of words to convert them to integers. The clever part is that
 no vocabulary is required and you can choose an arbitrary-long fixed length vector. A downside
 
-6.5. Further Reading
+6.5. Further Reading
 
 52
 

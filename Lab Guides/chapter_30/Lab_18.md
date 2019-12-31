@@ -1,5 +1,5 @@
 
-Chapter 30
+Chapter 30
 Project: Develop a Neural Machine
 Translation Model
 Machine translation is a challenging task that traditionally involves large statistical models
@@ -34,7 +34,7 @@ drawn from the Tatoeba Project. The dataset is comprised of German phrases and t
 counterparts and is intended to be used with the Anki flashcard software.
 353
 
-30.3. Preparing the Text Data
+30.3. Preparing the Text Data
 
 354
 
@@ -85,7 +85,7 @@ preparation is divided into two subsections:
 1. Clean Text
 2. Split Text
 
-30.3. Preparing the Text Data
+30.3. Preparing the Text Data
 
 30.3.1
 
@@ -140,7 +140,7 @@ for line in pair:
 # normalize unicode characters
 line = normalize('NFD', line).encode('ascii', 'ignore')
 
-30.3. Preparing the Text Data
+30.3. Preparing the Text Data
 
 356
 
@@ -197,7 +197,7 @@ for line in pair:
 line = normalize('NFD', line).encode('ascii', 'ignore')
 line = line.decode('UTF-8')
 
-30.3. Preparing the Text Data
+30.3. Preparing the Text Data
 
 357
 
@@ -254,7 +254,7 @@ examples in the file; these will be the shortest phrases in the dataset. Further
 stake the first 9,000 of those as examples for training and the remaining 1,000 examples to test
 the fit model.
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 
 358
 
@@ -308,7 +308,7 @@ return load(open(filename, 'rb'))
 dataset = load_clean_sentences('english-german-both.pkl')
 train = load_clean_sentences('english-german-train.pkl')
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 
 359
 
@@ -366,7 +366,7 @@ def encode_sequences(tokenizer, length, lines):
 X = tokenizer.texts_to_sequences(lines)
 # pad sequences with 0 values
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 
 360
 
@@ -424,7 +424,7 @@ model.add(LSTM(n_units, return_sequences=True))
 model.add(TimeDistributed(Dense(tar_vocab, activation='softmax')))
 # compile model
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 
 361
 
@@ -495,7 +495,7 @@ X = tokenizer.texts_to_sequences(lines)
 # pad sequences with 0 values
 X = pad_sequences(X, maxlen=length, padding='post')
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 return X
 # one hot encode target sequence
 def encode_output(sequences, vocab_size):
@@ -552,7 +552,7 @@ save_best_only=True, mode='min')
 
 362
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 
 363
 
@@ -603,7 +603,7 @@ _________________________________________________________________
 
 A plot of the model is also created providing another perspective on the model configuration.
 
-30.4. Train Neural Translation Model
+30.4. Train Neural Translation Model
 
 364
 
@@ -640,7 +640,7 @@ loss: 0.5474 - val_loss: 2.1787
 00029: val_loss did not improve
 loss: 0.5023 - val_loss: 2.1823
 
-30.5. Evaluate Neural Translation Model
+30.5. Evaluate Neural Translation Model
 
 365
 
@@ -697,7 +697,7 @@ for word, index in tokenizer.word_index.items():
 if index == integer:
 return word
 
-30.5. Evaluate Neural Translation Model
+30.5. Evaluate Neural Translation Model
 
 366
 
@@ -762,7 +762,7 @@ keras.preprocessing.text import Tokenizer
 keras.preprocessing.sequence import pad_sequences
 keras.models import load_model
 
-30.5. Evaluate Neural Translation Model
+30.5. Evaluate Neural Translation Model
 from nltk.translate.bleu_score import corpus_bleu
 # load a clean dataset
 def load_clean_sentences(filename):
@@ -815,7 +815,7 @@ predicted.append(translation.split())
 
 367
 
-30.5. Evaluate Neural Translation Model
+30.5. Evaluate Neural Translation Model
 print('BLEU-1:
 print('BLEU-2:
 print('BLEU-3:
@@ -895,7 +895,7 @@ src=[versucht es doch einfach], target=[just try it], predicted=[just try it]
 src=[sie sind jung], target=[youre young], predicted=[youre young]
 src=[er ging surfen], target=[he went surfing], predicted=[he went surfing]
 
-30.6. Extensions
+30.6. Extensions
 
 BLEU-1:
 BLEU-2:
@@ -957,7 +957,7 @@ lift skill, or a Bidirectional input layer could be used.
 - Layers. The encoder and/or the decoder models could be expanded with additional layers
 and trained for more epochs, providing more representational capacity for the model.
 
-30.7. Further Reading
+30.7. Further Reading
 
 370
 
@@ -1009,7 +1009,7 @@ https://arxiv.org/abs/1409.1259
 - Massive Exploration of Neural Machine Translation Architectures, 2017.
 https://arxiv.org/abs/1703.03906
 
-30.8. Summary
+30.8. Summary
 
 30.8
 

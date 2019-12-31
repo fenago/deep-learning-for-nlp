@@ -1,6 +1,6 @@
 
 
-Chapter 7
+Chapter 7
 How to Prepare Text Data With Keras
 You cannot feed raw text directly into deep learning models. Text data must be encoded as
 numbers to be used as input or output for machine learning and deep learning models, such
@@ -32,13 +32,6 @@ A good first step when working with text is to split it into words. Words are ca
 text to word sequence() function that you can use to split text into a list of words. By
 default, this function automatically does 3 things:
 - Splits words by space.
-
-54
-
-7.3. Encoding with one hot
-
-55
-
 - Filters out punctuation.
 - Converts text to lowercase (lower=True).
 
@@ -94,7 +87,7 @@ from keras.preprocessing.text import text_to_word_sequence
 # define the document
 text = 'The quick brown fox jumped over the lazy dog.'
 
-7.4. Hash Encoding with hashing trick
+7.4. Hash Encoding with hashing trick
 
 
 ```
@@ -210,7 +203,7 @@ Tokenizer was fit.
 appears in.
 - word index: A dictionary of words and their uniquely assigned integers.
 
-7.5. Tokenizer API
+7.5. Tokenizer API
 
 58
 
@@ -266,7 +259,7 @@ print(encoded_docs)
 ```
 
 
-7.6. Further Reading
+7.6. Further Reading
 
 59
 
@@ -321,7 +314,7 @@ deep learning. Specifically, you learned:
 and test documents.
 - The range of 4 different document encoding schemes offered by the Tokenizer API.
 
-7.7. Summary
+7.7. Summary
 
 7.7.1
 
@@ -332,7 +325,7 @@ Next
 This is the last chapter in the data preparation part. In the next part, you will discover how to
 develop bag-of-words models.
 
-Part IV
+Part IV
 Bag-of-Words
 
 61
