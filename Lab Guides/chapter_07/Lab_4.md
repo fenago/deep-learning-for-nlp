@@ -45,6 +45,8 @@ default, this function automatically does 3 things:
 You can change any of these defaults by passing arguments to the function. Below is an
 example of using the text to word sequence() function to split a document (in this case a
 simple string) into a list of words.
+
+```
 from keras.preprocessing.text import text_to_word_sequence
 # define the document
 text = 'The quick brown fox jumped over the lazy dog.'
@@ -56,6 +58,8 @@ print(result)
 
 Running the example creates an array containing all of the words in the document. The list
 of words is printed for review.
+
+```
 ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
 
 ```
@@ -92,8 +96,8 @@ text = 'The quick brown fox jumped over the lazy dog.'
 
 7.4. Hash Encoding with hashing trick
 
-56
 
+```
 # estimate the size of the vocabulary
 words = set(text_to_word_sequence(text))
 vocab_size = len(words)
@@ -104,6 +108,8 @@ print(vocab_size)
 We can put this together with the one hot() function and encode the words in the document.
 The complete example is listed below. The vocabulary size is increased by one-third to minimize
 collisions when hashing words.
+
+```
 from keras.preprocessing.text import one_hot
 from keras.preprocessing.text import text_to_word_sequence
 # define the document
@@ -122,6 +128,7 @@ Running the example first prints the size of the vocabulary as 8. The encoded do
 then printed as an array of integer encoded words.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+```
 8
 [5, 9, 8, 7, 9, 1, 5, 3, 8]
 
@@ -141,14 +148,12 @@ document, just like the one hot() function. It provides more flexibility, allowi
 the hash function as either hash (the default) or other hash functions such as the built in md5
 function or your own function. Below is an example of integer encoding a document using the
 md5 hash function.
+
+```
 from keras.preprocessing.text import hashing_trick
 from keras.preprocessing.text import text_to_word_sequence
 # define the document
 text = 'The quick brown fox jumped over the lazy dog.'
-
-7.5. Tokenizer API
-
-57
 
 # estimate the size of the vocabulary
 words = set(text_to_word_sequence(text))
@@ -163,6 +168,8 @@ print(result)
 Running the example prints the size of the vocabulary and the integer encoded document.
 We can see that the use of a different hash function results in consistent, but different integers
 for words as the one hot() function in the previous section.
+
+```
 8
 [6, 4, 1, 2, 7, 5, 6, 2, 6]
 
@@ -179,6 +186,8 @@ multiple text documents. This may be the preferred approach for large projects. 
 the Tokenizer class for preparing text documents for deep learning. The Tokenizer must be
 constructed and then fit on either raw text documents or integer encoded text documents. For
 example:
+
+```
 from keras.preprocessing.text import Tokenizer
 # define 5 documents
 docs = ['Well done!',
@@ -209,6 +218,8 @@ appears in.
 calculated during the fit.
 
 For example:
+
+```
 # summarize what was learned
 print(t.word_counts)
 print(t.document_count)
@@ -230,6 +241,8 @@ in the document.
 - freq: The frequency of each word as a ratio of words within each document.
 
 We can put all of this together with a worked example.
+
+```
 from keras.preprocessing.text import Tokenizer
 # define 5 documents
 docs = ['Well done!',
@@ -261,6 +274,8 @@ Running the example fits the Tokenizer with 5 small documents. The details of th
 Tokenizer are printed. Then the 5 documents are encoded using a word count. Each document
 is encoded as a 9-element vector with one position for each word and the chosen encoding
 scheme value for each word position. In this case, a simple word count mode is used.
+
+```
 OrderedDict([('well', 1), ('done', 1), ('good', 1), ('work', 2), ('great', 1), ('effort',
 1), ('nice', 1), ('excellent', 1)])
 5

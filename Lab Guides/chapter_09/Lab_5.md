@@ -85,6 +85,8 @@ files. We will assume that the review data is downloaded and available in the cu
 directory in the folder txt sentoken. We can load an individual text file by opening it, reading
 in the ASCII text, and closing the file. This is standard file handling stuff. For example, we can
 load the first negative review file cv000 29416.txt as follows:
+
+```
 # load one file
 filename = 'txt_sentoken/neg/cv000_29416.txt'
 # open the file as read only
@@ -99,6 +101,8 @@ file.close()
 This loads the document as ASCII and preserves any white space, like new lines. We can
 turn this into a function called load doc() that takes a filename of the document to load and
 returns the text.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -115,6 +119,8 @@ We have two directories each with 1,000 documents each. We can process each dire
 turn by first getting a list of files in the directory using the listdir() function, then loading
 each file in turn. For example, we can load each document in the negative directory using the
 load doc() function to do the actual loading.
+
+```
 from os import listdir
 # load doc into memory
 def load_doc(filename):
@@ -129,11 +135,6 @@ return text
 directory = 'txt_sentoken/neg'
 # walk through all files in the folder
 for filename in listdir(directory):
-
-9.3. Load Text Data
-
-72
-
 # skip files that do not have the right extension
 if not filename.endswith(".txt"):
 next
@@ -146,6 +147,8 @@ print('Loaded %s' % filename)
 ```
 
 Running this example prints the filename of each review after it is loaded.
+
+```
 ...
 Loaded
 Loaded
@@ -164,6 +167,8 @@ cv999_14636.txt
 We can turn the processing of the documents into a function as well and use it as a template
 later for developing a function to clean all documents in a folder. For example, below we define
 a process docs() function to do the same thing.
+
+```
 from os import listdir
 # load doc into memory
 def load_doc(filename):
@@ -194,11 +199,6 @@ process_docs(directory)
 
 Now that we know how to load the movie review text data, let’s look at cleaning it.
 
-9.4. Clean Text Data
-
-9.4
-
-73
 
 Clean Text Data
 
@@ -213,6 +213,8 @@ Split into Tokens
 First, let’s load one document and look at the raw tokens split by white space. We will use the
 load doc() function developed in the previous section. We can use the split() function to
 split the loaded document into tokens separated by white space.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -232,6 +234,8 @@ print(tokens)
 ```
 
 Running the example gives a nice long list of raw tokens from the document.
+
+```
 ...
 'years', 'ago', 'and', 'has', 'been', 'sitting', 'on', 'the', 'shelves', 'ever', 'since',
 '.', 'whatever', '.', '.', '.', 'skip', 'it', '!', "where's", 'joblo', 'coming',
@@ -250,9 +254,6 @@ Just looking at the raw tokens can give us a lot of ideas of things to try, such
 - Remove tokens that have one character (e.g. ‘a’).
 - Remove tokens that don’t have much meaning (e.g. ‘and’).
 
-9.4. Clean Text Data
-
-74
 
 Some ideas:
 - We can filter out punctuation from tokens using regular expressions.
@@ -262,6 +263,8 @@ check on each token.
 - We can filter out short tokens by checking their length.
 
 Below is an updated version of cleaning this review.
+
+```
 from nltk.corpus import stopwords
 import string
 import re
@@ -295,6 +298,8 @@ print(tokens)
 ```
 
 Running the example gives a much cleaner looking list of tokens.
+
+```
 ...
 'explanation', 'craziness', 'came', 'oh', 'way', 'horror', 'teen', 'slasher', 'flick',
 'packaged', 'look', 'way', 'someone', 'apparently', 'assuming', 'genre', 'still',
@@ -305,13 +310,10 @@ Running the example gives a much cleaner looking list of tokens.
 
 ```
 
-
-9.4. Clean Text Data
-
-75
-
 We can put this into a function called clean doc() and test it on another review, this time
 a positive review.
+
+```
 from nltk.corpus import stopwords
 import string
 import re
@@ -349,6 +351,8 @@ print(tokens)
 ```
 
 Again, the cleaning procedure seems to produce a good set of tokens, at least as a first cut.
+
+```
 ...
 'comic', 'oscar', 'winner', 'martin', 'childs', 'shakespeare', 'love', 'production',
 'design', 'turns', 'original', 'prague', 'surroundings', 'one', 'creepy', 'place',
@@ -363,12 +367,6 @@ Again, the cleaning procedure seems to produce a good set of tokens, at least as
 
 There are many more cleaning steps we could take and I leave them to your imagination.
 Next, let’s look at how we can manage a preferred vocabulary of tokens.
-
-9.5. Develop Vocabulary
-
-9.5
-
-76
 
 Develop Vocabulary
 
@@ -387,6 +385,8 @@ previously developed clean doc() function, then it needs to add all the tokens t
 and update counts. We can do this last step by calling the update() function on the counter
 object. Below is a function called add doc to vocab() that takes as arguments a document
 filename and a Counter vocabulary.
+
+```
 # load doc and add to vocab
 def add_doc_to_vocab(filename, vocab):
 # load doc
@@ -400,6 +400,8 @@ vocab.update(tokens)
 
 Finally, we can use our template above for processing all documents in a directory called
 process docs() and update it to call add doc to vocab().
+
+```
 # load all docs in a directory
 def process_docs(directory, vocab):
 # walk through all files in the folder
@@ -416,14 +418,13 @@ add_doc_to_vocab(path, vocab)
 
 We can put all of this together and develop a full vocabulary from all documents in the
 dataset.
+
+```
 import string
 import re
 from os import listdir
 from collections import Counter
 from nltk.corpus import stopwords
-
-9.5. Develop Vocabulary
-
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -475,13 +476,6 @@ process_docs('txt_sentoken/neg', vocab)
 process_docs('txt_sentoken/pos', vocab)
 # print the size of the vocab
 print(len(vocab))
-
-77
-
-9.5. Develop Vocabulary
-
-78
-
 # print the top words in the vocab
 print(vocab.most_common(50))
 
@@ -490,6 +484,8 @@ print(vocab.most_common(50))
 Running the example creates a vocabulary with all documents in the dataset, including
 positive and negative reviews. We can see that there are a little over 46,000 unique words across
 all reviews and the top 3 words are film, one, and movie.
+
+```
 46557
 [('film', 8860), ('one', 5521), ('movie', 5440), ('like', 3553), ('even', 2555), ('good',
 2320), ('time', 2283), ('story', 2118), ('films', 2102), ('would', 2042), ('much',
@@ -511,6 +507,8 @@ only appear once or a few times across 2,000 reviews are probably not predictive
 removed from the vocabulary, greatly cutting down on the tokens we need to model. We can do
 this by stepping through words and their counts and only keeping those with a count above a
 chosen threshold. Here we will use 5 occurrences.
+
+```
 # keep tokens with > 5 occurrence
 min_occurrence = 5
 tokens = [k for k,c in vocab.items() if c >= min_occurrence]
@@ -523,6 +521,8 @@ of 5 occurrences is too aggressive; you can experiment with different values. We
 the chosen vocabulary of words to a new file. I like to save the vocabulary as ASCII with one
 word per line. Below defines a function called save list() to save a list of items, in this case,
 tokens to file, one per line.
+
+```
 def save_list(lines, filename):
 data = '\n'.join(lines)
 file = open(filename, 'w')
@@ -532,11 +532,11 @@ file.close()
 ```
 
 The complete example for defining and saving the vocabulary is listed below.
+
+```
 import string
 import re
 from os import listdir
-
-9.5. Develop Vocabulary
 from collections import Counter
 from nltk.corpus import stopwords
 # load doc into memory
@@ -588,13 +588,6 @@ def save_list(lines, filename):
 data = '\n'.join(lines)
 file = open(filename, 'w')
 file.write(data)
-
-79
-
-9.6. Save Prepared Data
-
-80
-
 file.close()
 # define vocab
 vocab = Counter()
@@ -617,6 +610,8 @@ save_list(tokens, 'vocab.txt')
 Running this final snippet after creating the vocabulary will save the chosen words to file. It
 is a good idea to take a look at, and even study, your chosen vocabulary in order to get ideas
 for better preparing this data, or text data in the future.
+
+```
 hasnt
 updating
 figuratively
@@ -642,6 +637,8 @@ We can use the data cleaning and chosen vocabulary to prepare each movie review 
 prepared versions of the reviews ready for modeling. This is a good practice as it decouples
 the data preparation from modeling, allowing you to focus on modeling and circle back to data
 prep if you have new ideas. We can start off by loading the vocabulary from vocab.txt.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -649,11 +646,6 @@ file = open(filename, 'r')
 # read all text
 text = file.read()
 # close the file
-
-9.6. Save Prepared Data
-
-81
-
 file.close()
 return text
 # load vocabulary
@@ -661,7 +653,6 @@ vocab_filename = 'vocab.txt'
 vocab = load_doc(vocab_filename)
 vocab = vocab.split()
 vocab = set(vocab)
-
 ```
 
 Next, we can clean the reviews, use the loaded vocab to filter out unwanted tokens, and
@@ -672,6 +663,8 @@ document, clean it, filter it, and return it as a single line that could be save
 defines the doc to line() function to do just that, taking a filename and vocabulary (as a set)
 as arguments. It calls the previously defined load doc() function to load the document and
 clean doc() to tokenize the document.
+
+```
 # load doc, clean and return line of tokens
 def doc_to_line(filename, vocab):
 # load the doc
@@ -687,6 +680,8 @@ return ' '.join(tokens)
 Next, we can define a new version of process docs() to step through all reviews in a folder
 and convert them to lines by calling doc to line() for each document. A list of lines is then
 returned.
+
+```
 # load all docs in a directory
 def process_docs(directory, vocab):
 lines = list()
@@ -710,6 +705,8 @@ then call save list() from the previous section to save each list of processed r
 
 9.6. Save Prepared Data
 The complete code listing is provided below.
+
+```
 import string
 import re
 from os import listdir
@@ -759,13 +756,6 @@ def process_docs(directory, vocab):
 lines = list()
 # walk through all files in the folder
 for filename in listdir(directory):
-
-82
-
-9.7. Further Reading
-
-83
-
 # skip files that do not have the right extension
 if not filename.endswith(".txt"):
 next
@@ -818,12 +808,6 @@ http://www.cs.cornell.edu/people/pabo/movie-review-data/poldata.README.2.0.
 txt
 http://www.cs.cornell.edu/people/pabo/movie-review-data/README.1.1
 
-9.8. Summary
-
-9.7.2
-
-84
-
 APIs
 
 - nltk.tokenize package API.
@@ -835,9 +819,7 @@ https://docs.python.org/3/library/os.html
 - collections API - Container datatypes.
 https://docs.python.org/3/library/collections.html
 
-9.8
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to prepare movie review text data for sentiment analysis,
 step-by-step. Specifically, you learned:
@@ -846,9 +828,7 @@ step-by-step. Specifically, you learned:
 - How to prepare movie reviews using cleaning and a predefined vocabulary and save them
 to new files ready for modeling.
 
-9.8.1
-
-Next
+# Next
 
 In the next chapter, you will discover how you can develop a neural bag-of-words model for
 movie review sentiment analysis.

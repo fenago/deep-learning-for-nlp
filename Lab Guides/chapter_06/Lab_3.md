@@ -67,6 +67,8 @@ be sparse vectors, and you can transform them back to NumPy arrays to look and b
 understand what is going on by calling the toarray() function. Below is an example of using
 the CountVectorizer to tokenize, build a vocabulary, and then encode a document.
 from sklearn.feature_extraction.text import CountVectorizer
+
+```
 # list of text documents
 text = ["The quick brown fox jumped over the lazy dog."]
 # create the transform
@@ -86,8 +88,9 @@ print(vector.toarray())
 
 Above, you can see that we access the vocabulary to see what exactly was tokenized by
 calling:
-print(vectorizer.vocabulary_)
 
+```
+print(vectorizer.vocabulary_)
 ```
 
 
@@ -102,6 +105,8 @@ then the shape of the encoded document. We can see that there are 8 words in the
 therefore encoded vectors have a length of 8. We can then see that the encoded vector is a
 sparse matrix. Finally, we can see an array version of the encoded vector showing a count of 1
 occurrence for each word except the (index and id 7) that has an occurrence of 2.
+
+```
 {'dog': 1, 'fox': 2, 'over': 5, 'brown': 0, 'quick': 6, 'the': 7, 'lazy': 4, 'jumped': 3}
 (1, 8)
 <class 'scipy.sparse.csr.csr_matrix'>
@@ -113,6 +118,8 @@ Importantly, the same vectorizer can be used on documents that contain words not
 in the vocabulary. These words are ignored and no count is given in the resulting vector. For
 example, below is an example of using the vectorizer above to encode a document with one
 word in the vocab and one word that is not.
+
+```
 # encode another document
 text2 = ["the puppy"]
 vector = vectorizer.transform(text2)
@@ -122,6 +129,8 @@ print(vector.toarray())
 
 Running this example prints the array version of the encoded sparse vector showing one
 occurrence of the one word in the vocab and the other word not in the vocab completely ignored.
+
+```
 [[0 0 0 0 0 0 0 1]]
 
 ```
@@ -154,6 +163,8 @@ document frequencies and start encoding documents. The same create, fit, and tra
 is used as with the CountVectorizer. Below is an example of using the TfidfVectorizer to
 learn vocabulary and inverse document frequencies across 3 small documents and then encode
 one of those documents.
+
+```
 from sklearn.feature_extraction.text import TfidfVectorizer
 # list of text documents
 text = ["The quick brown fox jumped over the lazy dog.",
@@ -180,6 +191,8 @@ word in the vocabulary, assigning the lowest score of 1.0 to the most frequently
 the at index 7. Finally, the first document is encoded as an 8-element sparse array and we can
 review the final scorings of each word with different values for the, fox, and dog from the other
 words in the vocabulary.
+
+```
 {'fox': 2, 'lazy': 4, 'dog': 1, 'quick': 6, 'the': 7, 'over': 5, 'brown': 0, 'jumped': 3}
 [ 1.69314718 1.28768207 1.28768207 1.69314718 1.69314718 1.69314718
 1.69314718 1. ]
@@ -217,6 +230,8 @@ there are heuristics that you can use to pick the hash length and probability of
 on estimated vocabulary size (e.g. a load factor of 75%). See any good textbook on the topic.
 Note that this vectorizer does not require a call to fit on the training data documents. Instead,
 after instantiation, it can be used directly to start encoding documents.
+
+```
 from sklearn.feature_extraction.text import HashingVectorizer
 # list of text documents
 text = ["The quick brown fox jumped over the lazy dog."]
@@ -233,6 +248,8 @@ print(vector.toarray())
 Running the example encodes the sample document as a 20-element sparse array. The values
 of the encoded document correspond to normalized word counts by default in the range of -1 to
 1, but could be made simple integer counts by changing the default configuration.
+
+```
 (1, 20)
 [[ 0.
 0.
@@ -262,7 +279,6 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-6.5.1
 
 Natural Language Processing
 
@@ -272,15 +288,6 @@ https://en.wikipedia.org/wiki/Bag-of-words_model
 https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization
 - TF-IDF on Wikipedia.
 https://en.wikipedia.org/wiki/Tf%E2%80%93idf
-
-6.6. Summary
-
-6.5.2
-
-53
-
-sciki-learn
-
 - Section 4.2. Feature extraction, scikit-learn User Guide.
 http://scikit-learn.org/stable/modules/feature_extraction.html
 - sckit-learn Feature Extraction API.

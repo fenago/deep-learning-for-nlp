@@ -201,10 +201,14 @@ keep contractions together. One way would be to split the document into words by
 (as in the section Split by Whitespace), then use string translation to replace all punctuation with
 nothing (e.g. remove it). Python provides a constant called string.punctuation that provides a
 great list of punctuation characters. For example:
+
+```
 print(string.punctuation)
 ```
 
 Results in:
+
+```
 !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
 ```
 
@@ -217,6 +221,8 @@ stripped = [re_punc.sub('', w) for w in words]
 
 We can put all of this together, load the text file, split it into words by white space, then
 translate each word to remove the punctuation.
+
+```
 import string
 import re
 # load text
@@ -238,8 +244,7 @@ become Whats but armour-like has become armourlike.
 
 5.4. Manual Tokenization
 
-40
-
+```
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
 'vermin', 'He', 'lay', 'on', 'his', 'armourlike', 'back', 'and', 'if', 'he', 'lifted',
@@ -255,11 +260,12 @@ become Whats but armour-like has become armourlike.
 Sometimes text data may contain non-printable characters. We can use a similar approach to
 filter out all non-printable characters by selecting the inverse of the string.printable constant.
 For example:
+
+```
 ...
 re_print = re.compile('[^%s]' % re.escape(string.printable))
 result = [re_print.sub('', w) for w in words]
 ```
-
 
 5.4.5
 
@@ -269,6 +275,8 @@ It is common to convert all words to one case. This means that the vocabulary wi
 size, but some distinctions are lost (e.g. Apple the company vs apple the fruit is a commonly
 used example). We can convert all words to lowercase by calling the lower() function on each
 word. For example:
+
+```
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
 text = file.read()
@@ -281,6 +289,8 @@ print(words[:100])
 ```
 
 Running the example, we can see that all words are now lowercase.
+
+```
 ['one', 'morning,', 'when', 'gregor', 'samsa', 'woke', 'from', 'troubled', 'dreams,', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
 'vermin.', 'he', 'lay', 'on', 'his', 'armour-like', 'back,', 'and', 'if', 'he',
@@ -296,18 +306,12 @@ Running the example, we can see that all words are now lowercase.
 
 5.5. Tokenization and Cleaning with NLTK
 
-5.4.6
-
-41
-
 Note on Cleaning Text
 
 Cleaning text is really hard, problem specific, and full of tradeoffs. Remember, simple is better.
 Simpler text data, simpler models, smaller vocabularies. You can always make things more
 complex later to see if it results in better model skill. Next, we’ll look at some of the tools in
 the NLTK library that offer more than simple string splitting.
-
-5.5
 
 Tokenization and Cleaning with NLTK
 
@@ -321,17 +325,23 @@ Install NLTK
 
 You can install NLTK using your favorite package manager, such as pip. On a POSIX-compatible
 machine, this would be:
+
+```
 sudo pip install -U nltk
 ```
 
 After installation, you will need to install the data used with the library, including a great
 set of documents that you can use later for testing other tools in NLTK. There are few ways to
 do this, such as from within a script:
+
+```
 import nltk
 nltk.download()
 ```
 
 Or from the command line:
+
+```
 python -m nltk.downloader all
 ```
 
@@ -346,17 +356,14 @@ text into sentences, split each sentence into words, then save each sentence to 
 NLTK provides the sent tokenize() function to split text into sentences. The example below
 loads the metamorphosis clean.txt file into memory, splits it into sentences, and prints the
 first sentence.
+
+```
 from nltk import sent_tokenize
 # load data
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
 text = file.read()
 file.close()
-
-5.5. Tokenization and Cleaning with NLTK
-
-42
-
 # split into sentences
 sentences = sent_tokenize(text)
 print(sentences[0])
@@ -365,6 +372,8 @@ print(sentences[0])
 Running the example, we can see that although the document is split into sentences, that
 each sentence still preserves the new line from the artificial wrap of the lines in the original
 document.
+
+```
 One morning, when Gregor Samsa woke from troubled dreams, he found
 himself transformed in his bed into a horrible vermin.
 ```
@@ -378,6 +387,8 @@ NLTK provides a function called word tokenize() for splitting strings into token
 words). It splits tokens based on white space and punctuation. For example, commas and
 periods are taken as separate tokens. Contractions are split apart (e.g. What’s becomes What
 and ’s). Quotes are kept, and so on. For example:
+
+```
 from nltk.tokenize import word_tokenize
 # load data
 filename = 'metamorphosis_clean.txt'
@@ -391,6 +402,8 @@ print(tokens[:100])
 
 Running the code, we can see that punctuation are now tokens that we could then decide to
 specifically filter out.
+
+```
 ['One', 'morning', ',', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams',
 ',', 'he', 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a',
 'horrible', 'vermin', '.', 'He', 'lay', 'on', 'his', 'armour-like', 'back', ',', 'and',
@@ -414,8 +427,7 @@ Python has the function isalpha() that can be used. For example:
 
 5.5. Tokenization and Cleaning with NLTK
 
-43
-
+```
 from nltk.tokenize import word_tokenize
 # load data
 filename = 'metamorphosis_clean.txt'
@@ -431,6 +443,8 @@ print(words[:100])
 
 Running the example, you can see that not only punctuation tokens, but examples like
 armour-like and ’s were also filtered out.
+
+```
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
 'vermin', 'He', 'lay', 'on', 'his', 'back', 'and', 'if', 'he', 'lifted', 'his', 'head',
@@ -453,12 +467,16 @@ are the most common words such as: the, a, and is. For some applications like do
 classification, it may make sense to remove stop words. NLTK provides a list of commonly
 agreed upon stop words for a variety of languages, such as English. They can be loaded as
 follows:
+
+```
 from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 print(stop_words)
 ```
 
 You can see the full list as follows:
+
+```
 ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours',
 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers',
 'herself', 'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves',
@@ -468,11 +486,6 @@ You can see the full list as follows:
 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into',
 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down',
 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here',
-
-5.5. Tokenization and Cleaning with NLTK
-
-44
-
 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more',
 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so',
 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', 'should', 'now', 'd',
@@ -490,6 +503,8 @@ the same way. Let’s demonstrate this with a small pipeline of text preparation
 - Remove punctuation from each token.
 - Filter out remaining tokens that are not alphabetic.
 - Filter out tokens that are stop words.
+
+```
 import string
 import re
 from nltk.tokenize import word_tokenize
@@ -519,10 +534,8 @@ Running this example, we can see that in addition to all of the other transforms
 like a and to have been removed. I note that we are still left with tokens like nt. The rabbit
 hole is deep; there’s always more we can do.
 
-5.5. Tokenization and Cleaning with NLTK
 
-45
-
+```
 ['one', 'morning', 'gregor', 'samsa', 'woke', 'troubled', 'dreams', 'found', 'transformed',
 'bed', 'horrible', 'vermin', 'lay', 'armourlike', 'back', 'lifted', 'head', 'little',
 'could', 'see', 'brown', 'belly', 'slightly', 'domed', 'divided', 'arches', 'stiff',
@@ -538,8 +551,6 @@ hole is deep; there’s always more we can do.
 ```
 
 
-5.5.6
-
 Stem Words
 
 Stemming refers to the process of reducing each word to its root or base. For example fishing,
@@ -550,6 +561,8 @@ although a popular and long-standing method is the Porter Stemming algorithm. Th
 is available in NLTK via the PorterStemmer class. For example:
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
+
+```
 # load data
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
@@ -566,6 +579,8 @@ print(stemmed[:100])
 Running the example, you can see that words have been reduced to their stems, such as
 trouble has become troubl. You can also see that the stemming implementation has also reduced
 the tokens to lowercase, likely for internal look-ups in word tables.
+
+```
 ['one', 'morn', ',', 'when', 'gregor', 'samsa', 'woke', 'from', 'troubl', 'dream', ',',
 'he', 'found', 'himself', 'transform', 'in', 'hi', 'bed', 'into', 'a', 'horribl',
 'vermin', '.', 'He', 'lay', 'on', 'hi', 'armour-lik', 'back', ',', 'and', 'if', 'he',
@@ -575,10 +590,6 @@ the tokens to lowercase, likely for internal look-ups in word tables.
 'slide', 'off', 'ani', 'moment', '.', 'hi', 'mani', 'leg', ',', 'piti', 'thin',
 'compar', 'with', 'the', 'size', 'of', 'the', 'rest', 'of', 'him', ',', 'wave',
 'about', 'helplessli', 'as', 'he', 'look', '.', '``', 'what', "'s", 'happen', 'to'
-
-5.6. Additional Text Cleaning Considerations
-
-46
 ```
 
 There is a nice suite of stemming and lemmatization algorithms to choose from in NLTK, if
@@ -609,9 +620,7 @@ that in this tutorial and I hope you take that to heart. Ideally, you would save
 each transform so that you can spend time with all of the data in the new form. Things always
 jump out at you when to take the time to review your data.
 
-5.7
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Metamorphosis by Franz Kafka on Project Gutenberg.
@@ -620,11 +629,6 @@ http://www.gutenberg.org/ebooks/5200
 http://www.nltk.org/install.html
 - Installing NLTK Data.
 http://www.nltk.org/data.html
-
-5.8. Summary
-
-47
-
 - Python isalpha() function.
 https://docs.python.org/3/library/stdtypes.html#str.isalpha
 - Stop Words on Wikipedia.
@@ -640,9 +644,7 @@ http://www.nltk.org/api/nltk.stem.html
 - Processing Raw Text, Natural Language Processing with Python.
 http://www.nltk.org/book/ch03.html
 
-5.8
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to clean text or machine learning in Python.
 Specifically, you learned:
@@ -650,9 +652,6 @@ Specifically, you learned:
 - How to take a step up and use the more sophisticated methods in the NLTK library.
 - Considerations when preparing text for natural language processing models.
 
-5.8.1
-
-Next
-
+# Next
 In the next chapter, you will discover how you can encode text data using the scikit-learn
 Python library.

@@ -117,7 +117,7 @@ model.compile(optimizer='sgd', loss='mean_squared_error')
 Alternately, the optimizer can be created and configured before being provided as an argument
 to the compilation step.
 
-```
+```
 algorithm = SGD(lr=0.1, momentum=0.3)
 model.compile(optimizer=algorithm, loss='mean_squared_error')
 ```
@@ -518,7 +518,7 @@ A plot of the model graph is also created and saved to file.
 Figure 4.4: Plot of the RNN Model Graph.
 
 
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Keras documentation for Sequential Models.
@@ -534,9 +534,7 @@ https://keras.io/optimizers/
 - Keras documentation for loss functions.
 https://keras.io/losses/
 
-4.5
-
-Summary
+# Summary
 
 In this tutorial, you discovered the step-by-step life-cycle for creating, training and evaluating
 deep learning neural networks in Keras and how to use the functional API that provides more
@@ -547,8 +545,5 @@ problems.
 - How to use the functional API to develop standard Multilayer Perceptron, convolutional
 and recurrent neural networks.
 
-4.5.1
-
-Next
-
+# Next
 In the next part, you will discover how you can prepare text data ready for modeling.
