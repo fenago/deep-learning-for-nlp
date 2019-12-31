@@ -107,6 +107,8 @@ and easily fit into memory. This will not always be the case and you may need to
 to memory map the file. Tools like NLTK (covered in the next section) will make working
 with large files much easier. We can load the entire metamorphosis clean.txt into memory as
 follows:
+
+```
 # load text
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
@@ -122,15 +124,12 @@ Clean text often means a list of words or tokens that we can work with in our ma
 models. This means converting the raw text into a list of words and saving it again. A very
 simple way to do this would be to split the document by white space, including “ ” (space), new
 lines, tabs and more. We can do this in Python with the split() function on the loaded string.
+
+```
 # load text
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
 text = file.read()
-
-5.4. Manual Tokenization
-
-38
-
 file.close()
 # split into words by white space
 words = text.split()
@@ -141,6 +140,8 @@ Running the example splits the document into a long list of words and prints the
 us to review. We can see that punctuation is preserved (e.g. wasn’t and armour-like), which is
 nice. We can also see that end of sentence punctuation is kept with the last word (e.g. thought.),
 which is not great.
+
+```
 ['One', 'morning,', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams,', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
 'vermin.', 'He', 'lay', 'on', 'his', 'armour-like', 'back,', 'and', 'if', 'he',
@@ -154,13 +155,13 @@ which is not great.
 ```
 
 
-5.4.3
-
 Select Words
 
 Another approach might be to use the regex model (re) and split the document into words by
 selecting for strings of alphanumeric characters (a-z, A-Z, 0-9 and ‘ ’). For example:
 import re
+
+```
 # load text
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')

@@ -105,6 +105,7 @@ Click the Download Key Pair button.
 - If you have not already done so, restrict the access permissions on your key pair file.
 This is required as part of the SSH access to your server. For example, open a terminal on
 your workstation and type:
+
 ```
 cd Downloads
 chmod 600 keras-aws-keypair.pem

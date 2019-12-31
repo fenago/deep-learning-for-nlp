@@ -191,6 +191,8 @@ The model evaluates the loss across all of the test patterns, as well as any oth
 specified when the model was compiled, like classification accuracy. A list of evaluation metrics
 is returned. For example, for a model compiled with the accuracy metric, we could evaluate it
 on a new dataset as follows:
+
+```
 loss, accuracy = model.evaluate(X, y)
 ```
 
@@ -199,21 +201,16 @@ evaluating the model. We can turn this off by setting the verbose argument to 0.
 loss, accuracy = model.evaluate(X, y, verbose=0)
 ```
 
-
-4.1.5
-
 Step 5. Make Predictions
 
 Once we are satisfied with the performance of our fit model, we can use it to make predictions
 on new data. This is as easy as calling the predict() function on the model with an array of
 new input patterns. For example:
+
+```
 predictions = model.predict(X)
 ```
 
-
-4.2. Keras Functional Models
-
-26
 
 The predictions will be returned in the format provided by the output layer of the network.
 In the case of a regression problem, these predictions may be in the format of the problem
@@ -225,17 +222,19 @@ probabilities (assuming a one hot encoded output variable) that may need to be c
 single class output prediction using the argmax() NumPy function. Alternately, for classification
 problems, we can use the predict classes() function that will automatically convert uncrisp
 predictions to crisp integer class values.
+
+```
 predictions = model.predict_classes(X)
 ```
 
 As with fitting and evaluating the network, verbose output is provided to give an idea of the
 progress of the model making predictions. We can turn this off by setting the verbose argument
 to 0.
+
+```
 predictions = model.predict(X, verbose=0)
 ```
 
-
-4.2
 
 Keras Functional Models
 
@@ -249,7 +248,6 @@ defined by creating instances of layers and connecting them directly to each oth
 defining a Model that specifies the layers to act as the input and output to the model. Let’s
 look at the three unique aspects of Keras functional API in turn:
 
-4.2.1
 
 Defining Input
 
@@ -260,17 +258,14 @@ Perceptron, the shape must explicitly leave room for the shape of the mini-batch
 when splitting the data when training the network. Therefore, the shape tuple is always defined
 with a hanging last dimension (2,), this is the way you must define a one-dimensional tuple in
 Python, for example:
+
+```
 from keras.layers import Input
 visible = Input(shape=(2,))
 ```
 
 
-4.3. Standard Network Models
-
-4.2.2
-
-27
-
+
 Connecting Layers
 
 The layers in the model are connected pairwise. This is done by specifying where the input
@@ -278,6 +273,8 @@ comes from when defining each new layer. A bracket or functional notation is use
 after the layer is created, the layer from which the input to the current layer comes from is
 specified. Let’s make this clear with a short example. We can create the input layer as above,
 then create a hidden layer as a Dense that receives input only from the input layer.
+
+```
 from keras.layers import Input
 from keras.layers import Dense
 visible = Input(shape=(2,))
@@ -289,14 +286,14 @@ output as the input to the Dense hidden layer. It is this way of connecting laye
 that gives the functional API its flexibility. For example, you can see how easy it would be to
 start defining ad hoc graphs of layers.
 
-4.2.3
-
 Creating the Model
 
 After creating all of your model layers and connecting them together, you must define the model.
 As with the Sequential API, the model is the thing you can summarize, fit, evaluate, and use to
 make predictions. Keras provides a Model class that you can use to create a model from your
 created layers. It requires that you only specify the input and output layers. For example:
+
+```
 from keras.models import Model
 from keras.layers import Input
 from keras.layers import Dense
@@ -312,7 +309,6 @@ this for your own models to make it clear what exactly you have defined. My hope
 these examples provide templates for you when you want to define your own models using the
 functional API in the future.
 
-4.3
 
 Standard Network Models
 
@@ -321,11 +317,6 @@ neural network models are defined. In this section, we will look at defining a s
 Perceptron, convolutional neural network, and recurrent neural network. These examples will
 provide a foundation for understanding the more elaborate examples later.
 
-4.3. Standard Network Models
-
-4.3.1
-
-28
 
 Multilayer Perceptron
 
@@ -333,6 +324,8 @@ In this section, we define a Multilayer Perceptron model for binary classificati
 has 10 inputs, 3 hidden layers with 10, 20, and 10 neurons, and an output layer with 1 output.
 Rectified linear activation functions are used in each hidden layer and a sigmoid activation
 function is used in the output layer, for binary classification.
+
+```
 # Multilayer Perceptron
 from keras.utils import plot_model
 from keras.models import Model
@@ -348,9 +341,12 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='multilayer_perceptron_graph.png')
+
 ```
 
 Running the example prints the structure of the network.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -384,17 +380,13 @@ _________________________________________________________________
 
 A plot of the model graph is also created and saved to file.
 
-4.3. Standard Network Models
-
-29
 
 Figure 4.2: Plot of the MLP Model Graph.
+
 Note, creating plots of Keras models requires that you install pydot and pygraphviz (the
 graphviz library and the Python wrapper). Instructions for installing these libraries vary for
 different systems. If this is a challenge for you (e.g. you’re on windows), consider commenting
 out the calls to plot model() when you see them.
-
-4.3.2
 
 Convolutional Neural Network
 
@@ -402,6 +394,8 @@ In this section, we will define a convolutional neural network for image classif
 receives black and white 64 x 64 images as input, then has a sequence of two convolutional and
 pooling layers as feature extractors, followed by a fully connected layer to interpret the features
 and an output layer with a sigmoid activation for two-class predictions.
+
+```
 # Convolutional Neural Network
 from keras.utils import plot_model
 from keras.models import Model
@@ -418,14 +412,13 @@ hidden1 = Dense(10, activation='relu')(pool2)
 output = Dense(1, activation='sigmoid')(hidden1)
 model = Model(inputs=visible, outputs=output)
 # summarize layers
-
-4.3. Standard Network Models
 model.summary()
 # plot graph
 plot_model(model, to_file='convolutional_neural_network.png')
 ```
 
 Running the example summarizes the model layers.
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -463,15 +456,8 @@ _________________________________________________________________
 
 A plot of the model graph is also created and saved to file.
 
-30
-
-4.3. Standard Network Models
-
-31
-
 Figure 4.3: Plot of the CNN Model Graph.
 
-4.3.3
 
 Recurrent Neural Network
 
@@ -479,6 +465,8 @@ In this section, we will define a long short-term memory recurrent neural networ
 classification. The model expects 100 time steps of one feature as input. The model has a single
 LSTM hidden layer to extract features from the sequence, followed by a fully connected layer to
 interpret the LSTM output, followed by an output layer for making binary predictions.
+
+```
 # Recurrent Neural Network
 from keras.utils import plot_model
 from keras.models import Model
@@ -491,17 +479,13 @@ hidden2 = Dense(10, activation='relu')(hidden1)
 output = Dense(1, activation='sigmoid')(hidden2)
 model = Model(inputs=visible, outputs=output)
 # summarize layers
-
-4.4. Further Reading
-
-32
-
 model.summary()
 # plot graph
 plot_model(model, to_file='recurrent_neural_network.png')
 ```
 
 Running the example summarizes the model layers.
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -533,18 +517,12 @@ A plot of the model graph is also created and saved to file.
 
 Figure 4.4: Plot of the RNN Model Graph.
 
-4.4
 
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Keras documentation for Sequential Models.
 https://keras.io/models/sequential/
-
-4.5. Summary
-
-33
-
 - Keras documentation for Functional Models.
 https://keras.io/models/model/
 - Getting started with the Keras Sequential model.
@@ -573,10 +551,4 @@ and recurrent neural networks.
 
 Next
 
-This is the last chapter in the foundations part. In the next part, you will discover how you can
-prepare text data ready for modeling.
-
-Part III
-Data Preparation
-
-34
+In the next part, you will discover how you can prepare text data ready for modeling.
