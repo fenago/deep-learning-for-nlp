@@ -115,12 +115,14 @@ candidate = ['this', 'is', 'a', 'test']
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.1: Example of calculating a sentence BLEU score.
+```
+
 Running this example prints a perfect score as the candidate matches one of the references
 exactly.
 1.0
 
-Listing 24.2: Sample output of calculating the sentence BLEU score.
+```
+
 
 24.4. Cumulative and Individual BLEU Scores
 
@@ -143,11 +145,13 @@ candidates = [['this', 'is', 'a', 'test']]
 score = corpus_bleu(references, candidates)
 print(score)
 
-Listing 24.3: Example of calculating a corpus BLEU score.
+```
+
 Running the example prints a perfect score as before.
 1.0
 
-Listing 24.4: Sample output of calculating the corpus BLEU score.
+```
+
 
 24.4
 
@@ -172,11 +176,13 @@ candidate = ['this', 'is', 'a', 'test']
 score = sentence_bleu(reference, candidate, weights=(1, 0, 0, 0))
 print(score)
 
-Listing 24.5: Example of calculating an individual 1-gram BLEU score.
+```
+
 Running this example prints a score of 0.5.
 0.75
 
-Listing 24.6: Sample output of calculating an individual 1-gram BLEU score.
+```
+
 We can repeat this example for individual n-grams from 1 to 4 as follows:
 
 24.4. Cumulative and Individual BLEU Scores
@@ -217,7 +223,8 @@ weights=(0,
 0)))
 1)))
 
-Listing 24.7: Example of calculating an individual n-gram BLEU scores.
+```
+
 Running the example gives the following results.
 Individual
 Individual
@@ -234,7 +241,8 @@ Individual
 1.000000
 1.000000
 
-Listing 24.8: Sample output of calculating an individual n-gram BLEU scores.
+```
+
 Although we can calculate the individual BLEU scores, this is not how the method was
 intended to be used and the scores do not carry a lot of meaning, or seem that interpretable.
 
@@ -254,11 +262,13 @@ candidate = ['this', 'is', 'a', 'test']
 score = sentence_bleu(reference, candidate, weights=(0.25, 0.25, 0.25, 0.25))
 print(score)
 
-Listing 24.9: Example of calculating a cumulative 4-gram BLEU score.
+```
+
 Running this example prints the following score:
 0.707106781187
 
-Listing 24.10: Sample output of calculating a cumulative 4-gram BLEU score.
+```
+
 The cumulative and individual 1-gram BLEU use the same weights, e.g. (1, 0, 0, 0). The
 2-gram weights assign a 50% to each of 1-gram and 2-gram and the 3-gram weights are 33%
 for each of the 1, 2 and 3-gram scores. Let’s make this concrete by calculating the cumulative
@@ -280,7 +290,8 @@ print('Cumulative 3-gram: %f' % sentence_bleu(reference, candidate, weights=(0.3
 print('Cumulative 4-gram: %f' % sentence_bleu(reference, candidate, weights=(0.25, 0.25,
 0.25, 0.25)))
 
-Listing 24.11: Example of calculating cumulative n-gram BLEU scores.
+```
+
 Running the example prints the following scores. They are quite different and more expressive
 than the They are quite different and more expressive than the standalone individual n-gram
 scores.
@@ -299,7 +310,8 @@ Cumulative
 0.632878
 0.707107
 
-Listing 24.12: Sample output of calculating cumulative n-gram BLEU scores.
+```
+
 It is common to report the cumulative BLEU-1 to BLEU-4 scores when describing the skill
 of a text generation system.
 
@@ -311,7 +323,8 @@ In this section, we try to develop further intuition for the BLEU score with som
 work at the sentence level with a single reference sentence of the following:
 the quick brown fox jumped over the lazy dog
 
-Listing 24.13: Sample text for the worked example of calculating BLEU scores.
+```
+
 First, let’s look at a perfect score.
 # prefect match
 from nltk.translate.bleu_score import sentence_bleu
@@ -320,11 +333,13 @@ candidate = ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'd
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.14: Example of two matching cases.
+```
+
 Running the example prints a perfect match.
 1.0
 
-Listing 24.15: Sample output BLEU score for two matching cases.
+```
+
 Next, let’s change one word, ‘quick ’ to ‘fast’.
 # one word different
 from nltk.translate.bleu_score import sentence_bleu
@@ -333,7 +348,8 @@ candidate = ['the', 'fast', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'do
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.16: Example of making one word different.
+```
+
 
 24.5. Worked Examples
 
@@ -342,7 +358,8 @@ Listing 24.16: Example of making one word different.
 This result is a slight drop in score.
 0.7506238537503395
 
-Listing 24.17: Sample output BLEU score when making one word different.
+```
+
 Try changing two words, both ‘quick ’ to ‘fast’ and ‘lazy’ to ‘sleepy’.
 # two words different
 from nltk.translate.bleu_score import sentence_bleu
@@ -351,11 +368,13 @@ candidate = ['the', 'fast', 'brown', 'fox', 'jumped', 'over', 'the', 'sleepy', '
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.18: Example of making two words different.
+```
+
 Running the example, we can see a linear drop in skill.
 0.4854917717073234
 
-Listing 24.19: Sample output BLEU score when making two words different.
+```
+
 What about if all words are different in the candidate?
 # all words different
 from nltk.translate.bleu_score import sentence_bleu
@@ -364,11 +383,13 @@ candidate = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.20: Example of making all words different.
+```
+
 We get the worse possible score.
 0.0
 
-Listing 24.21: Sample output BLEU score when making all words different.
+```
+
 Now, let’s try a candidate that has fewer words than the reference (e.g. drop the last two
 words), but the words are all correct.
 # shorter candidate
@@ -378,11 +399,13 @@ candidate = ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the']
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.22: Example of making one case shorter.
+```
+
 The score is much like the score when two words were wrong above.
 0.7514772930752859
 
-Listing 24.23: Sample output BLEU score when making one case shorter.
+```
+
 How about if we make the candidate two words longer than the reference?
 
 24.6. Further Reading
@@ -397,11 +420,13 @@ candidate = ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'd
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.24: Example of making one case longer.
+```
+
 Again, we can see that our intuition holds and the score is something like two words wrong.
 0.7860753021519787
 
-Listing 24.25: Sample output BLEU score when making one longer shorter.
+```
+
 Finally, let’s compare a candidate that is way too short: only two words in length.
 # very short
 from nltk.translate.bleu_score import sentence_bleu
@@ -410,7 +435,8 @@ candidate = ['the', 'quick']
 score = sentence_bleu(reference, candidate)
 print(score)
 
-Listing 24.26: Example of making one case too short.
+```
+
 Running this example first prints a warning message indicating that the 3-gram and above
 part of the evaluation (up to 4-gram) cannot be performed. This is fair given we only have
 2-grams to work with in the candidate.
@@ -419,11 +445,13 @@ Corpus/Sentence contains 0 counts of 3-gram overlaps.
 BLEU scores might be undesirable; use SmoothingFunction().
 warnings.warn(_msg)
 
-Listing 24.27: Sample warning message.
+```
+
 Next, we can a score that is very low indeed.
 0.0301973834223185
 
-Listing 24.28: Sample output BLEU score when making one case too short.
+```
+
 I encourage you to continue to play with examples. The math is pretty simple and I would
 also encourage you to read the paper and explore calculating the sentence-level score yourself in
 a spreadsheet.

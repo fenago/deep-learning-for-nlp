@@ -32,12 +32,11 @@ Below is an overview of the 5 steps in the neural network model life-cycle in Ke
 
 4.1. Keras Model Life-Cycle
 
-22
 
 Figure 4.1: 5 Step Life-Cycle for Neural Network Models in Keras.
+
 Let’s take a look at each step in turn using the easy-to-use Keras Sequential API.
 
-4.1.1
 
 Step 1. Define Network
 
@@ -45,43 +44,47 @@ The first step is to define your neural network. Neural networks are defined in 
 sequence of layers. The container for these layers is the Sequential class. The first step is to
 create an instance of the Sequential class. Then you can create your layers and add them in
 the order that they should be connected. For example, we can do this in two steps:
+
+```
 model = Sequential()
 model.add(Dense(2))
+```
 
-Listing 4.1: Sequential model with one Dense layer with 2 neurons.
 But we can also do this in one step by creating an array of layers and passing it to the
 constructor of the Sequential class.
+
+```
 layers = [Dense(2)]
 model = Sequential(layers)
+```
 
-Listing 4.2: Layers for a Sequential model defined as an array.
 The first layer in the network must define the number of inputs to expect. The way that this
 is specified can differ depending on the network type, but for a Multilayer Perceptron model
 this is specified by the input dim attribute. For example, a small Multilayer Perceptron model
 with 2 inputs in the visible layer, 5 neurons in the hidden layer and one neuron in the output
 layer can be defined as:
+
+```
 model = Sequential()
 model.add(Dense(5, input_dim=2))
 model.add(Dense(1))
+```
 
-4.1. Keras Model Life-Cycle
-
-23
-
-Listing 4.3: Sequential model with 2 inputs.
 Think of a Sequential model as a pipeline with your raw data fed in at the bottom and
 predictions that come out at the top. This is a helpful conception in Keras as concerns that were
 traditionally associated with a layer can also be split out and added as separate layers, clearly
 showing their role in the transform of data from input to prediction. For example, activation
 functions that transform a summed signal from each neuron in a layer can be extracted and
 added to the Sequential as a layer-like object called the Activation class.
+
+```
 model = Sequential()
 model.add(Dense(5, input_dim=2))
 model.add(Activation('relu'))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
+```
 
-Listing 4.4: Sequential model with Activation functions defined separately from layers.
 The choice of activation function is most important for the output layer as it will define the
 format that predictions will take. For example, below are some common predictive modeling
 problem types and the structure and standard activation function that you can use in the output
@@ -92,8 +95,6 @@ the number of outputs.
 neuron the output layer.
 - Multiclass Classification (>2 class): Softmax activation function, or softmax, and
 one output neuron per class value, assuming a one hot encoded output pattern.
-
-4.1.2
 
 Step 2. Compile Network
 
@@ -108,20 +109,19 @@ function used to evaluate the network that is minimized by the optimization algo
 example, below is a case of compiling a defined model and specifying the stochastic gradient
 descent (sgd) optimization algorithm and the mean squared error (mean squared error) loss
 function, intended for a regression type problem.
-model.compile(optimizer='sgd', loss='mean_squared_error')
 
-Listing 4.5: Example of compiling a defined model.
+```
+model.compile(optimizer='sgd', loss='mean_squared_error')
+```
+
 Alternately, the optimizer can be created and configured before being provided as an argument
 to the compilation step.
 
-4.1. Keras Model Life-Cycle
-
-24
-
+```
 algorithm = SGD(lr=0.1, momentum=0.3)
 model.compile(optimizer=algorithm, loss='mean_squared_error')
+```
 
-Listing 4.6: Example of defining the optimization algorithm separately.
 The type of predictive modeling problem imposes constraints on the type of loss function
 that can be used. For example, below are some standard loss functions for different predictive
 model types:
@@ -143,11 +143,10 @@ momentum.
 Finally, you can also specify metrics to collect while fitting your model in addition to the
 loss function. Generally, the most useful additional metric to collect is accuracy for classification
 problems. The metrics to collect are specified by name in an array. For example:
+
+```
 model.compile(optimizer='sgd', loss='mean_squared_error', metrics=['accuracy'])
-
-Listing 4.7: Example of defining metrics when compiling the model.
-
-4.1.3
+```
 
 Step 3. Fit Network
 
@@ -163,13 +162,10 @@ network is exposed to before the weights are updated within an epoch. It is also
 optimization, ensuring that not too many input patterns are loaded into memory at a time. A
 minimal example of fitting a network is as follows:
 
-4.1. Keras Model Life-Cycle
-
-25
-
+```
 history = model.fit(X, y, batch_size=10, epochs=100)
+```
 
-Listing 4.8: Example of fitting a compiled model.
 Once fit, a history object is returned that provides a summary of the performance of the
 model during training. This includes both the loss and any additional metrics specified when
 compiling the model, recorded each epoch. Training can take a long time, from seconds to hours
@@ -179,11 +175,10 @@ too much noise for you, or may cause problems for your environment, such as if y
 interactive notebook or IDE. You can reduce the amount of information displayed to just the
 loss each epoch by setting the verbose argument to 2. You can turn off all output by setting
 verbose to 0. For example:
+
+```
 history = model.fit(X, y, batch_size=10, epochs=100, verbose=0)
-
-Listing 4.9: Example of turning off verbose output when fitting the model.
-
-4.1.4
+```
 
 Step 4. Evaluate Network
 
@@ -197,13 +192,13 @@ specified when the model was compiled, like classification accuracy. A list of e
 is returned. For example, for a model compiled with the accuracy metric, we could evaluate it
 on a new dataset as follows:
 loss, accuracy = model.evaluate(X, y)
+```
 
-Listing 4.10: Example of evaluating a fit model.
 As with fitting the network, verbose output is provided to give an idea of the progress of
 evaluating the model. We can turn this off by setting the verbose argument to 0.
 loss, accuracy = model.evaluate(X, y, verbose=0)
+```
 
-Listing 4.11: Example of turning off verbose output when evaluating a fit model.
 
 4.1.5
 
@@ -213,8 +208,8 @@ Once we are satisfied with the performance of our fit model, we can use it to ma
 on new data. This is as easy as calling the predict() function on the model with an array of
 new input patterns. For example:
 predictions = model.predict(X)
+```
 
-Listing 4.12: Example of making a prediction with a fit model.
 
 4.2. Keras Functional Models
 
@@ -231,14 +226,14 @@ single class output prediction using the argmax() NumPy function. Alternately, f
 problems, we can use the predict classes() function that will automatically convert uncrisp
 predictions to crisp integer class values.
 predictions = model.predict_classes(X)
+```
 
-Listing 4.13: Example of predicting classes with a fit model.
 As with fitting and evaluating the network, verbose output is provided to give an idea of the
 progress of the model making predictions. We can turn this off by setting the verbose argument
 to 0.
 predictions = model.predict(X, verbose=0)
+```
 
-Listing 4.14: Example of disabling verbose output when making predictions.
 
 4.2
 
@@ -267,8 +262,8 @@ with a hanging last dimension (2,), this is the way you must define a one-dimens
 Python, for example:
 from keras.layers import Input
 visible = Input(shape=(2,))
+```
 
-Listing 4.15: Example of defining input for a functional model.
 
 4.3. Standard Network Models
 
@@ -287,8 +282,8 @@ from keras.layers import Input
 from keras.layers import Dense
 visible = Input(shape=(2,))
 hidden = Dense(2)(visible)
+```
 
-Listing 4.16: Example of connecting a hidden layer to the visible layer.
 Note it is the visible after the creation of the Dense layer that connects the input layer’s
 output as the input to the Dense hidden layer. It is this way of connecting layers piece by piece
 that gives the functional API its flexibility. For example, you can see how easy it would be to
@@ -308,8 +303,8 @@ from keras.layers import Dense
 visible = Input(shape=(2,))
 hidden = Dense(2)(visible)
 model = Model(inputs=visible, outputs=hidden)
+```
 
-Listing 4.17: Example of creating a full model with the functional API.
 Now that we know all of the key pieces of the Keras functional API, let’s work through
 defining a suite of different models and build up some practice with it. Each example is
 executable and prints the structure and creates a diagram of the graph. I recommend doing
@@ -353,8 +348,8 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='multilayer_perceptron_graph.png')
+```
 
-Listing 4.18: Example of defining an MLP with the functional API.
 Running the example prints the structure of the network.
 _________________________________________________________________
 Layer (type)
@@ -385,8 +380,8 @@ Total params: 551
 Trainable params: 551
 Non-trainable params: 0
 _________________________________________________________________
+```
 
-Listing 4.19: Summary of MLP model defined with the functional API.
 A plot of the model graph is also created and saved to file.
 
 4.3. Standard Network Models
@@ -428,8 +423,8 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='convolutional_neural_network.png')
+```
 
-Listing 4.20: Example of defining an CNN with the functional API.
 Running the example summarizes the model layers.
 _________________________________________________________________
 Layer (type)
@@ -464,8 +459,8 @@ Total params: 8,933
 Trainable params: 8,933
 Non-trainable params: 0
 _________________________________________________________________
+```
 
-Listing 4.21: Summary of CNN model defined with the functional API.
 A plot of the model graph is also created and saved to file.
 
 30
@@ -504,8 +499,8 @@ model = Model(inputs=visible, outputs=output)
 model.summary()
 # plot graph
 plot_model(model, to_file='recurrent_neural_network.png')
+```
 
-Listing 4.22: Example of defining an RNN with the functional API.
 Running the example summarizes the model layers.
 _________________________________________________________________
 Layer (type)
@@ -532,8 +527,8 @@ Total params: 601
 Trainable params: 601
 Non-trainable params: 0
 _________________________________________________________________
+```
 
-Listing 4.23: Summary of RNN model defined with the functional API.
 A plot of the model graph is also created and saved to file.
 
 Figure 4.4: Plot of the RNN Model Graph.

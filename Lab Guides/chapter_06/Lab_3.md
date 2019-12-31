@@ -82,12 +82,14 @@ print(vector.shape)
 print(type(vector))
 print(vector.toarray())
 
-Listing 6.1: Example of training a CountVectorizer.
+```
+
 Above, you can see that we access the vocabulary to see what exactly was tokenized by
 calling:
 print(vectorizer.vocabulary_)
 
-Listing 6.2: Print the learned vocabulary.
+```
+
 
 6.3. Word Frequencies with TfidfVectorizer
 
@@ -105,7 +107,8 @@ occurrence for each word except the (index and id 7) that has an occurrence of 2
 <class 'scipy.sparse.csr.csr_matrix'>
 [[1 1 1 1 1 1 1 2]]
 
-Listing 6.3: Example output of training a CountVectorizer.
+```
+
 Importantly, the same vectorizer can be used on documents that contain words not included
 in the vocabulary. These words are ignored and no count is given in the resulting vector. For
 example, below is an example of using the vectorizer above to encode a document with one
@@ -115,12 +118,14 @@ text2 = ["the puppy"]
 vector = vectorizer.transform(text2)
 print(vector.toarray())
 
-Listing 6.4: Example of encoding another document with the fit CountVectorizer.
+```
+
 Running this example prints the array version of the encoded sparse vector showing one
 occurrence of the one word in the vocab and the other word not in the vocab completely ignored.
 [[0 0 0 0 0 0 0 1]]
 
-Listing 6.5: Example output of encoding another document.
+```
+
 The encoded vectors can then be used directly with a machine learning algorithm.
 
 6.3
@@ -167,7 +172,8 @@ vector = vectorizer.transform([text[0]])
 print(vector.shape)
 print(vector.toarray())
 
-Listing 6.6: Example of training a TfidfVectorizer.
+```
+
 A vocabulary of 8 words is learned from the documents and each word is assigned a unique
 integer index in the output vector. The inverse document frequencies are calculated for each
 word in the vocabulary, assigning the lowest score of 1.0 to the most frequently observed word:
@@ -181,7 +187,8 @@ words in the vocabulary.
 [[ 0.36388646 0.27674503 0.27674503 0.36388646 0.36388646 0.36388646
 0.36388646 0.42983441]]
 
-Listing 6.7: Example output of training a TfidfVectorizer.
+```
+
 The scores are normalized to values between 0 and 1 and the encoded document vectors can
 then be used directly with most machine learning algorithms.
 
@@ -221,7 +228,8 @@ vector = vectorizer.transform(text)
 print(vector.shape)
 print(vector.toarray())
 
-Listing 6.8: Example of training a HashingVectorizer.
+```
+
 Running the example encodes the sample document as a 20-element sparse array. The values
 of the encoded document correspond to normalized word counts by default in the range of -1 to
 1, but could be made simple integer counts by changing the default configuration.
@@ -245,7 +253,8 @@ of the encoded document correspond to normalized word counts by default in the r
 0.33333333
 0.
 
-Listing 6.9: Example output of training a HashingVectorizer.
+```
+
 
 6.5
 

@@ -64,7 +64,8 @@ To fetch a pail of water
 Jack fell down and broke his crown
 And Jill came tumbling after
 
-Listing 19.1: Jack and Jill nursery rhyme.
+```
+
 We will use this as our source text for exploring different framings of a word-based language
 model. We can define this text in Python as follows:
 # source text
@@ -73,7 +74,8 @@ To fetch a pail of water\n
 Jack fell down and broke his crown\n
 And Jill came tumbling after\n """
 
-Listing 19.2: Sample text for this tutorial.
+```
+
 
 19.4
 
@@ -97,7 +99,8 @@ went
 
 ...
 
-Listing 19.3: Example of input and output pairs.
+```
+
 The first step is to encode the text as integers. Each lowercase word in the source text is
 assigned a unique integer and we can convert the sequences of words to sequences of integers.
 Keras provides the Tokenizer class that can be used to perform this encoding. First, the
@@ -109,7 +112,8 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts([data])
 encoded = tokenizer.texts_to_sequences([data])[0]
 
-Listing 19.4: Example of training a Tokenizer on the sample text.
+```
+
 We will need to know the size of the vocabulary later for both defining the word embedding
 layer in the model, and for encoding output words using a one hot encoding. The size of the
 vocabulary can be retrieved from the trained Tokenizer by accessing the word index attribute.
@@ -117,7 +121,8 @@ vocabulary can be retrieved from the trained Tokenizer by accessing the word ind
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary Size: %d' % vocab_size)
 
-Listing 19.5: Summarize the size of the vocabulary.
+```
+
 Running this example, we can see that the size of the vocabulary is 21 words. We add one,
 because we will need to specify the integer for the largest encoded word as an array index, e.g.
 words encoded 1 to 21 with array indicies 0 to 21 or 22 positions. Next, we need to create
@@ -129,17 +134,20 @@ sequence = encoded[i-1:i+1]
 sequences.append(sequence)
 print('Total Sequences: %d' % len(sequences))
 
-Listing 19.6: Example of encoding the source text.
+```
+
 Running this piece shows that we have a total of 24 input-output pairs to train the network.
 Total Sequences: 24
 
-Listing 19.7: Example of output of summarizing the encoded text.
+```
+
 We can then split the sequences into input (X) and output elements (y). This is straightforward as we only have two columns in the data.
 # split into X and y elements
 sequences = array(sequences)
 X, y = sequences[:,0],sequences[:,1]
 
-Listing 19.8: Split the encoded text into input and output pairs.
+```
+
 
 19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
@@ -154,7 +162,8 @@ integer to a one hot encoding while specifying the number of classes as the voca
 # one hot encode outputs
 y = to_categorical(y, num_classes=vocab_size)
 
-Listing 19.9: One hot encode the output words.
+```
+
 We are now ready to define the neural network model. The model uses a learned word
 embedding in the input layer. This has one real-valued vector for each word in the vocabulary,
 where each word vector has a specified length. In this case we will use a 10-dimensional
@@ -175,7 +184,8 @@ model.summary()
 plot_model(model, to_file='model.png', show_shapes=True)
 return model
 
-Listing 19.10: Define and compile the language model.
+```
+
 The structure of the network can be summarized as follows:
 _________________________________________________________________
 Layer (type)
@@ -199,7 +209,8 @@ Trainable params: 13,542
 Non-trainable params: 0
 _________________________________________________________________
 
-Listing 19.11: Example output summarizing the defined model.
+```
+
 A plot the defined model is then saved to file with the name model.png.
 
 19.4. Model 1: One-Word-In, One-Word-Out Sequences
@@ -229,7 +240,8 @@ for word, index in tokenizer.word_index.items():
 if index == yhat:
 print(word)
 
-Listing 19.12: Evaluate the fit language model.
+```
+
 This process could then be repeated a few times to build up a generated sequence of words.
 To make this easier, we wrap up the behavior in a function that we can call by passing in our
 model and the seed word.
@@ -255,7 +267,8 @@ break
 in_text, result = out_word, result + ' ' + out_word
 return result
 
-Listing 19.13: Function to generate output sequences given a fit model.
+```
+
 We can tie all of this together. The complete code listing is provided below.
 from
 from
@@ -343,7 +356,8 @@ model.fit(X, y, epochs=500, verbose=2)
 # evaluate
 print(generate_seq(model, tokenizer, 'Jack', 6))
 
-Listing 19.14: Complete example of model1.
+```
+
 Running the example prints the loss and accuracy each training epoch.
 ...
 Epoch 496/500
@@ -363,7 +377,8 @@ Epoch 500/500
 - acc: 0.8750
 - acc: 0.8750
 
-Listing 19.15: Example output of fitting the language model.
+```
+
 We can see that the model does not memorize the source sequences, likely because there is
 some ambiguity in the input sequences, for example:
 
@@ -374,14 +389,16 @@ some ambiguity in the input sequences, for example:
 jack => and
 jack => fell
 
-Listing 19.16: Example output of predicting the next word.
+```
+
 And so on. At the end of the run, Jack is passed in and a prediction or new sequence is
 generated. We get a reasonable sequence as output that has some elements of the source.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 Jack and jill came tumbling after down
 
-Listing 19.17: Example output of predicting a sequence of words.
+```
+
 This is a good first cut language model, but does not take full advantage of the LSTM’s
 ability to handle sequences of input and disambiguate some of the ambiguous pairwise sequences
 by using a broader context.
@@ -408,7 +425,8 @@ up
 the
 hill
 
-Listing 19.18: Example framing of the problem as sequences of words.
+```
+
 This approach may allow the model to use the context of each line to help the model in those
 cases where a simple one-word-in-and-out model creates ambiguity. In this case, this comes at
 the cost of predicting words across lines, which might be fine for now if we are only interested
@@ -425,7 +443,8 @@ sequence = encoded[:i+1]
 sequences.append(sequence)
 print('Total Sequences: %d' % len(sequences))
 
-Listing 19.19: Example of preparing sequences of words.
+```
+
 
 19.5. Model 2: Line-by-Line Sequence
 
@@ -439,14 +458,16 @@ max_length = max([len(seq) for seq in sequences])
 sequences = pad_sequences(sequences, maxlen=max_length, padding='pre')
 print('Max Sequence Length: %d' % max_length)
 
-Listing 19.20: Example of padding sequences of words.
+```
+
 Next, we can split the sequences into input and output elements, much like before.
 # split into input and output elements
 sequences = array(sequences)
 X, y = sequences[:,:-1],sequences[:,-1]
 y = to_categorical(y, num_classes=vocab_size)
 
-Listing 19.21: Example of preparing the input and output sequences.
+```
+
 The model can then be defined as before, except the input sequences are now longer than a
 single word. Specifically, they are max length-1 in length, -1 because when we calculated the
 maximum length of sequences, they included the input and output elements.
@@ -463,7 +484,8 @@ model.summary()
 plot_model(model, to_file='model.png', show_shapes=True)
 return model
 
-Listing 19.22: Define and compile the language model.
+```
+
 We can use the model to generate new sequences as before. The generate seq() function
 can be updated to build up an input sequence by adding predictions to the list of input words
 each iteration.
@@ -490,7 +512,8 @@ break
 in_text += ' ' + out_word
 return in_text
 
-Listing 19.23: Function to generate sequences of words given input text.
+```
+
 Tying all of this together, the complete code example is provided below.
 from
 from
@@ -586,7 +609,8 @@ model.fit(X, y, epochs=500, verbose=2)
 print(generate_seq(model, tokenizer, max_length-1, 'Jack', 4))
 print(generate_seq(model, tokenizer, max_length-1, 'Jill', 4))
 
-Listing 19.24: Complete example of model2.
+```
+
 Running the example achieves a better fit on the source data. The added context has allowed
 the model to disambiguate some of the examples. There are still two lines of text that start
 with “Jack ” that may still be a problem for the network.
@@ -608,7 +632,8 @@ Epoch 500/500
 - acc: 0.9524
 - acc: 0.9524
 
-Listing 19.25: Example output of fitting the language model.
+```
+
 At the end of the run, we generate two sequences with different seed words: Jack and Jill.
 The first generated line looks good, directly matching the source text. The second is a bit
 strange. This makes sense, because the network only ever saw Jill within an input sequence,
@@ -624,7 +649,8 @@ running the example a few times.
 Jack fell down and broke
 Jill jill came tumbling after
 
-Listing 19.26: Example output of generating sequences of words.
+```
+
 This was a good example of how the framing may result in better new lines, but not good
 partial lines of input.
 
@@ -643,7 +669,8 @@ for i in range(2, len(encoded)):
 sequence = encoded[i-2:i+1]
 sequences.append(sequence)
 
-Listing 19.27: Example of preparing constrained sequence data.
+```
+
 The complete example is listed below
 from
 from
@@ -741,7 +768,8 @@ print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
 
 223
 
-Listing 19.28: Complete example of model3.
+```
+
 Running the example again gets a good fit on the source text at around 95% accuracy.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
@@ -763,7 +791,8 @@ Epoch 500/500
 - acc: 0.9565
 - acc: 0.9565
 
-Listing 19.29: Example output of fitting the language model.
+```
+
 We look at 4 generation examples, two start of line cases and two starting mid line.
 Jack and jill
 And Jill went
@@ -775,7 +804,8 @@ up the
 broke his crown and
 jack fell down and
 
-Listing 19.30: Example output of generating sequences of words.
+```
+
 The first start of line case generated correctly, but the second did not. The second case was
 an example from the 4th line, which is ambiguous with content from the first line. Perhaps a
 further expansion to 3 input words would be better. The two mid-line generation examples were

@@ -91,19 +91,22 @@ sample of image file names:
 997338199_7343367d7f.jpg
 997722733_0cb5439472.jpg
 
-Listing 25.1: Example of photographs filenames.
+```
+
 Keras provides the load img() function that can be used to load the image files directly as
 an array of pixels.
 from keras.preprocessing.image import load_img
 image = load_img('990890291_afc72be141.jpg')
 
-Listing 25.2: Example of loading a single photograph
+```
+
 The pixel data needs to be converted to a NumPy array for use in Keras. We can use the
 img to array() Keras function to convert the loaded data.
 from keras.preprocessing.image import img_to_array
 image = img_to_array(image)
 
-Listing 25.3: Example of converting a photograph to a NumPy array
+```
+
 We may want to use a pre-defined feature extraction model, such as a state-of-the-art deep
 image classification network trained on Image net. The Oxford Visual Geometry Group (VGG)
 model is popular for this purpose and is available in Keras. If we decide to use this pre-trained
@@ -115,18 +118,21 @@ image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 # prepare the image for the VGG model
 image = preprocess_input(image)
 
-Listing 25.4: Prepare image data for the VGG16 model
+```
+
 We may also want to force the loading of the photo to have the same pixel dimensions as the
 VGG model, which are 224 x 224 pixels. We can do that in the call to load img(), for example:
 image = load_img('990890291_afc72be141.jpg', target_size=(224, 224))
 
-Listing 25.5: Load an image in Keras to a specific size
+```
+
 We may want to extract the unique image identifier from the image filename. We can do
 that by splitting the filename string by the ‘.’ (period) character and retrieving the first element
 of the resulting array:
 image_id = filename.split('.')[0]
 
-Listing 25.6: Retrieve image identifier from filename
+```
+
 
 25.4. Pre-Calculate Photo Features
 
@@ -168,11 +174,13 @@ directory = 'Flicker8k_Dataset'
 images = load_photos(directory)
 print('Loaded Images: %d' % len(images))
 
-Listing 25.7: Complete example of loading photos from file.
+```
+
 Running this example prints the number of loaded images. It takes a few minutes to run.
 Loaded Images: 8091
 
-Listing 25.8: Example output of loading photos from file.
+```
+
 
 25.4
 
@@ -202,7 +210,8 @@ in_layer = Input(shape=(224, 224, 3))
 model = VGG16(include_top=False, input_tensor=in_layer, pooling='avg')
 model.summary()
 
-Listing 25.9: Load the VGG mode.
+```
+
 This will load the VGG 16-layer model. The two Dense output layers as well as the
 classification output layer are removed from the model by setting include top=False. The
 output from the final pooling layer is taken as the features extracted from the image. Next, we
@@ -265,7 +274,8 @@ print('Extracted Features: %d' % len(features))
 # save to file
 dump(features, open('features.pkl', 'wb'))
 
-Listing 25.10: Complete example of pre-calculating VGG16 photo features.
+```
+
 The example may take some time to complete, perhaps one hour. After all features are
 extracted, the dictionary is stored in the file features.pkl in the current working directory.
 These features can then be loaded later and used as input for training a language model. You
@@ -293,7 +303,8 @@ Two motorist be ride along on their vehicle that be oddly
 Two person be in a small race car drive by a green hill .
 Two person in race uniform in a street car .
 
-Listing 25.11: Sample of raw photo descriptions.
+```
+
 The file ExpertAnnotations.txt indicates which of the descriptions for each image were
 written by experts which were written by crowdsource workers asked to describe the image.
 Finally, the file CrowdFlowerAnnotations.txt provides the frequency of crowd workers that
@@ -324,7 +335,8 @@ text = file.read()
 file.close()
 return text
 
-Listing 25.12: Function for loading a file into memory.
+```
+
 We can see from the sample of the file above that we need only split each line by white space
 and take the first element as the image identifier and the rest as the image description. For
 example:
@@ -333,18 +345,21 @@ tokens = line.split()
 # take the first token as the image id, the rest as the description
 image_id, image_desc = tokens[0], tokens[1:]
 
-Listing 25.13: Example of splitting a line into an identifier and a description.
+```
+
 We can then clean up the image identifier by removing the filename extension and the
 description number.
 # remove filename from image id
 image_id = image_id.split('.')[0]
 
-Listing 25.14: Example of cleaning up the photo identifier.
+```
+
 We can also put the description tokens back together into a string for later processing.
 # convert description tokens back to string
 image_desc = ' '.join(image_desc)
 
-Listing 25.15: Example of converting the description tokens into a string.
+```
+
 We can put all of this together into a function. Below defines the load descriptions()
 function that will take the loaded file, process it line-by-line, and return a dictionary of image
 identifiers to their first description.
@@ -386,11 +401,13 @@ doc = load_doc(filename)
 descriptions = load_descriptions(doc)
 print('Loaded: %d ' % len(descriptions))
 
-Listing 25.16: Complete example of loading photo descriptions.
+```
+
 Running the example prints the number of loaded image descriptions.
 Loaded: 8092
 
-Listing 25.17: Example output of loading photo descriptions.
+```
+
 There are other ways to load descriptions that may turn out to be more accurate for the
 data. Use the above example as a starting point and let me know what you come up with.
 
@@ -431,7 +448,8 @@ desc = [word for word in desc if len(word)>1]
 # store as string
 descriptions[key] = ' '.join(desc)
 
-Listing 25.18: Function to clean photo descriptions.
+```
+
 We can then save the clean text to file for later use by our model. Each line will contain the
 image identifier followed by the clean description. Below defines the save doc() function for
 saving the cleaned descriptions to file.
@@ -445,7 +463,8 @@ file = open(filename, 'w')
 file.write(data)
 file.close()
 
-Listing 25.19: Function to save clean descriptions.
+```
+
 Putting this all together with the loading of descriptions from the previous section, the
 complete example is listed below.
 import string
@@ -522,13 +541,15 @@ print('Vocabulary Size: %d' % len(vocabulary))
 # save descriptions
 save_doc(descriptions, 'descriptions.txt')
 
-Listing 25.20: Complete example of cleaning photo descriptions.
+```
+
 Running the example first loads 8,092 descriptions, cleans them, summarizes the vocabulary
 of 4,484 unique words, then saves them to a new file called descriptions.txt.
 Loaded: 8092
 Vocabulary Size: 4484
 
-Listing 25.21: Example output of cleaning photo descriptions.
+```
+
 Open the new file descriptions.txt in a text editor and review the contents. You should
 see somewhat readable descriptions of photos ready for modeling.
 
@@ -544,7 +565,8 @@ fence
 3484019369_354e0b88c0 hockey team in red and white on the side of the ice rink
 505955292_026f1489f2 boy rides horse
 
-Listing 25.22: Sample of clean photo descriptions.
+```
+
 The vocabulary is still relatively large. To make modeling easier, especially the first time
 around, I would recommend further reducing the vocabulary by removing words that only
 appear once or twice across all descriptions.
@@ -599,18 +621,21 @@ return descriptions
 descriptions = load_clean_descriptions('descriptions.txt')
 print('Loaded %d' % (len(descriptions)))
 
-Listing 25.23: Load the cleaned descriptions.
+```
+
 Running this piece loads the 8,092 photo descriptions into a dictionary keyed on image
 identifiers. These identifiers can then be used to load each photo file for the corresponding
 inputs to the model.
 Loaded 8092
 
-Listing 25.24: Example output from loading the clean descriptions.
+```
+
 Next, we need to extract all of the description text so we can encode it.
 # extract all text
 desc_text = list(descriptions.values())
 
-Listing 25.25: Convert loaded description text to a list.
+```
+
 We can use the Keras Tokenizer class to consistently map each word in the vocabulary to
 an integer. First, the object is created, then is fit on the description text. The fit tokenizer can
 later be saved to file for consistent decoding of the predictions back to vocabulary words.
@@ -621,12 +646,14 @@ tokenizer.fit_on_texts(desc_text)
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary Size: %d' % vocab_size)
 
-Listing 25.26: Fit a Tokenizer of the photo description text.
+```
+
 Next, we can use the fit tokenizer to encode the photo descriptions into sequences of integers.
 # integer encode descriptions
 sequences = tokenizer.texts_to_sequences(desc_text)
 
-Listing 25.27: Example of integer encoding the description text.
+```
+
 The model will require all output sequences to have the same length for training. We can
 achieve this by padding all encoded sequences to have the same length as the longest encoded
 sequence. We can pad the sequences with 0 values after the list of words. Keras provides the
@@ -637,7 +664,8 @@ max_length = max(len(s) for s in sequences)
 print('Description Length: %d' % max_length)
 padded = pad_sequences(sequences, maxlen=max_length, padding='post')
 
-Listing 25.28: Pad descriptions to a maximum length.
+```
+
 
 25.7. Whole Description Sequence Model
 
@@ -649,13 +677,15 @@ from keras.utils import to_categorical
 # one hot encode
 y = to_categorical(padded, num_classes=vocab_size)
 
-Listing 25.29: Example of one hot encoding output text.
+```
+
 Once encoded, we can ensure that the sequence output data has the right shape for the
 model.
 y = y.reshape((len(descriptions), max_length, vocab_size))
 print(y.shape)
 
-Listing 25.30: Example of reshaping encoded text.
+```
+
 Putting all of this together, the complete example is listed below.
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -706,7 +736,8 @@ y = to_categorical(padded, num_classes=vocab_size)
 y = y.reshape((len(descriptions), max_length, vocab_size))
 print(y.shape)
 
-Listing 25.31: Complete example of data preparation for a whole sequence model.
+```
+
 Running the example first prints the number of loaded image descriptions (8,092 photos),
 the dataset vocabulary size (4,485 words), the length of the longest description (28 words), then
 finally the shape of the data for fitting a prediction model in the form [samples, sequence length,
@@ -716,7 +747,8 @@ Vocabulary Size: 4485
 Description Length: 28
 (8092, 28, 4485)
 
-Listing 25.32: Example output from preparing data for a whole sequence prediction model.
+```
+
 As mentioned, outputting the entire sequence may be challenging for the model. We will
 look at a simpler model in the next section.
 
@@ -738,11 +770,13 @@ One approach is to surround each photo description with special tags to signal t
 end of the description, such as STARTDESC and ENDDESC. For example, the description:
 boy rides horse
 
-Listing 25.33: Example of a photo description.
+```
+
 Would become:
 STARTDESC boy rides horse ENDDESC
 
-Listing 25.34: Example of a wrapped photo description.
+```
+
 And would be fed to the model with the same image input to result in the following
 input-output word sequence pairs:
 
@@ -760,7 +794,8 @@ STARTDESC, boy, rides,
 horse
 STARTDESC, boy, rides, horse ENDDESC
 
-Listing 25.35: Example input-output pairs for a wrapped description.
+```
+
 The data preparation would begin much the same as was described in the previous section.
 Each description must be integer encoded. After encoding, the sequences are split into multiple
 input and output pairs and only the output word (y) is one hot encoded. This is because the
@@ -782,7 +817,8 @@ sequences = tokenizer.texts_to_sequences(desc_text)
 max_length = max(len(s) for s in sequences)
 print('Description Length: %d' % max_length)
 
-Listing 25.36: Example of loading and encoding photo descriptions.
+```
+
 Next, we split the each integer encoded sequence into input and output pairs. Let’s step
 through a single sequence called seq at the i’th word in the sequence, where i more than or
 equal to 1. First, we take the first i-1 words as the input sequence and the i’th word as the
@@ -790,18 +826,21 @@ output word.
 # split into input and output pair
 in_seq, out_seq = seq[:i], seq[i]
 
-Listing 25.37: Example of splitting a description sequence.
+```
+
 Next, the input sequence is padded to the maximum length of the input sequences. Prepadding is used (the default) so that new words appear at the end of the sequence, instead of
 the input beginning.
 # pad input sequence
 in_seq = pad_sequences([in_seq], maxlen=max_length)[0]
 
-Listing 25.38: Example of padding a split description sequence.
+```
+
 The output word is one hot encoded, much like in the previous section.
 # encode output sequence
 out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
 
-Listing 25.39: Example of one hot encoding the output word.
+```
+
 
 25.8. Word-By-Word Model
 
@@ -877,7 +916,8 @@ X, y = array(X), array(y)
 print(X.shape)
 print(y.shape)
 
-Listing 25.40: Complete example of data preparation for a word-by-word model.
+```
+
 Running the example prints the same statistics, but prints the size of the resulting encoded
 input and output sequences. Note that the input of images must follow the exact same ordering
 where the same photo is shown for each example drawn from a single description. One way
@@ -889,7 +929,8 @@ Description Length: 28
 (66456, 28)
 (66456, 4485)
 
-Listing 25.41: Example output of data preparation for a word-by-word prediction model.
+```
+
 
 25.9
 
@@ -940,7 +981,8 @@ desc = mapping[image_id]
 in_img, in_seq, out_word = create_sequences(tokenizer, max_length, desc, image)
 yield [[in_img, in_seq], out_word]
 
-Listing 25.42: Example of a generator for progressive loading.
+```
+
 You could extend it to take the name of the dataset directory as a parameter. The generator
 returns an array containing the inputs (X) and output (y) for the model. The input is comprised
 of an array with two items for the input images and encoded word sequences. The outputs
@@ -960,7 +1002,8 @@ image = preprocess_input(image)[0]
 image_id = filename.split('/')[-1].split('.')[0]
 return image, image_id
 
-Listing 25.43: Example of a function for loading and preparing a photo.
+```
+
 Another function named create sequences() is called to create sequences of images, input
 sequences of words, and output words that we then yield to the caller. This is a function that
 includes everything discussed in the previous section, and also creates copies of the image pixels,
@@ -994,7 +1037,8 @@ y.append(out_seq)
 Ximages, XSeq, y = array(Ximages), array(XSeq), array(y)
 return Ximages, XSeq, y
 
-Listing 25.44: Example of a function for preparing description text.
+```
+
 Prior to preparing the model that uses the data generator, we must load the clean descriptions,
 prepare the tokenizer, and calculate the maximum sequence length. All 3 of must be passed to
 the data generator() as parameters. We use the same load clean descriptions() function
@@ -1117,7 +1161,8 @@ print(inputs[0].shape)
 print(inputs[1].shape)
 print(outputs.shape)
 
-Listing 25.45: Complete example of progressive loading.
+```
+
 A data generator can be tested by calling the next() function. We can test the generator as
 follows.
 # test the data generator
@@ -1127,14 +1172,16 @@ print(inputs[0].shape)
 print(inputs[1].shape)
 print(outputs.shape)
 
-Listing 25.46: Example of testing the custom generator function.
+```
+
 Running the example prints the shape of the input and output example for a single batch
 (e.g. 13 input-output pairs):
 (13, 224, 224, 3)
 (13, 28)
 (13, 4485)
 
-Listing 25.47: Example output from testing the generator function.
+```
+
 The generator can be used to fit a model by calling the fit generator() function on the
 model (instead of fit()) and passing in the generator. We must also specify the number of
 steps or batches per epoch. We could estimate this as (10 x training dataset size), perhaps
@@ -1145,7 +1192,8 @@ steps or batches per epoch. We could estimate this as (10 x training dataset siz
 model.fit_generator(data_generator(descriptions, tokenizer, max_length),
 steps_per_epoch=70000, ...)
 
-Listing 25.48: Example of using the progressive loading data generator when fitting a Keras
+```
+
 model.
 
 25.10

@@ -105,8 +105,8 @@ provides both the 16-layer and 19-layer version via the VGG16 and VGG19 classes.
 on the VGG16 model. The model can be created as follows:
 from keras.applications.vgg16 import VGG16
 model = VGG16()
+```
 
-Listing 23.1: Create the VGG16 model in Keras.
 That’s it. The first time you run this example, Keras will download the weight files from
 the Internet and store them in the ∼/.keras/models directory. Note that the weights are
 about 528 megabytes, so the download may take a few minutes depending on the speed of your
@@ -118,8 +118,8 @@ layers as follows:
 from keras.applications.vgg16 import VGG16
 model = VGG16()
 model.summary()
+```
 
-Listing 23.2: Create and summarize the VGG16 model.
 You can see that the model is huge. You can also see that, by default, the model expects
 images as input with the size 224 x 224 pixels with 3 channels (e.g. color).
 _________________________________________________________________
@@ -220,15 +220,15 @@ Total params: 138,357,544
 Trainable params: 138,357,544
 Non-trainable params: 0
 _________________________________________________________________
+```
 
-Listing 23.3: Output summary for the VGG16 model.
 We can also create a plot of the layers in the VGG model, as follows:
 from keras.applications.vgg16 import VGG16
 from keras.utils.vis_utils import plot_model
 model = VGG16()
 plot_model(model, to_file='vgg.png')
+```
 
-Listing 23.4: Create and plot the graph of the VGG16 model.
 Again, because the model is large, the plot is a little too large and perhaps unreadable.
 Nevertheless, it is provided below.
 
@@ -285,8 +285,8 @@ Load the weights for the VGG-16 model, as we did in the previous section.
 from keras.applications.vgg16 import VGG16
 # load the model
 model = VGG16()
+```
 
-Listing 23.5: Create the VGG16 model.
 
 23.5.3
 
@@ -298,22 +298,22 @@ the image and resize it to the required size of 224 x 224 pixels.
 from keras.preprocessing.image import load_img
 # load an image from file
 image = load_img('mug.jpg', target_size=(224, 224))
+```
 
-Listing 23.6: Load and resize the image.
 Next, we can convert the pixels to a NumPy array so that we can work with it in Keras. We
 can use the img to array() function for this.
 from keras.preprocessing.image import img_to_array
 # convert the image pixels to a NumPy array
 image = img_to_array(image)
+```
 
-Listing 23.7: Convert the image pixels to a NumPy array.
 The network expects one or more images as input; that means the input array will need to
 be 4-dimensional: samples, rows, columns, and channels. We only have one sample (one image).
 We can reshape the array by calling reshape() and adding the extra dimension.
 # reshape data for the model
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
+```
 
-Listing 23.8: Reshape the NumPy array of pixels.
 Next, the image pixels need to be prepared in the same way as the ImageNet training data
 was prepared. Specifically, from the paper:
 The only preprocessing we do is subtracting the mean RGB value, computed on the
@@ -323,8 +323,8 @@ Keras provides a function called preprocess input() to prepare new input for the
 from keras.applications.vgg16 import preprocess_input
 # prepare the image for the VGG model
 image = preprocess_input(image)
+```
 
-Listing 23.9: Pre-process the pixel data for the model.
 We are now ready to make a prediction for our loaded and prepared image.
 
 23.5. Develop a Simple Photo Classifier
@@ -339,8 +339,8 @@ We can call the predict() function on the model in order to get a prediction of 
 of the image belonging to each of the 1,000 known object types.
 # predict the probability across all output classes
 yhat = model.predict(image)
+```
 
-Listing 23.10: Classify the image with the VGG16 model.
 Nearly there, now we need to interpret the probabilities.
 
 23.5.5
@@ -357,8 +357,8 @@ label = decode_predictions(yhat)
 label = label[0][0]
 # print the classification
 print('%s (%.2f%%)' % (label[1], label[2]*100))
+```
 
-Listing 23.11: Interpret the prediction probabilities.
 And that’s it.
 
 23.5.6
@@ -394,15 +394,15 @@ label = label[0][0]
 265
 
 print('%s (%.2f%%)' % (label[1], label[2]*100))
+```
 
-Listing 23.12: Complete example for classifying an image with the VGG model.
 Running the example, we can see that the image is correctly classified as a coffee mug with
 a 75% likelihood.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 coffee_mug (75.27%)
+```
 
-Listing 23.13: Sample output of making a prediction for the image.
 
 23.6
 

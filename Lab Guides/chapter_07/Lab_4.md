@@ -52,12 +52,14 @@ text = 'The quick brown fox jumped over the lazy dog.'
 result = text_to_word_sequence(text)
 print(result)
 
-Listing 7.1: Example splitting words with the Tokenizer.
+```
+
 Running the example creates an array containing all of the words in the document. The list
 of words is printed for review.
 ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
 
-Listing 7.2: Example output for splitting words with the Tokenizer.
+```
+
 This is a good first step, but further pre-processing is required before you can work with the
 text.
 
@@ -97,7 +99,8 @@ words = set(text_to_word_sequence(text))
 vocab_size = len(words)
 print(vocab_size)
 
-Listing 7.3: Example of preparing a vocabulary.
+```
+
 We can put this together with the one hot() function and encode the words in the document.
 The complete example is listed below. The vocabulary size is increased by one-third to minimize
 collisions when hashing words.
@@ -113,7 +116,8 @@ print(vocab_size)
 result = one_hot(text, round(vocab_size*1.3))
 print(result)
 
-Listing 7.4: Example of one hot encoding.
+```
+
 Running the example first prints the size of the vocabulary as 8. The encoded document is
 then printed as an array of integer encoded words.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
@@ -121,7 +125,8 @@ running the example a few times.
 8
 [5, 9, 8, 7, 9, 1, 5, 3, 8]
 
-Listing 7.5: Example output for one hot encoding with the Tokenizer.
+```
+
 
 7.4
 
@@ -153,14 +158,16 @@ print(vocab_size)
 result = hashing_trick(text, round(vocab_size*1.3), hash_function='md5')
 print(result)
 
-Listing 7.6: Example of hash encoding.
+```
+
 Running the example prints the size of the vocabulary and the integer encoded document.
 We can see that the use of a different hash function results in consistent, but different integers
 for words as the one hot() function in the previous section.
 8
 [6, 4, 1, 2, 7, 5, 6, 2, 6]
 
-Listing 7.7: Example output for hash encoding with the Tokenizer.
+```
+
 
 7.5
 
@@ -184,7 +191,8 @@ t = Tokenizer()
 # fit the tokenizer on the documents
 t.fit_on_texts(docs)
 
-Listing 7.8: Example of fitting a Tokenizer.
+```
+
 Once fit, the Tokenizer provides 4 attributes that you can use to query what has been
 learned about your documents:
 - word counts: A dictionary mapping of words and their occurrence counts when the
@@ -207,7 +215,8 @@ print(t.document_count)
 print(t.word_index)
 print(t.word_docs)
 
-Listing 7.9: Summarize the output of the fit Tokenizer.
+```
+
 Once the Tokenizer has been fit on training data, it can be used to encode documents in
 the train or test datasets. The texts to matrix() function on the Tokenizer can be used to
 create one vector per document provided per input. The length of the vectors is the total size
@@ -241,7 +250,8 @@ print(t.word_docs)
 encoded_docs = t.texts_to_matrix(docs, mode='count')
 print(encoded_docs)
 
-Listing 7.10: Example of fitting and encoding with the Tokenizer.
+```
+
 
 7.6. Further Reading
 
@@ -264,7 +274,8 @@ OrderedDict([('well', 1), ('done', 1), ('good', 1), ('work', 2), ('great', 1), (
 [ 0. 1. 0. 0. 0. 0. 0. 1. 0.]
 [ 0. 0. 0. 0. 0. 0. 0. 0. 1.]]
 
-Listing 7.11: Example output from fitting and encoding with the Tokenizer.
+```
+
 The Tokenizer will be the key way we will prepare text for word embeddings throughout
 this book.
 

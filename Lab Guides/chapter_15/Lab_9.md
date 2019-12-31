@@ -125,7 +125,8 @@ text = load_doc(filename)
 tokens = clean_doc(text)
 print(tokens)
 
-Listing 15.1: Example of cleaning a movie review.
+```
+
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
 ...
@@ -137,7 +138,8 @@ we may want to explore and I leave them as further exercises.
 'half', 'bad', 'film', 'however', 'good', 'strong', 'violencegore', 'sexuality',
 'language', 'drug', 'content']
 
-Listing 15.2: Example output of cleaning a movie review.
+```
+
 
 15.3. Data Preparation
 
@@ -222,7 +224,8 @@ print(len(vocab))
 # print the top words in the vocab
 print(vocab.most_common(50))
 
-Listing 15.3: Example of selecting a vocabulary for the dataset.
+```
+
 Running the example shows that we have a vocabulary of 44,276 words. We also can see
 a sample of the top 50 most used words in the movie reviews. Note that this vocabulary was
 constructed based on only those reviews in the training dataset.
@@ -238,7 +241,8 @@ constructed based on only those reviews in the training dataset.
 ('another', 992), ('action', 985), ('love', 977), ('us', 967), ('go', 952),
 ('director', 948), ('end', 946), ('something', 945), ('still', 936)]
 
-Listing 15.4: Example output of selecting a vocabulary for the dataset.
+```
+
 We can step through the vocabulary and remove all words that have a low occurrence, such
 as only being used once or twice in all reviews. For example, the following snippet will retrieve
 only the tokens that appear 2 or more times in all reviews.
@@ -247,7 +251,8 @@ min_occurrence = 2
 tokens = [k for k,c in vocab.items() if c >= min_occurrence]
 print(len(tokens))
 
-Listing 15.5: Example of filtering the vocabulary by occurrence.
+```
+
 Finally, the vocabulary can be saved to a new file called vocab.txt that we can later load
 and use to filter movie reviews prior to encoding them for modeling. We define a new function
 
@@ -269,7 +274,8 @@ file.close()
 # save tokens to a vocabulary file
 save_list(tokens, 'vocab.txt')
 
-Listing 15.6: Example of saving the filtered vocabulary.
+```
+
 Pulling all of this together, the complete example is listed below.
 import string
 import re
@@ -349,12 +355,14 @@ print(len(tokens))
 # save tokens to a vocabulary file
 save_list(tokens, 'vocab.txt')
 
-Listing 15.7: Example of filtering the vocabulary for the dataset.
+```
+
 Running the above example with this addition shows that the vocabulary size drops by a
 little more than half its size, from 44,276 to 25,767 words.
 25767
 
-Listing 15.8: Example output of filtering the vocabulary by min occurrence.
+```
+
 Running the min occurrence filter on the vocabulary and saving it to file, you should now
 have a new file called vocab.txt with only the words we are interested in. The order of words
 in your file will differ, but should look something like the following:
@@ -375,7 +383,8 @@ web
 columbia
 ...
 
-Listing 15.9: Sample of the vocabulary file vocab.txt.
+```
+
 We are now ready to look at extracting features from the reviews ready for modeling.
 
 15.4
@@ -409,7 +418,8 @@ vocab_filename = 'vocab.txt'
 vocab = load_doc(vocab_filename)
 vocab = set(vocab.split())
 
-Listing 15.10: Load vocabulary.
+```
+
 Next, we need to load all of the training data movie reviews. For that we can adapt the
 process docs() from the previous section to load the documents, clean them, and return them
 as a list of strings, with one document per string. We want each document to be a string for
@@ -434,7 +444,8 @@ tokens = [w for w in tokens if w in vocab]
 tokens = ' '.join(tokens)
 return tokens
 
-Listing 15.11: Function to load and filter a loaded review.
+```
+
 The updated process docs() can then call the clean doc() for each document in a given
 directory.
 # load all docs in a directory
@@ -457,7 +468,8 @@ tokens = clean_doc(doc, vocab)
 documents.append(tokens)
 return documents
 
-Listing 15.12: Example to clean all movie reviews.
+```
+
 We can call the process docs function for both the neg and pos directories and combine
 the reviews into a single train or test dataset. We also can define the class labels for the dataset.
 The load clean dataset() function below will load all reviews and prepare class labels for the
@@ -472,7 +484,8 @@ docs = neg + pos
 labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
 return docs, labels
 
-Listing 15.13: Function to load and clean all train or test movie reviews.
+```
+
 
 15.4. Train CNN With Embedding Layer
 
@@ -494,7 +507,8 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts(lines)
 return tokenizer
 
-Listing 15.14: Function to create a Tokenizer from training.
+```
+
 Now that the mapping of words to integers has been prepared, we can use it to encode the
 reviews in the training dataset. We can do that by calling the texts to sequences() function
 on the Tokenizer. We also need to ensure that all documents have the same length. This is a
@@ -507,7 +521,8 @@ length by adding 0 values on the end.
 max_length = max([len(s.split()) for s in train_docs])
 print('Maximum length: %d' % max_length)
 
-Listing 15.15: Calculate the maximum movie review length.
+```
+
 We can then use the maximum length as a parameter to a function to integer encode and
 pad the sequences.
 # integer encode and pad documents
@@ -518,7 +533,8 @@ encoded = tokenizer.texts_to_sequences(docs)
 padded = pad_sequences(encoded, maxlen=max_length, padding='post')
 return padded
 
-Listing 15.16: Function to integer encode and pad movie reviews.
+```
+
 We are now ready to define our neural network model. The model will use an Embedding
 layer as the first hidden layer. The Embedding layer requires the specification of the vocabulary
 size, the size of the real-valued vector space, and the maximum length of input documents. The
@@ -534,7 +550,8 @@ encode the documents, for example:
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary size: %d' % vocab_size)
 
-Listing 15.17: Calculate the size of the vocabulary for the Embedding layer.
+```
+
 We will use a 100-dimensional vector space, but you could try other values, such as 50 or
 150. Finally, the maximum document length was calculated above in the max length variable
 used during padding. The complete model definition is listed below including the Embedding
@@ -563,7 +580,8 @@ model.summary()
 plot_model(model, to_file='model.png', show_shapes=True)
 return model
 
-Listing 15.18: Define a CNN model with the Embedding Layer.
+```
+
 Running just this piece provides a summary of the defined network. We can see that the
 Embedding layer expects documents with a length of 1,317 words as input and encodes each
 word in the document as a 100 element vector.
@@ -605,7 +623,8 @@ Trainable params: 2,812,053
 Non-trainable params: 0
 _________________________________________________________________
 
-Listing 15.19: Summary of the defined model.
+```
+
 A plot the defined model is then saved to file with the name model.png.
 
 Figure 15.1: Plot of the defined CNN classification model.
@@ -619,14 +638,16 @@ configuration, let me know.
 # fit network
 model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 
-Listing 15.20: Train the defined classification model.
+```
+
 After the model is fit, it is saved to a file named model.h5 for later evaluation.
 # save the model
 model.save('model.h5')
 
 15.4. Train CNN With Embedding Layer
 
-Listing 15.21: Save the fit model to file.
+```
+
 We can tie all of this together. The complete code listing is provided below.
 import string
 import re
@@ -751,7 +772,8 @@ model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 # save the model
 model.save('model.h5')
 
-Listing 15.22: Complete example of fitting a CNN model with an Embedding input layer.
+```
+
 Running the example will first provide a summary of the training dataset vocabulary (25,768)
 and maximum input sequence length in words (1,317). The example should run in a few minutes
 and the fit model will be saved to file.
@@ -779,7 +801,8 @@ Epoch 9/10
 Epoch 10/10
 7s - loss: 5.4109e-04 - acc: 1.0000
 
-Listing 15.23: Example output from fitting the model.
+```
+
 
 15.5
 
@@ -809,7 +832,8 @@ print('Maximum length: %d' % max_length)
 Xtrain = encode_docs(tokenizer, max_length, train_docs)
 Xtest = encode_docs(tokenizer, max_length, test_docs)
 
-Listing 15.24: Load and encode both training and test datasets.
+```
+
 We can then load the model and evaluate it on both datasets and print the accuracy.
 # load the model
 model = load_model('model.h5')
@@ -820,7 +844,8 @@ print('Train Accuracy: %f' % (acc*100))
 _, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
 
-Listing 15.25: Load and evaluate model on both train and test datasets.
+```
+
 New data must then be prepared using the same text encoding and encoding schemes as was
 used on the training dataset. Once prepared, a prediction can be made by calling the predict()
 function on the model. The function below named predict sentiment() will encode and pad
@@ -839,7 +864,8 @@ if round(percent_pos) == 0:
 return (1-percent_pos), 'NEGATIVE'
 return percent_pos, 'POSITIVE'
 
-Listing 15.26: Function to predict the sentiment for an ad hoc movie review.
+```
+
 We can test out this model with two ad hoc movie reviews. The complete example is listed
 below.
 import string
@@ -971,7 +997,8 @@ text = 'This is a bad movie. Do not watch it. It sucks.'
 percent, sentiment = predict_sentiment(text, vocab, tokenizer, max_length, model)
 print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
-Listing 15.27: Complete example of making a prediction on new text data.
+```
+
 Running the example first prints the skill of the model on the training and test dataset. We
 can see that the model achieves 100% accuracy on the training dataset and 87.5% on the test
 dataset, an impressive score.
@@ -988,7 +1015,8 @@ Sentiment: POSITIVE (55.431%)
 Review: [This is a bad movie. Do not watch it. It sucks.]
 Sentiment: NEGATIVE (54.746%)
 
-Listing 15.28: Example output from making a prediction on new reviews.
+```
+
 
 15.6
 

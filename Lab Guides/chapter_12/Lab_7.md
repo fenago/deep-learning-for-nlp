@@ -69,7 +69,8 @@ Gensim can be installed easily using pip or easy install. For example, you can i
 with pip by typing the following on your command line:
 sudo pip install -U gensim
 
-Listing 12.1: Install the Gensim library with pip.
+```
+
 If you need help installing Gensim on your system, you can see the Gensim Installation
 Instructions (linked at the end of the chapter).
 
@@ -96,7 +97,8 @@ of a new Word2Vec() instance. For example:
 sentences = ...
 model = Word2Vec(sentences)
 
-Listing 12.2: Example of creating a Word2Vec model.
+```
+
 Specifically, each sentence must be tokenized, meaning divided into words and prepared (e.g.
 perhaps pre-filtered and perhaps converted to a preferred case). The sentences could be text
 loaded into memory, or an iterator that progressively loads text, required for very large text
@@ -119,17 +121,20 @@ vocabulary of tokens (words) as follows:
 words = list(model.wv.vocab)
 print(words)
 
-Listing 12.3: Example of summarizing the words in the model vocabulary.
+```
+
 You can review the embedded vector for a specific token as follows:
 print(model['word'])
 
-Listing 12.4: Example of printing the embedding for a specific word.
+```
+
 Finally, a trained model can then be saved to file by calling the save word2vec format()
 function on the word vector model. By default, the model is saved in a binary format to save
 space. For example:
 model.wv.save_word2vec_format('model.bin')
 
-Listing 12.5: Example of saving a word embedding.
+```
+
 
 12.4. Develop Word2Vec Embedding
 
@@ -140,12 +145,14 @@ contents. You can do this by setting binary=False when calling the save word2vec
 function, for example:
 model.wv.save_word2vec_format('model.txt', binary=False)
 
-Listing 12.6: Example of saving a word embedding in ASCII format.
+```
+
 The saved model can then be loaded again by calling the Word2Vec.load() function. For
 example:
 model = Word2Vec.load('model.bin')
 
-Listing 12.7: Example of loading a saved word embedding.
+```
+
 We can tie all of this together with a worked example. Rather than loading a large text
 document or corpus from file, we will work with a small, in-memory list of pre-tokenized
 sentences. The model is trained and the minimum count for words is set to 1 so that no words
@@ -174,7 +181,8 @@ model.save('model.bin')
 new_model = Word2Vec.load('model.bin')
 print(new_model)
 
-Listing 12.8: Example demonstrating the Word2Vec model in Gensim.
+```
+
 Running the example prints the following output.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
@@ -213,7 +221,8 @@ Word2Vec(vocab=14, size=100, alpha=0.025)
 2.88707414e-03 1.62976081e-04 -6.05802808e-04 -1.06368808e-03]
 Word2Vec(vocab=14, size=100, alpha=0.025)
 
-Listing 12.9: Example output of the Word2Vec model in Gensim.
+```
+
 You can see that with a little work to prepare your text document, you can create your own
 word embedding very easily with Gensim.
 
@@ -227,7 +236,8 @@ diagnostic for your learned model. We can retrieve all of the vectors from a tra
 follows:
 X = model[model.wv.vocab]
 
-Listing 12.10: Access the model vocabulary.
+```
+
 We can then train a projection method on the vectors, such as those methods offered in
 scikit-learn, then use Matplotlib to plot the projection as a scatter plot. Let’s look at an example
 with Principal Component Analysis or PCA.
@@ -245,19 +255,22 @@ result = pca.fit_transform(X)
 
 127
 
-Listing 12.11: Example of fitting a 2D PCA model to the word vectors.
+```
+
 The resulting projection can be plotted using Matplotlib as follows, pulling out the two
 dimensions as x and y coordinates.
 pyplot.scatter(result[:, 0], result[:, 1])
 
-Listing 12.12: Example of plotting a scatter plot of the PCA vectors.
+```
+
 We can go one step further and annotate the points on the graph with the words themselves.
 A crude version without any nice offsets looks as follows.
 words = list(model.wv.vocab)
 for i, word in enumerate(words):
 pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
 
-Listing 12.13: Example of plotting words on the scatter plot.
+```
+
 Putting this all together with the model from the previous section, the complete example is
 listed below.
 from gensim.models import Word2Vec
@@ -282,7 +295,8 @@ for i, word in enumerate(words):
 pyplot.annotate(word, xy=(result[i, 0], result[i, 1]))
 pyplot.show()
 
-Listing 12.14: Example demonstrating how to plot word vectors.
+```
+
 Running the example creates a scatter plot with the dots annotated with the words. It is
 hard to pull much meaning out of the graph given such a tiny corpus was used to fit the model.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
@@ -322,14 +336,16 @@ from gensim.models import KeyedVectors
 filename = 'GoogleNews-vectors-negative300.bin'
 model = KeyedVectors.load_word2vec_format(filename, binary=True)
 
-Listing 12.15: Example of loading the Google word vectors in Gensim.
+```
+
 Note, this example may require a workstation with 8 or more Gigabytes of RAM to execute.
 On my modern workstation, it takes about 43 seconds to load. Another interesting thing that
 you can do is do a little linear algebra arithmetic with words. For example, a popular example
 described in lectures and introduction papers is:
 queen = (king - man) + woman
 
-Listing 12.16: Example of arithmetic of word vectors.
+```
+
 That is the word queen is the closest word given the subtraction of the notion of man from
 king and adding the word woman. The man-ness in king is replaced with woman-ness to give
 us queen. A very cool concept. Gensim provides an interface for performing these types of
@@ -337,7 +353,8 @@ operations in the most similar() function on the trained or loaded model. For ex
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
 print(result)
 
-Listing 12.17: Example of arithmetic of word vectors in Gensim.
+```
+
 We can put all of this together as follows.
 from gensim.models import KeyedVectors
 # load the google word2vec model
@@ -347,13 +364,15 @@ model = KeyedVectors.load_word2vec_format(filename, binary=True)
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
 print(result)
 
-Listing 12.18: Example demonstrating arithmetic with Google word vectors.
+```
+
 Running the example loads the Google pre-trained Word2Vec model and then calculates the
 (king - man) + woman = ? operation on the word vectors for those words. The answer, as we
 would expect, is queen.
 [('queen', 0.7118192315101624)]
 
-Listing 12.19: Output of arithmetic with Google word vectors.
+```
+
 See some of the articles in the further reading section for more interesting arithmetic examples
 that you can explore.
 
@@ -381,7 +400,8 @@ glove_input_file = 'glove.txt'
 word2vec_output_file = 'word2vec.txt'
 glove2word2vec(glove_input_file, word2vec_output_file)
 
-Listing 12.20: Example of converting a file from GloVe to Word2Vec format.
+```
+
 Once converted, the file can be loaded just like Word2Vec file above. Let’s make this concrete
 with an example. You can download the smallest GloVe pre-trained model from the GloVe
 website. It an 822 Megabyte zip file with 4 different models (50, 100, 200 and 300-dimensional
@@ -397,7 +417,8 @@ glove_input_file = 'glove.6B.100d.txt'
 word2vec_output_file = 'glove.6B.100d.txt.word2vec'
 glove2word2vec(glove_input_file, word2vec_output_file)
 
-Listing 12.21: Example of converting a specific GloVe file to Word2Vec format.
+```
+
 You now have a copy of the GloVe model in Word2Vec format with the filename
 glove.6B.100d.txt.word2vec. Now we can load it and perform the same (king - man) +
 woman = ? test as in the previous section. The complete code listing is provided below. Note
@@ -410,7 +431,8 @@ model = KeyedVectors.load_word2vec_format(filename, binary=False)
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
 print(result)
 
-Listing 12.22: Example of arithmetic with converted GloVe word vectors.
+```
+
 Pulling all of this together, the complete example is listed below.
 from gensim.models import KeyedVectors
 from gensim.scripts.glove2word2vec import glove2word2vec
@@ -427,11 +449,13 @@ model = KeyedVectors.load_word2vec_format(filename, binary=False)
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
 print(result)
 
-Listing 12.23: Example demonstrating how to load and use GloVe word embeddings.
+```
+
 Running the example prints the same result of queen.
 [('queen', 0.7698540687561035)]
 
-Listing 12.24: Example output of arithmetic with converted GloVe word vectors.
+```
+
 
 12.8
 

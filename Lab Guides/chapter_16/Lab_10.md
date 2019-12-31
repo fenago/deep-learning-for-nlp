@@ -126,7 +126,8 @@ text = load_doc(filename)
 tokens = clean_doc(text)
 print(tokens)
 
-Listing 16.1: Example of cleaning a movie review.
+```
+
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
 ...
@@ -138,7 +139,8 @@ we may want to explore and I leave them as further exercises.
 'half', 'bad', 'film', 'however', 'good', 'strong', 'violencegore', 'sexuality',
 'language', 'drug', 'content']
 
-Listing 16.2: Example output of cleaning a movie review.
+```
+
 
 16.3. Data Preparation
 
@@ -174,7 +176,8 @@ tokens = clean_doc(doc)
 documents.append(tokens)
 return documents
 
-Listing 16.3: Function for cleaning multiple review documents.
+```
+
 We can call this function with negative training reviews. We also need labels for the train
 and test documents. We know that we have 900 training documents and 100 test documents.
 We can use a Python list comprehension to create the labels for the negative (0) and positive
@@ -190,7 +193,8 @@ docs = neg + pos
 labels = [0 for _ in range(len(neg))] + [1 for _ in range(len(pos))]
 return docs, labels
 
-Listing 16.4: Function to prepare reviews and labels for a dataset.
+```
+
 Finally, we want to save the prepared train and test sets to file so that we can load them
 later for modeling and model evaluation. The function below-named save dataset() will save
 a given prepared dataset (X and y elements) to a file using the pickle API (this is the standard
@@ -205,7 +209,8 @@ def save_dataset(dataset, filename):
 dump(dataset, open(filename, 'wb'))
 print('Saved: %s' % filename)
 
-Listing 16.5: Function for saving clean documents to file.
+```
+
 
 16.3.4
 
@@ -287,7 +292,8 @@ test_docs, ytest = load_clean_dataset(False)
 save_dataset([train_docs, ytrain], 'train.pkl')
 save_dataset([test_docs, ytest], 'test.pkl')
 
-Listing 16.6: Complete example of cleaning and saving all movie reviews.
+```
+
 Running the example cleans the text movie review documents, creates labels, and saves the
 prepared data for both train and test datasets in train.pkl and test.pkl respectively. Now
 we are ready to develop our model.
@@ -318,7 +324,8 @@ def load_dataset(filename):
 return load(open(filename, 'rb'))
 trainLines, trainLabels = load_dataset('train.pkl')
 
-Listing 16.7: Example of loading the cleaned and saved reviews.
+```
+
 Next, we must fit a Keras Tokenizer on the training dataset. We will use this tokenizer to
 both define the vocabulary for the Embedding layer and encode the review documents as integers.
 The function create tokenizer() below will create a Tokenizer given a list of documents.
@@ -328,7 +335,8 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts(lines)
 return tokenizer
 
-Listing 16.8: Function for creating a Tokenizer.
+```
+
 We also need to know the maximum length of input sequences as input for the model and
 to pad all sequences to the fixed length. The function max length() below will calculate the
 maximum length (number of words) for all reviews in the training dataset.
@@ -336,13 +344,15 @@ maximum length (number of words) for all reviews in the training dataset.
 def max_length(lines):
 return max([len(s.split()) for s in lines])
 
-Listing 16.9: Function to calculate the maximum movie review length.
+```
+
 We also need to know the size of the vocabulary for the Embedding layer. This can be
 calculated from the prepared Tokenizer, as follows:
 # calculate vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
 
-Listing 16.10: Calculate the size of the vocabulary.
+```
+
 Finally, we can integer encode and pad the clean movie review text. The function below
 named encode text() will both encode and pad text data to the maximum review length.
 # encode a list of lines
@@ -353,7 +363,8 @@ encoded = tokenizer.texts_to_sequences(lines)
 padded = pad_sequences(encoded, maxlen=length, padding='post')
 return padded
 
-Listing 16.11: Function to encode and pad movie review text.
+```
+
 
 16.4.2
 
@@ -428,7 +439,8 @@ model.summary()
 plot_model(model, show_shapes=True, to_file='multichannel.png')
 return model
 
-Listing 16.12: Function for defining the classification model.
+```
+
 
 16.4.3
 
@@ -548,12 +560,14 @@ model.save('model.h5')
 
 184
 
-Listing 16.13: Complete example of fitting the n-gram CNN model.
+```
+
 Running the example first prints a summary of the prepared training dataset.
 Max document length: 1380
 Vocabulary size: 44277
 
-Listing 16.14: Example output from preparing the training data.
+```
+
 The model is fit relatively quickly and appears to show good skill on the training dataset.
 ...
 Epoch 3/7
@@ -573,7 +587,8 @@ Epoch 7/7
 [==============================] - 30s - loss: 3.0271e-04 - acc: 1.0000
 [==============================] - 28s - loss: 1.3875e-04 - acc: 1.0000
 
-Listing 16.15: Example output from fitting the model.
+```
+
 A plot of the defined model is saved to file, clearly showing the three input channels for the
 model.
 
@@ -607,7 +622,8 @@ trainX = encode_text(tokenizer, trainLines, length)
 testX = encode_text(tokenizer, testLines, length)
 print(trainX.shape, testX.shape)
 
-Listing 16.16: Prepare train and test data for evaluating the model.
+```
+
 We can load the saved model and evaluate it on both the training and test datasets. The
 complete example is listed below.
 from
@@ -668,7 +684,8 @@ print('Train Accuracy: %.2f' % (acc*100))
 _, acc = model.evaluate([testX,testX,testX], array(testLabels), verbose=0)
 print('Test Accuracy: %.2f' % (acc*100))
 
-Listing 16.17: Complete example of evaluating the fit model.
+```
+
 Running the example prints the skill of the model on both the training and test datasets. We
 can see that, as expected, the skill on the training dataset is excellent, here at 100% accuracy.
 We can also see that the skill of the model on the unseen test dataset is also very impressive,
@@ -679,7 +696,8 @@ running the example a few times.
 Train Accuracy: 100.00
 Test Accuracy: 88.50
 
-Listing 16.18: Example output from evaluating the fit model.
+```
+
 
 16.6
 

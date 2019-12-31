@@ -148,24 +148,24 @@ text = file.read()
 # close the file
 file.close()
 return text
+```
 
-Listing 20.1: Function to load text into memory.
 Using this function, we can load the cleaner version of the document in the file
 republic clean.txt as follows:
 # load document
 in_filename = 'republic_clean.txt'
 doc = load_doc(in_filename)
 print(doc[:200])
+```
 
-Listing 20.2: Example of loading the text into memory.
 Running this snippet loads the document and prints the first 200 characters as a sanity
 check.
 BOOK I.
 I went down yesterday to the Piraeus with Glaucon the son of Ariston,
 that I might offer up my prayers to the goddess (Bendis, the Thracian
 Artemis.); and also because I wanted to see in what
+```
 
-Listing 20.3: Example output of loading the text into memory.
 So far, so good. Next, let’s clean the text.
 
 20.3.4
@@ -207,8 +207,8 @@ tokens = [word for word in tokens if word.isalpha()]
 # make lower case
 tokens = [word.lower() for word in tokens]
 return tokens
+```
 
-Listing 20.4: Function to clean text.
 We can run this cleaning operation on our loaded document and print out some of the tokens
 and statistics as a sanity check.
 # clean document
@@ -216,8 +216,8 @@ tokens = clean_doc(doc)
 print(tokens[:200])
 print('Total Tokens: %d' % len(tokens))
 print('Unique Tokens: %d' % len(set(tokens)))
+```
 
-Listing 20.5: Example of cleaning text.
 First, we can see a nice list of tokens that look cleaner than the raw text. We could remove
 the ’Book I’ chapter markers and more, but this is a good start.
 ['book', 'i', 'i', 'went', 'down', 'yesterday', 'to', 'the', 'piraeus', 'with', 'glaucon',
@@ -245,15 +245,15 @@ the ’Book I’ chapter markers and more, but this is a good start.
 
 'brother', 'niceratus', 'the', 'son', 'of', 'nicias', 'and', 'several', 'others',
 'who', 'had', 'been', 'at', 'the', 'procession', 'polemarchus', 'said']
+```
 
-Listing 20.6: Example output of tokenized and clean text.
 We also get some statistics about the clean document. We can see that there are just under
 120,000 words in the clean text and a vocabulary of just under 7,500 words. This is smallish
 and models fit on this data should be manageable on modest hardware.
 Total Tokens: 118684
 Unique Tokens: 7409
+```
 
-Listing 20.7: Example output summarizing properties of the clean text.
 Next, we can look at shaping the tokens into sequences and saving them to file.
 
 20.3.5
@@ -277,13 +277,13 @@ line = ' '.join(seq)
 # store
 sequences.append(line)
 print('Total Sequences: %d' % len(sequences))
+```
 
-Listing 20.8: Split document into sequences of text.
 Running this piece creates a long list of lines. Printing statistics on the list, we can see that
 we will have exactly 118,633 training patterns to fit our model.
 Total Sequences: 118633
+```
 
-Listing 20.9: Example output of splitting the document into sequences.
 Next, we can save the sequences to a new file for later loading. We can define a new function
 for saving lines of text to a file. This new function is called save doc() and is listed below. It
 takes as input a list of lines and a filename. The lines are written, one per line, in ASCII format.
@@ -297,14 +297,14 @@ file.close()
 20.3. Data Preparation
 
 231
+```
 
-Listing 20.10: Function to save sequences of text to file.
 We can call this function and save our training sequences to the file republic sequences.txt.
 # save sequences to file
 out_filename = 'republic_sequences.txt'
 save_doc(sequences, out_filename)
+```
 
-Listing 20.11: Example of saving sequences to file.
 Take a look at the file with your text editor. You will see that each line is shifted along one
 word, with a new word at the end to be predicted; for example, here are the first 3 lines in
 truncated form:
@@ -312,8 +312,8 @@ book i i ... catch sight of
 i i went ... sight of us
 i went down ... of us from
 ...
+```
 
-Listing 20.12: Example contents of sequences saved to file.
 
 20.3.6
 
@@ -380,8 +380,8 @@ print('Total Sequences: %d' % len(sequences))
 # save sequences to file
 out_filename = 'republic_sequences.txt'
 save_doc(sequences, out_filename)
+```
 
-Listing 20.13: Complete example preparing text data for modeling.
 You should now have training data stored in the file republic sequences.txt in your
 current working directory. Next, let’s look at how to fit a language model to this data.
 
@@ -426,8 +426,8 @@ return text
 in_filename = 'republic_sequences.txt'
 doc = load_doc(in_filename)
 lines = doc.split('\n')
+```
 
-Listing 20.14: Load the clean sequences from file.
 Next, we can encode the training data.
 
 20.4.2
@@ -447,8 +447,8 @@ to a list of integers.
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(lines)
 sequences = tokenizer.texts_to_sequences(lines)
+```
 
-Listing 20.15: Train a tokenizer on the loaded sequences.
 We can access the mapping of words to integers as a dictionary attribute called word index
 on the Tokenizer object. We need to know the size of the vocabulary for defining the embedding
 layer later. We can determine the vocabulary by calculating the size of the mapping dictionary.
@@ -465,8 +465,8 @@ actual vocabulary.
 
 # vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
+```
 
-Listing 20.16: Calculate the size of the vocabulary.
 
 20.4.3
 
@@ -491,8 +491,8 @@ sequences = array(sequences)
 X, y = sequences[:,:-1], sequences[:,-1]
 y = to_categorical(y, num_classes=vocab_size)
 seq_length = X.shape[1]
+```
 
-Listing 20.17: Split text data into input and output sequences.
 
 20.4.4
 
@@ -529,8 +529,8 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.summary()
 plot_model(model, to_file='model.png', show_shapes=True)
 return model
+```
 
-Listing 20.18: Define the language model.
 A summary of the defined network is printed as a sanity check to ensure we have constructed
 what we intended.
 _________________________________________________________________
@@ -562,8 +562,8 @@ Total params: 1,269,810
 Trainable params: 1,269,810
 Non-trainable params: 0
 _________________________________________________________________
+```
 
-Listing 20.19: Example output from summarizing the defined model.
 A plot the defined model is then saved to file with the name model.png.
 
 20.4. Train Language Model
@@ -599,8 +599,8 @@ Epoch 99/100
 118633/118633 [==============================] - 266s - loss: 1.9812 - acc: 0.5291
 Epoch 100/100
 118633/118633 [==============================] - 270s - loss: 1.9709 - acc: 0.5315
+```
 
-Listing 20.20: Example output from training the language model.
 
 20.4.5
 
@@ -614,8 +614,8 @@ Tokenizer object, and we can save that too using Pickle.
 model.save('model.h5')
 # save the tokenizer
 dump(tokenizer, open('tokenizer.pkl', 'wb'))
+```
 
-Listing 20.21: Save the fit model and Tokenizer to file.
 
 20.4.6
 
@@ -694,8 +694,8 @@ model.fit(X, y, batch_size=128, epochs=100)
 model.save('model.h5')
 # save the tokenizer
 dump(tokenizer, open('tokenizer.pkl', 'wb'))
+```
 
-Listing 20.22: Complete example training the language model.
 
 20.5
 
@@ -730,16 +730,16 @@ return text
 in_filename = 'republic_sequences.txt'
 doc = load_doc(in_filename)
 lines = doc.split('\n')
+```
 
-Listing 20.23: Load the clean sequences from file.
 We need the text so that we can choose a source sequence as input to the model for generating
 a new sequence of text. The model will require 50 words as input. Later, we will need to specify
 the expected length of input. We can determine this from the input sequences by calculating
 the length of one line of the loaded data and subtracting 1 for the expected output word that is
 also on the same line.
 seq_length = len(lines[0].split()) - 1
+```
 
-Listing 20.24: Calculate the expected input length.
 
 20.5.2
 
@@ -749,13 +749,13 @@ We can now load the model from file. Keras provides the load model() function fo
 the model, ready for use.
 # load the model
 model = load_model('model.h5')
+```
 
-Listing 20.25: Load the saved model from file.
 We can also load the tokenizer from file using the Pickle API.
 # load the tokenizer
 tokenizer = load(open('tokenizer.pkl', 'rb'))
+```
 
-Listing 20.26: Load the saved Tokenizer from file.
 We are ready to use the loaded model.
 
 20.5.3
@@ -768,13 +768,13 @@ of what was used.
 # select a seed text
 seed_text = lines[randint(0,len(lines))]
 print(seed_text + '\n')
+```
 
-Listing 20.27: Select random examples as seed text.
 Next, we can generate new words, one at a time. First, the seed text must be encoded to
 integers using the same tokenizer that we used when training the model.
 encoded = tokenizer.texts_to_sequences([seed_text])[0]
+```
 
-Listing 20.28: Encode the selected seed text.
 
 20.5. Use Language Model
 
@@ -784,23 +784,23 @@ The model can predict the next word directly by calling model.predict classes() 
 will return the index of the word with the highest probability.
 # predict probabilities for each word
 yhat = model.predict_classes(encoded, verbose=0)
+```
 
-Listing 20.29: Predict the next word in the sequence.
 We can then look up the index in the Tokenizer’s mapping to get the associated word.
 out_word = ''
 for word, index in tokenizer.word_index.items():
 if index == yhat:
 out_word = word
 break
+```
 
-Listing 20.30: Map the predicted integer to a word in the known vocabulary.
 We can then append this word to the seed text and repeat the process. Importantly, the
 input sequence is going to get too long. We can truncate it to the desired length after the input
 sequence has been encoded to integers. Keras provides the pad sequences() function that we
 can use to perform this truncation.
 encoded = pad_sequences([encoded], maxlen=seq_length, truncating='pre')
+```
 
-Listing 20.31: Pad the encoded sequence.
 We can wrap all of this into a function called generate seq() that takes as input the model,
 the tokenizer, input sequence length, the seed text, and the number of words to generate. It
 then returns a sequence of words generated by the model.
@@ -826,8 +826,8 @@ break
 in_text += ' ' + out_word
 result.append(out_word)
 return ' '.join(result)
+```
 
-Listing 20.32: Function to generate a sequence of words given the model and seed text.
 We are now ready to generate a sequence of new words given some seed text.
 
 20.5. Use Language Model
@@ -837,8 +837,8 @@ We are now ready to generate a sequence of new words given some seed text.
 # generate new text
 generated = generate_seq(model, tokenizer, seq_length, seed_text, 50)
 print(generated)
+```
 
-Listing 20.33: Example of generating a sequence of text.
 Putting this all together, the complete code listing for generating text from the learnedlanguage model is listed below.
 from
 from
@@ -901,22 +901,22 @@ print(seed_text + '\n')
 # generate new text
 generated = generate_seq(model, tokenizer, seq_length, seed_text, 50)
 print(generated)
+```
 
-Listing 20.34: Complete example of generating sequences of text.
 Running the example first prints the seed text.
 when he said that a man when he grows old may learn many things for he can no more learn
 much than he can run much youth is the time for any extraordinary toil of course and
 therefore calculation and geometry and all the other elements of instruction which are a
+```
 
-Listing 20.35: Example output from selecting seed text.
 Then 50 words of generated text are printed.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 preparation for dialectic should be presented to the name of idle spendthrifts of whom the
 other is the manifold and the unjust and is the best and the other which delighted to
 be the opening of the soul of the soul and the embroiderer will have to be said at
+```
 
-Listing 20.36: Example output of generated text.
 You can see that the text seems reasonable. In fact, the addition of concatenation would
 help in interpreting the seed and the generated text. Nevertheless, the generated text gets the
 right kind of words in the right kind of order. Try running the example a few times to see other

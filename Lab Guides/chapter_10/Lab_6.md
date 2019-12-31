@@ -131,7 +131,8 @@ text = load_doc(filename)
 tokens = clean_doc(text)
 print(tokens)
 
-Listing 10.1: Example of cleaning a movie review.
+```
+
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore, and I leave them as further exercises. I’d love to see what you can
 come up with.
@@ -149,7 +150,8 @@ come up with.
 'half', 'bad', 'film', 'however', 'good', 'strong', 'violencegore', 'sexuality',
 'language', 'drug', 'content']
 
-Listing 10.2: Example output of cleaning a movie review.
+```
+
 
 10.3.3
 
@@ -230,7 +232,8 @@ print(len(vocab))
 # print the top words in the vocab
 print(vocab.most_common(50))
 
-Listing 10.3: Example of selecting a vocabulary for the dataset.
+```
+
 Running the example shows that we have a vocabulary of 44,276 words. We also can see
 a sample of the top 50 most used words in the movie reviews. Note that this vocabulary was
 constructed based on only those reviews in the training dataset.
@@ -246,7 +249,8 @@ constructed based on only those reviews in the training dataset.
 ('another', 992), ('action', 985), ('love', 977), ('us', 967), ('go', 952),
 ('director', 948), ('end', 946), ('something', 945), ('still', 936)]
 
-Listing 10.4: Example output of selecting a vocabulary for the dataset.
+```
+
 
 10.3. Data Preparation
 
@@ -260,7 +264,8 @@ min_occurrence = 2
 tokens = [k for k,c in vocab.items() if c >= min_occurrence]
 print(len(tokens))
 
-Listing 10.5: Example of filtering the vocabulary by occurrence.
+```
+
 Finally, the vocabulary can be saved to a new file called vocab.txt that we can later load
 and use to filter movie reviews prior to encoding them for modeling. We define a new function
 called save list() that saves the vocabulary to file, with one word per line. For example:
@@ -277,7 +282,8 @@ file.close()
 # save tokens to a vocabulary file
 save_list(tokens, 'vocab.txt')
 
-Listing 10.6: Example of saving the filtered vocabulary.
+```
+
 Pulling all of this together, the complete example is listed below.
 import string
 import re
@@ -354,7 +360,8 @@ print(len(tokens))
 # save tokens to a vocabulary file
 save_list(tokens, 'vocab.txt')
 
-Listing 10.7: Example of filtering the vocabulary for the dataset.
+```
+
 
 91
 
@@ -366,7 +373,8 @@ Running the above example with this addition shows that the vocabulary size drop
 little more than half its size, from about 44,000 to about 25,000 words.
 25767
 
-Listing 10.8: Example output of filtering the vocabulary by min occurrence.
+```
+
 Running the min occurrence filter on the vocabulary and saving it to file, you should now
 have a new file called vocab.txt with only the words we are interested in.
 The order of words in your file will differ, but should look something like the following:
@@ -382,7 +390,8 @@ web
 columbia
 ...
 
-Listing 10.9: Sample of the vocabulary file vocab.txt.
+```
+
 We are now ready to look at extracting features from the reviews ready for modeling.
 
 10.4
@@ -429,7 +438,8 @@ tokens = clean_doc(doc)
 tokens = [w for w in tokens if w in vocab]
 return ' '.join(tokens)
 
-Listing 10.10: Function to filter a review by pre-defined vocabulary.
+```
+
 Next, we need a function to work through all documents in a directory (such as pos and
 neg) to convert the documents into lines. Below lists the process docs() function that does
 just this, expecting a directory name and a vocabulary set as input arguments and returning a
@@ -450,7 +460,8 @@ line = doc_to_line(path, vocab)
 lines.append(line)
 return lines
 
-Listing 10.11: Function to filter all movie reviews by vocabulary.
+```
+
 We can call the process docs() consistently for positive and negative reviews to construct
 a dataset of review text and their associated output labels, 0 for negative and 1 for positive.
 The load clean dataset() function below implements this behavior.
@@ -464,7 +475,8 @@ docs = neg + pos
 labels = [0 for _ in range(len(neg))] + [1 for _ in range(len(pos))]
 return docs, labels
 
-Listing 10.12: Function to load movie reviews and prepare output labels.
+```
+
 Finally, we need to load the vocabulary and turn it into a set for use in cleaning reviews.
 
 10.4. Bag-of-Words Representation
@@ -476,7 +488,8 @@ vocab_filename = 'vocab.txt'
 vocab = load_doc(vocab_filename)
 vocab = set(vocab.split())
 
-Listing 10.13: Load the pre-defined vocabulary of words.
+```
+
 We can put all of this together, reusing the loading and cleaning functions developed in
 previous sections. The complete example is listed below, demonstrating how to prepare the
 positive and negative reviews from the training dataset.
@@ -557,11 +570,13 @@ docs, labels = load_clean_dataset(vocab)
 # summarize what we have
 print(len(docs), len(labels))
 
-Listing 10.14: Filter all movie reviews by the pre-defined vocabulary.
+```
+
 Running this example loads and cleans the review text and returns the labels.
 1800 1800
 
-Listing 10.15: Example output from loading, cleaning and filtering movie review data by a
+```
+
 constrained vocabulary.
 
 10.4.2
@@ -586,7 +601,8 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts(lines)
 return tokenizer
 
-Listing 10.16: Function to fit a Tokenizer on the clean and filtered movie reviews.
+```
+
 This process determines a consistent way to convert the vocabulary to a fixed-length vector
 with 25,768 elements, which is the total number of words in the vocabulary file vocab.txt.
 Next, documents can then be encoded using the Tokenizer by calling texts to matrix(). The
@@ -598,7 +614,8 @@ example:
 Xtrain = tokenizer.texts_to_matrix(train_docs, mode='freq')
 Xtest = tokenizer.texts_to_matrix(test_docs, mode='freq')
 
-Listing 10.17: Encode training data.
+```
+
 This encodes all of the positive and negative reviews in the training dataset.
 Next, the process docs() function from the previous section needs to be modified to
 selectively process reviews in the test or train dataset. We support the loading of both the
@@ -622,7 +639,8 @@ line = doc_to_line(path, vocab)
 lines.append(line)
 return lines
 
-Listing 10.18: Updated process documents function to load all reviews.
+```
+
 Similarly, the load clean dataset() dataset must be updated to load either train or test
 data and ensure it returns an NumPy array.
 # load and clean a dataset
@@ -637,7 +655,8 @@ labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
 10.4. Bag-of-Words Representation
 return docs, labels
 
-Listing 10.19: Function to load text data and labels.
+```
+
 We can put all of this together in a single example.
 import string
 import re
@@ -731,13 +750,15 @@ Xtrain = tokenizer.texts_to_matrix(train_docs, mode='freq')
 Xtest = tokenizer.texts_to_matrix(test_docs, mode='freq')
 print(Xtrain.shape, Xtest.shape)
 
-Listing 10.20: Complete example of preparing train and test data.
+```
+
 Running the example prints both the shape of the encoded training dataset and test dataset
 with 1,800 and 200 documents respectively, each with the same sized encoding vocabulary
 (vector length).
 (1800, 25768) (200, 25768)
 
-Listing 10.21: Example output of loading and preparing the datasets.
+```
+
 
 10.5
 
@@ -765,7 +786,8 @@ will have an input layer that equals the number of words in the vocabulary, and 
 length of the input documents. We can store this in a new variable called n words, as follows:
 n_words = Xtest.shape[1]
 
-Listing 10.22: Example of calculating the number of words.
+```
+
 We can now define the network. All model configuration was found with very little trial and
 error and should not be considered tuned for this problem. We will use a single hidden layer
 with 50 neurons and a rectified linear activation function. The output layer is a single neuron
@@ -786,13 +808,15 @@ model.summary()
 plot_model(model, to_file='model.png', show_shapes=True)
 return model
 
-Listing 10.23: Example of defining an MLP for the bag-of-words model.
+```
+
 Next, we can fit the model on the training data; in this case, the model is small and is easily
 fit in 10 epochs.
 # fit network
 model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 
-Listing 10.24: Example of fitting the defined model.
+```
+
 Finally, once the model is trained, we can evaluate its performance by making predictions in
 the test dataset and printing the accuracy.
 
@@ -802,7 +826,8 @@ the test dataset and printing the accuracy.
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
 
-Listing 10.25: Example of evaluating the fit model.
+```
+
 The complete example is listed below.
 import string
 import re
@@ -922,7 +947,8 @@ model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
 
-Listing 10.26: Complete example of training and evaluating an MLP bag-of-words model.
+```
+
 Running the example first prints a summary of the defined model.
 _________________________________________________________________
 Layer (type)
@@ -942,7 +968,8 @@ Trainable params: 1,288,501
 Non-trainable params: 0
 _________________________________________________________________
 
-Listing 10.27: Summary of the defined model.
+```
+
 A plot the defined model is then saved to file with the name model.png.
 
 Figure 10.1: Plot of the defined bag-of-words model.
@@ -979,7 +1006,8 @@ Epoch 10/10
 
 Test Accuracy: 87.000000
 
-Listing 10.28: Example output of training and evaluating the MLP model.
+```
+
 Next, let’s look at testing different word scoring methods for the bag-of-words model.
 
 10.6
@@ -1017,7 +1045,8 @@ Xtest = tokenizer.texts_to_matrix(test_docs, mode=mode)
 
 return Xtrain, Xtest
 
-Listing 10.29: Updated data preparation to take encoding mode as a parameter.
+```
+
 We also need a function to evaluate the MLP given a specific encoding of the data. Because
 neural networks are stochastic, they can produce different results when the same model is fit on
 the same data. This is mainly because of the random initial weights and the shuffling of patterns
@@ -1046,7 +1075,8 @@ scores.append(acc)
 print('%d accuracy: %s' % ((i+1), acc))
 return scores
 
-Listing 10.30: Function to create, fit and evaluate a model multiple times.
+```
+
 We are now ready to evaluate the performance of the 4 different word scoring methods.
 Pulling all of this together, the complete example is listed below.
 import string
@@ -1188,7 +1218,8 @@ print(results.describe())
 results.boxplot()
 pyplot.show()
 
-Listing 10.31: Complete example of comparing document encoding schemes.
+```
+
 At the end of the run, summary statistics for each word scoring method are provided,
 summarizing the distribution of model skill scores across each of the 10 runs per mode. We can
 see that the mean score of both the count and binary methods appear to be better than freq
@@ -1215,7 +1246,8 @@ min
 max
 0.945000 0.915000 0.910000 0.880000
 
-Listing 10.32: Example output of comparing document encoding schemes.
+```
+
 A box and whisker plot of the results is also presented, summarizing the accuracy distributions
 per configuration. We can see that binary achieved the best results with a modest spread and
 might be the preferred approach for this dataset.
@@ -1265,7 +1297,8 @@ if round(percent_pos) == 0:
 return (1-percent_pos), 'NEGATIVE'
 return percent_pos, 'POSITIVE'
 
-Listing 10.33: Function for making predictions for new reviews.
+```
+
 We can now make predictions for new review texts. Below is an example with both a clearly
 positive and a clearly negative review using the simple MLP developed above with the frequency
 word scoring mode.
@@ -1278,7 +1311,8 @@ text = 'This is a bad movie.'
 percent, sentiment = predict_sentiment(text, vocab, tokenizer, model)
 print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
-Listing 10.34: Exampling of making predictions for new reviews.
+```
+
 Pulling this all together, the complete example for making predictions for new reviews is
 listed below.
 import string
@@ -1411,7 +1445,8 @@ text = 'This is a bad movie.'
 percent, sentiment = predict_sentiment(text, vocab, tokenizer, model)
 print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
-Listing 10.35: Complete example of making predictions for new review data.
+```
+
 Running the example correctly classifies these reviews.
 
 111
@@ -1425,7 +1460,8 @@ Sentiment: POSITIVE (57.124%)
 Review: [This is a bad movie.]
 Sentiment: NEGATIVE (64.404%)
 
-Listing 10.36: Example output of making predictions for new reviews.
+```
+
 Ideally, we would fit the model on all available data (train and test) to create a final model
 and save the model and tokenizer to file so that they can be loaded and used in new software.
 

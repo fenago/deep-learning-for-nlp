@@ -94,7 +94,8 @@ text = file.read()
 # close the file
 file.close()
 
-Listing 9.1: Example of loading a single movie review.
+```
+
 This loads the document as ASCII and preserves any white space, like new lines. We can
 turn this into a function called load doc() that takes a filename of the document to load and
 returns the text.
@@ -108,7 +109,8 @@ text = file.read()
 file.close()
 return text
 
-Listing 9.2: Function to load a document into memory.
+```
+
 We have two directories each with 1,000 documents each. We can process each directory in
 turn by first getting a list of files in the directory using the listdir() function, then loading
 each file in turn. For example, we can load each document in the negative directory using the
@@ -141,7 +143,8 @@ path = directory + '/' + filename
 doc = load_doc(path)
 print('Loaded %s' % filename)
 
-Listing 9.3: Example of loading a all movie reviews.
+```
+
 Running this example prints the filename of each review after it is loaded.
 ...
 Loaded
@@ -156,7 +159,8 @@ cv997_5152.txt
 cv998_15691.txt
 cv999_14636.txt
 
-Listing 9.4: Example output of loading all movie reviews.
+```
+
 We can turn the processing of the documents into a function as well and use it as a template
 later for developing a function to clean all documents in a folder. For example, below we define
 a process docs() function to do the same thing.
@@ -186,7 +190,8 @@ print('Loaded %s' % filename)
 directory = 'txt_sentoken/neg'
 process_docs(directory)
 
-Listing 9.5: Example of loading a all movie reviews with functions.
+```
+
 Now that we know how to load the movie review text data, let’s look at cleaning it.
 
 9.4. Clean Text Data
@@ -224,7 +229,8 @@ text = load_doc(filename)
 tokens = text.split()
 print(tokens)
 
-Listing 9.6: Load a movie review and split by white space.
+```
+
 Running the example gives a nice long list of raw tokens from the document.
 ...
 'years', 'ago', 'and', 'has', 'been', 'sitting', 'on', 'the', 'shelves', 'ever', 'since',
@@ -235,7 +241,8 @@ Running the example gives a nice long list of raw tokens from the document.
 '10/10', ')', '-', 'memento', '(', '10/10', ')', '-', 'the', 'others', '(', '9/10',
 ')', '-', 'stir', 'of', 'echoes', '(', '8/10', ')']
 
-Listing 9.7: Example output of spitting a review by white space.
+```
+
 Just looking at the raw tokens can give us a lot of ideas of things to try, such as:
 - Remove punctuation from words (e.g. ‘what’s’).
 - Removing tokens that are just punctuation (e.g. ‘-’).
@@ -285,7 +292,8 @@ tokens = [w for w in tokens if not w in stop_words]
 tokens = [word for word in tokens if len(word) > 1]
 print(tokens)
 
-Listing 9.8: Load and clean one movie review.
+```
+
 Running the example gives a much cleaner looking list of tokens.
 ...
 'explanation', 'craziness', 'came', 'oh', 'way', 'horror', 'teen', 'slasher', 'flick',
@@ -295,7 +303,8 @@ Running the example gives a much cleaner looking list of tokens.
 'nightmare', 'elm', 'street', 'blair', 'witch', 'crow', 'crow', 'salvation', 'lost',
 'highway', 'memento', 'others', 'stir', 'echoes']
 
-Listing 9.9: Example output of cleaning one movie review.
+```
+
 
 9.4. Clean Text Data
 
@@ -337,7 +346,8 @@ text = load_doc(filename)
 tokens = clean_doc(text)
 print(tokens)
 
-Listing 9.10: Function to clean movie reviews.
+```
+
 Again, the cleaning procedure seems to produce a good set of tokens, at least as a first cut.
 ...
 'comic', 'oscar', 'winner', 'martin', 'childs', 'shakespeare', 'love', 'production',
@@ -349,7 +359,8 @@ Again, the cleaning procedure seems to produce a good set of tokens, at least as
 'imagining', 'attempt', 'irish', 'accent', 'actually', 'wasnt', 'half', 'bad', 'film',
 'however', 'good', 'strong', 'violencegore', 'sexuality', 'language', 'drug', 'content']
 
-Listing 9.11: Example output of a function to clean movie reviews.
+```
+
 There are many more cleaning steps we could take and I leave them to your imagination.
 Next, let’s look at how we can manage a preferred vocabulary of tokens.
 
@@ -385,7 +396,8 @@ tokens = clean_doc(doc)
 # update counts
 vocab.update(tokens)
 
-Listing 9.12: Function add a movie review to a vocabulary.
+```
+
 Finally, we can use our template above for processing all documents in a directory called
 process docs() and update it to call add doc to vocab().
 # load all docs in a directory
@@ -400,7 +412,8 @@ path = directory + '/' + filename
 # add doc to vocab
 add_doc_to_vocab(path, vocab)
 
-Listing 9.13: Updated process documents function.
+```
+
 We can put all of this together and develop a full vocabulary from all documents in the
 dataset.
 import string
@@ -472,7 +485,8 @@ print(len(vocab))
 # print the top words in the vocab
 print(vocab.most_common(50))
 
-Listing 9.14: Example of cleaning all reviews and building a vocabulary.
+```
+
 Running the example creates a vocabulary with all documents in the dataset, including
 positive and negative reviews. We can see that there are a little over 46,000 unique words across
 all reviews and the top 3 words are film, one, and movie.
@@ -488,7 +502,8 @@ all reviews and the top 3 words are film, one, and movie.
 ('another', 1111), ('love', 1089), ('action', 1078), ('go', 1075), ('us', 1065),
 ('director', 1056), ('something', 1048), ('end', 1047), ('still', 1038)]
 
-Listing 9.15: Example output of building a vocabulary.
+```
+
 Perhaps the least common words, those that only appear once across all reviews, are not
 predictive. Perhaps some of the most common words are not useful too. These are good
 questions and really should be tested with a specific predictive model. Generally, words that
@@ -501,7 +516,8 @@ min_occurrence = 5
 tokens = [k for k,c in vocab.items() if c >= min_occurrence]
 print(len(tokens))
 
-Listing 9.16: Example of filtering the vocabulary by an occurrence count.
+```
+
 This reduces the vocabulary from 46,557 to 14,803 words, a huge drop. Perhaps a minimum
 of 5 occurrences is too aggressive; you can experiment with different values. We can then save
 the chosen vocabulary of words to a new file. I like to save the vocabulary as ASCII with one
@@ -513,7 +529,8 @@ file = open(filename, 'w')
 file.write(data)
 file.close()
 
-Listing 9.17: Function to save the vocabulary to file.
+```
+
 The complete example for defining and saving the vocabulary is listed below.
 import string
 import re
@@ -595,7 +612,8 @@ print(len(tokens))
 # save tokens to a vocabulary file
 save_list(tokens, 'vocab.txt')
 
-Listing 9.18: Example building and saving a final vocabulary.
+```
+
 Running this final snippet after creating the vocabulary will save the chosen words to file. It
 is a good idea to take a look at, and even study, your chosen vocabulary in order to get ideas
 for better preparing this data, or text data in the future.
@@ -611,7 +629,8 @@ witch
 buffoons
 ...
 
-Listing 9.19: Sample of the saved vocabulary file.
+```
+
 Next, we can look at using the vocabulary to create a prepared version of the movie review
 dataset.
 
@@ -643,7 +662,8 @@ vocab = load_doc(vocab_filename)
 vocab = vocab.split()
 vocab = set(vocab)
 
-Listing 9.20: Load the saved vocabulary.
+```
+
 Next, we can clean the reviews, use the loaded vocab to filter out unwanted tokens, and
 save the clean reviews in a new file. One approach could be to save all the positive reviews
 in one file and all the negative reviews in another file, with the filtered tokens separated by
@@ -662,7 +682,8 @@ tokens = clean_doc(doc)
 tokens = [w for w in tokens if w in vocab]
 return ' '.join(tokens)
 
-Listing 9.21: Function to filter a review by the vocabulary
+```
+
 Next, we can define a new version of process docs() to step through all reviews in a folder
 and convert them to lines by calling doc to line() for each document. A list of lines is then
 returned.
@@ -682,7 +703,8 @@ line = doc_to_line(path, vocab)
 lines.append(line)
 return lines
 
-Listing 9.22: Updated process docs function to filter all documents by the vocabulary.
+```
+
 We can then call process docs() for both the directories of positive and negative reviews,
 then call save list() from the previous section to save each list of processed reviews to a file.
 
@@ -766,7 +788,8 @@ save_list(negative_lines, 'negative.txt')
 positive_lines = process_docs('txt_sentoken/pos', vocab)
 save_list(positive_lines, 'positive.txt')
 
-Listing 9.23: Example of cleaning and filtering all reviews by the vocab and saving the results
+```
+
 to file.
 Running the example saves two new files, negative.txt and positive.txt, that contain the
 prepared negative and positive reviews respectively. The data is ready for use in a bag-of-words

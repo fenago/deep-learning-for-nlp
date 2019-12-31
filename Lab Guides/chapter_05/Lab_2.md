@@ -112,8 +112,7 @@ filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
 text = file.read()
 file.close()
-
-Listing 5.1: Manually load the file.
+```
 
 5.4.2
 
@@ -136,8 +135,8 @@ file.close()
 # split into words by white space
 words = text.split()
 print(words[:100])
+```
 
-Listing 5.2: Manually split words by white space.
 Running the example splits the document into a long list of words and prints the first 100 for
 us to review. We can see that punctuation is preserved (e.g. wasn’t and armour-like), which is
 nice. We can also see that end of sentence punctuation is kept with the last word (e.g. thought.),
@@ -152,8 +151,8 @@ which is not great.
 'thin', 'compared', 'with', 'the', 'size', 'of', 'the', 'rest', 'of', 'him,', 'waved',
 'about', 'helplessly', 'as', 'he', 'looked.', '"What\'s', 'happened', 'to', 'me?"',
 'he', 'thought.', 'It', "wasn't", 'a', 'dream.', 'His', 'room,', 'a', 'proper', 'human']
+```
 
-Listing 5.3: Example output of splitting words by white space.
 
 5.4.3
 
@@ -170,8 +169,8 @@ file.close()
 # split based on words only
 words = re.split(r'\W+', text)
 print(words[:100])
+```
 
-Listing 5.4: Manually select words with regex.
 Again, running the example we can see that we get our list of words. This time, we can see
 that armour-like is now two words armour and like (fine) but contractions like What’s is also
 two words What and s (not great).
@@ -189,8 +188,8 @@ two words What and s (not great).
 5.4. Manual Tokenization
 
 39
+```
 
-Listing 5.5: Example output of selecting words with regex.
 
 5.4.4
 
@@ -202,19 +201,19 @@ keep contractions together. One way would be to split the document into words by
 nothing (e.g. remove it). Python provides a constant called string.punctuation that provides a
 great list of punctuation characters. For example:
 print(string.punctuation)
+```
 
-Listing 5.6: Print the known punctuation characters.
 Results in:
 !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+```
 
-Listing 5.7: Example output of printing the known punctuation characters.
 We can use regular expressions to select for the punctuation characters and use the sub()
 function to replace them with nothing. For example:
 re_punc = re.compile('[%s]' % re.escape(string.punctuation))
 # remove punctuation from each word
 stripped = [re_punc.sub('', w) for w in words]
+```
 
-Listing 5.8: Example of constructing a translation table that will remove punctuation.
 We can put all of this together, load the text file, split it into words by white space, then
 translate each word to remove the punctuation.
 import string
@@ -231,8 +230,8 @@ re_punc = re.compile('[%s]' % re.escape(string.punctuation))
 # remove punctuation from each word
 stripped = [re_punc.sub('', w) for w in words]
 print(stripped[:100])
+```
 
-Listing 5.9: Manually remove punctuation.
 We can see that this has had the desired effect, mostly. Contractions like What’s have
 become Whats but armour-like has become armourlike.
 
@@ -250,16 +249,16 @@ become Whats but armour-like has become armourlike.
 'thin', 'compared', 'with', 'the', 'size', 'of', 'the', 'rest', 'of', 'him', 'waved',
 'about', 'helplessly', 'as', 'he', 'looked', 'Whats', 'happened', 'to', 'me', 'he',
 'thought', 'It', 'wasnt', 'a', 'dream', 'His', 'room', 'a', 'proper', 'human']
+```
 
-Listing 5.10: Example output of removing punctuation with translation tables.
 Sometimes text data may contain non-printable characters. We can use a similar approach to
 filter out all non-printable characters by selecting the inverse of the string.printable constant.
 For example:
 ...
 re_print = re.compile('[^%s]' % re.escape(string.printable))
 result = [re_print.sub('', w) for w in words]
+```
 
-Listing 5.11: Example of removing non-printable characters.
 
 5.4.5
 
@@ -278,8 +277,8 @@ words = text.split()
 # convert to lower case
 words = [word.lower() for word in words]
 print(words[:100])
+```
 
-Listing 5.12: Manually normalize case.
 Running the example, we can see that all words are now lowercase.
 ['one', 'morning,', 'when', 'gregor', 'samsa', 'woke', 'from', 'troubled', 'dreams,', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
@@ -291,8 +290,8 @@ Running the example, we can see that all words are now lowercase.
 'thin', 'compared', 'with', 'the', 'size', 'of', 'the', 'rest', 'of', 'him,', 'waved',
 'about', 'helplessly', 'as', 'he', 'looked.', '"what\'s', 'happened', 'to', 'me?"',
 'he', 'thought.', 'it', "wasn't", 'a', 'dream.', 'his', 'room,', 'a', 'proper', 'human']
+```
 
-Listing 5.13: Example output of removing punctuation.
 
 5.5. Tokenization and Cleaning with NLTK
 
@@ -322,19 +321,19 @@ Install NLTK
 You can install NLTK using your favorite package manager, such as pip. On a POSIX-compatible
 machine, this would be:
 sudo pip install -U nltk
+```
 
-Listing 5.14: Command to install the NLTK library.
 After installation, you will need to install the data used with the library, including a great
 set of documents that you can use later for testing other tools in NLTK. There are few ways to
 do this, such as from within a script:
 import nltk
 nltk.download()
+```
 
-Listing 5.15: NLTK script to download required text data.
 Or from the command line:
 python -m nltk.downloader all
+```
 
-Listing 5.16: Command to download NLTK required text data.
 
 5.5.2
 
@@ -360,15 +359,15 @@ file.close()
 # split into sentences
 sentences = sent_tokenize(text)
 print(sentences[0])
+```
 
-Listing 5.17: NLTK script to split text into sentences.
 Running the example, we can see that although the document is split into sentences, that
 each sentence still preserves the new line from the artificial wrap of the lines in the original
 document.
 One morning, when Gregor Samsa woke from troubled dreams, he found
 himself transformed in his bed into a horrible vermin.
+```
 
-Listing 5.18: Example output of splitting text into sentences.
 
 5.5.3
 
@@ -387,8 +386,8 @@ file.close()
 # split into words
 tokens = word_tokenize(text)
 print(tokens[:100])
+```
 
-Listing 5.19: NLTK script to split text into words.
 Running the code, we can see that punctuation are now tokens that we could then decide to
 specifically filter out.
 ['One', 'morning', ',', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams',
@@ -401,8 +400,8 @@ specifically filter out.
 'many', 'legs', ',', 'pitifully', 'thin', 'compared', 'with', 'the', 'size', 'of',
 'the', 'rest', 'of', 'him', ',', 'waved', 'about', 'helplessly', 'as', 'he', 'looked',
 '.', '``', 'What', "'s", 'happened', 'to']
+```
 
-Listing 5.20: Example output of splitting text into words.
 
 5.5.4
 
@@ -427,8 +426,8 @@ tokens = word_tokenize(text)
 # remove all tokens that are not alphabetic
 words = [word for word in tokens if word.isalpha()]
 print(words[:100])
+```
 
-Listing 5.21: NLTK script to remove punctuation.
 Running the example, you can see that not only punctuation tokens, but examples like
 armour-like and ’s were also filtered out.
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
@@ -441,8 +440,8 @@ armour-like and ’s were also filtered out.
 'size', 'of', 'the', 'rest', 'of', 'him', 'waved', 'about', 'helplessly', 'as', 'he',
 'looked', 'What', 'happened', 'to', 'me', 'he', 'thought', 'It', 'was', 'a', 'dream',
 'His', 'room', 'a', 'proper', 'human', 'room']
+```
 
-Listing 5.22: Example output of removing punctuation.
 
 5.5.5
 
@@ -456,8 +455,8 @@ follows:
 from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 print(stop_words)
+```
 
-Listing 5.23: NLTK script print stop words.
 You can see the full list as follows:
 ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours',
 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers',
@@ -479,8 +478,8 @@ You can see the full list as follows:
 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', 'couldn', 'didn', 'doesn', 'hadn',
 'hasn', 'haven', 'isn', 'ma', 'mightn', 'mustn', 'needn', 'shan', 'shouldn', 'wasn',
 'weren', 'won', 'wouldn']
+```
 
-Listing 5.24: Example output of printing stop words.
 You can see that they are all lower case and have punctuation removed. You could compare
 your tokens to the stop words and filter them out, but you must ensure that your text is prepared
 the same way. Let’s demonstrate this with a small pipeline of text preparation including:
@@ -513,8 +512,8 @@ words = [word for word in stripped if word.isalpha()]
 stop_words = set(stopwords.words('english'))
 words = [w for w in words if not w in stop_words]
 print(words[:100])
+```
 
-Listing 5.25: NLTK script filter out stop words.
 Running this example, we can see that in addition to all of the other transforms, stop words
 like a and to have been removed. I note that we are still left with tokens like nt. The rabbit
 hole is deep; there’s always more we can do.
@@ -535,8 +534,8 @@ hole is deep; there’s always more we can do.
 'nice', 'gilded', 'frame', 'showed', 'lady', 'fitted', 'fur', 'hat', 'fur', 'boa',
 'sat', 'upright', 'raising', 'heavy', 'fur', 'muff', 'covered', 'whole', 'lower',
 'arm', 'towards', 'viewer']
+```
 
-Listing 5.26: Example output of filtering out stop words.
 
 5.5.6
 
@@ -561,8 +560,8 @@ tokens = word_tokenize(text)
 porter = PorterStemmer()
 stemmed = [porter.stem(word) for word in tokens]
 print(stemmed[:100])
+```
 
-Listing 5.27: NLTK script stem words.
 Running the example, you can see that words have been reduced to their stems, such as
 trouble has become troubl. You can also see that the stemming implementation has also reduced
 the tokens to lowercase, likely for internal look-ups in word tables.
@@ -579,8 +578,8 @@ the tokens to lowercase, likely for internal look-ups in word tables.
 5.6. Additional Text Cleaning Considerations
 
 46
+```
 
-Listing 5.28: Example output of stemming words.
 There is a nice suite of stemming and lemmatization algorithms to choose from in NLTK, if
 reducing words to their root is something you need for your project.
 

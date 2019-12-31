@@ -141,7 +141,8 @@ features[image_id] = feature
 print('>%s' % name)
 return features
 
-Listing 26.1: Function to extract photo features
+```
+
 We can call this function to prepare the photo data for testing our models, then save the
 resulting dictionary to a file named features.pkl. The complete example is listed below.
 from
@@ -202,7 +203,8 @@ dump(features, open('features.pkl', 'wb'))
 
 302
 
-Listing 26.2: Complete example of extracting photo features.
+```
+
 Running this data preparation step may take a while depending on your hardware, perhaps
 one hour on the CPU with a modern workstation. At the end of the run, you will have
 the extracted features stored in features.pkl for later use. This file will be a few hundred
@@ -229,7 +231,8 @@ filename = 'Flickr8k_text/Flickr8k.token.txt'
 # load descriptions
 doc = load_doc(filename)
 
-Listing 26.3: Example of loading photo descriptions into memory
+```
+
 Each photo has a unique identifier. This identifier is used on the photo filename and in the
 text file of descriptions. Next, we will step through the list of photo descriptions. Below defines
 a function load descriptions() that, given the loaded document text, will return a dictionary
@@ -265,7 +268,8 @@ return mapping
 descriptions = load_descriptions(doc)
 print('Loaded: %d ' % len(descriptions))
 
-Listing 26.4: Example of splitting descriptions from photo identifiers
+```
+
 Next, we need to clean the description text. The descriptions are already tokenized and easy
 to work with. We will clean the text in the following ways in order to reduce the size of the
 vocabulary of words we will need to work with:
@@ -297,7 +301,8 @@ desc_list[i] = ' '.join(desc)
 # clean descriptions
 clean_descriptions(descriptions)
 
-Listing 26.5: Example of cleaning description text
+```
+
 Once cleaned, we can summarize the size of the vocabulary. Ideally, we want a vocabulary
 that is both expressive and as small as possible. A smaller vocabulary will result in a smaller
 model that will train faster. For reference, we can transform the clean descriptions into a set
@@ -318,7 +323,8 @@ return all_desc
 vocabulary = to_vocabulary(descriptions)
 print('Vocabulary Size: %d' % len(vocabulary))
 
-Listing 26.6: Example of defining the description text vocabulary
+```
+
 Finally, we can save the dictionary of image identifiers and descriptions to a new file
 named descriptions.txt, with one image identifier and description per line. Below defines the
 save doc() function that, given a dictionary containing the mapping of identifiers to descriptions
@@ -336,7 +342,8 @@ file.close()
 # save descriptions
 save_doc(descriptions, 'descriptions.txt')
 
-Listing 26.7: Example of saving clean descriptions to file
+```
+
 Putting this all together, the complete listing is provided below.
 import string
 import re
@@ -428,13 +435,15 @@ print('Vocabulary Size: %d' % len(vocabulary))
 # save to file
 save_descriptions(descriptions, 'descriptions.txt')
 
-Listing 26.8: Complete example of text data preparation.
+```
+
 Running the example first prints the number of loaded photo descriptions (8,092) and the
 size of the clean vocabulary (8,763 words).
 Loaded: 8,092
 Vocabulary Size: 8,763
 
-Listing 26.9: Example output from preparing the text data
+```
+
 Finally, the clean descriptions are written to descriptions.txt. Taking a look at the file,
 we can see that the descriptions are ready for modeling. The order of descriptions in your file
 may vary.
@@ -451,7 +460,8 @@ crowd of people fill up packed stadium
 crowd sitting in an indoor stadium
 stadium full of people watch game
 
-Listing 26.10: Sample of text from the clean photo descriptions
+```
+
 
 26.5
 
@@ -505,7 +515,8 @@ identifier = line.split('.')[0]
 dataset.append(identifier)
 return set(dataset)
 
-Listing 26.11: Functions for loading the photo description text and identifiers
+```
+
 Now, we can load the photos and descriptions using the pre-defined set of train or development
 identifiers. Below is the function load clean descriptions() that loads the cleaned text
 descriptions from descriptions.txt for a given set of identifiers and returns a dictionary of
@@ -542,7 +553,8 @@ desc = 'startseq ' + ' '.join(image_desc) + ' endseq'
 descriptions[image_id].append(desc)
 return descriptions
 
-Listing 26.12: Function for loading the clean photo descriptions
+```
+
 Next, we can load the photo features for a given dataset. Below defines a function named
 load photo features() that loads the entire set of photo descriptions, then returns the subset
 of interest for a given set of photo identifiers. This is not very efficient; nevertheless, this will
@@ -555,7 +567,8 @@ all_features = load(open(filename, 'rb'))
 features = {k: all_features[k] for k in dataset}
 return features
 
-Listing 26.13: Function for loading pre-calculated photo features
+```
+
 We can pause here and test everything developed so far. The complete code example is
 listed below.
 from pickle import load
@@ -624,7 +637,8 @@ print('Descriptions: train=%d' % len(train_descriptions))
 train_features = load_photo_features('features.pkl', train)
 print('Photos: train=%d' % len(train_features))
 
-Listing 26.14: Complete example of loading the prepared data.
+```
+
 Running this example first loads the 6,000 photo identifiers in the test dataset. These
 features are then used to filter and load the cleaned description text and the pre-computed
 photo features. We are nearly there.
@@ -632,7 +646,8 @@ Dataset: 6,000
 Descriptions: train=6,000
 Photos: train=6,000
 
-Listing 26.15: Example output from preparing the text data
+```
+
 The description text will need to be encoded to numbers before it can be presented to
 the model as in input or compared to the model’s predictions. The first step in encoding the
 data is to create a consistent mapping from words to unique integer values. Keras provides
@@ -661,7 +676,8 @@ tokenizer = create_tokenizer(train_descriptions)
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary Size: %d' % vocab_size)
 
-Listing 26.16: Example of preparing the Tokenizer
+```
+
 We can now encode the text. Each description will be split into words. The model will be
 provided one word and the photo and generate the next word. Then the first two words of the
 description will be provided to the model as input with the image to generate the next word.
@@ -691,7 +707,8 @@ in
 field
 endseq
 
-Listing 26.17: Example of how a photo description is transformed into input and output
+```
+
 sequences
 Later, when the model is used to generate descriptions, the generated words will be concatenated and recursively provided as input to generate a caption for an image. The function
 below named create sequences(), given the tokenizer, a maximum sequence length, and the
@@ -733,7 +750,8 @@ X2.append(in_seq)
 y.append(out_seq)
 return array(X1), array(X2), array(y)
 
-Listing 26.18: Function for creating input and output sequences
+```
+
 We will need to calculate the maximum number of words in the longest description. A short
 helper function named max length() is defined below.
 # calculate the length of the description with the most words
@@ -741,7 +759,8 @@ def max_length(descriptions):
 lines = to_lines(descriptions)
 return max(len(d.split()) for d in lines)
 
-Listing 26.19: Function for calculating the maximum sequence length.
+```
+
 We now have enough to load the data for the training and development datasets and
 transform the loaded data into input-output pairs for fitting a deep learning model.
 
@@ -802,7 +821,8 @@ model.summary()
 plot_model(model, to_file='model.png', show_shapes=True)
 return model
 
-Listing 26.20: Function to define the caption generation model.
+```
+
 A plot of the model is created and helps to better understand the structure of the network
 and the two streams of input.
 
@@ -828,7 +848,8 @@ that has both the training and validation loss in the filename.
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1,
 save_best_only=True, mode='min')
 
-Listing 26.21: Example of checkpoint configuration.
+```
+
 We can then specify the checkpoint in the call to fit() via the callbacks argument. We
 must also specify the development dataset in fit() via the validation data argument. We
 will only fit the model for 20 epochs, but given the amount of training data, each epoch may
@@ -837,7 +858,8 @@ take 30 minutes on modern hardware.
 model.fit([X1train, X2train], ytrain, epochs=20, verbose=2, callbacks=[checkpoint],
 validation_data=([X1test, X2test], ytest))
 
-Listing 26.22: Example of fitting the caption generation model.
+```
+
 
 26.5. Develop Deep Learning Model
 
@@ -1045,7 +1067,8 @@ save_best_only=True, mode='min')
 model.fit([X1train, X2train], ytrain, epochs=20, verbose=2, callbacks=[checkpoint],
 validation_data=([X1test, X2test], ytest))
 
-Listing 26.23: Complete example of training the caption generation model.
+```
+
 Running the example first prints a summary of the loaded training and development datasets.
 Dataset: 6,000
 Descriptions: train=6,000
@@ -1057,7 +1080,8 @@ Descriptions: test=1,000
 Photos: test=1,000
 Train on 306,404 samples, validate on 50,903 samples
 
-Listing 26.24: Sample output from fitting the caption generation model
+```
+
 After the summary of the model, we can get an idea of the total number of training and
 validation (development) input-output pairs. The model then runs, saving the best model to
 .h5 files along the way. Note, that even on a modern CPU, each epoch may take 20 minutes.
@@ -1117,7 +1141,8 @@ if word == 'endseq':
 break
 return in_text
 
-Listing 26.25: Functions for generating a description for a photo.
+```
+
 When generating and comparing photo descriptions, we will need to strip off the special
 start and end of sequence words. The function below named cleanup summary() will perform
 this operation.
@@ -1133,7 +1158,8 @@ if index > -1:
 summary = summary[:index]
 return summary
 
-Listing 26.26: Functions to remove start and end of sequence words.
+```
+
 We will generate predictions for all photos in the test dataset. The function below named
 evaluate model() will evaluate a trained model against a given dataset of photo descriptions
 and photo features. The actual and predicted descriptions are collected and evaluated collectively
@@ -1163,7 +1189,8 @@ print('BLEU-2: %f' % corpus_bleu(actual, predicted, weights=(0.5, 0.5, 0, 0)))
 print('BLEU-3: %f' % corpus_bleu(actual, predicted, weights=(0.3, 0.3, 0.3, 0)))
 print('BLEU-4: %f' % corpus_bleu(actual, predicted, weights=(0.25, 0.25, 0.25, 0.25)))
 
-Listing 26.27: Functions for evaluating a caption generation model.
+```
+
 BLEU scores are used in text translation for evaluating translated text against one or
 more reference translations. Here, we compare each generated description against all of the
 reference descriptions for the photograph. We then calculate BLEU scores for 1, 2, 3 and 4
@@ -1364,7 +1391,8 @@ model = load_model(filename)
 # evaluate model
 evaluate_model(model, test_descriptions, test_features, tokenizer, max_length)
 
-Listing 26.28: Complete example of evaluating the caption generation model.
+```
+
 Running the example prints the BLEU scores. We can see that the scores fit within the
 expected range of a skillful model on the problem. The chosen model configuration is by no
 means optimized.
@@ -1380,7 +1408,8 @@ BLEU-2: 0.230646
 BLEU-3: 0.150245
 BLEU-4: 0.062847
 
-Listing 26.29: Sample output from evaluating the caption generation model
+```
+
 
 26.7
 
@@ -1469,7 +1498,8 @@ tokenizer = create_tokenizer(train_descriptions)
 # save the tokenizer
 dump(tokenizer, open('tokenizer.pkl', 'wb'))
 
-Listing 26.30: Complete example of preparing and saving the Tokenizer.
+```
+
 We can now load the tokenizer whenever we need it without having to load the entire training
 dataset of annotations. Now, let’s generate a description for a new photograph. Below is a new
 photograph that I chose randomly on Flickr (available under a permissive license)1 .
@@ -1491,12 +1521,14 @@ tokenizer = load(open('tokenizer.pkl', 'rb'))
 # pre-define the max sequence length (from training)
 max_length = 34
 
-Listing 26.31: Example of loading the saved Tokenizer
+```
+
 Then we must load the model, as before.
 # load the model
 model = load_model('model.h5')
 
-Listing 26.32: Example of loading the saved model
+```
+
 Next, we must load the photo we wish to describe and extract the features. We could do this
 by re-defining the model and adding the VGG-16 model to it, or we can use the VGG model to
 predict the features and use them as inputs to our existing model. We will do the latter and
@@ -1528,7 +1560,8 @@ return feature
 # load and prepare the photograph
 photo = extract_features('example.jpg')
 
-Listing 26.33: Example of extracting features for the provided photo.
+```
+
 We can then generate a description using the generate desc() function defined when
 evaluating the model. The complete example for generating a description for an entirely new
 standalone photograph is listed below.
@@ -1630,11 +1663,13 @@ description = generate_desc(model, tokenizer, photo, max_length)
 description = cleanup_summary(description)
 print(description)
 
-Listing 26.34: Complete example of generating a description for a new photo.
+```
+
 In this case, the description generated was as follows:
 dog is running across the beach
 
-Listing 26.35: Sample output from generating a caption for the new photograph
+```
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
