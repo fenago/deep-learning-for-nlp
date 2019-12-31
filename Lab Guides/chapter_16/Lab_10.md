@@ -9,9 +9,9 @@ different kernel sizes. This, in effect, creates a multichannel convolutional ne
 text that reads text with different n-gram sizes (groups of words). In this tutorial, you will
 discover how to develop a multichannel convolutional neural network for sentiment prediction
 on text movie review data. After completing this tutorial, you will know:
- How to prepare movie review text data for modeling.
- How to develop a multichannel convolutional neural network for text in Keras.
- How to evaluate a fit model on unseen movie review data.
+- How to prepare movie review text data for modeling.
+- How to develop a multichannel convolutional neural network for text in Keras.
+- How to evaluate a fit model on unseen movie review data.
 
 Let’s get started.
 
@@ -37,7 +37,7 @@ analysis was described previously in Chapter 9. You can download the dataset fro
 
 175
 
- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
+- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
@@ -78,11 +78,11 @@ Loading and Cleaning Reviews
 
 The text data is already pretty clean; not much preparation is required. Without getting bogged
 down too much in the details, we will prepare the data using the following way:
- Split tokens on white space.
- Remove all punctuation from words.
- Remove all words that are not purely comprised of alphabetical characters.
- Remove all words that are known stop words.
- Remove all words that have a length ≤ 1 character.
+- Split tokens on white space.
+- Remove all punctuation from words.
+- Remove all words that are not purely comprised of alphabetical characters.
+- Remove all words that are known stop words.
+- Remove all words that have a length ≤ 1 character.
 
 16.3. Data Preparation
 
@@ -380,11 +380,11 @@ see Chapter 14.
 In Keras, a multiple-input model can be defined using the functional API. We will define a
 model with three input channels for processing 4-grams, 6-grams, and 8-grams of movie review
 text. Each channel is comprised of the following elements:
- Input layer that defines the length of input sequences.
- Embedding layer set to the size of the vocabulary and 100-dimensional real-valued representations.
- Conv1D layer with 32 filters and a kernel size set to the number of words to read at once.
- MaxPooling1D layer to consolidate the output from the convolutional layer.
- Flatten layer to reduce the three-dimensional output to two dimensional for concatenation.
+- Input layer that defines the length of input sequences.
+- Embedding layer set to the size of the vocabulary and 100-dimensional real-valued representations.
+- Conv1D layer with 32 filters and a kernel size set to the number of words to read at once.
+- MaxPooling1D layer to consolidate the output from the convolutional layer.
+- Flatten layer to reduce the three-dimensional output to two dimensional for concatenation.
 
 The output from the three channels are concatenated into a single vector and process by a
 Dense layer and an output layer. The function below defines and returns the model. As part of
@@ -686,34 +686,34 @@ Listing 16.18: Example output from evaluating the fit model.
 Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
- Different n-grams. Explore the model by changing the kernel size (number of n-grams)
+- Different n-grams. Explore the model by changing the kernel size (number of n-grams)
 used by the channels in the model to see how it impacts model skill.
- More or Fewer Channels. Explore using more or fewer channels in the model and see
+- More or Fewer Channels. Explore using more or fewer channels in the model and see
 how it impacts model skill.
- Shared Embedding. Explore configurations where each channel shares the same word
+- Shared Embedding. Explore configurations where each channel shares the same word
 embedding and report on the impact on model skill.
 
 16.7. Further Reading
 
 187
 
- Deeper Network. Convolutional neural networks perform better in computer vision
+- Deeper Network. Convolutional neural networks perform better in computer vision
 when they are deeper. Explore using deeper models here and see how it impacts model
 skill.
- Truncated Sequences. Padding all sequences to the length of the longest sequence
+- Truncated Sequences. Padding all sequences to the length of the longest sequence
 might be extreme if the longest sequence is very different to all other reviews. Study the
 distribution of review lengths and truncate reviews to a mean length.
- Truncated Vocabulary. We removed infrequently occurring words, but still had a large
+- Truncated Vocabulary. We removed infrequently occurring words, but still had a large
 vocabulary of more than 25,000 words. Explore further reducing the size of the vocabulary
 and the effect on model skill.
- Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
+- Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
 alternate configurations of the number of training epochs and batch size and use the test
 dataset as a validation set to pick a better stopping point for training the model.
- Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
+- Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
 model and the impact on model skill with and without further fine tuning during training.
- Use GloVe Embedding. Explore loading the pre-trained GloVe embedding and the
+- Use GloVe Embedding. Explore loading the pre-trained GloVe embedding and the
 impact on model skill with and without further fine tuning during training.
- Train Final Model. Train a final model on all available data and use it make predictions
+- Train Final Model. Train a final model on all available data and use it make predictions
 on real ad hoc movie reviews from the internet.
 
 If you explore any of these extensions, I’d love to know.
@@ -723,11 +723,11 @@ If you explore any of these extensions, I’d love to know.
 Further Reading
 
 This section provides more resources on the topic if you are looking to go deeper.
- Convolutional Neural Networks for Sentence Classification, 2014.
+- Convolutional Neural Networks for Sentence Classification, 2014.
 https://arxiv.org/abs/1408.5882
- Convolutional Neural Networks for Sentence Classification (code).
+- Convolutional Neural Networks for Sentence Classification (code).
 https://github.com/yoonkim/CNN_sentence
- Keras Functional API.
+- Keras Functional API.
 https://keras.io/getting-started/functional-api-guide/
 
 16.8
@@ -736,9 +736,9 @@ Summary
 
 In this tutorial, you discovered how to develop a multichannel convolutional neural network for
 sentiment prediction on text movie review data. Specifically, you learned:
- How to prepare movie review text data for modeling.
- How to develop a multichannel convolutional neural network for text in Keras.
- How to evaluate a fit model on unseen movie review data.
+- How to prepare movie review text data for modeling.
+- How to develop a multichannel convolutional neural network for text in Keras.
+- How to evaluate a fit model on unseen movie review data.
 
 16.8. Summary
 

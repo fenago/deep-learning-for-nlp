@@ -7,10 +7,10 @@ led to great performance of neural network models on a suite of challenging natu
 processing problems. In this tutorial, you will discover how to develop word embedding models
 with convolutional neural networks to classify movie reviews. After completing this tutorial,
 you will know:
- How to prepare movie review text data for classification with deep learning methods.
- How to develop a neural classification model with word embedding and convolutional
+- How to prepare movie review text data for classification with deep learning methods.
+- How to develop a neural classification model with word embedding and convolutional
 layers.
- How to evaluate the developed a neural classification model.
+- How to evaluate the developed a neural classification model.
 
 Let’s get started.
 
@@ -36,7 +36,7 @@ analysis was described previously in Chapter 9. You can download the dataset fro
 
 154
 
- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
+- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
@@ -77,11 +77,11 @@ Loading and Cleaning Reviews
 
 The text data is already pretty clean; not much preparation is required. Without getting bogged
 down too much in the details, we will prepare the data using the following way:
- Split tokens on white space.
- Remove all punctuation from words.
- Remove all words that are not purely comprised of alphabetical characters.
- Remove all words that are known stop words.
- Remove all words that have a length ≤ 1 character.
+- Split tokens on white space.
+- Remove all punctuation from words.
+- Remove all words that are not purely comprised of alphabetical characters.
+- Remove all words that are known stop words.
+- Remove all words that have a length ≤ 1 character.
 
 15.3. Data Preparation
 
@@ -995,17 +995,17 @@ Listing 15.28: Example output from making a prediction on new reviews.
 Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
- Data Cleaning. Explore better data cleaning, perhaps leaving some punctuation in tact
+- Data Cleaning. Explore better data cleaning, perhaps leaving some punctuation in tact
 or normalizing contractions.
- Truncated Sequences. Padding all sequences to the length of the longest sequence
+- Truncated Sequences. Padding all sequences to the length of the longest sequence
 might be extreme if the longest sequence is very different to all other reviews. Study the
 distribution of review lengths and truncate reviews to a mean length.
- Truncated Vocabulary. We removed infrequently occurring words, but still had a large
+- Truncated Vocabulary. We removed infrequently occurring words, but still had a large
 vocabulary of more than 25,000 words. Explore further reducing the size of the vocabulary
 and the effect on model skill.
- Filters and Kernel Size. The number of filters and kernel size are important to model
+- Filters and Kernel Size. The number of filters and kernel size are important to model
 skill and were not tuned. Explore tuning these two CNN parameters.
- Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
+- Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
 alternate configurations of the number of training epochs and batch size and use the test
 dataset as a validation set to pick a better stopping point for training the model.
 
@@ -1013,15 +1013,15 @@ dataset as a validation set to pick a better stopping point for training the mod
 
 172
 
- Deeper Network. Explore whether a deeper network results in better skill, either in
+- Deeper Network. Explore whether a deeper network results in better skill, either in
 terms of CNN layers, MLP layers and both.
- Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
+- Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
 model and the impact on model skill with and without further fine tuning during training.
- Use GloVe Embedding. Explore loading the pre-trained GloVe embedding and the
+- Use GloVe Embedding. Explore loading the pre-trained GloVe embedding and the
 impact on model skill with and without further fine tuning during training.
- Longer Test Reviews. Explore whether the skill of model predictions is dependent on
+- Longer Test Reviews. Explore whether the skill of model predictions is dependent on
 the length of movie reviews as suspected in the final section on evaluating the model.
- Train Final Model. Train a final model on all available data and use it make predictions
+- Train Final Model. Train a final model on all available data and use it make predictions
 on real ad hoc movie reviews from the internet.
 
 If you explore any of these extensions, I’d love to know.
@@ -1036,12 +1036,12 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Dataset
 
- Movie Review Data.
+- Movie Review Data.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/
- A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based
+- A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based
 on Minimum Cuts, 2004.
 http://xxx.lanl.gov/abs/cs/0409058
- Movie Review Polarity Dataset.
+- Movie Review Polarity Dataset.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
@@ -1049,11 +1049,11 @@ gz
 
 APIs
 
- collections API - Container datatypes.
+- collections API - Container datatypes.
 https://docs.python.org/3/library/collections.html
- Tokenizer Keras API.
+- Tokenizer Keras API.
 https://keras.io/preprocessing/text/#tokenizer
- Embedding Keras API.
+- Embedding Keras API.
 https://keras.io/layers/embeddings/
 
 15.8. Summary
@@ -1066,10 +1066,10 @@ Summary
 
 In this tutorial, you discovered how to develop word embeddings for the classification of movie
 reviews. Specifically, you learned:
- How to prepare movie review text data for classification with deep learning methods.
- How to develop a neural classification model with word embedding and convolutional
+- How to prepare movie review text data for classification with deep learning methods.
+- How to develop a neural classification model with word embedding and convolutional
 layers.
- How to evaluate the developed a neural classification model.
+- How to evaluate the developed a neural classification model.
 
 15.8.1
 

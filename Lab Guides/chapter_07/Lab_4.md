@@ -7,10 +7,10 @@ numbers to be used as input or output for machine learning and deep learning mod
 as word embeddings. The Keras deep learning library provides some basic tools to help you
 prepare your text data. In this tutorial, you will discover how you can use Keras to prepare
 your text data. After completing this tutorial, you will know:
- About the convenience methods that you can use to quickly prepare text data.
- The Tokenizer API that can be fit on training data and used to encode training, validation,
+- About the convenience methods that you can use to quickly prepare text data.
+- The Tokenizer API that can be fit on training data and used to encode training, validation,
 and test documents.
- The range of 4 different document encoding schemes offered by the Tokenizer API.
+- The range of 4 different document encoding schemes offered by the Tokenizer API.
 
 Let’s get started.
 
@@ -31,7 +31,7 @@ Split Words with text to word sequence
 A good first step when working with text is to split it into words. Words are called tokens and the process of splitting text into tokens is called tokenization. Keras provides the
 text to word sequence() function that you can use to split text into a list of words. By
 default, this function automatically does 3 things:
- Splits words by space.
+- Splits words by space.
 
 54
 
@@ -39,8 +39,8 @@ default, this function automatically does 3 things:
 
 55
 
- Filters out punctuation.
- Converts text to lowercase (lower=True).
+- Filters out punctuation.
+- Converts text to lowercase (lower=True).
 
 You can change any of these defaults by passing arguments to the function. Below is an
 example of using the text to word sequence() function to split a document (in this case a
@@ -187,17 +187,17 @@ t.fit_on_texts(docs)
 Listing 7.8: Example of fitting a Tokenizer.
 Once fit, the Tokenizer provides 4 attributes that you can use to query what has been
 learned about your documents:
- word counts: A dictionary mapping of words and their occurrence counts when the
+- word counts: A dictionary mapping of words and their occurrence counts when the
 Tokenizer was fit.
- word docs: A dictionary mapping of words and the number of documents that reach
+- word docs: A dictionary mapping of words and the number of documents that reach
 appears in.
- word index: A dictionary of words and their uniquely assigned integers.
+- word index: A dictionary of words and their uniquely assigned integers.
 
 7.5. Tokenizer API
 
 58
 
- document count: A dictionary mapping and the number of documents they appear in
+- document count: A dictionary mapping and the number of documents they appear in
 calculated during the fit.
 
 For example:
@@ -214,11 +214,11 @@ create one vector per document provided per input. The length of the vectors is 
 of the vocabulary. This function provides a suite of standard bag-of-words model text encoding
 schemes that can be provided via a mode argument to the function. The modes available
 include:
- binary: Whether or not each word is present in the document. This is the default.
- count: The count of each word in the document.
- tfidf: The Text Frequency-Inverse DocumentFrequency (TF-IDF) scoring for each word
+- binary: Whether or not each word is present in the document. This is the default.
+- count: The count of each word in the document.
+- tfidf: The Text Frequency-Inverse DocumentFrequency (TF-IDF) scoring for each word
 in the document.
- freq: The frequency of each word as a ratio of words within each document.
+- freq: The frequency of each word as a ratio of words within each document.
 
 We can put all of this together with a worked example.
 from keras.preprocessing.text import Tokenizer
@@ -273,15 +273,15 @@ this book.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- Text Preprocessing Keras API.
+- Text Preprocessing Keras API.
 https://keras.io/preprocessing/text/
- text to word sequence Keras API.
+- text to word sequence Keras API.
 https://keras.io/preprocessing/text/#text_to_word_sequence
- one hot Keras API.
+- one hot Keras API.
 https://keras.io/preprocessing/text/#one_hot
- hashing trick Keras API.
+- hashing trick Keras API.
 https://keras.io/preprocessing/text/#hashing_trick
- Tokenizer Keras API.
+- Tokenizer Keras API.
 https://keras.io/preprocessing/text/#tokenizer
 
 7.7
@@ -290,10 +290,10 @@ Summary
 
 In this tutorial, you discovered how you can use the Keras API to prepare your text data for
 deep learning. Specifically, you learned:
- About the convenience methods that you can use to quickly prepare text data.
- The Tokenizer API that can be fit on training data and used to encode training, validation,
+- About the convenience methods that you can use to quickly prepare text data.
+- The Tokenizer API that can be fit on training data and used to encode training, validation,
 and test documents.
- The range of 4 different document encoding schemes offered by the Tokenizer API.
+- The range of 4 different document encoding schemes offered by the Tokenizer API.
 
 7.7. Summary
 

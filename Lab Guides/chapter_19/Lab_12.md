@@ -8,11 +8,11 @@ such as machine translation and speech recognition. The choice of how the langua
 framed must match how the language model is intended to be used. In this tutorial, you will
 discover how the framing of a language model affects the skill of the model when generating
 short sequences from a nursery rhyme. After completing this tutorial, you will know:
- The challenge of developing a good framing of a word-based language model for a given
+- The challenge of developing a good framing of a word-based language model for a given
 application.
- How to develop one-word, two-word, and line-based framings for word-based language
+- How to develop one-word, two-word, and line-based framings for word-based language
 models.
- How to generate sequences using a fit language model.
+- How to generate sequences using a fit language model.
 
 Let’s get started.
 
@@ -790,22 +790,22 @@ confirm model requirements have been met.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- Jack and Jill on Wikipedia.
+- Jack and Jill on Wikipedia.
 https://en.wikipedia.org/wiki/Jack_and_Jill_(nursery_rhyme)
- Language Model on Wikpedia.
+- Language Model on Wikpedia.
 https://en.wikipedia.org/wiki/Language_model
- Keras Embedding Layer API.
+- Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
 
 19.8. Summary
 
 224
 
- Keras Text Processing API.
+- Keras Text Processing API.
 https://keras.io/preprocessing/text/
- Keras Sequence Processing API.
+- Keras Sequence Processing API.
 https://keras.io/preprocessing/sequence/
- Keras Utils API.
+- Keras Utils API.
 https://keras.io/utils/
 
 19.8
@@ -814,11 +814,11 @@ Summary
 
 In this tutorial, you discovered how to develop different word-based language models for a simple
 nursery rhyme. Specifically, you learned:
- The challenge of developing a good framing of a word-based language model for a given
+- The challenge of developing a good framing of a word-based language model for a given
 application.
- How to develop one-word, two-word, and line-based framings for word-based language
+- How to develop one-word, two-word, and line-based framings for word-based language
 models.
- How to generate sequences using a fit language model.
+- How to generate sequences using a fit language model.
 
 19.8.1
 

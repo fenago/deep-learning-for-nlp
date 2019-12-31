@@ -10,9 +10,9 @@ feature extraction (or vectorization). The scikit-learn library offers easy-to-u
 both tokenization and feature extraction of your text data. In this tutorial, you will discover
 exactly how you can prepare your text data for predictive modeling in Python with scikit-learn.
 After completing this tutorial, you will know:
- How to convert text to word count vectors with CountVectorizer.
- How to convert text to word frequency vectors with TfidfVectorizer.
- How to convert text to unique integers with HashingVectorizer.
+- How to convert text to word count vectors with CountVectorizer.
+- How to convert text to word frequency vectors with TfidfVectorizer.
+- How to convert text to unique integers with HashingVectorizer.
 
 Let’s get started.
 
@@ -54,9 +54,9 @@ Word Counts with CountVectorizer
 The CountVectorizer provides a simple way to both tokenize a collection of text documents
 and build a vocabulary of known words, but also to encode new documents using that vocabulary.
 You can use it as follows:
- Create an instance of the CountVectorizer class.
- Call the fit() function in order to learn a vocabulary from one or more documents.
- Call the transform() function on one or more documents as needed to encode each as a
+- Create an instance of the CountVectorizer class.
+- Call the fit() function in order to learn a vocabulary from one or more documents.
+- Call the transform() function on one or more documents as needed to encode each as a
 vector.
 
 An encoded vector is returned with a length of the entire vocabulary and an integer count
@@ -132,8 +132,8 @@ some words like the will appear many times and their large counts will not be ve
 in the encoded vectors. An alternative is to calculate word frequencies, and by far the most
 popular method is called TF-IDF. This is an acronym that stands for Term Frequency - Inverse
 Document Frequency which are the components of the resulting scores assigned to each word.
- Term Frequency: This summarizes how often a given word appears within a document.
- Inverse Document Frequency: This downscales words that appear a lot across documents.
+- Term Frequency: This summarizes how often a given word appears within a document.
+- Inverse Document Frequency: This downscales words that appear a lot across documents.
 
 Without going into the math, TF-IDF are word frequency scores that try to highlight
 words that are more interesting, e.g. frequent in a document but not across documents.
@@ -257,11 +257,11 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Natural Language Processing
 
- Bag-of-words model on Wikipedia.
+- Bag-of-words model on Wikipedia.
 https://en.wikipedia.org/wiki/Bag-of-words_model
- Tokenization on Wikipedia.
+- Tokenization on Wikipedia.
 https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization
- TF-IDF on Wikipedia.
+- TF-IDF on Wikipedia.
 https://en.wikipedia.org/wiki/Tf%E2%80%93idf
 
 6.6. Summary
@@ -272,12 +272,12 @@ https://en.wikipedia.org/wiki/Tf%E2%80%93idf
 
 sciki-learn
 
- Section 4.2. Feature extraction, scikit-learn User Guide.
+- Section 4.2. Feature extraction, scikit-learn User Guide.
 http://scikit-learn.org/stable/modules/feature_extraction.html
- sckit-learn Feature Extraction API.
+- sckit-learn Feature Extraction API.
 http://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_
 extraction
- Working With Text Data, scikit-learn Tutorial.
+- Working With Text Data, scikit-learn Tutorial.
 http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.
 html
 
@@ -285,16 +285,16 @@ html
 
 Class APIs
 
- CountVectorizer scikit-learn API.
+- CountVectorizer scikit-learn API.
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.
 text.CountVectorizer.html
- TfidfVectorizer scikit-learn API.
+- TfidfVectorizer scikit-learn API.
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.
 text.TfidfVectorizer.html
- TfidfTransformer scikit-learn API.
+- TfidfTransformer scikit-learn API.
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.
 text.TfidfTransformer.html
- HashingVectorizer scikit-learn API.
+- HashingVectorizer scikit-learn API.
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.
 text.HashingVectorizer.html
 
@@ -304,9 +304,9 @@ Summary
 
 In this tutorial, you discovered how to prepare text documents for machine learning with
 scikit-learn for bag-of-words models. Specifically, you learned:
- How to convert text to word count vectors with CountVectorizer.
- How to convert text to word frequency vectors with TfidfVectorizer.
- How to convert text to unique integers with HashingVectorizer.
+- How to convert text to word count vectors with CountVectorizer.
+- How to convert text to word frequency vectors with TfidfVectorizer.
+- How to convert text to unique integers with HashingVectorizer.
 
 We have only scratched the surface in these examples and I want to highlight that there are
 many configuration details for these classes to influence the tokenizing of documents that are

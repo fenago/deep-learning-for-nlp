@@ -11,10 +11,10 @@ models using deep learning and freely available datasets of photos and their des
 tutorial, you will discover how to prepare photos and textual descriptions ready for developing
 a deep learning automatic photo caption generation model. After completing this tutorial, you
 will know:
- About the Flickr8K dataset comprised of more than 8,000 photos and up to 5 captions for
+- About the Flickr8K dataset comprised of more than 8,000 photos and up to 5 captions for
 each photo.
- How to generally load and prepare photo and text data for modeling with deep learning.
- How to specifically encode data for two different types of deep learning models in Keras.
+- How to generally load and prepare photo and text data for modeling with deep learning.
+- How to specifically encode data for two different types of deep learning models in Keras.
 
 Let’s get started.
 
@@ -58,18 +58,18 @@ The dataset is available for free. You must complete a request form and the link
 dataset will be emailed to you. I would love to link to them for you, but the email address
 expressly requests: Please do not redistribute the dataset. You can use the link below to request
 the dataset:
- Dataset Request Form.
+- Dataset Request Form.
 https://illinois.edu/fb/sec/1713398
 
 Within a short time, you will receive an email that contains links to two files:
- Flickr8k Dataset.zip (1 Gigabyte) An archive of all photographs.
- Flickr8k text.zip (2.2 Megabytes) An archive of all text descriptions for photographs.
+- Flickr8k Dataset.zip (1 Gigabyte) An archive of all photographs.
+- Flickr8k text.zip (2.2 Megabytes) An archive of all text descriptions for photographs.
 
 Download the datasets and unzip them into your current working directory. You will have
 two directories:
- Flicker8k Dataset: Contains more than 8000 photographs in JPEG format (yes the
+- Flicker8k Dataset: Contains more than 8000 photographs in JPEG format (yes the
 directory name spells it ‘Flicker’ not ‘Flickr’).
- Flickr8k text: Contains a number of files containing different sources of descriptions for
+- Flickr8k text: Contains a number of files containing different sources of descriptions for
 the photographs.
 
 Next, let’s look at how to load the images.
@@ -402,9 +402,9 @@ The descriptions are tokenized; this means that each token is comprised of words
 white space. It also means that punctuation are separated as their own tokens, such as periods
 (‘.’) and apostrophes for word plurals (’s). It is a good idea to clean up the description text
 before using it in a model. Some ideas of data cleaning we can form include:
- Normalizing the case of all tokens to lowercase.
- Remove all punctuation from tokens.
- Removing all tokens that contain one or fewer characters (after punctuation is removed),
+- Normalizing the case of all tokens to lowercase.
+- Remove all punctuation from tokens.
+- Removing all tokens that contain one or fewer characters (after punctuation is removed),
 e.g. ‘a’ and hanging ‘s’ characters.
 
 We can implement these simple cleaning operations in a function that cleans each description
@@ -1162,30 +1162,30 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Flickr8K Dataset
 
- Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
+- Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
 http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.
 html
- Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics,
+- Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics,
 013.
 https://www.jair.org/media/3994/live-3994-7274-jair.pdf
- Dataset Request Form.
+- Dataset Request Form.
 https://illinois.edu/fb/sec/1713398
- Old Flicrk8K Homepage.
+- Old Flicrk8K Homepage.
 http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html
 
 25.10.2
 
 API
 
- Python Generators.
+- Python Generators.
 https://wiki.python.org/moin/Generators
- Keras Model API.
+- Keras Model API.
 https://keras.io/models/model/
- Keras pad sequences() API.
+- Keras pad sequences() API.
 https://keras.io/preprocessing/sequence/#pad_sequences
- Keras Tokenizer API.
+- Keras Tokenizer API.
 https://keras.io/preprocessing/text/#tokenizer
- Keras VGG16 API.
+- Keras VGG16 API.
 https://keras.io/applications/#vgg16
 
 25.11
@@ -1194,10 +1194,10 @@ Summary
 
 In this tutorial, you discovered how to prepare photos and textual descriptions ready for
 developing an automatic photo caption generation model. Specifically, you learned:
- About the Flickr8K dataset comprised of more than 8,000 photos and up to 5 captions for
+- About the Flickr8K dataset comprised of more than 8,000 photos and up to 5 captions for
 each photo.
- How to generally load and prepare photo and text data for modeling with deep learning.
- How to specifically encode data for two different types of deep learning models in Keras.
+- How to generally load and prepare photo and text data for modeling with deep learning.
+- How to specifically encode data for two different types of deep learning models in Keras.
 
 25.11.1
 

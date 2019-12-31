@@ -9,9 +9,9 @@ This comes at the cost of requiring larger models that are slower to train. Neve
 field of neural language models, character-based models offer a lot of promise for a general,
 flexible and powerful approach to language modeling. In this tutorial, you will discover how to
 develop a character-based neural language model. After completing this tutorial, you will know:
- How to prepare text for character-based language modeling.
- How to develop a character-based language model using LSTMs.
- How to use a trained character-based language model to generate text.
+- How to prepare text for character-based language modeling.
+- How to develop a character-based language model using LSTMs.
+- How to use a trained character-based language model to generate text.
 
 Let’s get started.
 
@@ -699,11 +699,11 @@ We can also see that the model still generated something for the new text, but i
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- Sing a Song of Sixpence on Wikipedia.
+- Sing a Song of Sixpence on Wikipedia.
 https://en.wikipedia.org/wiki/Sing_a_Song_of_Sixpence
- Keras Utils API.
+- Keras Utils API.
 https://keras.io/utils/
- Keras Sequence Processing API.
+- Keras Sequence Processing API.
 https://keras.io/preprocessing/sequence/
 
 18.7
@@ -712,9 +712,9 @@ Summary
 
 In this tutorial, you discovered how to develop a character-based neural language model.
 Specifically, you learned:
- How to prepare text for character-based language modeling.
- How to develop a character-based language model using LSTMs.
- How to use a trained character-based language model to generate text.
+- How to prepare text for character-based language modeling.
+- How to develop a character-based language model using LSTMs.
+- How to use a trained character-based language model to generate text.
 
 18.7.1
 

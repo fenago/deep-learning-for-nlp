@@ -8,9 +8,9 @@ are working with. You need help as to where to begin and what order to work thro
 from raw data to data ready for modeling. In this tutorial, you will discover how to prepare
 movie review text data for sentiment analysis, step-by-step. After completing this tutorial, you
 will know:
- How to load text data and clean it to remove punctuation and other non-words.
- How to develop a vocabulary, tailor it, and save it to file.
- How to prepare movie reviews using cleaning and a pre-defined vocabulary and save them
+- How to load text data and clean it to remove punctuation and other non-words.
+- How to develop a vocabulary, tailor it, and save it to file.
+- How to prepare movie reviews using cleaning and a pre-defined vocabulary and save them
 to new files ready for modeling.
 
 Let’s get started.
@@ -49,10 +49,10 @@ this corpus as the polarity dataset.
 — A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based on
 Minimum Cuts, 2004.
 The data has been cleaned up somewhat, for example:
- The dataset is comprised of only English reviews.
- All text has been converted to lowercase.
- There is white space around punctuation like periods, commas, and brackets.
- Text has been split into one sentence per line.
+- The dataset is comprised of only English reviews.
+- All text has been converted to lowercase.
+- There is white space around punctuation like periods, commas, and brackets.
+- Text has been split into one sentence per line.
 
 The data has been used for a few related natural language processing tasks. For classification,
 the performance of classical models (such as Support Vector Machines) on the data is in the
@@ -64,7 +64,7 @@ statistically significant improvement (from 82.8% to 86.4%)
 — A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based on
 Minimum Cuts, 2004.
 You can download the dataset from here:
- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
+- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
@@ -237,22 +237,22 @@ Running the example gives a nice long list of raw tokens from the document.
 
 Listing 9.7: Example output of spitting a review by white space.
 Just looking at the raw tokens can give us a lot of ideas of things to try, such as:
- Remove punctuation from words (e.g. ‘what’s’).
- Removing tokens that are just punctuation (e.g. ‘-’).
- Removing tokens that contain numbers (e.g. ‘10/10’).
- Remove tokens that have one character (e.g. ‘a’).
- Remove tokens that don’t have much meaning (e.g. ‘and’).
+- Remove punctuation from words (e.g. ‘what’s’).
+- Removing tokens that are just punctuation (e.g. ‘-’).
+- Removing tokens that contain numbers (e.g. ‘10/10’).
+- Remove tokens that have one character (e.g. ‘a’).
+- Remove tokens that don’t have much meaning (e.g. ‘and’).
 
 9.4. Clean Text Data
 
 74
 
 Some ideas:
- We can filter out punctuation from tokens using regular expressions.
- We can remove tokens that are just punctuation or contain numbers by using an isalpha()
+- We can filter out punctuation from tokens using regular expressions.
+- We can remove tokens that are just punctuation or contain numbers by using an isalpha()
 check on each token.
- We can remove English stop words using the list loaded using NLTK.
- We can filter out short tokens by checking their length.
+- We can remove English stop words using the list loaded using NLTK.
+- We can filter out short tokens by checking their length.
 
 Below is an updated version of cleaning this review.
 from nltk.corpus import stopwords
@@ -782,15 +782,15 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Dataset
 
- Movie Review Data.
+- Movie Review Data.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/
- A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based
+- A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based
 on Minimum Cuts, 2004.
 http://xxx.lanl.gov/abs/cs/0409058
- Movie Review Polarity Dataset.
+- Movie Review Polarity Dataset.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
- Dataset Readme v2.0 and v1.1.
+- Dataset Readme v2.0 and v1.1.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/poldata.README.2.0.
 txt
 http://www.cs.cornell.edu/people/pabo/movie-review-data/README.1.1
@@ -803,13 +803,13 @@ http://www.cs.cornell.edu/people/pabo/movie-review-data/README.1.1
 
 APIs
 
- nltk.tokenize package API.
+- nltk.tokenize package API.
 http://www.nltk.org/api/nltk.tokenize.html
- Chapter 2, Accessing Text Corpora and Lexical Resources.
+- Chapter 2, Accessing Text Corpora and Lexical Resources.
 http://www.nltk.org/book/ch02.html
- os API Miscellaneous operating system interfaces.
+- os API Miscellaneous operating system interfaces.
 https://docs.python.org/3/library/os.html
- collections API - Container datatypes.
+- collections API - Container datatypes.
 https://docs.python.org/3/library/collections.html
 
 9.8
@@ -818,9 +818,9 @@ Summary
 
 In this tutorial, you discovered how to prepare movie review text data for sentiment analysis,
 step-by-step. Specifically, you learned:
- How to load text data and clean it to remove punctuation and other non-words.
- How to develop a vocabulary, tailor it, and save it to file.
- How to prepare movie reviews using cleaning and a predefined vocabulary and save them
+- How to load text data and clean it to remove punctuation and other non-words.
+- How to develop a vocabulary, tailor it, and save it to file.
+- How to prepare movie reviews using cleaning and a predefined vocabulary and save them
 to new files ready for modeling.
 
 9.8.1

@@ -6,10 +6,10 @@ you must follow a strict model life-cycle. In this chapter you will discover the
 life-cycle for creating, training and evaluating deep learning neural networks in Keras and how
 to make predictions with a trained model. You will also discover how to use the functional API
 that provides more flexibility when designing models. After reading this chapter you will know:
- How to define, compile, fit and evaluate a deep learning neural network in Keras.
- How to select standard defaults for regression and classification predictive modeling
+- How to define, compile, fit and evaluate a deep learning neural network in Keras.
+- How to select standard defaults for regression and classification predictive modeling
 problems.
- How to use the functional API to develop standard Multilayer Perceptron, convolutional
+- How to use the functional API to develop standard Multilayer Perceptron, convolutional
 and recurrent neural networks.
 
 Let’s get started.
@@ -86,11 +86,11 @@ The choice of activation function is most important for the output layer as it w
 format that predictions will take. For example, below are some common predictive modeling
 problem types and the structure and standard activation function that you can use in the output
 layer:
- Regression: Linear activation function, or linear, and the number of neurons matching
+- Regression: Linear activation function, or linear, and the number of neurons matching
 the number of outputs.
- Binary Classification (2 class): Logistic activation function, or sigmoid, and one
+- Binary Classification (2 class): Logistic activation function, or sigmoid, and one
 neuron the output layer.
- Multiclass Classification (>2 class): Softmax activation function, or softmax, and
+- Multiclass Classification (>2 class): Softmax activation function, or softmax, and
 one output neuron per class value, assuming a one hot encoded output pattern.
 
 4.1.2
@@ -125,20 +125,20 @@ Listing 4.6: Example of defining the optimization algorithm separately.
 The type of predictive modeling problem imposes constraints on the type of loss function
 that can be used. For example, below are some standard loss functions for different predictive
 model types:
- Regression: Mean Squared Error or mean squared error.
- Binary Classification (2 class): Logarithmic Loss, also called cross entropy or
+- Regression: Mean Squared Error or mean squared error.
+- Binary Classification (2 class): Logarithmic Loss, also called cross entropy or
 binary crossentropy.
- Multiclass Classification (>2 class): Multiclass Logarithmic Loss or
+- Multiclass Classification (>2 class): Multiclass Logarithmic Loss or
 categorical crossentropy.
 
 The most common optimization algorithm is stochastic gradient descent, but Keras also
 supports a suite of other state-of-the-art optimization algorithms that work well with little or
 no configuration. Perhaps the most commonly used optimization algorithms because of their
 generally better performance are:
- Stochastic Gradient Descent, or sgd, that requires the tuning of a learning rate and
+- Stochastic Gradient Descent, or sgd, that requires the tuning of a learning rate and
 momentum.
- Adam, or adam, that requires the tuning of learning rate.
- RMSprop, or rmsprop, that requires the tuning of learning rate.
+- Adam, or adam, that requires the tuning of learning rate.
+- RMSprop, or rmsprop, that requires the tuning of learning rate.
 
 Finally, you can also specify metrics to collect while fitting your model in addition to the
 loss function. Generally, the most useful additional metric to collect is accuracy for classification
@@ -543,22 +543,22 @@ Figure 4.4: Plot of the RNN Model Graph.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- Keras documentation for Sequential Models.
+- Keras documentation for Sequential Models.
 https://keras.io/models/sequential/
 
 4.5. Summary
 
 33
 
- Keras documentation for Functional Models.
+- Keras documentation for Functional Models.
 https://keras.io/models/model/
- Getting started with the Keras Sequential model.
+- Getting started with the Keras Sequential model.
 https://keras.io/models/model/
- Getting started with the Keras functional API.
+- Getting started with the Keras functional API.
 https://keras.io/models/model/
- Keras documentation for optimization algorithms.
+- Keras documentation for optimization algorithms.
 https://keras.io/optimizers/
- Keras documentation for loss functions.
+- Keras documentation for loss functions.
 https://keras.io/losses/
 
 4.5
@@ -568,10 +568,10 @@ Summary
 In this tutorial, you discovered the step-by-step life-cycle for creating, training and evaluating
 deep learning neural networks in Keras and how to use the functional API that provides more
 flexibility when deigning models. Specifically, you learned:
- How to define, compile, fit and evaluate a deep learning neural network in Keras.
- How to select standard defaults for regression and classification predictive modeling
+- How to define, compile, fit and evaluate a deep learning neural network in Keras.
+- How to select standard defaults for regression and classification predictive modeling
 problems.
- How to use the functional API to develop standard Multilayer Perceptron, convolutional
+- How to use the functional API to develop standard Multilayer Perceptron, convolutional
 and recurrent neural networks.
 
 4.5.1

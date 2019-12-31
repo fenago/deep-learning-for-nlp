@@ -7,9 +7,9 @@ by neural network models on natural language processing problems like machine tr
 In this tutorial, you will discover how to train and load word embedding models for natural
 language processing applications in Python using Gensim. After completing this tutorial, you
 will know:
- How to train your own Word2Vec word embedding model on text data.
- How to visualize a trained word embedding model using Principal Component Analysis.
- How to load pre-trained Word2Vec and GloVe word embedding models from Google and
+- How to train your own Word2Vec word embedding model on text data.
+- How to visualize a trained word embedding model using Principal Component Analysis.
+- How to load pre-trained Word2Vec and GloVe word embedding models from Google and
 Stanford.
 
 Let’s get started.
@@ -102,14 +102,14 @@ perhaps pre-filtered and perhaps converted to a preferred case). The sentences c
 loaded into memory, or an iterator that progressively loads text, required for very large text
 corpora. There are many parameters on this constructor; a few noteworthy arguments you may
 wish to configure are:
- size: (default 100) The number of dimensions of the embedding, e.g. the length of the
+- size: (default 100) The number of dimensions of the embedding, e.g. the length of the
 dense vector to represent each token (word).
- window: (default 5) The maximum distance between a target word and words around the
+- window: (default 5) The maximum distance between a target word and words around the
 target word.
- min count: (default 5) The minimum count of words to consider when training the model;
+- min count: (default 5) The minimum count of words to consider when training the model;
 words with an occurrence less than this count will be ignored.
- workers: (default 3) The number of threads to use while training.
- sg: (default 0 or CBOW) The training algorithm, either CBOW (0) or skip gram (1).
+- workers: (default 3) The number of threads to use while training.
+- sg: (default 0 or CBOW) The training algorithm, either CBOW (0) or skip gram (1).
 
 The defaults are often good enough when just getting started. If you have a lot of cores, as
 most modern computers do, I strongly encourage you to increase workers to match the number
@@ -307,7 +307,7 @@ A pre-trained model is nothing more than a file containing tokens and their asso
 vectors. The pre-trained Google Word2Vec model was trained on Google news data (about 100
 billion words); it contains 3 million words and phrases and was fit using 300-dimensional word
 vectors. It is a 1.53 Gigabyte file. You can download it from here:
- GoogleNews-vectors-negative300.bin.gz.
+- GoogleNews-vectors-negative300.bin.gz.
 https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
 
 Unzipped, the binary file (GoogleNews-vectors-negative300.bin) is 3.4 Gigabytes. The
@@ -387,7 +387,7 @@ with an example. You can download the smallest GloVe pre-trained model from the 
 website. It an 822 Megabyte zip file with 4 different models (50, 100, 200 and 300-dimensional
 vectors) trained on Wikipedia data with 6 billion tokens and a 400,000 word vocabulary. The
 direct download link is here:
- glove.6B.zip.
+- glove.6B.zip.
 http://nlp.stanford.edu/data/glove.6B.zip
 
 Working with the 100-dimensional version of the model, we can convert the file to Word2Vec
@@ -443,28 +443,28 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Word Embeddings
 
- Word Embedding on Wikipedia.
+- Word Embedding on Wikipedia.
 https://en.wikipedia.org/wiki/Word2vec
- Word2Vec on Wikipedia.
+- Word2Vec on Wikipedia.
 https://en.wikipedia.org/wiki/Word2vec
- Google Word2Vec project.
+- Google Word2Vec project.
 https://code.google.com/archive/p/word2vec/
- Stanford GloVe project.
+- Stanford GloVe project.
 https://nlp.stanford.edu/projects/glove/
 
 12.8.2
 
 Gensim
 
- Gensim Python Library.
+- Gensim Python Library.
 https://radimrehurek.com/gensim/index.html
- Gensim Installation Instructions.
+- Gensim Installation Instructions.
 https://radimrehurek.com/gensim/install.html
- models.word2vec Gensim API.
+- models.word2vec Gensim API.
 https://radimrehurek.com/gensim/models/keyedvectors.html
- models.keyedvectors Gensim API.
+- models.keyedvectors Gensim API.
 https://radimrehurek.com/gensim/models/keyedvectors.html
- scripts.glove2word2vec Gensim API.
+- scripts.glove2word2vec Gensim API.
 https://radimrehurek.com/gensim/scripts/glove2word2vec.html
 
 131
@@ -477,11 +477,11 @@ https://radimrehurek.com/gensim/scripts/glove2word2vec.html
 
 Articles
 
- Messing Around With Word2Vec, 2016.
+- Messing Around With Word2Vec, 2016.
 https://quomodocumque.wordpress.com/2016/01/15/messing-around-with-word2vec/
- Vector Space Models for the Digital Humanities, 2015.
+- Vector Space Models for the Digital Humanities, 2015.
 http://bookworm.benschmidt.org/posts/2015-10-25-Word-Embeddings.html
- Gensim Word2Vec Tutorial, 2014.
+- Gensim Word2Vec Tutorial, 2014.
 https://rare-technologies.com/word2vec-tutorial/
 
 12.9
@@ -490,9 +490,9 @@ Summary
 
 In this tutorial, you discovered how to develop and load word embedding layers in Python using
 Gensim. Specifically, you learned:
- How to train your own Word2Vec word embedding model on text data.
- How to visualize a trained word embedding model using Principal Component Analysis.
- How to load pre-trained Word2Vec and GloVe word embedding models from Google and
+- How to train your own Word2Vec word embedding model on text data.
+- How to visualize a trained word embedding model using Principal Component Analysis.
+- How to load pre-trained Word2Vec and GloVe word embedding models from Google and
 Stanford.
 
 12.9.1

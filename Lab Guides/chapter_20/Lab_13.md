@@ -9,10 +9,10 @@ different words with similar meanings have similar representation and because th
 large context of recently observed words when making predictions. In this tutorial, you will
 discover how to develop a statistical language model using deep learning in Python. After
 completing this tutorial, you will know:
- How to prepare text for developing a word-based language model.
- How to design and fit a neural language model with a learned embedding and an LSTM
+- How to prepare text for developing a word-based language model.
+- How to design and fit a neural language model with a learned embedding and an LSTM
 hidden layer.
- How to use the learned language model to generate new text with similar statistical
+- How to use the learned language model to generate new text with similar statistical
 properties as the source text.
 
 Let’s get started.
@@ -42,7 +42,7 @@ dialog (e.g. conversation) on the topic of order and justice within a city state
 available for free in the public domain. It is available on the Project Gutenberg website in a
 number of formats. You can download the ASCII text version of the entire book (or books)
 here (you might need to open the URL twice):
- Download The Republic by Plato.
+- Download The Republic by Plato.
 http://www.gutenberg.org/cache/epub/1497/pg1497.txt
 
 Download the book text and place it in your current working directly with the filename
@@ -96,11 +96,11 @@ You are not far wrong, I said.
 ...
 What do you see that we will need to handle in preparing the data? Here’s what I see from
 a quick look:
- Book/Chapter headings (e.g. BOOK I.).
- Lots of punctuation (e.g. -, ;-, ?-, and more).
- Strange names (e.g. Polemarchus).
- Some long monologues that go on for hundreds of lines.
- Some quoted dialog (e.g. ‘...’).
+- Book/Chapter headings (e.g. BOOK I.).
+- Lots of punctuation (e.g. -, ;-, ?-, and more).
+- Strange names (e.g. Polemarchus).
+- Some long monologues that go on for hundreds of lines.
+- Some quoted dialog (e.g. ‘...’).
 
 These observations, and more, suggest at ways that we may wish to prepare the text data.
 The specific way we prepare the data really depends on how we intend to model it, which in
@@ -176,17 +176,17 @@ We need to transform the raw text into a sequence of tokens or words that we can
 source to train the model. Based on reviewing the raw text (above), below are some specific
 operations we will perform to clean the text. You may want to explore more cleaning operations
 yourself as an extension.
- Replace ‘-’ with a white space so we can split words better.
- Split words based on white space.
- Remove all punctuation from words to reduce the vocabulary size (e.g. ‘What?’ becomes
+- Replace ‘-’ with a white space so we can split words better.
+- Split words based on white space.
+- Remove all punctuation from words to reduce the vocabulary size (e.g. ‘What?’ becomes
 ‘What’).
- Remove all words that are not alphabetic to remove standalone punctuation tokens.
+- Remove all words that are not alphabetic to remove standalone punctuation tokens.
 
 20.3. Data Preparation
 
 229
 
- Normalize all words to lowercase to reduce the vocabulary size.
+- Normalize all words to lowercase to reduce the vocabulary size.
 
 Vocabulary size is a big deal with language modeling. A smaller vocabulary results in a
 smaller model that trains faster. We can implement each of these cleaning operations in this
@@ -391,10 +391,10 @@ Train Language Model
 
 We can now train a statistical language model from the prepared data. The model we will train
 is a neural language model. It has a few unique characteristics:
- It uses a distributed representation for words so that different words with similar meanings
+- It uses a distributed representation for words so that different words with similar meanings
 will have a similar representation.
- It learns the representation at the same time as learning the model.
- It learns to predict the probability for the next word using the context of the last 100
+- It learns the representation at the same time as learning the model.
+- It learns to predict the probability for the next word using the context of the last 100
 words.
 
 Specifically, we will use an Embedding Layer to learn the representation of words, and a
@@ -927,32 +927,32 @@ examples of generated text.
 Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
- Contrived Seed Text. Hand craft or select seed text and evaluate how the seed text
+- Contrived Seed Text. Hand craft or select seed text and evaluate how the seed text
 impacts the generated text, specifically the initial words or sentences generated.
- Simplify Vocabulary. Explore a simpler vocabulary, perhaps with stemmed words or
+- Simplify Vocabulary. Explore a simpler vocabulary, perhaps with stemmed words or
 stop words removed.
- Data Cleaning. Consider using more or less cleaning of the text, perhaps leave in some
+- Data Cleaning. Consider using more or less cleaning of the text, perhaps leave in some
 punctuation or perhaps replacing all fancy names with one or a handful. Evaluate how
 these changes to the size of the vocabulary impact the generated text.
- Tune Model. Tune the model, such as the size of the embedding or number of memory
+- Tune Model. Tune the model, such as the size of the embedding or number of memory
 cells in the hidden layer, to see if you can develop a better model.
- Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
+- Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
 dropout to see if you can develop a better model.
 
 20.7. Further Reading
 
 243
 
- Develop Pre-Trained Embedding. Extend the model to use pre-trained Word2Vec
+- Develop Pre-Trained Embedding. Extend the model to use pre-trained Word2Vec
 vectors to see if it results in a better model.
- Use GloVe Embedding. Use the GloVe word embedding vectors with and without fine
+- Use GloVe Embedding. Use the GloVe word embedding vectors with and without fine
 tuning by the network and evaluate how it impacts training and the generated words.
- Sequence Length. Explore training the model with different length input sequences,
+- Sequence Length. Explore training the model with different length input sequences,
 both shorter and longer, and evaluate how it impacts the quality of the generated text.
- Reduce Scope. Consider training the model on one book (chapter) or a subset of
+- Reduce Scope. Consider training the model on one book (chapter) or a subset of
 the original text and evaluate the impact on training, training speed and the resulting
 generated text.
- Sentence-Wise Model. Split the raw data based on sentences and pad each sentence
+- Sentence-Wise Model. Split the raw data based on sentences and pad each sentence
 to a fixed length (e.g. the longest sentence length).
 
 If you explore any of these extensions, I’d love to know.
@@ -962,13 +962,13 @@ If you explore any of these extensions, I’d love to know.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- Project Gutenberg.
+- Project Gutenberg.
 https://www.gutenberg.org/
- The Republic by Plato on Project Gutenberg.
+- The Republic by Plato on Project Gutenberg.
 https://www.gutenberg.org/ebooks/1497
- Republic (Plato) on Wikipedia.
+- Republic (Plato) on Wikipedia.
 https://en.wikipedia.org/wiki/Republic_(Plato)
- Language model on Wikipedia.
+- Language model on Wikipedia.
 https://en.wikipedia.org/wiki/Language_model
 
 20.8
@@ -977,10 +977,10 @@ Summary
 
 In this tutorial, you discovered how to develop a word-based language model using a word
 embedding and a recurrent neural network. Specifically, you learned:
- How to prepare text for developing a word-based language model.
- How to design and fit a neural language model with a learned embedding and an LSTM
+- How to prepare text for developing a word-based language model.
+- How to design and fit a neural language model with a learned embedding and an LSTM
 hidden layer.
- How to use the learned language model to generate new text with similar statistical
+- How to use the learned language model to generate new text with similar statistical
 properties as the source text.
 
 20.8.1

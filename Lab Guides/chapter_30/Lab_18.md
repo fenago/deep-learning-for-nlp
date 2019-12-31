@@ -7,9 +7,9 @@ developed using highly sophisticated linguistic knowledge. Neural machine transl
 use of deep neural networks for the problem of machine translation. In this tutorial, you will
 discover how to develop a neural machine translation system for translating German phrases to
 English. After completing this tutorial, you will know:
- How to clean and prepare data ready to train a neural machine translation system.
- How to develop an encoder-decoder model for machine translation.
- How to use a trained model for inference on new input phrases and evaluate the model
+- How to clean and prepare data ready to train a neural machine translation system.
+- How to develop an encoder-decoder model for machine translation.
+- How to use a trained model for inference on new input phrases and evaluate the model
 skill.
 
 Let’s get started.
@@ -38,7 +38,7 @@ counterparts and is intended to be used with the Anki flashcard software.
 
 354
 
- Download the English-German pairs dataset.
+- Download the English-German pairs dataset.
 http://www.manythings.org/anki/deu-eng.zip
 
 Download the dataset to your current working directory and decompress it; for example:
@@ -72,11 +72,11 @@ Preparing the Text Data
 The next step is to prepare the text data ready for modeling. Take a look at the raw data and
 note what you see that we might need to handle in a data cleaning operation. For example,
 here are some observations I note from reviewing the raw data:
- There is punctuation.
- The text contains uppercase and lowercase.
- There are special characters in the German.
- There are duplicate phrases in English with different translations in German.
- The file is ordered by sentence length with very long sentences toward the end of the file.
+- There is punctuation.
+- The text contains uppercase and lowercase.
+- There are special characters in the German.
+- There are duplicate phrases in English with different translations in German.
+- The file is ordered by sentence length with very long sentences toward the end of the file.
 
 A good text cleaning procedure may handle some or all of these observations. Data
 preparation is divided into two subsections:
@@ -116,11 +116,11 @@ return pairs
 Listing 30.4: Function to split lines into pairs
 We are now ready to clean each sentence. The specific cleaning operations we will perform
 are as follows:
- Remove all non-printable characters.
- Remove all punctuation characters.
- Normalize all Unicode characters to ASCII (e.g. Latin characters).
- Normalize the case to lowercase.
- Remove any remaining tokens that are not alphabetic.
+- Remove all non-printable characters.
+- Remove all punctuation characters.
+- Normalize all Unicode characters to ASCII (e.g. Latin characters).
+- Normalize the case to lowercase.
+- Remove any remaining tokens that are not alphabetic.
 
 We will perform these operations on each phrase for each pair in the loaded dataset. The
 clean pairs() function below implements these operations.
@@ -916,31 +916,31 @@ Listing 30.29: Sample output translation on the test dataset.
 Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
- Data Cleaning. Different data cleaning operations could be performed on the data, such
+- Data Cleaning. Different data cleaning operations could be performed on the data, such
 as not removing punctuation or normalizing case, or perhaps removing duplicate English
 phrases.
- Vocabulary. The vocabulary could be refined, perhaps removing words used less than 5
+- Vocabulary. The vocabulary could be refined, perhaps removing words used less than 5
 or 10 times in the dataset and replaced with unk.
- More Data. The dataset used to fit the model could be expanded to 50,000, 100,000
+- More Data. The dataset used to fit the model could be expanded to 50,000, 100,000
 phrases, or more.
- Input Order. The order of input phrases could be reversed, which has been reported to
+- Input Order. The order of input phrases could be reversed, which has been reported to
 lift skill, or a Bidirectional input layer could be used.
- Layers. The encoder and/or the decoder models could be expanded with additional layers
+- Layers. The encoder and/or the decoder models could be expanded with additional layers
 and trained for more epochs, providing more representational capacity for the model.
 
 30.7. Further Reading
 
 370
 
- Units. The number of memory units in the encoder and decoder could be increased,
+- Units. The number of memory units in the encoder and decoder could be increased,
 providing more representational capacity for the model.
- Regularization. The model could use regularization, such as weight or activation
+- Regularization. The model could use regularization, such as weight or activation
 regularization, or the use of dropout on the LSTM layers.
- Pre-Trained Word Vectors. Pre-trained word vectors could be used in the model.
- Alternate Measure. Explore alternate performance measures beside BLEU such as
+- Pre-Trained Word Vectors. Pre-trained word vectors could be used in the model.
+- Alternate Measure. Explore alternate performance measures beside BLEU such as
 ROGUE. Compare scores for the same translations to develop an intuition for how the
 measures differ in practice.
- Recursive Model. A recursive formulation of the model could be used where the next
+- Recursive Model. A recursive formulation of the model could be used where the next
 word in the output sequence could be conditional on the input sequence and the output
 sequence generated so far.
 
@@ -956,28 +956,28 @@ This section provides more resources on the topic if you are looking to go deepe
 
 Dataset
 
- Tab-delimited Bilingual Sentence Pairs.
+- Tab-delimited Bilingual Sentence Pairs.
 http://www.manythings.org/anki/
- German - English deu-eng.zip.
+- German - English deu-eng.zip.
 http://www.manythings.org/anki/deu-eng.zip
 
 30.7.2
 
 Neural Machine Translation
 
- Google’s Neural Machine Translation System: Bridging the Gap between Human and
+- Google’s Neural Machine Translation System: Bridging the Gap between Human and
 Machine Translation, 2016.
 https://arxiv.org/abs/1609.08144
- Sequence to Sequence Learning with Neural Networks, 2014.
+- Sequence to Sequence Learning with Neural Networks, 2014.
 https://arxiv.org/abs/1409.3215
- Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine
+- Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine
 Translation, 2014.
 https://arxiv.org/abs/1406.1078
- Neural Machine Translation by Jointly Learning to Align and Translate, 2014.
+- Neural Machine Translation by Jointly Learning to Align and Translate, 2014.
 https://arxiv.org/abs/1409.0473
- On the Properties of Neural Machine Translation: Encoder-Decoder Approaches, 2014.
+- On the Properties of Neural Machine Translation: Encoder-Decoder Approaches, 2014.
 https://arxiv.org/abs/1409.1259
- Massive Exploration of Neural Machine Translation Architectures, 2017.
+- Massive Exploration of Neural Machine Translation Architectures, 2017.
 https://arxiv.org/abs/1703.03906
 
 30.8. Summary
@@ -990,7 +990,7 @@ Summary
 
 In this tutorial, you discovered how to develop a neural machine translation system for translating
 German phrases to English. Specifically, you learned:
- How to clean and prepare data ready to train a neural machine translation system.
- How to develop an encoder-decoder model for machine translation.
- How to use a trained model for inference on new input phrases and evaluate the model
+- How to clean and prepare data ready to train a neural machine translation system.
+- How to develop an encoder-decoder model for machine translation.
+- How to use a trained model for inference on new input phrases and evaluate the model
 skill.

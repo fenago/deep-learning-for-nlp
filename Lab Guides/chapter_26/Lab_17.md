@@ -14,9 +14,9 @@ defined to predict a caption, given a photo, instead of requiring sophisticated 
 or a pipeline of specifically designed models. In this tutorial, you will discover how to develop
 a photo captioning deep learning model from scratch. After completing this tutorial, you will
 know:
- How to prepare photo and text data for training a deep learning model.
- How to design and train a deep learning caption generation model.
- How to evaluate a train caption generation model and use it to caption entirely new
+- How to prepare photo and text data for training a deep learning model.
+- How to design and train a deep learning caption generation model.
+- How to evaluate a train caption generation model and use it to caption entirely new
 photographs.
 
 Let’s get started.
@@ -47,18 +47,18 @@ Chapter 25. The dataset is available for free. You must complete a request form 
 the dataset will be emailed to you. I would love to link to them for you, but the email address
 expressly requests: Please do not redistribute the dataset. You can use the link below to request
 the dataset:
- Dataset Request Form.
+- Dataset Request Form.
 https://illinois.edu/fb/sec/1713398
 
 Within a short time, you will receive an email that contains links to two files:
- Flickr8k Dataset.zip (1 Gigabyte) An archive of all photographs.
- Flickr8k text.zip (2.2 Megabytes) An archive of all text descriptions for photographs.
+- Flickr8k Dataset.zip (1 Gigabyte) An archive of all photographs.
+- Flickr8k text.zip (2.2 Megabytes) An archive of all text descriptions for photographs.
 
 Download the datasets and unzip them into your current working directory. You will have
 two directories:
- Flicker8k Dataset: Contains 8092 photographs in JPEG format (yes the directory name
+- Flicker8k Dataset: Contains 8092 photographs in JPEG format (yes the directory name
 spells it ‘Flicker’ not ‘Flickr’).
- Flickr8k text: Contains a number of files containing different sources of descriptions for
+- Flickr8k text: Contains a number of files containing different sources of descriptions for
 the photographs.
 
 The dataset has a pre-defined training dataset (6,000 images), development dataset (1,000
@@ -66,10 +66,10 @@ images), and test dataset (1,000 images). One measure that can be used to evalua
 the model are BLEU scores. For reference, below are some ball-park BLEU scores for skillful
 models when evaluated on the test dataset (taken from the 2017 paper Where to put the Image
 in an Image Caption Generator ):
- BLEU-1: 0.401 to 0.578.
- BLEU-2: 0.176 to 0.390.
- BLEU-3: 0.099 to 0.260.
- BLEU-4: 0.059 to 0.170.
+- BLEU-1: 0.401 to 0.578.
+- BLEU-2: 0.176 to 0.390.
+- BLEU-3: 0.099 to 0.260.
+- BLEU-4: 0.059 to 0.170.
 
 We describe the BLEU metric more later when we work on evaluating our model. Next, let’s
 look at how to load the images.
@@ -269,10 +269,10 @@ Listing 26.4: Example of splitting descriptions from photo identifiers
 Next, we need to clean the description text. The descriptions are already tokenized and easy
 to work with. We will clean the text in the following ways in order to reduce the size of the
 vocabulary of words we will need to work with:
- Convert all words to lowercase.
- Remove all punctuation.
- Remove all words that are one character or less in length (e.g. ‘a’).
- Remove all words with numbers in them.
+- Convert all words to lowercase.
+- Remove all punctuation.
+- Remove all words that are one character or less in length (e.g. ‘a’).
+- Remove all words with numbers in them.
 
 Below defines the clean descriptions() function that, given the dictionary of image
 identifiers to descriptions, steps through each description and cleans the text.
@@ -752,17 +752,17 @@ Defining the Model
 We will define a deep learning based on the merge-model described by Marc Tanti, et al. in
 their 2017 papers. Note, the merge model for image captioning was introduced in Chapter 22.
 We will describe the model in three parts:
- Photo Feature Extractor. This is a 16-layer VGG model pre-trained on the ImageNet
+- Photo Feature Extractor. This is a 16-layer VGG model pre-trained on the ImageNet
 dataset. We have pre-processed the photos with the VGG model (without the output
 layer) and will use the extracted features predicted by this model as input.
- Sequence Processor. This is a word embedding layer for handling the text input,
+- Sequence Processor. This is a word embedding layer for handling the text input,
 followed by a Long Short-Term Memory (LSTM) recurrent neural network layer.
 
 26.5. Develop Deep Learning Model
 
 312
 
- Decoder (for lack of a better name). Both the feature extractor and sequence processor
+- Decoder (for lack of a better name). Both the feature extractor and sequence processor
 output a fixed-length vector. These are merged together and processed by a Dense layer
 to make a final prediction.
 
@@ -1647,33 +1647,33 @@ running the example a few times.
 Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
- Alternate Pre-Trained Image Models. A small 16-layer VGG model was used for
+- Alternate Pre-Trained Image Models. A small 16-layer VGG model was used for
 feature extraction. Consider exploring larger models that offer better performance on the
 ImageNet dataset, such as Inception.
- Smaller Vocabulary. A larger vocabulary of nearly eight thousand words was used in
+- Smaller Vocabulary. A larger vocabulary of nearly eight thousand words was used in
 the development of the model. Many of the words supported may be misspellings or only
 used once in the entire dataset. Refine the vocabulary and reduce the size, perhaps by
 half.
- Pre-trained Word Vectors. The model learned the word vectors as part of fitting the
+- Pre-trained Word Vectors. The model learned the word vectors as part of fitting the
 model. Better performance may be achieved by using word vectors either pre-trained on
 the training dataset or trained on a much larger corpus of text, such as news articles or
 Wikipedia.
- Train Word2Vec Vectors. Pre-train word vectors using Word2Vec on the description
+- Train Word2Vec Vectors. Pre-train word vectors using Word2Vec on the description
 data and explore models that allow and don’t allow fine tuning of the vectors during
 training, then compare skill.
- Tune Model. The configuration of the model was not tuned on the problem. Explore
+- Tune Model. The configuration of the model was not tuned on the problem. Explore
 alternate configurations and see if you can achieve better performance.
- Inject Architecture. Explore the inject architecture for caption generation and compare
+- Inject Architecture. Explore the inject architecture for caption generation and compare
 performance to the merge architecture used in this tutorial.
- Alternate Framings. Explore alternate framings of the problems such as generating the
+- Alternate Framings. Explore alternate framings of the problems such as generating the
 entire sequence from the photo alone.
- Pre-Train Language Model. Pre-train a language model for generating description
+- Pre-Train Language Model. Pre-train a language model for generating description
 text, then use it in the caption generation model and evaluate the impact on model
 training time and skill.
- Truncate Descriptions. Only train the model on description at or below a specific
+- Truncate Descriptions. Only train the model on description at or below a specific
 number of words and explore truncating long descriptions to a preferred length. Evaluate
 the impact on training time and model skill.
- Alternate Measure. Explore alternate performance measures beside BLEU such as
+- Alternate Measure. Explore alternate performance measures beside BLEU such as
 ROGUE. Compare scores for the same descriptions to develop an intuition for how the
 measures differ in practice.
 
@@ -1693,16 +1693,16 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Caption Generation Papers
 
- Show and Tell: A Neural Image Caption Generator, 2015.
+- Show and Tell: A Neural Image Caption Generator, 2015.
 https://arxiv.org/abs/1411.4555
- Show, Attend and Tell: Neural Image Caption Generation with Visual Attention, 2015.
+- Show, Attend and Tell: Neural Image Caption Generation with Visual Attention, 2015.
 https://arxiv.org/abs/1502.03044
- Where to put the Image in an Image Caption Generator, 2017.
+- Where to put the Image in an Image Caption Generator, 2017.
 https://arxiv.org/abs/1703.09137
- What is the Role of Recurrent Neural Networks (RNNs) in an Image Caption Generator?,
+- What is the Role of Recurrent Neural Networks (RNNs) in an Image Caption Generator?,
 2017.
 https://arxiv.org/abs/1708.02043
- Automatic Description Generation from Images: A Survey of Models, Datasets, and
+- Automatic Description Generation from Images: A Survey of Models, Datasets, and
 Evaluation Measures, 2016.
 https://arxiv.org/abs/1601.03896
 
@@ -1710,37 +1710,37 @@ https://arxiv.org/abs/1601.03896
 
 Flickr8K Dataset
 
- Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
+- Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
 http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.
 html
- Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics,
+- Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics,
 2013.
 https://www.jair.org/media/3994/live-3994-7274-jair.pdf
- Dataset Request Form.
+- Dataset Request Form.
 https://illinois.edu/fb/sec/1713398
- Old Flicrk8K Homepage.
+- Old Flicrk8K Homepage.
 http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html
 
 26.9.3
 
 API
 
- Keras Model API.
+- Keras Model API.
 https://keras.io/models/model/
- Keras pad sequences() API.
+- Keras pad sequences() API.
 https://keras.io/preprocessing/sequence/#pad_sequences
- Keras Tokenizer API.
+- Keras Tokenizer API.
 https://keras.io/preprocessing/text/#tokenizer
- Keras VGG16 API.
+- Keras VGG16 API.
 https://keras.io/applications/#vgg16
 
 26.10. Summary
 
 330
 
- Gensim Word2Vec API.
+- Gensim Word2Vec API.
 https://radimrehurek.com/gensim/models/word2vec.html
- nltk.translate package API Documentation.
+- nltk.translate package API Documentation.
 http://www.nltk.org/api/nltk.translate.html
 
 26.10
@@ -1749,9 +1749,9 @@ Summary
 
 In this tutorial, you discovered how to develop a photo captioning deep learning model from
 scratch. Specifically, you learned:
- How to prepare photo and text data ready for training a deep learning model.
- How to design and train a deep learning caption generation model.
- How to evaluate a train caption generation model and use it to caption entirely new
+- How to prepare photo and text data ready for training a deep learning model.
+- How to design and train a deep learning caption generation model.
+- How to evaluate a train caption generation model and use it to caption entirely new
 photographs.
 
 26.10.1

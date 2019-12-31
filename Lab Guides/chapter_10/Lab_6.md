@@ -10,9 +10,9 @@ sentiment analysis models is to use a bag-of-words model that transforms documen
 where each word in the document is assigned a score. In this tutorial, you will discover how you
 can develop a deep learning predictive model using the bag-of-words representation for movie
 review sentiment classification. After completing this tutorial, you will know:
- How to prepare the review text data for modeling with a restricted vocabulary.
- How to use the bag-of-words model to prepare train and test data.
- How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
+- How to prepare the review text data for modeling with a restricted vocabulary.
+- How to use the bag-of-words model to prepare train and test data.
+- How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
 on new review text data.
 
 Let’s get started.
@@ -40,7 +40,7 @@ Movie Review Dataset
 
 In this tutorial, we will use the Movie Review Dataset. This dataset designed for sentiment
 analysis was described previously in Chapter 9. You can download the dataset from here:
- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
+- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
@@ -82,16 +82,16 @@ Loading and Cleaning Reviews
 
 The text data is already pretty clean, so not much preparation is required. Without getting too
 much into the details, we will prepare the data using the following method:
- Split tokens on white space.
+- Split tokens on white space.
 
 10.3. Data Preparation
 
 87
 
- Remove all punctuation from words.
- Remove all words that are not purely comprised of alphabetical characters.
- Remove all words that are known stop words.
- Remove all words that have a length ≤ 1 character.
+- Remove all punctuation from words.
+- Remove all words that are not purely comprised of alphabetical characters.
+- Remove all words that are known stop words.
+- Remove all words that have a length ≤ 1 character.
 
 We can put all of these steps into a function called clean doc() that takes as an argument
 the raw text loaded from a file and returns a list of cleaned tokens. We can also define a function
@@ -988,11 +988,11 @@ Comparing Word Scoring Methods
 
 The texts to matrix() function for the Tokenizer in the Keras API provides 4 different
 methods for scoring words; they are:
- binary Where words are marked as present (1) or absent (0).
- count Where the occurrence count for each word is marked as an integer.
- tfidf Where each word is scored based on their frequency, where words that are common
+- binary Where words are marked as present (1) or absent (0).
+- count Where the occurrence count for each word is marked as an integer.
+- tfidf Where each word is scored based on their frequency, where words that are common
 across all documents are penalized.
- freq Where words are scored based on their frequency of occurrence within the document.
+- freq Where words are scored based on their frequency of occurrence within the document.
 
 We can evaluate the skill of the model developed in the previous section fit using each of the
 4 supported word scoring modes. This first involves the development of a function to create an
@@ -1434,26 +1434,26 @@ and save the model and tokenizer to file so that they can be loaded and used in 
 Extensions
 
 This section lists some extensions if you are looking to get more out of this tutorial.
- Manage Vocabulary. Explore using a larger or smaller vocabulary. Perhaps you can
+- Manage Vocabulary. Explore using a larger or smaller vocabulary. Perhaps you can
 get better performance with a smaller set of words.
- Tune the Network Topology. Explore alternate network topologies such as deeper or
+- Tune the Network Topology. Explore alternate network topologies such as deeper or
 wider networks. Perhaps you can get better performance with a more suited network.
- Use Regularization. Explore the use of regularization techniques, such as dropout.
+- Use Regularization. Explore the use of regularization techniques, such as dropout.
 Perhaps you can delay the convergence of the model and achieve better test set performance.
- More Data Cleaning. Explore more or less cleaning of the review text and see how it
+- More Data Cleaning. Explore more or less cleaning of the review text and see how it
 impacts the model skill.
- Training Diagnostics. Use the test dataset as a validation dataset during training and
+- Training Diagnostics. Use the test dataset as a validation dataset during training and
 create plots of train and test loss. Use these diagnostics to tune the batch size and number
 of training epochs.
- Trigger Words. Explore whether there are specific words in reviews that are highly
+- Trigger Words. Explore whether there are specific words in reviews that are highly
 predictive of the sentiment.
- Use Bigrams. Prepare the model to score bigrams of words and evaluate the performance
+- Use Bigrams. Prepare the model to score bigrams of words and evaluate the performance
 under different scoring schemes.
- Truncated Reviews. Explore how using a truncated version of the movie reviews results
+- Truncated Reviews. Explore how using a truncated version of the movie reviews results
 impacts model skill, try truncating the start, end and middle of reviews.
- Ensemble Models. Create models with different word scoring schemes and see if using
+- Ensemble Models. Create models with different word scoring schemes and see if using
 ensembles of the models results in improves to model skill.
- Real Reviews. Train a final model on all data and evaluate the model on real movie
+- Real Reviews. Train a final model on all data and evaluate the model on real movie
 reviews taken from the internet.
 
 If you explore any of these extensions, I’d love to know.
@@ -1472,12 +1472,12 @@ This section provides more resources on the topic if you are looking go deeper.
 
 Dataset
 
- Movie Review Data.
+- Movie Review Data.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/
- A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based
+- A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based
 on Minimum Cuts, 2004.
 http://xxx.lanl.gov/abs/cs/0409058
- Movie Review Polarity Dataset.
+- Movie Review Polarity Dataset.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
@@ -1485,15 +1485,15 @@ gz
 
 APIs
 
- nltk.tokenize package API.
+- nltk.tokenize package API.
 http://www.nltk.org/api/nltk.tokenize.html
- Chapter 2, Accessing Text Corpora and Lexical Resources.
+- Chapter 2, Accessing Text Corpora and Lexical Resources.
 http://www.nltk.org/book/ch02.html
- os API Miscellaneous operating system interfaces.
+- os API Miscellaneous operating system interfaces.
 https://docs.python.org/3/library/os.html
- collections API - Container datatypes.
+- collections API - Container datatypes.
 https://docs.python.org/3/library/collections.html
- Tokenizer Keras API.
+- Tokenizer Keras API.
 https://keras.io/preprocessing/text/#tokenizer
 
 10.10
@@ -1502,9 +1502,9 @@ Summary
 
 In this tutorial, you discovered how to develop a bag-of-words model for predicting the sentiment
 of movie reviews. Specifically, you learned:
- How to prepare the review text data for modeling with a restricted vocabulary.
- How to use the bag-of-words model to prepare train and test data.
- How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
+- How to prepare the review text data for modeling with a restricted vocabulary.
+- How to use the bag-of-words model to prepare train and test data.
+- How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
 on new review text data.
 
 10.10.1

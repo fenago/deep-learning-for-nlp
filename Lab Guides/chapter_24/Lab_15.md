@@ -8,10 +8,10 @@ of text to one or more reference translations. Although developed for translatio
 to evaluate text generated for a suite of natural language processing tasks. In this tutorial, you
 will discover the BLEU score for evaluating and scoring candidate text using the NLTK library
 in Python. After completing this tutorial, you will know:
- A gentle introduction to the BLEU score and an intuition for what is being calculated.
- How you can calculate BLEU scores in Python using the NLTK library for sentences and
+- A gentle introduction to the BLEU score and an intuition for what is being calculated.
+- How you can calculate BLEU scores in Python using the NLTK library for sentences and
 documents.
- How you can use a suite of small examples to develop an intuition for how differences
+- How you can use a suite of small examples to develop an intuition for how differences
 between a candidate and reference text impact the final BLEU score.
 
 Let’s get started.
@@ -41,11 +41,11 @@ perfect mismatch results in a score of 0.0. The score was developed for evaluati
 
 made by automatic machine translation systems. It is not perfect, but does offer 5 compelling
 benefits:
- It is quick and inexpensive to calculate.
- It is easy to understand.
- It is language independent.
- It correlates highly with human evaluation.
- It has been widely adopted.
+- It is quick and inexpensive to calculate.
+- It is easy to understand.
+- It is language independent.
+- It correlates highly with human evaluation.
+- It has been widely adopted.
 
 The BLEU score was proposed by Kishore Papineni, et al. in their 2002 paper BLEU: a
 Method for Automatic Evaluation of Machine Translation. The approach works by counting
@@ -88,11 +88,11 @@ and scored 0.2571 against two references.
 — BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
 In addition to translation, we can use the BLEU score for other language generation problems
 with deep learning methods such as:
- Language generation.
- Image caption generation.
- Text summarization.
- Speech recognition.
- And much more.
+- Language generation.
+- Image caption generation.
+- Text summarization.
+- Speech recognition.
+- And much more.
 
 24.3
 
@@ -433,18 +433,18 @@ a spreadsheet.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- BLEU on Wikipedia.
+- BLEU on Wikipedia.
 https://en.wikipedia.org/wiki/BLEU
- BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
+- BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
 http://www.aclweb.org/anthology/P02-1040.pdf
 
 24.7. Summary
 
 275
 
- Source code for nltk.translate.bleu score.
+- Source code for nltk.translate.bleu score.
 http://www.nltk.org/_modules/nltk/translate/bleu_score.html
- nltk.translate package API Documentation.
+- nltk.translate package API Documentation.
 http://www.nltk.org/api/nltk.translate.html
 
 24.7
@@ -454,10 +454,10 @@ Summary
 In this tutorial, you discovered the BLEU score for evaluating and scoring candidate text to
 reference text in machine translation and other language generation tasks. Specifically, you
 learned:
- A gentle introduction to the BLEU score and an intuition for what is being calculated.
- How you can calculate BLEU scores in Python using the NLTK library for sentences and
+- A gentle introduction to the BLEU score and an intuition for what is being calculated.
+- How you can calculate BLEU scores in Python using the NLTK library for sentences and
 documents.
- How to can use a suite of small examples to develop an intuition for how differences
+- How to can use a suite of small examples to develop an intuition for how differences
 between a candidate and reference text impact the final BLEU score.
 
 24.7.1

@@ -8,9 +8,9 @@ case. In fact, there is a whole suite of text preparation methods that you may n
 the choice of methods really depends on your natural language processing task. In this tutorial,
 you will discover how you can clean and prepare your text ready for modeling with machine
 learning. After completing this tutorial, you will know:
- How to get started by developing your own very simple text cleaning tools.
- How to take a step up and use the more sophisticated methods in the NLTK library.
- Considerations when preparing text for natural language processing models.
+- How to get started by developing your own very simple text cleaning tools.
+- How to take a step up and use the more sophisticated methods in the NLTK library.
+- Considerations when preparing text for natural language processing models.
 
 Let’s get started.
 
@@ -40,7 +40,7 @@ Metamorphosis by Franz Kafka. No specific reason, other than it’s short, I lik
 like it too. I expect it’s one of those classics that most students have to read in school. The full
 text for Metamorphosis is available for free from Project Gutenberg. You can download the
 ASCII text version of the text here:
- Metamorphosis by Franz Kafka Plain Text UTF-8 (may need to load the page twice).
+- Metamorphosis by Franz Kafka Plain Text UTF-8 (may need to load the page twice).
 http://www.gutenberg.org/cache/epub/5200/pg5200.txt
 
 Download the file and place it in your current working directory with the file name
@@ -63,28 +63,28 @@ After actually getting a hold of your text data, the first step in cleaning up t
 a strong idea about what you’re trying to achieve, and in that context review your text to see
 what exactly might help. Take a moment to look at the text. What do you notice? Here’s what
 I see:
- It’s plain text so there is no markup to parse (yay!).
- The translation of the original German uses UK English (e.g. travelling).
- The lines are artificially wrapped with new lines at about 70 characters (meh).
- There are no obvious typos or spelling mistakes.
- There’s punctuation like commas, apostrophes, quotes, question marks, and more.
- There’s hyphenated descriptions like armour-like.
- There’s a lot of use of the em dash (-) to continue sentences (maybe replace with commas?).
- There are names (e.g. Mr. Samsa)
+- It’s plain text so there is no markup to parse (yay!).
+- The translation of the original German uses UK English (e.g. travelling).
+- The lines are artificially wrapped with new lines at about 70 characters (meh).
+- There are no obvious typos or spelling mistakes.
+- There’s punctuation like commas, apostrophes, quotes, question marks, and more.
+- There’s hyphenated descriptions like armour-like.
+- There’s a lot of use of the em dash (-) to continue sentences (maybe replace with commas?).
+- There are names (e.g. Mr. Samsa)
 
 5.4. Manual Tokenization
 
 37
 
- There does not appear to be numbers that require handling (e.g. 1999)
- There are section markers (e.g. II and III ).
+- There does not appear to be numbers that require handling (e.g. 1999)
+- There are section markers (e.g. II and III ).
 
 I’m sure there is a lot more going on to the trained eye. We are going to look at general
 text cleaning steps in this tutorial. Nevertheless, consider some possible objectives we may have
 when working with this text document. For example:
- If we were interested in developing a Kafkaesque language model, we may want to keep all
+- If we were interested in developing a Kafkaesque language model, we may want to keep all
 of the case, quotes, and other punctuation in place.
- If we were interested in classifying documents as Kafka and Not Kafka, maybe we would
+- If we were interested in classifying documents as Kafka and Not Kafka, maybe we would
 want to strip case, punctuation, and even trim words back to their stem.
 
 Use your task as the lens by which to choose how to ready your text data.
@@ -484,12 +484,12 @@ Listing 5.24: Example output of printing stop words.
 You can see that they are all lower case and have punctuation removed. You could compare
 your tokens to the stop words and filter them out, but you must ensure that your text is prepared
 the same way. Let’s demonstrate this with a small pipeline of text preparation including:
- Load the raw text.
- Split into tokens.
- Convert to lowercase.
- Remove punctuation from each token.
- Filter out remaining tokens that are not alphabetic.
- Filter out tokens that are stop words.
+- Load the raw text.
+- Split into tokens.
+- Convert to lowercase.
+- Remove punctuation from each token.
+- Filter out remaining tokens that are not alphabetic.
+- Filter out tokens that are stop words.
 import string
 import re
 from nltk.tokenize import word_tokenize
@@ -591,15 +591,15 @@ Additional Text Cleaning Considerations
 We are only getting started. Because the source text for this tutorial was reasonably clean to
 begin with, we skipped many concerns of text cleaning that you may need to deal with in your
 own project. Here is a shortlist of additional considerations when cleaning text:
- Handling large documents and large collections of text documents that do not fit into
+- Handling large documents and large collections of text documents that do not fit into
 memory.
- Extracting text from markup like HTML, PDF, or other structured document formats.
- Transliteration of characters from other languages into English.
- Decoding Unicode characters into a normalized form, such as UTF8.
- Handling of domain specific words, phrases, and acronyms.
- Handling or removing numbers, such as dates and amounts.
- Locating and correcting common typos and misspellings.
- And much more...
+- Extracting text from markup like HTML, PDF, or other structured document formats.
+- Transliteration of characters from other languages into English.
+- Decoding Unicode characters into a normalized form, such as UTF8.
+- Handling of domain specific words, phrases, and acronyms.
+- Handling or removing numbers, such as dates and amounts.
+- Locating and correcting common typos and misspellings.
+- And much more...
 
 The list could go on. Hopefully, you can see that getting truly clean text is impossible, that
 we are really doing the best we can based on the time, resources, and knowledge we have. The
@@ -614,30 +614,30 @@ jump out at you when to take the time to review your data.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- Metamorphosis by Franz Kafka on Project Gutenberg.
+- Metamorphosis by Franz Kafka on Project Gutenberg.
 http://www.gutenberg.org/ebooks/5200
- Installing NLTK.
+- Installing NLTK.
 http://www.nltk.org/install.html
- Installing NLTK Data.
+- Installing NLTK Data.
 http://www.nltk.org/data.html
 
 5.8. Summary
 
 47
 
- Python isalpha() function.
+- Python isalpha() function.
 https://docs.python.org/3/library/stdtypes.html#str.isalpha
- Stop Words on Wikipedia.
+- Stop Words on Wikipedia.
 https://en.wikipedia.org/wiki/Stop_words
- Stemming on Wikipedia.
+- Stemming on Wikipedia.
 https://en.wikipedia.org/wiki/Stemming
- nltk.tokenize package API.
+- nltk.tokenize package API.
 http://www.nltk.org/api/nltk.tokenize.html
- Porter Stemming algorithm.
+- Porter Stemming algorithm.
 https://tartarus.org/martin/PorterStemmer/
- nltk.stem package API.
+- nltk.stem package API.
 http://www.nltk.org/api/nltk.stem.html
- Processing Raw Text, Natural Language Processing with Python.
+- Processing Raw Text, Natural Language Processing with Python.
 http://www.nltk.org/book/ch03.html
 
 5.8
@@ -646,9 +646,9 @@ Summary
 
 In this tutorial, you discovered how to clean text or machine learning in Python.
 Specifically, you learned:
- How to get started by developing your own very simple text cleaning tools.
- How to take a step up and use the more sophisticated methods in the NLTK library.
- Considerations when preparing text for natural language processing models.
+- How to get started by developing your own very simple text cleaning tools.
+- How to take a step up and use the more sophisticated methods in the NLTK library.
+- Considerations when preparing text for natural language processing models.
 
 5.8.1
 

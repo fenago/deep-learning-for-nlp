@@ -10,9 +10,9 @@ model, besides its capability of classifying objects in photographs, is that the
 are freely available and can be loaded and used in your own models and applications. In this
 tutorial, you will discover the VGG convolutional neural network models for image classification.
 After completing this tutorial, you will know:
- About the ImageNet dataset and competition and the VGG winning models.
- How to load the VGG model in Keras and summarize its structure.
- How to use the loaded VGG model to classifying objects in ad hoc photographs.
+- About the ImageNet dataset and competition and the VGG winning models.
+- How to load the VGG model in Keras and summarize its structure.
+- How to use the loaded VGG model to classifying objects in ad hoc photographs.
 
 Let’s get started.
 
@@ -244,16 +244,16 @@ Figure 23.3: Plot of Layers in the VGG Model.
 
 The VGG() class takes a few arguments that may only interest you if you are looking to use
 the model in your own project, e.g. for transfer learning. For example:
- include top (True): Whether or not to include the output layers for the model. You
+- include top (True): Whether or not to include the output layers for the model. You
 don’t need these if you are fitting the model on your own problem.
- weights (‘imagenet’): What weights to load. You can specify None to not load pretrained weights if you are interested in training the model yourself from scratch.
- input tensor (None): A new input layer if you intend to fit the model on new data of a
+- weights (‘imagenet’): What weights to load. You can specify None to not load pretrained weights if you are interested in training the model yourself from scratch.
+- input tensor (None): A new input layer if you intend to fit the model on new data of a
 different size.
- input shape (None): The size of images that the model is expected to take if you change
+- input shape (None): The size of images that the model is expected to take if you change
 the input layer.
- pooling (None): The type of pooling to use when you are training a new set of output
+- pooling (None): The type of pooling to use when you are training a new set of output
 layers.
- classes (1000): The number of classes (e.g. size of output vector) for the model.
+- classes (1000): The number of classes (e.g. size of output vector) for the model.
 
 Next, let’s look at using the loaded VGG model to classify ad hoc photographs.
 
@@ -409,21 +409,21 @@ Listing 23.13: Sample output of making a prediction for the image.
 Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
- ImageNet.
+- ImageNet.
 http://www.image-net.org/
- ImageNet on Wikipedia.
+- ImageNet on Wikipedia.
 https://en.wikipedia.org/wiki/ImageNet
- Very Deep Convolutional Networks for Large-Scale Image Recognition, 2015.
+- Very Deep Convolutional Networks for Large-Scale Image Recognition, 2015.
 https://arxiv.org/abs/1409.1556
- Very Deep Convolutional Networks for Large-Scale Visual Recognition, at Oxford.
+- Very Deep Convolutional Networks for Large-Scale Visual Recognition, at Oxford.
 http://www.robots.ox.ac.uk/~vgg/research/very_deep/
 
- Building powerful image classification models using very little data, 2016.
+- Building powerful image classification models using very little data, 2016.
 https://blog.keras.io/building-powerful-image-classification-models-using-very-litt
 html
- Keras Applications API.
+- Keras Applications API.
 https://keras.io/applications/
- Keras weight files files.
+- Keras weight files files.
 https://github.com/fchollet/deep-learning-models/releases/
 
 23.7
@@ -432,9 +432,9 @@ Summary
 
 In this tutorial, you discovered the VGG convolutional neural network models for image
 classification. Specifically, you learned:
- About the ImageNet dataset and competition and the VGG winning models.
- How to load the VGG model in Keras and summarize its structure.
- How to use the loaded VGG model to classifying objects in ad hoc photographs.
+- About the ImageNet dataset and competition and the VGG winning models.
+- How to load the VGG model in Keras and summarize its structure.
+- How to use the loaded VGG model to classifying objects in ad hoc photographs.
 
 23.7. Summary
 
