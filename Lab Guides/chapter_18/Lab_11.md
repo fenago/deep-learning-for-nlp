@@ -25,20 +25,15 @@ This tutorial is divided into the following parts:
 3. Train Language Model
 4. Generate Text
 
-197
 
-18.2. Sing a Song of Sixpence
-
-18.2
-
-198
-
-Sing a Song of Sixpence
+# Sing a Song of Sixpence
 
 The nursery rhyme Sing a Song of Sixpence is well known in the west. The first verse is common,
 but there is also a 4 verse version that we will use to develop our character-based language
 model. It is short, so fitting the model will be fast, but not so short that we won’t see anything
 interesting. The complete 4 verse version we will use as source text is listed below.
+
+```
 Sing a song of sixpence,
 A pocket full of rye.
 Four and twenty blackbirds,
@@ -61,13 +56,9 @@ And pecked off her nose.
 Copy the text and save it in a new file in your current working directory with the file name
 rhyme.txt.
 
-18.3
-
-Data Preparation
+# Data Preparation
 
 The first step is to prepare the text data. We will start by defining the type of language model.
-
-18.3.1
 
 Language Model Design
 
@@ -93,6 +84,8 @@ Load Text
 
 We must load the text into memory so that we can work with it. Below is a function named
 load doc() that will load a text file given a filename and return the loaded text.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -107,6 +100,8 @@ return text
 
 We can call this function with the filename of the nursery rhyme rhyme.txt to load the text
 into memory. The contents of the file are then printed to screen as a sanity check.
+
+```
 # load text
 raw_text = load_doc('rhyme.txt')
 print(raw_text)
@@ -121,6 +116,8 @@ Clean Text
 Next, we need to clean the loaded text. We will not do much to it on this example. Specifically,
 we will strip all of the new line characters so that we have one long sequence of characters
 separated only by white space.
+
+```
 # clean
 tokens = raw_text.split()
 raw_text = ' '.join(tokens)
@@ -139,17 +136,14 @@ Now that we have a long list of characters, we can create our input-output seque
 train the model. Each input sequence will be 10 characters with one output character, making
 each sequence 11 characters long. We can create the sequences by enumerating the characters
 in the text, starting at the 11th character at index 10.
+
+```
 # organize into sequences of characters
 length = 10
 sequences = list()
 for i in range(length, len(raw_text)):
 # select sequence of tokens
 seq = raw_text[i-length:i+1]
-
-18.3. Data Preparation
-
-200
-
 # store
 sequences.append(seq)
 print('Total Sequences: %d' % len(sequences))
@@ -158,6 +152,8 @@ print('Total Sequences: %d' % len(sequences))
 
 Running this snippet, we can see that we end up with just under 400 sequences of characters
 for training our language model.
+
+```
 Total Sequences: 399
 
 ```
@@ -170,6 +166,8 @@ Save Sequences
 Finally, we can save the prepared data to file so that we can load it later when we develop our
 model. Below is a function save doc() that, given a list of strings and a filename, will save the
 strings to file, one per line.
+
+```
 # save tokens to file, one dialog per line
 def save_doc(lines, filename):
 data = '\n'.join(lines)
@@ -181,6 +179,8 @@ file.close()
 
 We can call this function and save our prepared sequences to the filename char sequences.txt
 in our current working directory.
+
+```
 # save sequences to file
 out_filename = 'char_sequences.txt'
 save_doc(sequences, out_filename)
@@ -193,6 +193,8 @@ save_doc(sequences, out_filename)
 Complete Example
 
 Tying all of this together, the complete code listing is provided below.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -206,11 +208,6 @@ return text
 def save_doc(lines, filename):
 data = '\n'.join(lines)
 file = open(filename, 'w')
-
-18.4. Train Language Model
-
-201
-
 file.write(data)
 file.close()
 # load text
@@ -236,6 +233,8 @@ save_doc(sequences, out_filename)
 
 Run the example to create the char sequences.txt file. Take a look inside you should see
 something like the following:
+
+```
 Sing a song
 ing a song
 ng a song o
@@ -251,8 +250,6 @@ ng of sixpe
 ```
 
 We are now ready to train our character-based neural language model.
-
-18.4
 
 Train Language Model
 
@@ -273,6 +270,8 @@ can use the same load doc() function developed in the previous section. Once loa
 202
 
 the text by new line to give a list of sequences ready to be encoded.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -298,6 +297,8 @@ The sequences of characters must be encoded as integers. This means that each un
 will be assigned a specific integer value and each sequence of characters will be encoded as a
 sequence of integers. We can create the mapping given a sorted set of unique characters in the
 raw input data. The mapping is a dictionary of character values to integer values.
+
+```
 chars = sorted(list(set(raw_text)))
 mapping = dict((c, i) for i, c in enumerate(chars))
 
@@ -305,6 +306,8 @@ mapping = dict((c, i) for i, c in enumerate(chars))
 
 Next, we can process each sequence of characters one at a time and use the dictionary
 mapping to look up the integer value for each character.
+
+```
 sequences = list()
 for line in lines:
 # integer encode line
@@ -316,6 +319,8 @@ sequences.append(encoded_seq)
 
 The result is a list of integer lists. We need to know the size of the vocabulary later. We can
 retrieve this as the size of the dictionary mapping.
+
+```
 # vocabulary size
 vocab_size = len(mapping)
 print('Vocabulary Size: %d' % vocab_size)
@@ -324,22 +329,19 @@ print('Vocabulary Size: %d' % vocab_size)
 
 Running this piece, we can see that there are 38 unique characters in the input sequence
 data.
-Vocabulary Size: 38
 
 ```
+Vocabulary Size: 38
+```
 
-
-18.4. Train Language Model
-
-18.4.3
-
-203
 
 Split Inputs and Output
 
 Now that the sequences have been integer encoded, we can separate the columns into input and
 output sequences of characters. We can do this using a simple array slice.
 sequences = array(sequences)
+
+```
 X, y = sequences[:,:-1], sequences[:,-1]
 
 ```
@@ -351,6 +353,8 @@ network to predict, where a probability distribution over characters can be outp
 and compared to the ideal case of all 0 values with a 1 for the actual next character. We can
 use the to categorical() function in the Keras API to one hot encode the input and output
 sequences.
+
+```
 sequences = [to_categorical(x, num_classes=vocab_size) for x in X]
 X = array(sequences)
 y = to_categorical(y, num_classes=vocab_size)
@@ -371,6 +375,8 @@ model has a single LSTM hidden layer with 75 memory cells, chosen with a little 
 error. The model has a fully connected output layer that outputs one vector with a probability
 distribution across all characters in the vocabulary. A softmax activation function is used on
 the output layer to ensure the output has the properties of a probability distribution.
+
+```
 # define the model
 def define_model(X):
 model = Sequential()
@@ -395,6 +401,8 @@ is used to optimize the model and accuracy is reported at the end of each batch 
 
 model is fit for 100 training epochs, again found with a little trial and error. Running this prints
 a summary of the defined network as a sanity check.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -426,6 +434,8 @@ Save Model
 After the model is fit, we save it to file for later use. The Keras model API provides the save()
 function that we can use to save the model to a single file, including weights and topology
 information.
+
+```
 # save the model to file
 model.save('model.h5')
 
@@ -433,22 +443,20 @@ model.save('model.h5')
 
 We also save the mapping from characters to integers that we will need to encode any input
 when using the model and decode any output from the model.
+
+```
 # save the mapping
 dump(mapping, open('mapping.pkl', 'wb'))
 
 ```
 
 
-18.4. Train Language Model
-
-18.4.6
-
-205
-
 Complete Example
 
 Tying all of this together, the complete code listing for fitting the character-based neural
 language model is listed below.
+
+```
 from
 from
 from
@@ -506,11 +514,6 @@ sequences = array(sequences)
 X, y = sequences[:,:-1], sequences[:,-1]
 sequences = [to_categorical(x, num_classes=vocab_size) for x in X]
 X = array(sequences)
-
-18.5. Generate Text
-
-206
-
 y = to_categorical(y, num_classes=vocab_size)
 # define model
 model = define_model(X)
@@ -525,6 +528,8 @@ dump(mapping, open('mapping.pkl', 'wb'))
 
 Running the example might take one minute. You will see that the model learns the problem
 well, perhaps too well for generating surprising sequences of characters.
+
+```
 ...
 Epoch 96/100
 0s - loss: 0.2193
@@ -561,6 +566,8 @@ Load Model
 
 The first step is to load the model saved to the file model.h5. We can use the load model()
 function from the Keras API.
+
+```
 # load the model
 model = load_model('model.h5')
 
@@ -568,6 +575,8 @@ model = load_model('model.h5')
 
 We also need to load the pickled dictionary for mapping characters to integers from the file
 mapping.pkl. We will use the Pickle API to load the object.
+
+```
 # load the mapping
 mapping = load(open('mapping.pkl', 'rb'))
 
@@ -575,24 +584,22 @@ mapping = load(open('mapping.pkl', 'rb'))
 
 We are now ready to use the loaded model.
 
-18.5. Generate Text
-
-18.5.2
-
-207
-
-Generate Characters
+# Generate Characters
 
 We must provide sequences of 10 characters as input to the model in order to start the generation
 process. We will pick these manually. A given input sequence will need to be prepared in the
 same way as preparing the training data for the model. First, the sequence of characters must
 be integer encoded using the loaded mapping.
+
+```
 # encode the characters as integers
 encoded = [mapping[char] for char in in_text]
 
 ```
 
 Next, the integers need to be one hot encoded using the to categorical() Keras function.
+
+```
 # one hot encode
 encoded = to_categorical(encoded, num_classes=len(mapping))
 
@@ -602,6 +609,8 @@ We can then use the model to predict the next character in the sequence. We use
 predict classes() instead of predict() to directly select the integer for the character with
 the highest probability instead of getting the full probability distribution across the entire set of
 characters.
+
+```
 # predict character
 yhat = model.predict_classes(encoded, verbose=0)
 
@@ -609,6 +618,8 @@ yhat = model.predict_classes(encoded, verbose=0)
 
 We can then decode this integer by looking up the mapping to see the character to which it
 maps.
+
+```
 out_char = ''
 for char, index in mapping.items():
 if index == yhat:
@@ -622,6 +633,8 @@ input sequence is 10 characters by truncating the first character from the input
 We can use the pad sequences() function from the Keras API that can perform this truncation
 operation. Putting all of this together, we can define a new function named generate seq()
 for using the loaded model to generate new sequences of text.
+
+```
 # generate a sequence of characters with a language model
 def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 in_text = seed_text
@@ -633,11 +646,6 @@ encoded = [mapping[char] for char in in_text]
 encoded = pad_sequences([encoded], maxlen=seq_length, truncating='pre')
 # one hot encode
 encoded = to_categorical(encoded, num_classes=len(mapping))
-
-18.5. Generate Text
-
-208
-
 # predict character
 yhat = model.predict_classes(encoded, verbose=0)
 # reverse map integer to character
@@ -659,6 +667,8 @@ Complete Example
 
 Tying all of this together, the complete example for generating text using the fit neural language
 model is listed below.
+
+```
 from
 from
 from
@@ -715,9 +725,12 @@ Running the example generates three sequences of text. The first is a test to se
 model does at starting from the beginning of the rhyme. The second is a test to see how well it
 does at beginning in the middle of a line. The final example is a test to see how well it does
 with a sequence of characters never seen before.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
-Sing a song of sixpence, A poc
+
+
+```Sing a song of sixpence, A poc
 king was in his counting house
 hello worls e pake wofey. The
 
@@ -725,8 +738,6 @@ hello worls e pake wofey. The
 
 We can see that the model did very well with the first two examples, as we would expect.
 We can also see that the model still generated something for the new text, but it is nonsense.
-
-18.6
 
 Further Reading
 
@@ -738,18 +749,10 @@ https://keras.io/utils/
 - Keras Sequence Processing API.
 https://keras.io/preprocessing/sequence/
 
-18.7
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop a character-based neural language model.
 Specifically, you learned:
 - How to prepare text for character-based language modeling.
 - How to develop a character-based language model using LSTMs.
 - How to use a trained character-based language model to generate text.
-
-18.7.1
-
-Next
-
-In the next chapter, you will discover how you can develop a word-based neural language model.

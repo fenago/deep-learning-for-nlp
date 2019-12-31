@@ -626,18 +626,13 @@ print(trainX.shape, testX.shape)
 
 We can load the saved model and evaluate it on both the training and test datasets. The
 complete example is listed below.
-from
-from
-from
-from
-from
 
-pickle import load
-numpy import array
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.models import load_model
-
+```
+from pickle import load
+from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.models import load_model
 # load a clean dataset
 def load_dataset(filename):
 return load(open(filename, 'rb'))
@@ -656,11 +651,6 @@ encoded = tokenizer.texts_to_sequences(lines)
 # pad encoded sequences
 padded = pad_sequences(encoded, maxlen=length, padding='post')
 return padded
-
-16.6. Extensions
-
-186
-
 # load datasets
 trainLines, trainLabels = load_dataset('train.pkl')
 testLines, testLabels = load_dataset('test.pkl')
@@ -693,15 +683,15 @@ achieving 88.5%, which is above the skill of the model reported in the 2014 pape
 a direct apples-to-apples comparison).
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 Train Accuracy: 100.00
 Test Accuracy: 88.50
 
 ```
 
 
-16.6
-
-Extensions
+# Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
 - Different n-grams. Explore the model by changing the kernel size (number of n-grams)
@@ -710,11 +700,6 @@ used by the channels in the model to see how it impacts model skill.
 how it impacts model skill.
 - Shared Embedding. Explore configurations where each channel shares the same word
 embedding and report on the impact on model skill.
-
-16.7. Further Reading
-
-187
-
 - Deeper Network. Convolutional neural networks perform better in computer vision
 when they are deeper. Explore using deeper models here and see how it impacts model
 skill.
@@ -736,9 +721,7 @@ on real ad hoc movie reviews from the internet.
 
 If you explore any of these extensions, I’d love to know.
 
-16.7
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking to go deeper.
 - Convolutional Neural Networks for Sentence Classification, 2014.
@@ -748,28 +731,10 @@ https://github.com/yoonkim/CNN_sentence
 - Keras Functional API.
 https://keras.io/getting-started/functional-api-guide/
 
-16.8
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop a multichannel convolutional neural network for
 sentiment prediction on text movie review data. Specifically, you learned:
 - How to prepare movie review text data for modeling.
 - How to develop a multichannel convolutional neural network for text in Keras.
 - How to evaluate a fit model on unseen movie review data.
-
-16.8. Summary
-
-16.8.1
-
-188
-
-Next
-
-This chapter is the last in the text classification part. In the next part, you will discover how to
-develop neural language models.
-
-Part VII
-Language Modeling
-
-189

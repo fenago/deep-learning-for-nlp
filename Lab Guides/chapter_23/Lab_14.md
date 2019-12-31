@@ -1,7 +1,4 @@
-
-Chapter 23
-How to Load and Use a Pre-Trained
-Object Recognition Model
+# How to Load and Use a Pre-Trained Object Recognition Model
 Convolutional neural networks are now capable of outperforming humans on some computer
 vision tasks, such as classifying images. That is, given a photograph of an object, answer the
 question as to which of 1,000 specific objects the photograph shows. A competition-winning
@@ -28,14 +25,6 @@ This tutorial is divided into the following parts:
 Note, Keras makes use of the Python Imaging Library or PIL library for manipulating
 images. Installation on your system may vary.
 
-256
-
-23.2. ImageNet
-
-23.2
-
-257
-
 ImageNet
 
 ImageNet is a research project to develop a large database of images with annotations, e.g.
@@ -54,12 +43,6 @@ these challenges and results on the tasks have exceeded human performance.
 
 Figure 23.1: Sample of Images from the ImageNet Dataset used in the ILSVRC Challenge.
 Taken From ImageNet Large Scale Visual Recognition Challenge.
-
-23.3. The Oxford VGG Models
-
-23.3
-
-258
 
 The Oxford VGG Models
 
@@ -93,16 +76,13 @@ Load the VGG Model in Keras
 
 The VGG model can be loaded and used in the Keras deep learning library. Keras provides an
 Applications interface for loading and using pre-trained models. Using this interface, you can
-
-23.4. Load the VGG Model in Keras
-
-259
-
 create a VGG model using the pre-trained weights provided by the Oxford group and use it as
 a starting point in your own model, or use it as a model directly for classifying images. In this
 tutorial, we will focus on the use case of classifying new images using the VGG model. Keras
 provides both the 16-layer and 19-layer version via the VGG16 and VGG19 classes. Let’s focus
 on the VGG16 model. The model can be created as follows:
+
+```
 from keras.applications.vgg16 import VGG16
 model = VGG16()
 ```
@@ -115,6 +95,8 @@ The weights are only downloaded once. The next time you run the example, the wei
 loaded locally and the model should be ready to use in seconds. We can use the standard Keras
 tools for inspecting the model structure. For example, you can print a summary of the network
 layers as follows:
+
+```
 from keras.applications.vgg16 import VGG16
 model = VGG16()
 model.summary()
@@ -122,6 +104,8 @@ model.summary()
 
 You can see that the model is huge. You can also see that, by default, the model expects
 images as input with the size 224 x 224 pixels with 3 channels (e.g. color).
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -169,10 +153,6 @@ block4_conv1 (Conv2D)
 (None, 28, 28, 512)
 1180160
 _________________________________________________________________
-
-23.4. Load the VGG Model in Keras
-
-260
 
 block4_conv2 (Conv2D)
 (None, 28, 28, 512)
@@ -223,6 +203,8 @@ _________________________________________________________________
 ```
 
 We can also create a plot of the layers in the VGG model, as follows:
+
+```
 from keras.applications.vgg16 import VGG16
 from keras.utils.vis_utils import plot_model
 model = VGG16()
@@ -235,12 +217,6 @@ Nevertheless, it is provided below.
 23.4. Load the VGG Model in Keras
 
 Figure 23.3: Plot of Layers in the VGG Model.
-
-261
-
-23.5. Develop a Simple Photo Classifier
-
-262
 
 The VGG() class takes a few arguments that may only interest you if you are looking to use
 the model in your own project, e.g. for transfer learning. For example:
@@ -257,15 +233,11 @@ layers.
 
 Next, let’s look at using the loaded VGG model to classify ad hoc photographs.
 
-23.5
-
-Develop a Simple Photo Classifier
+# Develop a Simple Photo Classifier
 
 Let’s develop a simple image classification script.
 
-23.5.1
-
-Get a Sample Image
+### Get a Sample Image
 
 First, we need an image we can classify. You can download a random photograph of a coffee
 mug from Flickr.
@@ -273,28 +245,25 @@ mug from Flickr.
 Figure 23.4: Coffee Mug. Photo by jfanaian, some rights reserved.
 Download the image and save it to your current working directory with the filename mug.jpg.
 
-23.5. Develop a Simple Photo Classifier
 
-23.5.2
-
-263
-
-Load the VGG Model
+### Load the VGG Model
 
 Load the weights for the VGG-16 model, as we did in the previous section.
+
+```
 from keras.applications.vgg16 import VGG16
 # load the model
 model = VGG16()
 ```
 
 
-23.5.3
-
-Load and Prepare Image
+### Load and Prepare Image
 
 Next, we can load the image as pixel data and prepare it to be presented to the network. Keras
 provides some tools to help with this step. First, we can use the load img() function to load
 the image and resize it to the required size of 224 x 224 pixels.
+
+```
 from keras.preprocessing.image import load_img
 # load an image from file
 image = load_img('mug.jpg', target_size=(224, 224))
@@ -302,6 +271,8 @@ image = load_img('mug.jpg', target_size=(224, 224))
 
 Next, we can convert the pixels to a NumPy array so that we can work with it in Keras. We
 can use the img to array() function for this.
+
+```
 from keras.preprocessing.image import img_to_array
 # convert the image pixels to a NumPy array
 image = img_to_array(image)
@@ -320,6 +291,8 @@ The only preprocessing we do is subtracting the mean RGB value, computed on the
 training set, from each pixel.
 — Very Deep Convolutional Networks for Large-Scale Image Recognition, 2014.
 Keras provides a function called preprocess input() to prepare new input for the network.
+
+```
 from keras.applications.vgg16 import preprocess_input
 # prepare the image for the VGG model
 image = preprocess_input(image)
@@ -350,6 +323,8 @@ Interpret Prediction
 Keras provides a function to interpret the probabilities called decode predictions(). It can
 return a list of classes and their probabilities in case you would like to present the top 3 objects
 that may be in the photo. We will just report the first most likely object.
+
+```
 from keras.applications.vgg16 import decode_predictions
 # convert the probabilities to class labels
 label = decode_predictions(yhat)
@@ -366,6 +341,8 @@ And that’s it.
 Complete Example
 
 Tying all of this together, the complete example is listed below:
+
+```
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.applications.vgg16 import preprocess_input
@@ -388,18 +365,16 @@ label = decode_predictions(yhat)
 # retrieve the most likely result, e.g. highest probability
 label = label[0][0]
 # print the classification
-
-23.6. Further Reading
-
-265
-
 print('%s (%.2f%%)' % (label[1], label[2]*100))
 ```
 
 Running the example, we can see that the image is correctly classified as a coffee mug with
 a 75% likelihood.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 coffee_mug (75.27%)
 ```
 
@@ -426,23 +401,10 @@ https://keras.io/applications/
 - Keras weight files files.
 https://github.com/fchollet/deep-learning-models/releases/
 
-23.7
-
-Summary
+# Summary
 
 In this tutorial, you discovered the VGG convolutional neural network models for image
 classification. Specifically, you learned:
 - About the ImageNet dataset and competition and the VGG winning models.
 - How to load the VGG model in Keras and summarize its structure.
 - How to use the loaded VGG model to classifying objects in ad hoc photographs.
-
-23.7. Summary
-
-23.7.1
-
-266
-
-Next
-
-In the next chapter, you will discover how you can evaluate generated text against a ground
-truth.

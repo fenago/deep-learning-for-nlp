@@ -1,7 +1,6 @@
 
 Chapter 19
-How to Develop a Word-Based Neural
-Language Model
+# How to Develop a Word-Based Neural Language Model
 Language modeling involves predicting the next word in a sequence given the sequence of words
 already present. A language model is a key element in many natural language processing models
 such as machine translation and speech recognition. The choice of how the language model is
