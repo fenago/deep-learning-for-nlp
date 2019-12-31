@@ -12,7 +12,7 @@ problems.
 - How to use the functional API to develop standard Multilayer Perceptron, convolutional
 and recurrent neural networks.
 
-Let’s get started.
+Let's get started.
 Note: It is assumed that you have a basic familiarity with deep learning and Keras, this chapter
 should provide a refresher for the Keras API, and perhaps an introduction to the Keras
 functional API. See the Appendix for installation instructions. Most code snippets in this
@@ -35,7 +35,7 @@ Below is an overview of the 5 steps in the neural network model life-cycle in Ke
 
 Figure 4.1: 5 Step Life-Cycle for Neural Network Models in Keras.
 
-Let’s take a look at each step in turn using the easy-to-use Keras Sequential API.
+Let's take a look at each step in turn using the easy-to-use Keras Sequential API.
 
 
 Step 1. Define Network
@@ -245,7 +245,7 @@ more flexibility, including creating more complex models.
 It specifically allows you to define multiple input or output models as well as models that
 share layers. More than that, it allows you to define ad hoc acyclic network graphs. Models are
 defined by creating instances of layers and connecting them directly to each other in pairs, then
-defining a Model that specifies the layers to act as the input and output to the model. Let’s
+defining a Model that specifies the layers to act as the input and output to the model. Let's
 look at the three unique aspects of Keras functional API in turn:
 
 
@@ -271,7 +271,7 @@ Connecting Layers
 The layers in the model are connected pairwise. This is done by specifying where the input
 comes from when defining each new layer. A bracket or functional notation is used, such that
 after the layer is created, the layer from which the input to the current layer comes from is
-specified. Let’s make this clear with a short example. We can create the input layer as above,
+specified. Let's make this clear with a short example. We can create the input layer as above,
 then create a hidden layer as a Dense that receives input only from the input layer.
 
 ```
@@ -281,7 +281,7 @@ visible = Input(shape=(2,))
 hidden = Dense(2)(visible)
 ```
 
-Note it is the visible after the creation of the Dense layer that connects the input layer’s
+Note it is the visible after the creation of the Dense layer that connects the input layer's
 output as the input to the Dense hidden layer. It is this way of connecting layers piece by piece
 that gives the functional API its flexibility. For example, you can see how easy it would be to
 start defining ad hoc graphs of layers.
@@ -302,7 +302,7 @@ hidden = Dense(2)(visible)
 model = Model(inputs=visible, outputs=hidden)
 ```
 
-Now that we know all of the key pieces of the Keras functional API, let’s work through
+Now that we know all of the key pieces of the Keras functional API, let's work through
 defining a suite of different models and build up some practice with it. Each example is
 executable and prints the structure and creates a diagram of the graph. I recommend doing
 this for your own models to make it clear what exactly you have defined. My hope is that
@@ -385,7 +385,7 @@ Figure 4.2: Plot of the MLP Model Graph.
 
 Note, creating plots of Keras models requires that you install pydot and pygraphviz (the
 graphviz library and the Python wrapper). Instructions for installing these libraries vary for
-different systems. If this is a challenge for you (e.g. you’re on windows), consider commenting
+different systems. If this is a challenge for you (e.g. you're on windows), consider commenting
 out the calls to plot model() when you see them.
 
 Convolutional Neural Network

@@ -13,7 +13,7 @@ application.
 models.
 - How to generate sequences using a fit language model.
 
-Let’s get started.
+Let's get started.
 
 19.1
 
@@ -226,7 +226,7 @@ The model is fit for 500 training epochs, again, perhaps more than is needed. Th
 configuration was not tuned for this and later experiments; an over-prescribed configuration
 was chosen to ensure that we could focus on the framing of the language model.
 After the model is fit, we test it by passing it a given word from the vocabulary and
-having the model predict the next word. Here we pass in ‘Jack ’ by encoding it and calling
+having the model predict the next word. Here we pass in 'Jack ' by encoding it and calling
 model.predict classes() to get the integer output for the predicted word. This is then looked
 up in the vocabulary mapping to give the associated word.
 # evaluate
@@ -398,7 +398,7 @@ Jack and jill came tumbling after down
 
 ```
 
-This is a good first cut language model, but does not take full advantage of the LSTM’s
+This is a good first cut language model, but does not take full advantage of the LSTM's
 ability to handle sequences of input and disambiguate some of the ambiguous pairwise sequences
 by using a broader context.
 

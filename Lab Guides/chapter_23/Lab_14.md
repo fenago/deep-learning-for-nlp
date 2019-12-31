@@ -11,7 +11,7 @@ After completing this tutorial, you will know:
 - How to load the VGG model in Keras and summarize its structure.
 - How to use the loaded VGG model to classifying objects in ad hoc photographs.
 
-Let’s get started.
+Let's get started.
 
 23.1
 
@@ -79,7 +79,7 @@ Applications interface for loading and using pre-trained models. Using this inte
 create a VGG model using the pre-trained weights provided by the Oxford group and use it as
 a starting point in your own model, or use it as a model directly for classifying images. In this
 tutorial, we will focus on the use case of classifying new images using the VGG model. Keras
-provides both the 16-layer and 19-layer version via the VGG16 and VGG19 classes. Let’s focus
+provides both the 16-layer and 19-layer version via the VGG16 and VGG19 classes. Let's focus
 on the VGG16 model. The model can be created as follows:
 
 ```
@@ -87,7 +87,7 @@ from keras.applications.vgg16 import VGG16
 model = VGG16()
 ```
 
-That’s it. The first time you run this example, Keras will download the weight files from
+That's it. The first time you run this example, Keras will download the weight files from
 the Internet and store them in the ∼/.keras/models directory. Note that the weights are
 about 528 megabytes, so the download may take a few minutes depending on the speed of your
 Internet connection.
@@ -221,8 +221,8 @@ Figure 23.3: Plot of Layers in the VGG Model.
 The VGG() class takes a few arguments that may only interest you if you are looking to use
 the model in your own project, e.g. for transfer learning. For example:
 - include top (True): Whether or not to include the output layers for the model. You
-don’t need these if you are fitting the model on your own problem.
-- weights (‘imagenet’): What weights to load. You can specify None to not load pretrained weights if you are interested in training the model yourself from scratch.
+don't need these if you are fitting the model on your own problem.
+- weights ('imagenet'): What weights to load. You can specify None to not load pretrained weights if you are interested in training the model yourself from scratch.
 - input tensor (None): A new input layer if you intend to fit the model on new data of a
 different size.
 - input shape (None): The size of images that the model is expected to take if you change
@@ -231,11 +231,11 @@ the input layer.
 layers.
 - classes (1000): The number of classes (e.g. size of output vector) for the model.
 
-Next, let’s look at using the loaded VGG model to classify ad hoc photographs.
+Next, let's look at using the loaded VGG model to classify ad hoc photographs.
 
 # Develop a Simple Photo Classifier
 
-Let’s develop a simple image classification script.
+Let's develop a simple image classification script.
 
 ### Get a Sample Image
 
@@ -334,7 +334,7 @@ label = label[0][0]
 print('%s (%.2f%%)' % (label[1], label[2]*100))
 ```
 
-And that’s it.
+And that's it.
 
 23.5.6
 

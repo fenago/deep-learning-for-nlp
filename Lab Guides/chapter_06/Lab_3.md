@@ -14,7 +14,7 @@ After completing this tutorial, you will know:
 - How to convert text to word frequency vectors with TfidfVectorizer.
 - How to convert text to unique integers with HashingVectorizer.
 
-Let’s get started.
+Let's get started.
 
 6.1
 

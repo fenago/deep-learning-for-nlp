@@ -15,7 +15,7 @@ hidden layer.
 - How to use the learned language model to generate new text with similar statistical
 properties as the source text.
 
-Let’s get started.
+Let's get started.
 
 20.1
 
@@ -37,7 +37,7 @@ This tutorial is divided into the following parts:
 
 The Republic by Plato
 
-The Republic is the classical Greek philosopher Plato’s most famous work. It is structured as a
+The Republic is the classical Greek philosopher Plato's most famous work. It is structured as a
 dialog (e.g. conversation) on the topic of order and justice within a city state The entire text is
 available for free in the public domain. It is available on the Project Gutenberg website in a
 number of formats. You can download the ASCII text version of the entire book (or books)
@@ -88,19 +88,19 @@ to wait.
 I turned round, and asked him where his master was.
 There he is, said the youth, coming after you, if you will only wait.
 Certainly we will, said Glaucon; and in a few minutes Polemarchus appeared, and
-with him Adeimantus, Glaucon’s brother, Niceratus the son of Nicias, and several
+with him Adeimantus, Glaucon's brother, Niceratus the son of Nicias, and several
 others who had been at the procession.
 Polemarchus said to me: I perceive, Socrates, that you and your companion are
 already on your way to the city.
 You are not far wrong, I said.
 ...
-What do you see that we will need to handle in preparing the data? Here’s what I see from
+What do you see that we will need to handle in preparing the data? Here's what I see from
 a quick look:
 - Book/Chapter headings (e.g. BOOK I.).
 - Lots of punctuation (e.g. -, ;-, ?-, and more).
 - Strange names (e.g. Polemarchus).
 - Some long monologues that go on for hundreds of lines.
-- Some quoted dialog (e.g. ‘...’).
+- Some quoted dialog (e.g. '...').
 
 These observations, and more, suggest at ways that we may wish to prepare the text data.
 The specific way we prepare the data really depends on how we intend to model it, which in
@@ -166,7 +166,7 @@ that I might offer up my prayers to the goddess (Bendis, the Thracian
 Artemis.); and also because I wanted to see in what
 ```
 
-So far, so good. Next, let’s clean the text.
+So far, so good. Next, let's clean the text.
 
 20.3.4
 
@@ -176,10 +176,10 @@ We need to transform the raw text into a sequence of tokens or words that we can
 source to train the model. Based on reviewing the raw text (above), below are some specific
 operations we will perform to clean the text. You may want to explore more cleaning operations
 yourself as an extension.
-- Replace ‘-’ with a white space so we can split words better.
+- Replace '-' with a white space so we can split words better.
 - Split words based on white space.
-- Remove all punctuation from words to reduce the vocabulary size (e.g. ‘What?’ becomes
-‘What’).
+- Remove all punctuation from words to reduce the vocabulary size (e.g. 'What?' becomes
+'What').
 - Remove all words that are not alphabetic to remove standalone punctuation tokens.
 
 20.3. Data Preparation
@@ -219,7 +219,7 @@ print('Unique Tokens: %d' % len(set(tokens)))
 ```
 
 First, we can see a nice list of tokens that look cleaner than the raw text. We could remove
-the ’Book I’ chapter markers and more, but this is a good start.
+the 'Book I' chapter markers and more, but this is a good start.
 ['book', 'i', 'i', 'went', 'down', 'yesterday', 'to', 'the', 'piraeus', 'with', 'glaucon',
 'the', 'son', 'of', 'ariston', 'that', 'i', 'might', 'offer', 'up', 'my', 'prayers',
 'to', 'the', 'goddess', 'bendis', 'the', 'thracian', 'artemis', 'and', 'also',
@@ -383,7 +383,7 @@ save_doc(sequences, out_filename)
 ```
 
 You should now have training data stored in the file republic sequences.txt in your
-current working directory. Next, let’s look at how to fit a language model to this data.
+current working directory. Next, let's look at how to fit a language model to this data.
 
 20.4
 
@@ -399,7 +399,7 @@ words.
 
 Specifically, we will use an Embedding Layer to learn the representation of words, and a
 Long Short-Term Memory (LSTM) recurrent neural network to learn to predict words based on
-their context. Let’s start by loading our training data.
+their context. Let's start by loading our training data.
 
 20.4. Train Language Model
 
@@ -483,7 +483,7 @@ next. Keras provides the to categorical() that can be used to one hot encode the
 words for each input-output sequence pair.
 Finally, we need to specify to the Embedding layer how long input sequences are. We know
 that there are 50 words because we designed the model, but a good generic way to specify that
-is to use the second dimension (number of columns) of the input data’s shape. That way, if
+is to use the second dimension (number of columns) of the input data's shape. That way, if
 you change the length of sequences when preparing data, you do not need to change this data
 loading code; it is generic.
 # separate into input and output
@@ -786,7 +786,7 @@ will return the index of the word with the highest probability.
 yhat = model.predict_classes(encoded, verbose=0)
 ```
 
-We can then look up the index in the Tokenizer’s mapping to get the associated word.
+We can then look up the index in the Tokenizer's mapping to get the associated word.
 out_word = ''
 for word, index in tokenizer.word_index.items():
 if index == yhat:
@@ -955,7 +955,7 @@ generated text.
 - Sentence-Wise Model. Split the raw data based on sentences and pad each sentence
 to a fixed length (e.g. the longest sentence length).
 
-If you explore any of these extensions, I’d love to know.
+If you explore any of these extensions, I'd love to know.
 
 20.7
 

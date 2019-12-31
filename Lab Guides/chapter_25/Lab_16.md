@@ -16,7 +16,7 @@ each photo.
 - How to generally load and prepare photo and text data for modeling with deep learning.
 - How to specifically encode data for two different types of deep learning models in Keras.
 
-Let’s get started.
+Let's get started.
 
 25.1
 
@@ -68,11 +68,11 @@ Within a short time, you will receive an email that contains links to two files:
 Download the datasets and unzip them into your current working directory. You will have
 two directories:
 - Flicker8k Dataset: Contains more than 8000 photographs in JPEG format (yes the
-directory name spells it ‘Flicker’ not ‘Flickr’).
+directory name spells it 'Flicker' not 'Flickr').
 - Flickr8k text: Contains a number of files containing different sources of descriptions for
 the photographs.
 
-Next, let’s look at how to load the images.
+Next, let's look at how to load the images.
 
 25.3. How to Load Photographs
 
@@ -127,7 +127,7 @@ image = load_img('990890291_afc72be141.jpg', target_size=(224, 224))
 ```
 
 We may want to extract the unique image identifier from the image filename. We can do
-that by splitting the filename string by the ‘.’ (period) character and retrieving the first element
+that by splitting the filename string by the '.' (period) character and retrieving the first element
 of the resulting array:
 image_id = filename.split('.')[0]
 
@@ -417,12 +417,12 @@ Prepare Description Text
 
 The descriptions are tokenized; this means that each token is comprised of words separated by
 white space. It also means that punctuation are separated as their own tokens, such as periods
-(‘.’) and apostrophes for word plurals (’s). It is a good idea to clean up the description text
+('.') and apostrophes for word plurals ('s). It is a good idea to clean up the description text
 before using it in a model. Some ideas of data cleaning we can form include:
 - Normalizing the case of all tokens to lowercase.
 - Remove all punctuation from tokens.
 - Removing all tokens that contain one or fewer characters (after punctuation is removed),
-e.g. ‘a’ and hanging ‘s’ characters.
+e.g. 'a' and hanging 's' characters.
 
 We can implement these simple cleaning operations in a function that cleans each description
 in the loaded dictionary from the previous section. Below defines the clean descriptions()
@@ -819,9 +819,9 @@ print('Description Length: %d' % max_length)
 
 ```
 
-Next, we split the each integer encoded sequence into input and output pairs. Let’s step
-through a single sequence called seq at the i’th word in the sequence, where i more than or
-equal to 1. First, we take the first i-1 words as the input sequence and the i’th word as the
+Next, we split the each integer encoded sequence into input and output pairs. Let's step
+through a single sequence called seq at the i'th word in the sequence, where i more than or
+equal to 1. First, we take the first i-1 words as the input sequence and the i'th word as the
 output word.
 # split into input and output pair
 in_seq, out_seq = seq[:i], seq[i]
@@ -954,9 +954,9 @@ fitting the model and two photos will result in about 22 examples on average. A 
 batch size for modern hardware may be 32 examples, so that is about 2-3 photos worth of
 examples.
 We can write a custom generator to load a few photos and return the samples as a single
-batch. Let’s assume we are working with a word-by-word model described in the previous
+batch. Let's assume we are working with a word-by-word model described in the previous
 section that expects a sequence of words and a prepared image as input and predicts a single
-word. Let’s design a data generator that given a loaded dictionary of image identifiers to clean
+word. Let's design a data generator that given a loaded dictionary of image identifiers to clean
 descriptions, a trained tokenizer, and a maximum sequence length will load one-image worth of
 examples for each batch.
 
@@ -967,7 +967,7 @@ examples for each batch.
 A generator must loop forever and yield each batch of samples. We can loop forever with
 a while loop and within this, loop over each image in the image directory. For each image
 filename, we can load the image and create all of the input-output sequence pairs from the
-image’s description. Below is the data generator function.
+image's description. Below is the data generator function.
 def data_generator(mapping, tokenizer, max_length):
 # loop for ever over images
 directory = 'Flicker8k_Dataset'
@@ -1007,7 +1007,7 @@ return image, image_id
 Another function named create sequences() is called to create sequences of images, input
 sequences of words, and output words that we then yield to the caller. This is a function that
 includes everything discussed in the previous section, and also creates copies of the image pixels,
-one for each input-output pair created from the photo’s description.
+one for each input-output pair created from the photo's description.
 # create sequences of images, input sequences and output words for an image
 def create_sequences(tokenizer, max_length, descriptions, images):
 Ximages, XSeq, y = list(), list(),list()

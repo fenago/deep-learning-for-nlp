@@ -13,7 +13,7 @@ will know:
 - How to prepare movie reviews using cleaning and a pre-defined vocabulary and save them
 to new files ready for modeling.
 
-Let’s get started.
+Let's get started.
 
 9.1
 
@@ -69,7 +69,7 @@ http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
 After unzipping the file, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
-one per file with a naming convention from cv000 to cv999 for each of neg and pos. Next, let’s
+one per file with a naming convention from cv000 to cv999 for each of neg and pos. Next, let's
 look at loading the text data.
 
 9.3. Load Text Data
@@ -197,7 +197,7 @@ process_docs(directory)
 
 ```
 
-Now that we know how to load the movie review text data, let’s look at cleaning it.
+Now that we know how to load the movie review text data, let's look at cleaning it.
 
 
 Clean Text Data
@@ -210,7 +210,7 @@ that does not require too much preparation.
 
 Split into Tokens
 
-First, let’s load one document and look at the raw tokens split by white space. We will use the
+First, let's load one document and look at the raw tokens split by white space. We will use the
 load doc() function developed in the previous section. We can use the split() function to
 split the loaded document into tokens separated by white space.
 
@@ -248,11 +248,11 @@ Running the example gives a nice long list of raw tokens from the document.
 ```
 
 Just looking at the raw tokens can give us a lot of ideas of things to try, such as:
-- Remove punctuation from words (e.g. ‘what’s’).
-- Removing tokens that are just punctuation (e.g. ‘-’).
-- Removing tokens that contain numbers (e.g. ‘10/10’).
-- Remove tokens that have one character (e.g. ‘a’).
-- Remove tokens that don’t have much meaning (e.g. ‘and’).
+- Remove punctuation from words (e.g. 'what's').
+- Removing tokens that are just punctuation (e.g. '-').
+- Removing tokens that contain numbers (e.g. '10/10').
+- Remove tokens that have one character (e.g. 'a').
+- Remove tokens that don't have much meaning (e.g. 'and').
 
 
 Some ideas:
@@ -366,7 +366,7 @@ Again, the cleaning procedure seems to produce a good set of tokens, at least as
 ```
 
 There are many more cleaning steps we could take and I leave them to your imagination.
-Next, let’s look at how we can manage a preferred vocabulary of tokens.
+Next, let's look at how we can manage a preferred vocabulary of tokens.
 
 Develop Vocabulary
 

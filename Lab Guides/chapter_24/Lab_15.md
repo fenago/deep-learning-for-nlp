@@ -14,7 +14,7 @@ documents.
 - How you can use a suite of small examples to develop an intuition for how differences
 between a candidate and reference text impact the final BLEU score.
 
-Let’s get started.
+Let's get started.
 
 24.1
 
@@ -159,7 +159,7 @@ Cumulative and Individual BLEU Scores
 
 The BLEU score calculations in NLTK allow you to specify the weighting of different n-grams
 in the calculation of the BLEU score. This gives you the flexibility to calculate different types
-of BLEU score, such as individual and cumulative n-gram scores. Let’s take a look.
+of BLEU score, such as individual and cumulative n-gram scores. Let's take a look.
 
 24.4.1
 
@@ -271,7 +271,7 @@ Running this example prints the following score:
 
 The cumulative and individual 1-gram BLEU use the same weights, e.g. (1, 0, 0, 0). The
 2-gram weights assign a 50% to each of 1-gram and 2-gram and the 3-gram weights are 33%
-for each of the 1, 2 and 3-gram scores. Let’s make this concrete by calculating the cumulative
+for each of the 1, 2 and 3-gram scores. Let's make this concrete by calculating the cumulative
 scores for BLEU-1, BLEU-2, BLEU-3 and BLEU-4:
 # cumulative BLEU scores
 from nltk.translate.bleu_score import sentence_bleu
@@ -325,7 +325,7 @@ the quick brown fox jumped over the lazy dog
 
 ```
 
-First, let’s look at a perfect score.
+First, let's look at a perfect score.
 # prefect match
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -340,7 +340,7 @@ Running the example prints a perfect match.
 
 ```
 
-Next, let’s change one word, ‘quick ’ to ‘fast’.
+Next, let's change one word, 'quick ' to 'fast'.
 # one word different
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -360,7 +360,7 @@ This result is a slight drop in score.
 
 ```
 
-Try changing two words, both ‘quick ’ to ‘fast’ and ‘lazy’ to ‘sleepy’.
+Try changing two words, both 'quick ' to 'fast' and 'lazy' to 'sleepy'.
 # two words different
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]
@@ -390,7 +390,7 @@ We get the worse possible score.
 
 ```
 
-Now, let’s try a candidate that has fewer words than the reference (e.g. drop the last two
+Now, let's try a candidate that has fewer words than the reference (e.g. drop the last two
 words), but the words are all correct.
 # shorter candidate
 from nltk.translate.bleu_score import sentence_bleu
@@ -427,7 +427,7 @@ Again, we can see that our intuition holds and the score is something like two w
 
 ```
 
-Finally, let’s compare a candidate that is way too short: only two words in length.
+Finally, let's compare a candidate that is way too short: only two words in length.
 # very short
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']]

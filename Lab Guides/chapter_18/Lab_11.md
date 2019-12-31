@@ -13,7 +13,7 @@ develop a character-based neural language model. After completing this tutorial,
 - How to develop a character-based language model using LSTMs.
 - How to use a trained character-based language model to generate text.
 
-Let’s get started.
+Let's get started.
 
 18.1
 
@@ -30,7 +30,7 @@ This tutorial is divided into the following parts:
 
 The nursery rhyme Sing a Song of Sixpence is well known in the west. The first verse is common,
 but there is also a 4 verse version that we will use to develop our character-based language
-model. It is short, so fitting the model will be fast, but not so short that we won’t see anything
+model. It is short, so fitting the model will be fast, but not so short that we won't see anything
 interesting. The complete 4 verse version we will use as source text is listed below.
 
 ```

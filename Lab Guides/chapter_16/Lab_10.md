@@ -13,7 +13,7 @@ on text movie review data. After completing this tutorial, you will know:
 - How to develop a multichannel convolutional neural network for text in Keras.
 - How to evaluate a fit model on unseen movie review data.
 
-Let’s get started.
+Let's get started.
 
 16.1
 
@@ -386,7 +386,7 @@ model learns how to best integrate these interpretations.
 This approach was first described by Yoon Kim in his 2014 paper titled Convolutional Neural
 Networks for Sentence Classification. In the paper, Kim experimented with static and dynamic
 (updated) embedding layers, we can simplify the approach and instead focus only on the use of
-different kernel sizes. This approach is best understood with a diagram taken from Kim’s paper,
+different kernel sizes. This approach is best understood with a diagram taken from Kim's paper,
 see Chapter 14.
 In Keras, a multiple-input model can be defined using the functional API. We will define a
 model with three input channels for processing 4-grams, 6-grams, and 8-grams of movie review
@@ -719,7 +719,7 @@ impact on model skill with and without further fine tuning during training.
 - Train Final Model. Train a final model on all available data and use it make predictions
 on real ad hoc movie reviews from the internet.
 
-If you explore any of these extensions, I’d love to know.
+If you explore any of these extensions, I'd love to know.
 
 # Further Reading
 

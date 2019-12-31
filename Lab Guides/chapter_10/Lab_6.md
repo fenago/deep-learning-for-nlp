@@ -15,7 +15,7 @@ review sentiment classification. After completing this tutorial, you will know:
 - How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
 on new review text data.
 
-Let’s get started.
+Let's get started.
 
 10.1
 
@@ -39,7 +39,7 @@ http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
 After unzipping the file, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
-one per file with a naming convention cv000 to cv999 for each of neg and pos. Next, let’s look
+one per file with a naming convention cv000 to cv999 for each of neg and pos. Next, let's look
 at loading the text data.
 
 10.3
@@ -130,7 +130,7 @@ print(tokens)
 ```
 
 Running the example prints a long list of clean tokens. There are many more cleaning steps
-we may want to explore, and I leave them as further exercises. I’d love to see what you can
+we may want to explore, and I leave them as further exercises. I'd love to see what you can
 come up with.
 
 10.3. Data Preparation
@@ -1009,7 +1009,7 @@ Test Accuracy: 87.000000
 
 ```
 
-Next, let’s look at testing different word scoring methods for the bag-of-words model.
+Next, let's look at testing different word scoring methods for the bag-of-words model.
 
 10.6
 
@@ -1475,7 +1475,7 @@ ensembles of the models results in improves to model skill.
 - Real Reviews. Train a final model on all data and evaluate the model on real movie
 reviews taken from the internet.
 
-If you explore any of these extensions, I’d love to know.
+If you explore any of these extensions, I'd love to know.
 
 10.9
 

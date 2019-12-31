@@ -12,7 +12,7 @@ learning. After completing this tutorial, you will know:
 - How to take a step up and use the more sophisticated methods in the NLTK library.
 - Considerations when preparing text for natural language processing models.
 
-Let’s get started.
+Let's get started.
 
 5.1
 
@@ -35,9 +35,9 @@ This tutorial is divided into the following parts:
 
 Metamorphosis by Franz Kafka
 
-Let’s start off by selecting a dataset. In this tutorial, we will use the text from the book
-Metamorphosis by Franz Kafka. No specific reason, other than it’s short, I like it, and you may
-like it too. I expect it’s one of those classics that most students have to read in school. The full
+Let's start off by selecting a dataset. In this tutorial, we will use the text from the book
+Metamorphosis by Franz Kafka. No specific reason, other than it's short, I like it, and you may
+like it too. I expect it's one of those classics that most students have to read in school. The full
 text for Metamorphosis is available for free from Project Gutenberg. You can download the
 ASCII text version of the text here:
 - Metamorphosis by Franz Kafka Plain Text UTF-8 (may need to load the page twice).
@@ -60,16 +60,16 @@ Poor Gregor...
 Text Cleaning Is Task Specific
 
 After actually getting a hold of your text data, the first step in cleaning up text data is to have
-a strong idea about what you’re trying to achieve, and in that context review your text to see
-what exactly might help. Take a moment to look at the text. What do you notice? Here’s what
+a strong idea about what you're trying to achieve, and in that context review your text to see
+what exactly might help. Take a moment to look at the text. What do you notice? Here's what
 I see:
-- It’s plain text so there is no markup to parse (yay!).
+- It's plain text so there is no markup to parse (yay!).
 - The translation of the original German uses UK English (e.g. travelling).
 - The lines are artificially wrapped with new lines at about 70 characters (meh).
 - There are no obvious typos or spelling mistakes.
-- There’s punctuation like commas, apostrophes, quotes, question marks, and more.
-- There’s hyphenated descriptions like armour-like.
-- There’s a lot of use of the em dash (-) to continue sentences (maybe replace with commas?).
+- There's punctuation like commas, apostrophes, quotes, question marks, and more.
+- There's hyphenated descriptions like armour-like.
+- There's a lot of use of the em dash (-) to continue sentences (maybe replace with commas?).
 - There are names (e.g. Mr. Samsa)
 
 5.4. Manual Tokenization
@@ -79,7 +79,7 @@ I see:
 - There does not appear to be numbers that require handling (e.g. 1999)
 - There are section markers (e.g. II and III ).
 
-I’m sure there is a lot more going on to the trained eye. We are going to look at general
+I'm sure there is a lot more going on to the trained eye. We are going to look at general
 text cleaning steps in this tutorial. Nevertheless, consider some possible objectives we may have
 when working with this text document. For example:
 - If we were interested in developing a Kafkaesque language model, we may want to keep all
@@ -102,7 +102,7 @@ you a long way.
 
 Load Data
 
-Let’s load the text data so that we can work with it. The text is small and will load quickly
+Let's load the text data so that we can work with it. The text is small and will load quickly
 and easily fit into memory. This will not always be the case and you may need to write code
 to memory map the file. Tools like NLTK (covered in the next section) will make working
 with large files much easier. We can load the entire metamorphosis clean.txt into memory as
@@ -137,7 +137,7 @@ print(words[:100])
 ```
 
 Running the example splits the document into a long list of words and prints the first 100 for
-us to review. We can see that punctuation is preserved (e.g. wasn’t and armour-like), which is
+us to review. We can see that punctuation is preserved (e.g. wasn't and armour-like), which is
 nice. We can also see that end of sentence punctuation is kept with the last word (e.g. thought.),
 which is not great.
 
@@ -158,7 +158,7 @@ which is not great.
 Select Words
 
 Another approach might be to use the regex model (re) and split the document into words by
-selecting for strings of alphanumeric characters (a-z, A-Z, 0-9 and ‘ ’). For example:
+selecting for strings of alphanumeric characters (a-z, A-Z, 0-9 and ' '). For example:
 import re
 
 ```
@@ -173,7 +173,7 @@ print(words[:100])
 ```
 
 Again, running the example we can see that we get our list of words. This time, we can see
-that armour-like is now two words armour and like (fine) but contractions like What’s is also
+that armour-like is now two words armour and like (fine) but contractions like What's is also
 two words What and s (not great).
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
@@ -239,7 +239,7 @@ stripped = [re_punc.sub('', w) for w in words]
 print(stripped[:100])
 ```
 
-We can see that this has had the desired effect, mostly. Contractions like What’s have
+We can see that this has had the desired effect, mostly. Contractions like What's have
 become Whats but armour-like has become armourlike.
 
 5.4. Manual Tokenization
@@ -310,7 +310,7 @@ Note on Cleaning Text
 
 Cleaning text is really hard, problem specific, and full of tradeoffs. Remember, simple is better.
 Simpler text data, simpler models, smaller vocabularies. You can always make things more
-complex later to see if it results in better model skill. Next, we’ll look at some of the tools in
+complex later to see if it results in better model skill. Next, we'll look at some of the tools in
 the NLTK library that offer more than simple string splitting.
 
 Tokenization and Cleaning with NLTK
@@ -385,8 +385,8 @@ Split into Words
 
 NLTK provides a function called word tokenize() for splitting strings into tokens (nominally
 words). It splits tokens based on white space and punctuation. For example, commas and
-periods are taken as separate tokens. Contractions are split apart (e.g. What’s becomes What
-and ’s). Quotes are kept, and so on. For example:
+periods are taken as separate tokens. Contractions are split apart (e.g. What's becomes What
+and 's). Quotes are kept, and so on. For example:
 
 ```
 from nltk.tokenize import word_tokenize
@@ -442,7 +442,7 @@ print(words[:100])
 ```
 
 Running the example, you can see that not only punctuation tokens, but examples like
-armour-like and ’s were also filtered out.
+armour-like and 's were also filtered out.
 
 ```
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
@@ -496,7 +496,7 @@ You can see the full list as follows:
 
 You can see that they are all lower case and have punctuation removed. You could compare
 your tokens to the stop words and filter them out, but you must ensure that your text is prepared
-the same way. Let’s demonstrate this with a small pipeline of text preparation including:
+the same way. Let's demonstrate this with a small pipeline of text preparation including:
 - Load the raw text.
 - Split into tokens.
 - Convert to lowercase.
@@ -532,7 +532,7 @@ print(words[:100])
 
 Running this example, we can see that in addition to all of the other transforms, stop words
 like a and to have been removed. I note that we are still left with tokens like nt. The rabbit
-hole is deep; there’s always more we can do.
+hole is deep; there's always more we can do.
 
 
 ```

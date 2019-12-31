@@ -12,7 +12,7 @@ you will know:
 layers.
 - How to evaluate the developed a neural classification model.
 
-Let’s get started.
+Let's get started.
 
 15.1
 
@@ -1034,7 +1034,7 @@ the length of movie reviews as suspected in the final section on evaluating the 
 - Train Final Model. Train a final model on all available data and use it make predictions
 on real ad hoc movie reviews from the internet.
 
-If you explore any of these extensions, I’d love to know.
+If you explore any of these extensions, I'd love to know.
 
 
 Further Reading

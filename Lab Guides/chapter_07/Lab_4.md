@@ -12,7 +12,7 @@ your text data. After completing this tutorial, you will know:
 and test documents.
 - The range of 4 different document encoding schemes offered by the Tokenizer API.
 
-Let’s get started.
+Let's get started.
 
 7.1
 

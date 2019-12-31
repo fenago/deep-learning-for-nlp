@@ -12,7 +12,7 @@ English. After completing this tutorial, you will know:
 - How to use a trained model for inference on new input phrases and evaluate the model
 skill.
 
-Let’s get started.
+Let's get started.
 
 30.1
 
@@ -299,7 +299,7 @@ Train Neural Translation Model
 
 In this section, we will develop the translation model. This involves both loading and preparing
 the clean text data ready for modeling and defining and training the model on the prepared
-data. Let’s start off by loading the datasets so that we can prepare the data. The function
+data. Let's start off by loading the datasets so that we can prepare the data. The function
 below named load clean sentences() can be used to load the train, test, and both datasets
 in turn.
 
@@ -878,9 +878,9 @@ Running the example first prints examples of source text, expected and predicted
 as well as scores for the training dataset, followed by the test dataset. Your specific results will
 differ given the random shuffling of the dataset and the stochastic nature of neural networks.
 Looking at the results for the test dataset first, we can see that the translations are readable
-and mostly correct. For example: ‘ich liebe dich’ was correctly translated to ‘i love you’.
-We can also see that the translations were not perfect, with ‘ich konnte nicht gehen’ translated
-to i cant go instead of the expected ‘i couldnt walk ’. We can also see the BLEU-4 score of 0.51,
+and mostly correct. For example: 'ich liebe dich' was correctly translated to 'i love you'.
+We can also see that the translations were not perfect, with 'ich konnte nicht gehen' translated
+to i cant go instead of the expected 'i couldnt walk '. We can also see the BLEU-4 score of 0.51,
 which provides an upper bound on what we might expect from this model.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
@@ -911,9 +911,9 @@ BLEU-4:
 ```
 
 Looking at the results on the test set, do see readable translations, which is not an easy task.
-For example, we see ‘ich mag dich nicht’ correctly translated to ‘i dont like you’. We also see
+For example, we see 'ich mag dich nicht' correctly translated to 'i dont like you'. We also see
 some poor translations and a good case that the model could support from further tuning, such
-as ‘ich bin etwas beschwipst’ translated as ‘i a bit bit’ instead of the expected im a bit tipsy A
+as 'ich bin etwas beschwipst' translated as 'i a bit bit' instead of the expected im a bit tipsy A
 BLEU-4 score of 0.076238 was achieved, providing a baseline skill to improve upon with further
 improvements to the model.
 
@@ -969,7 +969,7 @@ measures differ in practice.
 word in the output sequence could be conditional on the input sequence and the output
 sequence generated so far.
 
-If you explore any of these extensions, I’d love to know.
+If you explore any of these extensions, I'd love to know.
 
 30.7
 
@@ -990,7 +990,7 @@ http://www.manythings.org/anki/deu-eng.zip
 
 Neural Machine Translation
 
-- Google’s Neural Machine Translation System: Bridging the Gap between Human and
+- Google's Neural Machine Translation System: Bridging the Gap between Human and
 Machine Translation, 2016.
 https://arxiv.org/abs/1609.08144
 - Sequence to Sequence Learning with Neural Networks, 2014.

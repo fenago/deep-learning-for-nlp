@@ -12,7 +12,7 @@ layer.
 - How to learn a word embedding while fitting a neural network.
 - How to use a pre-trained word embedding in a neural network.
 
-Let’s get started.
+Let's get started.
 
 13.1
 
@@ -91,7 +91,7 @@ The Embedding layer has weights that are learned. If you save your model to file
 include weights for the Embedding layer. The output of the Embedding layer is a 2D vector with
 one embedding for each word in the input sequence of words (input document). If you wish
 to connect a Dense layer directly to an Embedding layer, you must first flatten the 2D output
-matrix to a 1D vector using the Flatten layer. Now, let’s see how we can use an Embedding
+matrix to a 1D vector using the Flatten layer. Now, let's see how we can use an Embedding
 layer in practice.
 
 13.4
@@ -326,7 +326,7 @@ Accuracy: 100.000000
 
 You could save the learned weights from the Embedding layer to file for later use in other
 models. You could also use this model generally to classify other documents that have the
-same kind vocabulary seen in the test dataset. Next, let’s look at loading a pre-trained word
+same kind vocabulary seen in the test dataset. Next, let's look at loading a pre-trained word
 embedding in Keras.
 
 13.5
@@ -547,8 +547,8 @@ words, and sometimes also convert all characters to lowercase. One can also repl
 all numbers (possibly greater than some constant) with some single token such as .
 All these pre-processing steps aim to reduce the vocabulary size without removing
 any important content (which in some cases may not be true when you lowercase
-certain words, ie. ‘Bush’ is different than ‘bush’, while ‘Another’ has usually the
-same sense as ‘another’). The smaller the vocabulary is, the lower is the memory
+certain words, ie. 'Bush' is different than 'bush', while 'Another' has usually the
+same sense as 'another'). The smaller the vocabulary is, the lower is the memory
 complexity, and the more robustly are the parameters for the words estimated. You
 also have to pre-process the test data in the same way.
 [...]

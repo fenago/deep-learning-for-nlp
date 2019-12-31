@@ -19,7 +19,7 @@ know:
 - How to evaluate a train caption generation model and use it to caption entirely new
 photographs.
 
-Let’s get started.
+Let's get started.
 
 26.1
 
@@ -57,7 +57,7 @@ Within a short time, you will receive an email that contains links to two files:
 Download the datasets and unzip them into your current working directory. You will have
 two directories:
 - Flicker8k Dataset: Contains 8092 photographs in JPEG format (yes the directory name
-spells it ‘Flicker’ not ‘Flickr’).
+spells it 'Flicker' not 'Flickr').
 - Flickr8k text: Contains a number of files containing different sources of descriptions for
 the photographs.
 
@@ -71,7 +71,7 @@ in an Image Caption Generator ):
 - BLEU-3: 0.099 to 0.260.
 - BLEU-4: 0.059 to 0.170.
 
-We describe the BLEU metric more later when we work on evaluating our model. Next, let’s
+We describe the BLEU metric more later when we work on evaluating our model. Next, let's
 look at how to load the images.
 
 # Prepare Photo Data
@@ -268,7 +268,7 @@ to work with. We will clean the text in the following ways in order to reduce th
 vocabulary of words we will need to work with:
 - Convert all words to lowercase.
 - Remove all punctuation.
-- Remove all words that are one character or less in length (e.g. ‘a’).
+- Remove all words that are one character or less in length (e.g. 'a').
 - Remove all words with numbers in them.
 
 Below defines the clean descriptions() function that, given the dictionary of image
@@ -633,7 +633,7 @@ Photos: train=6,000
 ```
 
 The description text will need to be encoded to numbers before it can be presented to
-the model as in input or compared to the model’s predictions. The first step in encoding the
+the model as in input or compared to the model's predictions. The first step in encoding the
 data is to create a consistent mapping from words to unique integer values. Keras provides
 the Tokenizer class that can learn this mapping from the loaded description data. Below
 defines the to lines() to convert the dictionary of descriptions into a list of strings and the
@@ -1460,7 +1460,7 @@ dump(tokenizer, open('tokenizer.pkl', 'wb'))
 ```
 
 We can now load the tokenizer whenever we need it without having to load the entire training
-dataset of annotations. Now, let’s generate a description for a new photograph. Below is a new
+dataset of annotations. Now, let's generate a description for a new photograph. Below is a new
 photograph that I chose randomly on Flickr (available under a permissive license)1 .
 1
 
@@ -1656,7 +1656,7 @@ model. Better performance may be achieved by using word vectors either pre-train
 the training dataset or trained on a much larger corpus of text, such as news articles or
 Wikipedia.
 - Train Word2Vec Vectors. Pre-train word vectors using Word2Vec on the description
-data and explore models that allow and don’t allow fine tuning of the vectors during
+data and explore models that allow and don't allow fine tuning of the vectors during
 training, then compare skill.
 - Tune Model. The configuration of the model was not tuned on the problem. Explore
 alternate configurations and see if you can achieve better performance.
@@ -1674,7 +1674,7 @@ the impact on training time and model skill.
 ROGUE. Compare scores for the same descriptions to develop an intuition for how the
 measures differ in practice.
 
-If you explore any of these extensions, I’d love to know.
+If you explore any of these extensions, I'd love to know.
 
 26.9
 

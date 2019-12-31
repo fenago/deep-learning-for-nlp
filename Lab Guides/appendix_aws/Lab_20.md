@@ -14,7 +14,7 @@ through this project you will know:
 
 - How to configure a server instance for faster deep learning on the GPU.
 
-Let’s get started.
+Let's get started.
 
 
 The process is quite simple because most of the work has already been done for us. Below is an
@@ -28,7 +28,7 @@ overview of the process.
 Note, it costs money to use a virtual server instance on Amazon. The cost is low for
 model development (e.g. less than one US dollar per hour), which is why this is so attractive,
 but it is not free. The server instance runs Linux. It is desirable although not required that you
-know how to navigate Linux or a Unix-like environment. We’re just running our Python scripts,
+know how to navigate Linux or a Unix-like environment. We're just running our Python scripts,
 so no advanced skills are needed.
 
 **Note:** The specific versions may differ as the software and libraries are updated frequently
@@ -55,7 +55,7 @@ Now that you have an AWS account, you want to launch an EC2 virtual server insta
 which you can run Keras. Launching an instance is as easy as selecting the image to load and
 starting the virtual server. Thankfully there is already an image available that has almost
 everything we need it is called the Deep Learning AMI (Amazon Linux) and was created
-and is maintained by Amazon. Let’s launch it as an instance.
+and is maintained by Amazon. Let's launch it as an instance.
 
 -  Login to your AWS console if you have not already.
         https://console.aws.amazon.com/console/home

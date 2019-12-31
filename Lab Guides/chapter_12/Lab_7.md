@@ -12,7 +12,7 @@ will know:
 - How to load pre-trained Word2Vec and GloVe word embedding models from Google and
 Stanford.
 
-Let’s get started.
+Let's get started.
 
 12.1
 
@@ -23,8 +23,8 @@ This tutorial is divided into the following parts:
 2. Gensim Library
 3. Develop Word2Vec Embedding
 4. Visualize Word Embedding
-5. Load Google’s Word2Vec Embedding
-6. Load Stanford’s GloVe Embedding
+5. Load Google's Word2Vec Embedding
+6. Load Stanford's GloVe Embedding
 
 122
 
@@ -249,7 +249,7 @@ X = model[model.wv.vocab]
 ```
 
 We can then train a projection method on the vectors, such as those methods offered in
-scikit-learn, then use Matplotlib to plot the projection as a scatter plot. Let’s look at an example
+scikit-learn, then use Matplotlib to plot the projection as a scatter plot. Let's look at an example
 with Principal Component Analysis or PCA.
 
 12.5.1
@@ -319,7 +319,7 @@ Figure 12.1: Scatter Plot of PCA Projection of Word2Vec Model
 
 12.6
 
-Load Google’s Word2Vec Embedding
+Load Google's Word2Vec Embedding
 
 Training your own word vectors may be the best approach for a given NLP problem. But it
 can take a long time, a fast computer with a lot of RAM and disk space, and perhaps some
@@ -338,7 +338,7 @@ Gensim library provides tools to load this file. Specifically, you can call the
 KeyedVectors.load word2vec format() function to load this model into memory, for example:
 from gensim.models import KeyedVectors
 
-12.7. Load Stanford’s GloVe Embedding
+12.7. Load Stanford's GloVe Embedding
 
 ```
 filename = 'GoogleNews-vectors-negative300.bin'
@@ -390,16 +390,16 @@ that you can explore.
 
 12.7
 
-Load Stanford’s GloVe Embedding
+Load Stanford's GloVe Embedding
 
 Stanford researchers also have their own word embedding algorithm like Word2Vec called Global
-Vectors for Word Representation, or GloVe for short. I won’t get into the details of the differences
+Vectors for Word Representation, or GloVe for short. I won't get into the details of the differences
 between Word2Vec and GloVe here, but generally, NLP practitioners seem to prefer GloVe at
 the moment based on results.
 Like Word2Vec, the GloVe researchers also provide pre-trained word vectors, in this case, a
 great selection to choose from. You can download the GloVe pre-trained word vectors and load
 
-12.7. Load Stanford’s GloVe Embedding
+12.7. Load Stanford's GloVe Embedding
 
 130
 
@@ -415,7 +415,7 @@ word2vec_output_file = 'word2vec.txt'
 glove2word2vec(glove_input_file, word2vec_output_file)
 ```
 
-Once converted, the file can be loaded just like Word2Vec file above. Let’s make this concrete
+Once converted, the file can be loaded just like Word2Vec file above. Let's make this concrete
 with an example. You can download the smallest GloVe pre-trained model from the GloVe
 website. It an 822 Megabyte zip file with 4 different models (50, 100, 200 and 300-dimensional
 vectors) trained on Wikipedia data with 6 billion tokens and a 400,000 word vocabulary. The
