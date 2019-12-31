@@ -42,6 +42,8 @@ counterparts and is intended to be used with the Anki flashcard software.
 http://www.manythings.org/anki/deu-eng.zip
 
 Download the dataset to your current working directory and decompress it; for example:
+
+```
 unzip deu-eng.zip
 
 ```
@@ -49,6 +51,8 @@ unzip deu-eng.zip
 You will have a file called deu.txt that contains 152,820 pairs of English to German phases,
 one pair per line with a tab separating the language. For example, the first 5 lines of the file
 look as follows:
+
+```
 Hi.
 Hi.
 Run!
@@ -87,14 +91,13 @@ preparation is divided into two subsections:
 
 30.3. Preparing the Text Data
 
-30.3.1
-
-355
 
 Clean Text
 
 First, we must load the data in a way that preserves the Unicode German characters. The
 function below called load doc() will load the file as a blob of text.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -110,6 +113,8 @@ return text
 Each line contains a single pair of phrases, first English and then German, separated by a tab
 character. We must split the loaded text by line and then by phrase. The function to pairs()
 below will split the loaded text.
+
+```
 # split a loaded document into sentences
 def to_pairs(doc):
 lines = doc.strip().split('\n')
@@ -128,6 +133,8 @@ are as follows:
 
 We will perform these operations on each phrase for each pair in the loaded dataset. The
 clean pairs() function below implements these operations.
+
+```
 # clean a list of lines
 def clean_pairs(lines):
 cleaned = list()
@@ -139,11 +146,6 @@ clean_pair = list()
 for line in pair:
 # normalize unicode characters
 line = normalize('NFD', line).encode('ascii', 'ignore')
-
-30.3. Preparing the Text Data
-
-356
-
 line = line.decode('UTF-8')
 # tokenize on white space
 line = line.split()
@@ -165,6 +167,8 @@ return array(cleaned)
 Finally, now that the data has been cleaned, we can save the list of phrase pairs to a file
 ready for use. The function save clean data() uses the pickle API to save the list of clean
 text to file. Pulling all of this together, the complete example is listed below.
+
+```
 import string
 import re
 from pickle import dump
@@ -196,11 +200,6 @@ for line in pair:
 # normalize unicode characters
 line = normalize('NFD', line).encode('ascii', 'ignore')
 line = line.decode('UTF-8')
-
-30.3. Preparing the Text Data
-
-357
-
 # tokenize on white space
 line = line.split()
 # convert to lowercase
@@ -260,6 +259,8 @@ the fit model.
 
 Below is the complete example of loading the clean data, splitting it, and saving the split
 portions of data to new files.
+
+```
 from pickle import load
 from pickle import dump
 from numpy.random import shuffle
@@ -301,17 +302,14 @@ the clean text data ready for modeling and defining and training the model on th
 data. Let’s start off by loading the datasets so that we can prepare the data. The function
 below named load clean sentences() can be used to load the train, test, and both datasets
 in turn.
+
+```
 # load a clean dataset
 def load_clean_sentences(filename):
 return load(open(filename, 'rb'))
 # load datasets
 dataset = load_clean_sentences('english-german-both.pkl')
 train = load_clean_sentences('english-german-train.pkl')
-
-30.4. Train Neural Translation Model
-
-359
-
 test = load_clean_sentences('english-german-test.pkl')
 
 ```
@@ -323,6 +321,8 @@ long or have words that are out of the vocabulary. We can use the Keras Tokenize
 map words to integers, as needed for modeling. We will use separate tokenizer for the English
 sequences and the German sequences. The function below-named create tokenizer() will
 train a tokenizer on a list of phrases.
+
+```
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
@@ -333,6 +333,8 @@ return tokenizer
 
 Similarly, the function named max length() below will find the length of the longest sequence
 in a list of phrases.
+
+```
 # max sentence length
 def max_length(lines):
 return max(len(line.split()) for line in lines)
@@ -341,6 +343,8 @@ return max(len(line.split()) for line in lines)
 
 We can call these functions with the combined dataset to prepare tokenizers, vocabulary
 sizes, and maximum lengths for both the English and German phrases.
+
+```
 # prepare english tokenizer
 eng_tokenizer = create_tokenizer(dataset[:, 0])
 eng_vocab_size = len(eng_tokenizer.word_index) + 1
@@ -360,16 +364,13 @@ We are now ready to prepare the training dataset. Each input and output sequence
 encoded to integers and padded to the maximum phrase length. This is because we will use a
 word embedding for the input sequences and one hot encode the output sequences The function
 below named encode sequences() will perform these operations and return the result.
+
+```
 # encode and pad sequences
 def encode_sequences(tokenizer, length, lines):
 # integer encode sequences
 X = tokenizer.texts_to_sequences(lines)
 # pad sequences with 0 values
-
-30.4. Train Neural Translation Model
-
-360
-
 X = pad_sequences(X, maxlen=length, padding='post')
 return X
 
@@ -378,6 +379,8 @@ return X
 The output sequence needs to be one hot encoded. This is because the model will predict
 the probability of each word in the vocabulary as output. The function encode output() below
 will one hot encode English output sequences.
+
+```
 # one hot encode target sequence
 def encode_output(sequences, vocab_size):
 ylist = list()
@@ -392,6 +395,8 @@ return y
 
 We can make use of these two functions and prepare both the train and test dataset ready
 for training the model.
+
+```
 # prepare training data
 trainX = encode_sequences(ger_tokenizer, ger_length, train[:, 1])
 trainY = encode_sequences(eng_tokenizer, eng_length, train[:, 0])
@@ -414,6 +419,8 @@ minimizes the categorical loss function because we have framed the prediction pr
 multiclass classification. The model configuration was not optimized for this problem, meaning
 that there is plenty of opportunity for you to tune it and lift the skill of the translations. I
 would love to see what you can come up with.
+
+```
 # define NMT model
 def define_model(src_vocab, tar_vocab, src_timesteps, tar_timesteps, n_units):
 model = Sequential()
@@ -423,11 +430,6 @@ model.add(RepeatVector(tar_timesteps))
 model.add(LSTM(n_units, return_sequences=True))
 model.add(TimeDistributed(Dense(tar_vocab, activation='softmax')))
 # compile model
-
-30.4. Train Neural Translation Model
-
-361
-
 model.compile(optimizer='adam', loss='categorical_crossentropy')
 # summarize defined model
 model.summary()
@@ -439,6 +441,8 @@ return model
 Finally, we can train the model. We train the model for 30 epochs and a batch size of
 64 examples. We use checkpointing to ensure that each time the model skill on the test set
 improves, the model is saved to file.
+
+```
 # fit model
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1,
 save_best_only=True, mode='min')
@@ -449,6 +453,8 @@ callbacks=[checkpoint], verbose=2)
 
 We can tie all of this together and fit the neural translation model. The complete working
 example is listed below.
+
+```
 from
 from
 from
@@ -549,13 +555,6 @@ model = define_model(ger_vocab_size, eng_vocab_size, ger_length, eng_length, 256
 # fit model
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1,
 save_best_only=True, mode='min')
-
-362
-
-30.4. Train Neural Translation Model
-
-363
-
 model.fit(trainX, trainY, epochs=30, batch_size=64, validation_data=(testX, testY),
 callbacks=[checkpoint], verbose=2)
 
@@ -563,6 +562,8 @@ callbacks=[checkpoint], verbose=2)
 
 Running the example first prints a summary of the parameters of the dataset such as
 vocabulary size and maximum phrase lengths.
+
+```
 English Vocabulary Size: 2404
 English Max Length: 5
 German Vocabulary Size: 3856
@@ -571,6 +572,8 @@ German Max Length: 10
 ```
 
 Next, a summary of the defined model is printed, allowing us to confirm the model configuration.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -603,14 +606,12 @@ _________________________________________________________________
 
 A plot of the model is also created providing another perspective on the model configuration.
 
-30.4. Train Neural Translation Model
-
-364
-
 Figure 30.1: Plot of the defined neural machine translation model
 Next, the model is trained. Each epoch takes about 30 seconds on modern CPU hardware;
 no GPU is required. During the run, the model will be saved to the file model.h5, ready for
 inference in the next step.
+
+```
 ...
 Epoch
 Epoch
@@ -640,10 +641,6 @@ loss: 0.5474 - val_loss: 2.1787
 00029: val_loss did not improve
 loss: 0.5023 - val_loss: 2.1823
 
-30.5. Evaluate Neural Translation Model
-
-365
-
 ```
 
 
@@ -656,6 +653,8 @@ well on the train dataset and ideally have been generalized to perform well on t
 Ideally, we would use a separate validation dataset to help with model selection during training
 instead of the test set. You can try this as an extension. The clean datasets must be loaded
 and prepared as before.
+
+```
 ...
 # load datasets
 dataset = load_clean_sentences('english-german-both.pkl')
@@ -676,6 +675,8 @@ testX = encode_sequences(ger_tokenizer, ger_length, test[:, 1])
 ```
 
 Next, the best model saved during training must be loaded.
+
+```
 # load model
 model = load_model('model.h5')
 
@@ -685,29 +686,30 @@ Evaluation involves two steps: first generating a translated output sequence, an
 repeating this process for many input examples and summarizing the skill of the model across
 multiple cases. Starting with inference, the model can predict the entire output sequence in a
 one-shot manner.
+
+```
 translation = model.predict(source, verbose=0)
 
 ```
 
 This will be a sequence of integers that we can enumerate and lookup in the tokenizer to map
 back to words. The function below, named word for id(), will perform this reverse mapping.
+
+```
 # map an integer to a word
 def word_for_id(integer, tokenizer):
 for word, index in tokenizer.word_index.items():
-if index == integer:
-return word
-
-30.5. Evaluate Neural Translation Model
-
-366
-
-return None
+    if index == integer:
+        return word
+    return None
 
 ```
 
 We can perform this mapping for each integer in the translation and return the result as a
 string of words. The function predict sequence() below performs this operation for a single
 encoded source phrase.
+
+```
 # generate target given source sequence
 def predict_sequence(model, tokenizer, source):
 prediction = model.predict(source, verbose=0)[0]
@@ -728,6 +730,8 @@ get an idea of how the model performs in practice. We will also calculate the BL
 get a quantitative idea of how well the model has performed. The evaluate model() function
 below implements this, calling the above predict sequence() function for each phrase in a
 provided dataset.
+
+```
 # evaluate the skill of the model
 def evaluate_model(model, tokenizer, sources, raw_dataset):
 actual, predicted = list(), list()
@@ -750,6 +754,8 @@ print('BLEU-4: %f' % corpus_bleu(actual, predicted, weights=(0.25, 0.25, 0.25, 0
 
 We can tie all of this together and evaluate the loaded model on both the training and test
 datasets. The complete code listing is provided below.
+
+```
 from
 from
 from
@@ -761,8 +767,6 @@ numpy import argmax
 keras.preprocessing.text import Tokenizer
 keras.preprocessing.sequence import pad_sequences
 keras.models import load_model
-
-30.5. Evaluate Neural Translation Model
 from nltk.translate.bleu_score import corpus_bleu
 # load a clean dataset
 def load_clean_sentences(filename):
@@ -813,9 +817,6 @@ actual.append(raw_target.split())
 predicted.append(translation.split())
 # calculate BLEU score
 
-367
-
-30.5. Evaluate Neural Translation Model
 print('BLEU-1:
 print('BLEU-2:
 print('BLEU-3:
@@ -883,6 +884,8 @@ to i cant go instead of the expected ‘i couldnt walk ’. We can also see the 
 which provides an upper bound on what we might expect from this model.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 src=[ich liebe dich], target=[i love you], predicted=[i love you]
 src=[ich sagte du sollst den mund halten], target=[i said shut up], predicted=[i said stop
 up]
@@ -895,14 +898,10 @@ src=[versucht es doch einfach], target=[just try it], predicted=[just try it]
 src=[sie sind jung], target=[youre young], predicted=[youre young]
 src=[er ging surfen], target=[he went surfing], predicted=[he went surfing]
 
-30.6. Extensions
-
 BLEU-1:
 BLEU-2:
 BLEU-3:
 BLEU-4:
-
-369
 
 0.085682
 0.284191
@@ -917,6 +916,8 @@ some poor translations and a good case that the model could support from further
 as ‘ich bin etwas beschwipst’ translated as ‘i a bit bit’ instead of the expected im a bit tipsy A
 BLEU-4 score of 0.076238 was achieved, providing a baseline skill to improve upon with further
 improvements to the model.
+
+```
 src=[tom erblasste], target=[tom turned pale], predicted=[tom went pale]
 src=[bring mich nach hause], target=[take me home], predicted=[let us at]
 src=[ich bin etwas beschwipst], target=[im a bit tipsy], predicted=[i a bit bit]
@@ -956,11 +957,6 @@ phrases, or more.
 lift skill, or a Bidirectional input layer could be used.
 - Layers. The encoder and/or the decoder models could be expanded with additional layers
 and trained for more epochs, providing more representational capacity for the model.
-
-30.7. Further Reading
-
-370
-
 - Units. The number of memory units in the encoder and decoder could be increased,
 providing more representational capacity for the model.
 - Regularization. The model could use regularization, such as weight or activation
@@ -1009,13 +1005,7 @@ https://arxiv.org/abs/1409.1259
 - Massive Exploration of Neural Machine Translation Architectures, 2017.
 https://arxiv.org/abs/1703.03906
 
-30.8. Summary
-
-30.8
-
-371
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop a neural machine translation system for translating
 German phrases to English. Specifically, you learned:

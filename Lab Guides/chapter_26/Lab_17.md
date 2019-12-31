@@ -74,13 +74,7 @@ in an Image Caption Generator ):
 We describe the BLEU metric more later when we work on evaluating our model. Next, let’s
 look at how to load the images.
 
-26.3. Prepare Photo Data
-
-26.3
-
-300
-
-Prepare Photo Data
+# Prepare Photo Data
 
 We will use a pre-trained model to interpret the content of the photos. There are many models
 to choose from. In this case, we will use the Oxford Visual Geometry Group, or VGG, model
@@ -106,6 +100,8 @@ Keras also provides tools for reshaping the loaded photo into the preferred size
 given a directory name, will load each photo, prepare it for VGG, and collect the predicted
 features from the VGG model. The image features are a 1-dimensional 4,096 element vector.
 The function returns a dictionary of image identifier to image features.
+
+```
 # extract features from each photo in the directory
 def extract_features(directory):
 # load the model
@@ -145,6 +141,8 @@ return features
 
 We can call this function to prepare the photo data for testing our models, then save the
 resulting dictionary to a file named features.pkl. The complete example is listed below.
+
+```
 from
 from
 from
@@ -199,10 +197,6 @@ print('Extracted Features: %d' % len(features))
 # save to file
 dump(features, open('features.pkl', 'wb'))
 
-26.4. Prepare Text Data
-
-302
-
 ```
 
 Running this data preparation step may take a while depending on your hardware, perhaps
@@ -218,6 +212,8 @@ The dataset contains multiple descriptions for each photograph and the text of t
 requires some minimal cleaning. Note, a fuller investigation into how this text data can
 be prepared was described in Chapter 25. First, we will load the file containing all of the
 descriptions.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -238,6 +234,8 @@ text file of descriptions. Next, we will step through the list of photo descript
 a function load descriptions() that, given the loaded document text, will return a dictionary
 of photo identifiers to descriptions. Each photo identifier maps to a list of one or more textual
 descriptions.
+
+```
 # extract descriptions for images
 def load_descriptions(doc):
 mapping = dict()
@@ -254,11 +252,6 @@ image_id = image_id.split('.')[0]
 # convert description tokens back to string
 image_desc = ' '.join(image_desc)
 # create the list if needed
-
-26.4. Prepare Text Data
-
-303
-
 if image_id not in mapping:
 mapping[image_id] = list()
 # store description
@@ -280,6 +273,8 @@ vocabulary of words we will need to work with:
 
 Below defines the clean descriptions() function that, given the dictionary of image
 identifiers to descriptions, steps through each description and cleans the text.
+
+```
 def clean_descriptions(descriptions):
 # prepare regex for char filtering
 re_punc = re.compile('[%s]' % re.escape(string.punctuation))
@@ -308,10 +303,7 @@ that is both expressive and as small as possible. A smaller vocabulary will resu
 model that will train faster. For reference, we can transform the clean descriptions into a set
 and print its size to get an idea of the size of our dataset vocabulary.
 
-26.4. Prepare Text Data
-
-304
-
+```
 # convert the loaded descriptions into a vocabulary of words
 def to_vocabulary(descriptions):
 # build a list of all description strings
@@ -329,6 +321,8 @@ Finally, we can save the dictionary of image identifiers and descriptions to a n
 named descriptions.txt, with one image identifier and description per line. Below defines the
 save doc() function that, given a dictionary containing the mapping of identifiers to descriptions
 and a filename, saves the mapping to file.
+
+```
 # save descriptions to file, one per line
 def save_descriptions(descriptions, filename):
 lines = list()
@@ -345,6 +339,8 @@ save_doc(descriptions, 'descriptions.txt')
 ```
 
 Putting this all together, the complete listing is provided below.
+
+```
 import string
 import re
 # load doc into memory
@@ -416,13 +412,6 @@ file.write(data)
 file.close()
 filename = 'Flickr8k_text/Flickr8k.token.txt'
 # load descriptions
-
-305
-
-26.5. Develop Deep Learning Model
-
-306
-
 doc = load_doc(filename)
 # parse descriptions
 descriptions = load_descriptions(doc)
@@ -447,6 +436,8 @@ Vocabulary Size: 8,763
 Finally, the clean descriptions are written to descriptions.txt. Taking a look at the file,
 we can see that the descriptions are ready for modeling. The order of descriptions in your file
 may vary.
+
+```
 2252123185_487f21e336
 2252123185_487f21e336
 2252123185_487f21e336
@@ -480,11 +471,6 @@ Loading Data
 
 First, we must load the prepared photo and text data so that we can use it to fit the model.
 We are going to train the data on all of the photos and captions in the training dataset. While
-
-26.5. Develop Deep Learning Model
-
-307
-
 training, we are going to monitor the performance of the model on the development dataset and
 use that performance to decide when to save models to file.
 The train and development dataset have been predefined in the Flickr 8k.trainImages.txt
@@ -492,6 +478,8 @@ and Flickr 8k.devImages.txt files respectively, that both contain lists of photo
 From these file names, we can extract the photo identifiers and use these identifiers to filter
 photos and descriptions for each set. The function load set() below will load a pre-defined set
 of identifiers given the train or development sets filename.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -527,6 +515,8 @@ input. Therefore, we will need a first word to kick-off the generation process a
 signal the end of the caption. We will use the strings startseq and endseq for this purpose.
 These tokens are added to the loaded descriptions as they are loaded. It is important to do this
 now before we encode the text so that the tokens are also encoded correctly.
+
+```
 # load clean descriptions into memory
 def load_clean_descriptions(filename, dataset):
 # load document
@@ -536,11 +526,6 @@ for line in doc.split('\n'):
 # split line by white space
 tokens = line.split()
 # split id from description
-
-26.5. Develop Deep Learning Model
-
-308
-
 image_id, image_desc = tokens[0], tokens[1:]
 # skip images not in the set
 if image_id in dataset:
@@ -559,6 +544,8 @@ Next, we can load the photo features for a given dataset. Below defines a functi
 load photo features() that loads the entire set of photo descriptions, then returns the subset
 of interest for a given set of photo identifiers. This is not very efficient; nevertheless, this will
 get us up and running quickly.
+
+```
 # load photo features
 def load_photo_features(filename, dataset):
 # load all features
@@ -594,11 +581,6 @@ continue
 identifier = line.split('.')[0]
 dataset.append(identifier)
 return set(dataset)
-
-26.5. Develop Deep Learning Model
-
-309
-
 # load clean descriptions into memory
 def load_clean_descriptions(filename, dataset):
 # load document
@@ -642,6 +624,8 @@ print('Photos: train=%d' % len(train_features))
 Running this example first loads the 6,000 photo identifiers in the test dataset. These
 features are then used to filter and load the cleaned description text and the pre-computed
 photo features. We are nearly there.
+
+```
 Dataset: 6,000
 Descriptions: train=6,000
 Photos: train=6,000
@@ -651,14 +635,11 @@ Photos: train=6,000
 The description text will need to be encoded to numbers before it can be presented to
 the model as in input or compared to the model’s predictions. The first step in encoding the
 data is to create a consistent mapping from words to unique integer values. Keras provides
-
-26.5. Develop Deep Learning Model
-
-310
-
 the Tokenizer class that can learn this mapping from the loaded description data. Below
 defines the to lines() to convert the dictionary of descriptions into a list of strings and the
 create tokenizer() function that will fit a Tokenizer given the loaded photo description text.
+
+```
 # convert a dictionary of clean descriptions to a list of descriptions
 def to_lines(descriptions):
 all_desc = list()
@@ -683,6 +664,8 @@ provided one word and the photo and generate the next word. Then the first two w
 description will be provided to the model as input with the image to generate the next word.
 This is how the model will be trained. For example, the input sequence “little girl running in
 field ” would be split into 6 input-output pairs to train the model:
+
+```
 X1,
 photo
 photo
@@ -720,13 +703,10 @@ The input text is encoded as integers, which will be fed to a word embedding lay
 photo features will be fed directly to another part of the model. The model will output a
 prediction, which will be a probability distribution over all words in the vocabulary. The
 output data will therefore be a one hot encoded version of each word, representing an idealized
-
-26.5. Develop Deep Learning Model
-
-311
-
 probability distribution with 0 values at all word positions except the actual word position,
 which has a value of 1.
+
+```
 # create sequences of images, input sequences and output words for an image
 def create_sequences(tokenizer, max_length, descriptions, photos):
 X1, X2, y = list(), list(), list()
@@ -754,6 +734,8 @@ return array(X1), array(X2), array(y)
 
 We will need to calculate the maximum number of words in the longest description. A short
 helper function named max length() is defined below.
+
+```
 # calculate the length of the description with the most words
 def max_length(descriptions):
 lines = to_lines(descriptions)
@@ -797,6 +779,8 @@ input models using an addition operation. This is then fed to a Dense 256 neuron
 to a final output Dense layer that makes a softmax prediction over the entire output vocabulary
 for the next word in the sequence. The function below named define model() defines and
 returns the model ready to be fit.
+
+```
 # define the captioning model
 def define_model(vocab_size, max_length):
 # feature extractor model
@@ -826,9 +810,6 @@ return model
 A plot of the model is created and helps to better understand the structure of the network
 and the two streams of input.
 
-26.5. Develop Deep Learning Model
-
-313
 
 Figure 26.1: Plot of the defined caption generation model.
 
@@ -844,6 +825,8 @@ At the end of the run, we can then use the saved model with the best skill on th
 dataset as our final model. We can do this by defining a ModelCheckpoint in Keras and
 specifying it to monitor the minimum loss on the validation dataset and save the model to a file
 that has both the training and validation loss in the filename.
+
+```
 # define checkpoint callback
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1,
 save_best_only=True, mode='min')
@@ -854,6 +837,8 @@ We can then specify the checkpoint in the call to fit() via the callbacks argume
 must also specify the development dataset in fit() via the validation data argument. We
 will only fit the model for 20 epochs, but given the amount of training data, each epoch may
 take 30 minutes on modern hardware.
+
+```
 # fit model
 model.fit([X1train, X2train], ytrain, epochs=20, verbose=2, callbacks=[checkpoint],
 validation_data=([X1test, X2test], ytest))
@@ -861,17 +846,13 @@ validation_data=([X1test, X2test], ytest))
 ```
 
 
-26.5. Develop Deep Learning Model
-
-26.5.4
-
-314
-
 Complete Example
 
 The complete example for fitting the model on the training data is listed below. Note, running
 this example may require a machine with 8 or more Gigabytes of RAM. See the appendix for
 using AWS, if needed.
+
+```
 from
 from
 from
@@ -935,8 +916,6 @@ tokens = line.split()
 # split id from description
 image_id, image_desc = tokens[0], tokens[1:]
 # skip images not in the set
-
-26.5. Develop Deep Learning Model
 if image_id in dataset:
 # create list
 if image_id not in descriptions:
@@ -988,10 +967,6 @@ in_seq = pad_sequences([in_seq], maxlen=max_length)[0]
 out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
 # store
 X1.append(photos[key][0])
-
-315
-
-26.5. Develop Deep Learning Model
 X2.append(in_seq)
 y.append(out_seq)
 return array(X1), array(X2), array(y)
@@ -1045,13 +1020,6 @@ print('Dataset: %d' % len(test))
 # descriptions
 test_descriptions = load_clean_descriptions('descriptions.txt', test)
 print('Descriptions: test=%d' % len(test_descriptions))
-
-316
-
-26.6. Evaluate Model
-
-317
-
 # photo features
 test_features = load_photo_features('features.pkl', test)
 print('Photos: test=%d' % len(test_features))
@@ -1070,6 +1038,8 @@ validation_data=([X1test, X2test], ytest))
 ```
 
 Running the example first prints a summary of the loaded training and development datasets.
+
+```
 Dataset: 6,000
 Descriptions: train=6,000
 Photos: train=6,000
@@ -1105,10 +1075,7 @@ generate desc() implements this behavior and generates a textual description giv
 model, and a given prepared photo as input. It calls the function word for id() in order to
 map an integer prediction back to a word.
 
-26.6. Evaluate Model
-
-318
-
+```
 # map an integer to a word
 def word_for_id(integer, tokenizer):
 for word, index in tokenizer.word_index.items():
@@ -1146,6 +1113,8 @@ return in_text
 When generating and comparing photo descriptions, we will need to strip off the special
 start and end of sequence words. The function below named cleanup summary() will perform
 this operation.
+
+```
 # remove start/end sequence tokens from a summary
 def cleanup_summary(summary):
 # remove start of sequence token
@@ -1163,13 +1132,10 @@ return summary
 We will generate predictions for all photos in the test dataset. The function below named
 evaluate model() will evaluate a trained model against a given dataset of photo descriptions
 and photo features. The actual and predicted descriptions are collected and evaluated collectively
-
-26.6. Evaluate Model
-
-319
-
 using the corpus BLEU score that summarizes how close the generated text is to the expected
 text.
+
+```
 # evaluate the skill of the model
 def evaluate_model(model, descriptions, photos, tokenizer, max_length):
 actual, predicted = list(), list()
@@ -1202,6 +1168,8 @@ data. We first need to load the training dataset in order to prepare a Tokenizer
 can encode generated words as input sequences for the model. It is critical that we encode the
 generated words using exactly the same encoding scheme as was used when training the model.
 We then use these functions for loading the test dataset. The complete example is listed below.
+
+```
 from
 from
 from
@@ -1280,10 +1248,6 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts(lines)
 return tokenizer
 # calculate the length of the description with the most words
-
-320
-
-26.6. Evaluate Model
 def max_length(descriptions):
 lines = to_lines(descriptions)
 return max(len(d.split()) for d in lines)
@@ -1352,8 +1316,6 @@ print('BLEU-2: %f' % corpus_bleu(actual, predicted,
 print('BLEU-3: %f' % corpus_bleu(actual, predicted,
 print('BLEU-4: %f' % corpus_bleu(actual, predicted,
 
-322
-
 desc_list]
 
 weights=(1.0, 0, 0, 0)))
@@ -1396,8 +1358,10 @@ evaluate_model(model, test_descriptions, test_features, tokenizer, max_length)
 Running the example prints the BLEU scores. We can see that the scores fit within the
 expected range of a skillful model on the problem. The chosen model configuration is by no
 means optimized.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
 BLEU-1: 0.438805
 BLEU-2: 0.230646
 
@@ -1457,11 +1421,6 @@ descriptions = dict()
 for line in doc.split('\n'):
 # split line by white space
 tokens = line.split()
-
-26.7. Generate New Captions
-
-324
-
 # split id from description
 image_id, image_desc = tokens[0], tokens[1:]
 # skip images not in the set
@@ -1516,6 +1475,8 @@ We will generate a description for it using our model. Download the photograph a
 it to your local directory with the filename example.jpg. First, we must load the Tokenizer
 from tokenizer.pkl and define the maximum length of the sequence to generate, needed for
 padding inputs.
+
+```
 # load the tokenizer
 tokenizer = load(open('tokenizer.pkl', 'rb'))
 # pre-define the max sequence length (from training)
@@ -1524,6 +1485,8 @@ max_length = 34
 ```
 
 Then we must load the model, as before.
+
+```
 # load the model
 model = load_model('model.h5')
 
@@ -1534,6 +1497,8 @@ by re-defining the model and adding the VGG-16 model to it, or we can use the VG
 predict the features and use them as inputs to our existing model. We will do the latter and
 use a modified version of the extract features() function used during data preparation, but
 adapted to work on a single photo.
+
+```
 # extract features from each photo in the directory
 def extract_features(filename):
 # load the model
@@ -1547,11 +1512,6 @@ image = load_img(filename, target_size=(224, 224))
 image = img_to_array(image)
 # reshape data for the model
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
-
-26.7. Generate New Captions
-
-326
-
 # prepare the image for the VGG model
 image = preprocess_input(image)
 # get features
@@ -1565,6 +1525,8 @@ photo = extract_features('example.jpg')
 We can then generate a description using the generate desc() function defined when
 evaluating the model. The complete example for generating a description for an entirely new
 standalone photograph is listed below.
+
+```
 from
 from
 from
