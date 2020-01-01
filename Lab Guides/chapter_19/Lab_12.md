@@ -26,14 +26,6 @@ This tutorial is divided into the following parts:
 4. Model 2: Line-by-Line Sequence
 5. Model 3: Two-Words-In, One-Word-Out Sequence
 
-210
-
-19.2. Framing Language Modeling
-
-19.2
-
-211
-
 Framing Language Modeling
 
 A statistical language model is learned from raw text and predicts the probability of the next
@@ -53,11 +45,11 @@ from a source text for language modeling. In this tutorial, we will explore 3 di
 developing word-based language models in the Keras deep learning library. There is no single
 best approach, just different framings that may suit different applications.
 
-19.3
-
-Jack and Jill Nursery Rhyme
+# Jack and Jill Nursery Rhyme
 
 Jack and Jill is a simple nursery rhyme. It is comprised of 4 lines, as follows:
+
+```
 Jack and Jill went up the hill
 To fetch a pail of water
 Jack fell down and broke his crown
@@ -67,6 +59,8 @@ And Jill came tumbling after
 
 We will use this as our source text for exploring different framings of a word-based language
 model. We can define this text in Python as follows:
+
+```
 # source text
 data = """ Jack and Jill went up the hill\n
 To fetch a pail of water\n
@@ -76,12 +70,12 @@ And Jill came tumbling after\n """
 ```
 
 
-19.4
-
 Model 1: One-Word-In, One-Word-Out Sequences
 
 We can start with a very simple model. Given one word as input, the model will learn to predict
 the next word in the sequence. For example:
+
+```
 X,
 Jack,
 and,
@@ -106,6 +100,8 @@ Keras provides the Tokenizer class that can be used to perform this encoding. Fi
 Tokenizer is fit on the source text to develop the mapping from words to unique integers. Then
 sequences of text can be converted to sequences of integers by calling the texts to sequences()
 function.
+
+```
 # integer encode text
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts([data])
@@ -116,6 +112,8 @@ encoded = tokenizer.texts_to_sequences([data])[0]
 We will need to know the size of the vocabulary later for both defining the word embedding
 layer in the model, and for encoding output words using a one hot encoding. The size of the
 vocabulary can be retrieved from the trained Tokenizer by accessing the word index attribute.
+
+```
 # determine the vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary Size: %d' % vocab_size)
@@ -126,6 +124,8 @@ Running this example, we can see that the size of the vocabulary is 21 words. We
 because we will need to specify the integer for the largest encoded word as an array index, e.g.
 words encoded 1 to 21 with array indicies 0 to 21 or 22 positions. Next, we need to create
 sequences of words to fit the model with one word as input and one word as output.
+
+```
 # create word -> word sequences
 sequences = list()
 for i in range(1, len(encoded)):
@@ -136,11 +136,15 @@ print('Total Sequences: %d' % len(sequences))
 ```
 
 Running this piece shows that we have a total of 24 input-output pairs to train the network.
+
+```
 Total Sequences: 24
 
 ```
 
 We can then split the sequences into input (X) and output elements (y). This is straightforward as we only have two columns in the data.
+
+```
 # split into X and y elements
 sequences = array(sequences)
 X, y = sequences[:,0],sequences[:,1]
@@ -150,14 +154,14 @@ X, y = sequences[:,0],sequences[:,1]
 
 19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
-213
-
 We will fit our model to predict a probability distribution across all words in the vocabulary.
 That means that we need to turn the output element from a single integer into a one hot
 encoding with a 0 for every word in the vocabulary and a 1 for the actual word that the value.
 This gives the network a ground truth to aim for from which we can calculate error and update
 the model. Keras provides the to categorical() function that we can use to convert the
 integer to a one hot encoding while specifying the number of classes as the vocabulary size.
+
+```
 # one hot encode outputs
 y = to_categorical(y, num_classes=vocab_size)
 
@@ -170,6 +174,8 @@ projection. The input sequence contains a single word, therefore the input lengt
 model has a single hidden LSTM layer with 50 units. This is far more than is needed. The
 output layer is comprised of one neuron for each word in the vocabulary and uses a softmax
 activation function to ensure the output is normalized to look like a probability.
+
+```
 # define the model
 def define_model(vocab_size):
 model = Sequential()
@@ -186,6 +192,8 @@ return model
 ```
 
 The structure of the network can be summarized as follows:
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -214,9 +222,9 @@ A plot the defined model is then saved to file with the name model.png.
 
 19.4. Model 1: One-Word-In, One-Word-Out Sequences
 
-214
 
 Figure 19.1: Plot of the defined word-based language model.
+
 We will use this same general network structure for each example in this tutorial, with
 minor changes to the learned embedding layer. We can compile and fit the network on the
 encoded text data. Technically, we are modeling a multiclass classification problem (predict the
@@ -229,6 +237,8 @@ After the model is fit, we test it by passing it a given word from the vocabular
 having the model predict the next word. Here we pass in 'Jack ' by encoding it and calling
 model.predict classes() to get the integer output for the predicted word. This is then looked
 up in the vocabulary mapping to give the associated word.
+
+```
 # evaluate
 in_text = 'Jack'
 print(in_text)
@@ -244,10 +254,10 @@ print(word)
 This process could then be repeated a few times to build up a generated sequence of words.
 To make this easier, we wrap up the behavior in a function that we can call by passing in our
 model and the seed word.
+
+```
 # generate a sequence from the model
 def generate_seq(model, tokenizer, seed_text, n_words):
-
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
 in_text, result = seed_text, seed_text
 # generate a fixed number of words
 for _ in range(n_words):
@@ -269,6 +279,8 @@ return result
 ```
 
 We can tie all of this together. The complete code listing is provided below.
+
+```
 from
 from
 from
@@ -312,13 +324,6 @@ model = Sequential()
 model.add(Embedding(vocab_size, 10, input_length=1))
 model.add(LSTM(50))
 model.add(Dense(vocab_size, activation='softmax'))
-
-215
-
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
-
-216
-
 # compile network
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 # summarize defined model
@@ -358,6 +363,8 @@ print(generate_seq(model, tokenizer, 'Jack', 6))
 ```
 
 Running the example prints the loss and accuracy each training epoch.
+
+```
 ...
 Epoch 496/500
 0s - loss: 0.2358
@@ -381,10 +388,7 @@ Epoch 500/500
 We can see that the model does not memorize the source sequences, likely because there is
 some ambiguity in the input sequences, for example:
 
-19.5. Model 2: Line-by-Line Sequence
-
-217
-
+```
 jack => and
 jack => fell
 
@@ -396,18 +400,16 @@ Note: Given the stochastic nature of neural networks, your specific results may 
 running the example a few times.
 Jack and jill came tumbling after down
 
-```
-
 This is a good first cut language model, but does not take full advantage of the LSTM's
 ability to handle sequences of input and disambiguate some of the ambiguous pairwise sequences
 by using a broader context.
 
-19.5
-
-Model 2: Line-by-Line Sequence
+# Model 2: Line-by-Line Sequence
 
 Another approach is to split up the source text line-by-line, then break each line down into a
 series of words that build up. For example:
+
+```
 X,
 _, _, _, _, _, Jack,
 _, _, _, _, Jack, and,
@@ -433,6 +435,8 @@ in modeling and generating lines of text. Note that in this representation, we w
 padding of sequences to ensure they meet a fixed length input. This is a requirement when
 using Keras. First, we can create the sequences of integers, line-by-line by using the Tokenizer
 already fit on the source text.
+
+```
 # create line-based sequences
 sequences = list()
 for line in data.split('\n'):
@@ -444,14 +448,11 @@ print('Total Sequences: %d' % len(sequences))
 
 ```
 
-
-19.5. Model 2: Line-by-Line Sequence
-
-218
-
 Next, we can pad the prepared sequences. We can do this using the pad sequences()
 function provided in Keras. This first involves finding the longest sequence, then using that as
 the length by which to pad-out all other sequences.
+
+```
 # pad input sequences
 max_length = max([len(seq) for seq in sequences])
 sequences = pad_sequences(sequences, maxlen=max_length, padding='pre')
@@ -460,6 +461,8 @@ print('Max Sequence Length: %d' % max_length)
 ```
 
 Next, we can split the sequences into input and output elements, much like before.
+
+```
 # split into input and output elements
 sequences = array(sequences)
 X, y = sequences[:,:-1],sequences[:,-1]
@@ -470,6 +473,8 @@ y = to_categorical(y, num_classes=vocab_size)
 The model can then be defined as before, except the input sequences are now longer than a
 single word. Specifically, they are max length-1 in length, -1 because when we calculated the
 maximum length of sequences, they included the input and output elements.
+
+```
 # define the model
 def define_model(vocab_size, max_length):
 model = Sequential()
@@ -488,6 +493,8 @@ return model
 We can use the model to generate new sequences as before. The generate seq() function
 can be updated to build up an input sequence by adding predictions to the list of input words
 each iteration.
+
+```
 # generate a sequence from a language model
 def generate_seq(model, tokenizer, max_length, seed_text, n_words):
 in_text = seed_text
@@ -514,6 +521,8 @@ return in_text
 ```
 
 Tying all of this together, the complete code example is provided below.
+
+```
 from
 from
 from
@@ -569,13 +578,6 @@ return model
 # source text
 data = """ Jack and Jill went up the hill\n
 To fetch a pail of water\n
-
-219
-
-19.5. Model 2: Line-by-Line Sequence
-
-220
-
 Jack fell down and broke his crown\n
 And Jill came tumbling after\n """
 # prepare the tokenizer on the source text
@@ -613,6 +615,8 @@ print(generate_seq(model, tokenizer, max_length-1, 'Jill', 4))
 Running the example achieves a better fit on the source data. The added context has allowed
 the model to disambiguate some of the examples. There are still two lines of text that start
 with “Jack ” that may still be a problem for the network.
+
+```
 ...
 Epoch 496/500
 0s - loss: 0.1039
@@ -637,14 +641,12 @@ At the end of the run, we generate two sequences with different seed words: Jack
 The first generated line looks good, directly matching the source text. The second is a bit
 strange. This makes sense, because the network only ever saw Jill within an input sequence,
 not at the beginning of the sequence, so it has forced an output to use the word Jill, i.e. the
-
-19.6. Model 3: Two-Words-In, One-Word-Out Sequence
-
-221
-
 last line of the rhyme.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 Jack fell down and broke
 Jill jill came tumbling after
 
@@ -653,15 +655,15 @@ Jill jill came tumbling after
 This was a good example of how the framing may result in better new lines, but not good
 partial lines of input.
 
-19.6
-
-Model 3: Two-Words-In, One-Word-Out Sequence
+# Model 3: Two-Words-In, One-Word-Out Sequence
 
 We can use an intermediate between the one-word-in and the whole-sentence-in approaches
 and pass in a sub-sequences of words as input. This will provide a trade-off between the two
 framings allowing new lines to be generated and for generation to be picked up mid line. We will
 use 3 words as input to predict one word as output. The preparation of the sequences is much
 like the first example, except with different offsets in the source sequence arrays, as follows:
+
+```
 # encode 2 words -> 1 word
 sequences = list()
 for i in range(2, len(encoded)):
@@ -671,6 +673,8 @@ sequences.append(sequence)
 ```
 
 The complete example is listed below
+
+```
 from
 from
 from
@@ -761,17 +765,13 @@ print(generate_seq(model, tokenizer, max_length-1, 'And Jill', 3))
 print(generate_seq(model, tokenizer, max_length-1, 'fell down', 5))
 print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
 
-222
-
-19.7. Further Reading
-
-223
-
 ```
 
 Running the example again gets a good fit on the source text at around 95% accuracy.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 ...
 Epoch 496/500
 0s - loss: 0.0685
@@ -814,9 +814,7 @@ how the model will be used must be compatible. That careful design is required w
 language models in general, perhaps followed-up by spot testing with sequence generation to
 confirm model requirements have been met.
 
-19.7
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Jack and Jill on Wikipedia.
@@ -825,11 +823,6 @@ https://en.wikipedia.org/wiki/Jack_and_Jill_(nursery_rhyme)
 https://en.wikipedia.org/wiki/Language_model
 - Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
-
-19.8. Summary
-
-224
-
 - Keras Text Processing API.
 https://keras.io/preprocessing/text/
 - Keras Sequence Processing API.
@@ -837,9 +830,7 @@ https://keras.io/preprocessing/sequence/
 - Keras Utils API.
 https://keras.io/utils/
 
-19.8
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop different word-based language models for a simple
 nursery rhyme. Specifically, you learned:
@@ -848,10 +839,3 @@ application.
 - How to develop one-word, two-word, and line-based framings for word-based language
 models.
 - How to generate sequences using a fit language model.
-
-19.8.1
-
-Next
-
-In the next chapter, you will discover how you can develop a word-based neural language model
-on a large corpus of text.

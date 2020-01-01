@@ -126,11 +126,6 @@ image = preprocess_input(image)
 # get features
 feature = model.predict(image, verbose=0)
 # get image id
-
-26.3. Prepare Photo Data
-
-301
-
 image_id = name.split('.')[0]
 # store feature
 features[image_id] = feature
@@ -428,6 +423,8 @@ save_descriptions(descriptions, 'descriptions.txt')
 
 Running the example first prints the number of loaded photo descriptions (8,092) and the
 size of the clean vocabulary (8,763 words).
+
+```
 Loaded: 8,092
 Vocabulary Size: 8,763
 
@@ -558,6 +555,8 @@ return features
 
 We can pause here and test everything developed so far. The complete code example is
 listed below.
+
+```
 from pickle import load
 # load doc into memory
 def load_doc(filename):
@@ -1300,10 +1299,6 @@ actual, predicted = list(), list()
 for key, desc_list in descriptions.items():
 # generate description
 yhat = generate_desc(model, tokenizer, photos[key], max_length)
-
-321
-
-26.6. Evaluate Model
 # clean up prediction
 yhat = cleanup_summary(yhat)
 # store actual and predicted
@@ -1362,13 +1357,9 @@ means optimized.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
+```
 BLEU-1: 0.438805
 BLEU-2: 0.230646
-
-26.7. Generate New Captions
-
-323
-
 BLEU-3: 0.150245
 BLEU-4: 0.062847
 
@@ -1389,6 +1380,8 @@ the tokenizer and save it to a file so that we can load it quickly whenever we n
 needing the entire Flickr8K dataset. An alternative would be to use our own vocabulary file
 and mapping to integers function during training. We can create the Tokenizer as before and
 save it as a pickle file tokenizer.pkl. The complete example is listed below.
+
+```
 from keras.preprocessing.text import Tokenizer
 from pickle import dump
 # load doc into memory
@@ -1462,13 +1455,11 @@ dump(tokenizer, open('tokenizer.pkl', 'wb'))
 We can now load the tokenizer whenever we need it without having to load the entire training
 dataset of annotations. Now, let's generate a description for a new photograph. Below is a new
 photograph that I chose randomly on Flickr (available under a permissive license)1 .
-1
 
 https://www.flickr.com/photos/bambe1964/7837618434/
 
 26.7. Generate New Captions
 
-325
 
 Figure 26.2: Photo of a dog at the beach. Photo by bambe1964, some rights reserved.
 We will generate a description for it using our model. Download the photograph and save
@@ -1635,12 +1626,6 @@ dog is running across the beach
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-26.8. Extensions
-
-26.8
-
-328
-
 Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
@@ -1682,12 +1667,6 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-26.9. Further Reading
-
-26.9.1
-
-329
-
 Caption Generation Papers
 
 - Show and Tell: A Neural Image Caption Generator, 2015.
@@ -1717,11 +1696,6 @@ https://www.jair.org/media/3994/live-3994-7274-jair.pdf
 https://illinois.edu/fb/sec/1713398
 - Old Flicrk8K Homepage.
 http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html
-
-26.9.3
-
-API
-
 - Keras Model API.
 https://keras.io/models/model/
 - Keras pad sequences() API.
@@ -1730,19 +1704,12 @@ https://keras.io/preprocessing/sequence/#pad_sequences
 https://keras.io/preprocessing/text/#tokenizer
 - Keras VGG16 API.
 https://keras.io/applications/#vgg16
-
-26.10. Summary
-
-330
-
 - Gensim Word2Vec API.
 https://radimrehurek.com/gensim/models/word2vec.html
 - nltk.translate package API Documentation.
 http://www.nltk.org/api/nltk.translate.html
 
-26.10
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to develop a photo captioning deep learning model from
 scratch. Specifically, you learned:
@@ -1750,15 +1717,3 @@ scratch. Specifically, you learned:
 - How to design and train a deep learning caption generation model.
 - How to evaluate a train caption generation model and use it to caption entirely new
 photographs.
-
-26.10.1
-
-Next
-
-This is the last chapter in the image captioning part. In the next part you will discover how to
-develop neural machine translation models.
-
-Part IX
-Machine Translation
-
-331

@@ -31,15 +31,8 @@ This tutorial is divided into the following parts:
 6. Whole Description Sequence Model
 7. Word-By-Word Model
 8. Progressive Loading
-276
 
 25.2. Download the Flickr8K Dataset
-
-25.2
-
-277
-
-Download the Flickr8K Dataset
 
 A good dataset to use when getting started with image captioning is the Flickr8K dataset. The
 reason is that it is realistic and relatively small so that you can download it and build models on
@@ -49,6 +42,7 @@ authors describe the dataset as follows:
 We introduce a new benchmark collection for sentence-based image description and
 search, consisting of 8,000 images that are each paired with five different captions
 which provide clear descriptions of the salient entities and events.
+
 ...
 The images were chosen from six different Flickr groups, and tend not to contain
 any well-known people or locations, but were manually selected to depict a variety
@@ -74,17 +68,13 @@ the photographs.
 
 Next, let's look at how to load the images.
 
-25.3. How to Load Photographs
-
-25.3
-
-278
-
-How to Load Photographs
+# How to Load Photographs
 
 In this section, we will develop some code to load the photos for use with the Keras deep learning
 library in Python. The image file names are unique image identifiers. For example, here is a
 sample of image file names:
+
+```
 990890291_afc72be141.jpg
 99171998_7cc800ceef.jpg
 99679241_adc853a5c0.jpg
@@ -95,6 +85,8 @@ sample of image file names:
 
 Keras provides the load img() function that can be used to load the image files directly as
 an array of pixels.
+
+```
 from keras.preprocessing.image import load_img
 image = load_img('990890291_afc72be141.jpg')
 
@@ -103,6 +95,8 @@ image = load_img('990890291_afc72be141.jpg')
 The pixel data needs to be converted to a NumPy array for use in Keras. We can use the
 img to array() Keras function to convert the loaded data.
 from keras.preprocessing.image import img_to_array
+
+```
 image = img_to_array(image)
 
 ```
@@ -112,6 +106,8 @@ image classification network trained on Image net. The Oxford Visual Geometry Gr
 model is popular for this purpose and is available in Keras. If we decide to use this pre-trained
 model as a feature extractor in our model, we can pre-process the pixel data for the model by
 using the preprocess input() function in Keras, for example:
+
+```
 from keras.applications.vgg16 import preprocess_input
 # reshape data into a single sample of an image
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
@@ -122,6 +118,8 @@ image = preprocess_input(image)
 
 We may also want to force the loading of the photo to have the same pixel dimensions as the
 VGG model, which are 224 x 224 pixels. We can do that in the call to load img(), for example:
+
+```
 image = load_img('990890291_afc72be141.jpg', target_size=(224, 224))
 
 ```
@@ -129,6 +127,8 @@ image = load_img('990890291_afc72be141.jpg', target_size=(224, 224))
 We may want to extract the unique image identifier from the image filename. We can do
 that by splitting the filename string by the '.' (period) character and retrieving the first element
 of the resulting array:
+
+```
 image_id = filename.split('.')[0]
 
 ```
@@ -136,11 +136,11 @@ image_id = filename.split('.')[0]
 
 25.4. Pre-Calculate Photo Features
 
-279
-
 We can tie all of this together and develop a function that, given the name of the directory
 containing the photos, will load and pre-process all of the photos for the VGG model and return
 them in a dictionary keyed on their unique image identifiers.
+
+```
 from
 from
 from
@@ -177,8 +177,9 @@ print('Loaded Images: %d' % len(images))
 ```
 
 Running this example prints the number of loaded images. It takes a few minutes to run.
-Loaded Images: 8091
 
+```
+Loaded Images: 8091
 ```
 
 
@@ -204,6 +205,8 @@ model. The first step is to load the VGG model. This model is provided directly 
 
 can be loaded as follows. Note that this will download the 500-megabyte model weights to your
 computer, which may take a few minutes.
+
+```
 from keras.applications.vgg16 import VGG16
 # load the model
 in_layer = Input(shape=(224, 224, 3))
@@ -218,6 +221,8 @@ output from the final pooling layer is taken as the features extracted from the 
 can walk over all images in the directory of images as in the previous section and call predict()
 function on the model for each prepared image to get the extracted features. The features can
 then be stored in a dictionary keyed on the image id. The complete example is listed below.
+
+```
 from
 from
 from
@@ -264,11 +269,6 @@ print('>%s' % name)
 return features
 # extract features from all images
 directory = 'Flicker8k_Dataset'
-
-25.5. How to Load Descriptions
-
-281
-
 features = extract_features(directory)
 print('Extracted Features: %d' % len(features))
 # save to file
@@ -289,6 +289,8 @@ It is important to take a moment to talk about the descriptions; there are a num
 The file Flickr8k.token.txt contains a list of image identifiers (used in the image filenames)
 and tokenized descriptions. Each image has multiple descriptions. Below is a sample of the
 descriptions from the file showing 5 different descriptions for a single image.
+
+```
 1305564994_00513f9a5b.jpg#0
 racer 's motorbike .
 1305564994_00513f9a5b.jpg#1
@@ -320,15 +322,12 @@ results reported in the paper. The first step is to decide which captions to use
 approach is to use the first description for each photograph. First, we need a function to load
 the entire annotations file (Flickr8k.token.txt) into memory. Below is a function to do this
 called load doc() that, given a filename, will return the document as a string.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
 file = open(filename, 'r')
-
-25.5. How to Load Descriptions
-
-282
-
 # read all text
 text = file.read()
 # close the file
@@ -340,6 +339,8 @@ return text
 We can see from the sample of the file above that we need only split each line by white space
 and take the first element as the image identifier and the rest as the image description. For
 example:
+
+```
 # split line by white space
 tokens = line.split()
 # take the first token as the image id, the rest as the description
@@ -349,12 +350,16 @@ image_id, image_desc = tokens[0], tokens[1:]
 
 We can then clean up the image identifier by removing the filename extension and the
 description number.
+
+```
 # remove filename from image id
 image_id = image_id.split('.')[0]
 
 ```
 
 We can also put the description tokens back together into a string for later processing.
+
+```
 # convert description tokens back to string
 image_desc = ' '.join(image_desc)
 
@@ -363,6 +368,8 @@ image_desc = ' '.join(image_desc)
 We can put all of this together into a function. Below defines the load descriptions()
 function that will take the loaded file, process it line-by-line, and return a dictionary of image
 identifiers to their first description.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -382,11 +389,6 @@ tokens = line.split()
 if len(line) < 2:
 continue
 # take the first token as the image id, the rest as the description
-
-25.6. Prepare Description Text
-
-283
-
 image_id, image_desc = tokens[0], tokens[1:]
 # remove filename from image id
 image_id = image_id.split('.')[0]
@@ -404,6 +406,8 @@ print('Loaded: %d ' % len(descriptions))
 ```
 
 Running the example prints the number of loaded image descriptions.
+
+```
 Loaded: 8092
 
 ```
@@ -427,6 +431,8 @@ e.g. 'a' and hanging 's' characters.
 We can implement these simple cleaning operations in a function that cleans each description
 in the loaded dictionary from the previous section. Below defines the clean descriptions()
 function that will clean each loaded description.
+
+```
 # clean description text
 def clean_descriptions(descriptions):
 # prepare regex for char filtering
@@ -437,11 +443,6 @@ desc = desc.split()
 # convert to lower case
 desc = [word.lower() for word in desc]
 # remove punctuation from each word
-
-25.6. Prepare Description Text
-
-284
-
 desc = [re_punc.sub('', w) for w in desc]
 # remove hanging 's' and 'a'
 desc = [word for word in desc if len(word)>1]
@@ -453,6 +454,8 @@ descriptions[key] = ' '.join(desc)
 We can then save the clean text to file for later use by our model. Each line will contain the
 image identifier followed by the clean description. Below defines the save doc() function for
 saving the cleaned descriptions to file.
+
+```
 # save descriptions to file, one per line
 def save_doc(descriptions, filename):
 lines = list()
@@ -467,6 +470,8 @@ file.close()
 
 Putting this all together with the loading of descriptions from the previous section, the
 complete example is listed below.
+
+```
 import string
 import re
 # load doc into memory
@@ -495,11 +500,6 @@ image_id = image_id.split('.')[0]
 image_desc = ' '.join(image_desc)
 # store the first description for each image
 if image_id not in mapping:
-
-25.6. Prepare Description Text
-
-285
-
 mapping[image_id] = image_desc
 return mapping
 # clean description text
@@ -545,6 +545,8 @@ save_doc(descriptions, 'descriptions.txt')
 
 Running the example first loads 8,092 descriptions, cleans them, summarizes the vocabulary
 of 4,484 unique words, then saves them to a new file called descriptions.txt.
+
+```
 Loaded: 8092
 Vocabulary Size: 4484
 
