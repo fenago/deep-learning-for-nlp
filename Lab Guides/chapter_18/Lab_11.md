@@ -425,7 +425,7 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-Figure 18.1: Plot of the defined character-based language model.
+![](./-.png)
 
 18.4.5
 

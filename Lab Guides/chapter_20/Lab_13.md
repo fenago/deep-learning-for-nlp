@@ -564,7 +564,7 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-Figure 20.1: Plot of the defined word-based language model.
+![](./253-19.png)
 
 The model is compiled specifying the categorical cross entropy loss needed to fit the model.
 Technically, the model is learning a multiclass classification and this is the suitable loss function

@@ -41,7 +41,8 @@ For the classification task, images must be classified into one of 1,000 differe
 For the last few years very deep convolutional neural network models have been used to win
 these challenges and results on the tasks have exceeded human performance.
 
-Figure 23.1: Sample of Images from the ImageNet Dataset used in the ILSVRC Challenge.
+![](./274-25.png)
+
 Taken From ImageNet Large Scale Visual Recognition Challenge.
 
 The Oxford VGG Models
@@ -50,7 +51,8 @@ Researchers from the Oxford Visual Geometry Group, or VGG for short, participate
 ILSVRC challenge. In 2014, convolutional neural network models (CNN) developed by the
 VGG won the image classification tasks.
 
-Figure 23.2: ILSVRC Results in 2014 for the Classification task.
+![](./275-26.png)
+
 After the competition, the participants wrote up their findings in the paper Very Deep
 Convolutional Networks for Large-Scale Image Recognition, 2014. They also made their models
 and learned weights available online. This allowed other researchers and developers to use a
@@ -216,7 +218,7 @@ Nevertheless, it is provided below.
 
 23.4. Load the VGG Model in Keras
 
-Figure 23.3: Plot of Layers in the VGG Model.
+![](./278-27.png)
 
 The VGG() class takes a few arguments that may only interest you if you are looking to use
 the model in your own project, e.g. for transfer learning. For example:
@@ -242,7 +244,8 @@ Let's develop a simple image classification script.
 First, we need an image we can classify. You can download a random photograph of a coffee
 mug from Flickr.
 
-Figure 23.4: Coffee Mug. Photo by jfanaian, some rights reserved.
+![](./279-28.png)
+
 Download the image and save it to your current working directory with the filename mug.jpg.
 
 

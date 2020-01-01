@@ -810,7 +810,7 @@ A plot of the model is created and helps to better understand the structure of t
 and the two streams of input.
 
 
-Figure 26.1: Plot of the defined caption generation model.
+![](./342-30.png)
 
 26.5.3
 
@@ -1461,7 +1461,8 @@ https://www.flickr.com/photos/bambe1964/7837618434/
 26.7. Generate New Captions
 
 
-Figure 26.2: Photo of a dog at the beach. Photo by bambe1964, some rights reserved.
+![](./330-29.png)
+
 We will generate a description for it using our model. Download the photograph and save
 it to your local directory with the filename example.jpg. First, we must load the Tokenizer
 from tokenizer.pkl and define the maximum length of the sequence to generate, needed for
@@ -1661,9 +1662,7 @@ measures differ in practice.
 
 If you explore any of these extensions, I'd love to know.
 
-26.9
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 

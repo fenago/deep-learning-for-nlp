@@ -1,5 +1,5 @@
 
-Chapter 13
+Chapter 13
 # How to Learn and Load Word Embeddings in Keras
 Word embeddings provide a dense representation of words and their relative meanings. They are
 an improvement over sparse representations used in simpler bag of word model representations.
@@ -12,7 +12,7 @@ layer.
 - How to learn a word embedding while fitting a neural network.
 - How to use a pre-trained word embedding in a neural network.
 
-Let's get started.
+Let’s get started.
 
 13.1
 
@@ -68,7 +68,7 @@ arguments:
 is integer encoded to values between 0-10, then the size of the vocabulary would be 11
 words.
 
-13.4. Example of Learning an Embedding
+13.4. Example of Learning an Embedding
 
 135
 
@@ -91,7 +91,7 @@ The Embedding layer has weights that are learned. If you save your model to file
 include weights for the Embedding layer. The output of the Embedding layer is a 2D vector with
 one embedding for each word in the input sequence of words (input document). If you wish
 to connect a Dense layer directly to an Embedding layer, you must first flatten the 2D output
-matrix to a 1D vector using the Flatten layer. Now, let's see how we can use an Embedding
+matrix to a 1D vector using the Flatten layer. Now, let’s see how we can use an Embedding
 layer in practice.
 
 13.4
@@ -127,7 +127,7 @@ model encoding like counts or TF-IDF. Keras provides the one hot() function that
 hash of each word as an efficient integer encoding. We will estimate the vocabulary size of 50,
 which is much larger than needed to reduce the probability of collisions from the hash function.
 
-13.4. Example of Learning an Embedding
+13.4. Example of Learning an Embedding
 
 ```
 # integer encode the documents
@@ -283,7 +283,7 @@ Then the padded versions of each document are printed, making them all uniform l
 ```
 
 
-13.5. Example of Using Pre-Trained GloVe Embedding
+13.5. Example of Using Pre-Trained GloVe Embedding
 
 After the network is defined, a summary of the layers is printed. We can see that as expected,
 the output of the Embedding layer is a 4 × 8 matrix and this is squashed to a 32-element vector
@@ -326,7 +326,7 @@ Accuracy: 100.000000
 
 You could save the learned weights from the Embedding layer to file for later use in other
 models. You could also use this model generally to classify other documents that have the
-same kind vocabulary seen in the test dataset. Next, let's look at loading a pre-trained word
+same kind vocabulary seen in the test dataset. Next, let’s look at loading a pre-trained word
 embedding in Keras.
 
 13.5
@@ -547,8 +547,8 @@ words, and sometimes also convert all characters to lowercase. One can also repl
 all numbers (possibly greater than some constant) with some single token such as .
 All these pre-processing steps aim to reduce the vocabulary size without removing
 any important content (which in some cases may not be true when you lowercase
-certain words, ie. 'Bush' is different than 'bush', while 'Another' has usually the
-same sense as 'another'). The smaller the vocabulary is, the lower is the memory
+certain words, ie. ‘Bush’ is different than ‘bush’, while ‘Another’ has usually the
+same sense as ‘another’). The smaller the vocabulary is, the lower is the memory
 complexity, and the more robustly are the parameters for the words estimated. You
 also have to pre-process the test data in the same way.
 [...]
@@ -566,7 +566,7 @@ https://en.wikipedia.org/wiki/Word_embedding
 - Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
 
-13.8. Summary
+13.8. Summary
 
 - Using pre-trained word embeddings in a Keras model, 2016.
 https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html

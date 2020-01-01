@@ -220,10 +220,10 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+## Model 1: One-Word-In, One-Word-Out Sequences
 
 
-Figure 19.1: Plot of the defined word-based language model.
+![](./231-18.png)
 
 We will use this same general network structure for each example in this tutorial, with
 minor changes to the learned embedding layer. We can compile and fit the network on the

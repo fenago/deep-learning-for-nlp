@@ -619,7 +619,8 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-Figure 15.1: Plot of the defined CNN classification model.
+![](./181-15.png)
+
 Next, we fit the network on the training data. We use a binary cross entropy loss function
 because the problem we are learning is a binary classification problem. The efficient Adam
 implementation of stochastic gradient descent is used and we keep track of accuracy in addition

@@ -973,7 +973,8 @@ _________________________________________________________________
 
 A plot the defined model is then saved to file with the name model.png.
 
-Figure 10.1: Plot of the defined bag-of-words model.
+![](./119-8.png)
+
 We can see that the model easily fits the training data within the 10 epochs, achieving close
 to 100% accuracy. Evaluating the model on the test dataset, we can see that model does well,
 achieving an accuracy of above 87%, well within the ballpark of low-to-mid 80s seen in the
@@ -1243,11 +1244,8 @@ A box and whisker plot of the results is also presented, summarizing the accurac
 per configuration. We can see that binary achieved the best results with a modest spread and
 might be the preferred approach for this dataset.
 
-10.7. Predicting Sentiment for New Reviews
 
-108
-
-Figure 10.2: Box and Whisker Plot for Model Accuracy with Different Word Scoring Methods.
+![](./125-9.png)
 
 10.7
 

@@ -606,7 +606,8 @@ _________________________________________________________________
 
 A plot of the model is also created providing another perspective on the model configuration.
 
-Figure 30.1: Plot of the defined neural machine translation model
+![](./381-36.png)
+
 Next, the model is trained. Each epoch takes about 30 seconds on modern CPU hardware;
 no GPU is required. During the run, the model will be saved to the file model.h5, ready for
 inference in the next step.

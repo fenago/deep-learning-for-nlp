@@ -315,7 +315,7 @@ hard to pull much meaning out of the graph given such a tiny corpus was used to 
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-Figure 12.1: Scatter Plot of PCA Projection of Word2Vec Model
+![](./145-11.png)
 
 12.6
 

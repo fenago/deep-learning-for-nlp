@@ -592,7 +592,7 @@ Epoch 7/7
 A plot of the defined model is saved to file, clearly showing the three input channels for the
 model.
 
-Figure 16.1: Plot of the Multichannel Convolutional Neural Network For Text.
+![](./-.png)
 The model is fit for a number of epochs and saved to the file model.h5 for later evaluation.
 
 16.5. Evaluate Model

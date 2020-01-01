@@ -33,7 +33,7 @@ Below is an overview of the 5 steps in the neural network model life-cycle in Ke
 4.1. Keras Model Life-Cycle
 
 
-Figure 4.1: 5 Step Life-Cycle for Neural Network Models in Keras.
+![](./39-4.png)
 
 Let's take a look at each step in turn using the easy-to-use Keras Sequential API.
 
@@ -381,7 +381,7 @@ _________________________________________________________________
 A plot of the model graph is also created and saved to file.
 
 
-Figure 4.2: Plot of the MLP Model Graph.
+![](./46-5.png)
 
 Note, creating plots of Keras models requires that you install pydot and pygraphviz (the
 graphviz library and the Python wrapper). Instructions for installing these libraries vary for
@@ -456,7 +456,7 @@ _________________________________________________________________
 
 A plot of the model graph is also created and saved to file.
 
-Figure 4.3: Plot of the CNN Model Graph.
+![](./48-6.png)
 
 
 Recurrent Neural Network
@@ -515,7 +515,7 @@ _________________________________________________________________
 
 A plot of the model graph is also created and saved to file.
 
-Figure 4.4: Plot of the RNN Model Graph.
+![](./48-7.png)
 
 
 # Further Reading
