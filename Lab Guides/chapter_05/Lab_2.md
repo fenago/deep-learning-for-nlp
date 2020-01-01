@@ -11,9 +11,7 @@ learning. After completing this tutorial, you will know:
 
 Let's get started.
 
-5.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Metamorphosis by Franz Kafka
@@ -652,3 +650,40 @@ Specifically, you learned:
 # Next
 In the next chapter, you will discover how you can encode text data using the scikit-learn
 Python library.
+
+##### Run Notebook
+Click notebook `01_manual_load_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `02_manual_split.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `03_manual_select_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `04_manual_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `05_manual_normalize_case.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `06_nltk_download.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `07_nltk_split_sentences.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `08_nltk_split_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `09_nltk_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `10_nltk_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `11_nltk_filter_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `12_nltk_stemming.ipynb` in jupterLab UI and run jupyter notebook.
+

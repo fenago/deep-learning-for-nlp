@@ -1072,3 +1072,19 @@ reviews. Specifically, you learned:
 - How to develop a neural classification model with word embedding and convolutional
 layers.
 - How to evaluate the developed a neural classification model.
+
+
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_cnn_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `5_evaluate.ipynb` in jupterLab UI and run jupyter notebook.

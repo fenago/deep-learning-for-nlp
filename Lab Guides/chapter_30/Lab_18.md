@@ -1011,3 +1011,15 @@ German phrases to English. Specifically, you learned:
 - How to develop an encoder-decoder model for machine translation.
 - How to use a trained model for inference on new input phrases and evaluate the model
 skill.
+
+##### Run Notebook
+Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_split_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_generate.ipynb` in jupterLab UI and run jupyter notebook.

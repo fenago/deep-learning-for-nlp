@@ -27,10 +27,6 @@ Below is an overview of the 5 steps in the neural network model life-cycle in Ke
 3. Fit Network.
 4. Evaluate Network.
 5. Make Predictions.
-21
-
-4.1. Keras Model Life-Cycle
-
 
 ![](./39-4.png)
 
@@ -546,3 +542,15 @@ and recurrent neural networks.
 
 # Next
 In the next part, you will discover how you can prepare text data ready for modeling.
+
+
+##### Run Notebook
+Click notebook `1_functional_mlp.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+##### Run Notebook
+Click notebook `2_functional_cnn.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+##### Run Notebook
+Click notebook `3_functional_rnn.ipynb` in jupterLab UI and run jupyter notebook.

@@ -587,3 +587,10 @@ Keras. Specifically, you learned:
 layer.
 - How to learn a word embedding while fitting a neural network.
 - How to use a pre-trained word embedding in a neural network.
+
+
+##### Run Notebook
+Click notebook `1_embedding_example.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_pretrained_embedding.ipynb` in jupterLab UI and run jupyter notebook.

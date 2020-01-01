@@ -1714,3 +1714,24 @@ scratch. Specifically, you learned:
 - How to design and train a deep learning caption generation model.
 - How to evaluate a train caption generation model and use it to caption entirely new
 photographs.
+
+##### Run Notebook
+Click notebook `1_extract_features.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_data_prep.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_load_prepared_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `5_evaluate_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `6_save_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `7_generate_description.ipynb` in jupterLab UI and run jupyter notebook.

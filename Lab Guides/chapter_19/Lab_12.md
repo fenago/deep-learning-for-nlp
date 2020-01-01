@@ -837,3 +837,12 @@ application.
 - How to develop one-word, two-word, and line-based framings for word-based language
 models.
 - How to generate sequences using a fit language model.
+
+##### Run Notebook
+Click notebook `1_model1.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_model2.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_model3.ipynb` in jupterLab UI and run jupyter notebook.

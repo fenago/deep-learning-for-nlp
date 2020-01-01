@@ -983,3 +983,14 @@ embedding and a recurrent neural network. Specifically, you learned:
 hidden layer.
 - How to use the learned language model to generate new text with similar statistical
 properties as the source text.
+
+
+##### Run Notebook
+Click notebook `1_prepare_text.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+##### Run Notebook
+Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.

@@ -12,9 +12,7 @@ and test documents.
 
 Let's get started.
 
-7.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Split words with text to word sequence.
@@ -301,9 +299,7 @@ https://keras.io/preprocessing/text/#hashing_trick
 - Tokenizer Keras API.
 https://keras.io/preprocessing/text/#tokenizer
 
-7.7
-
-Summary
+# Summary
 
 In this tutorial, you discovered how you can use the Keras API to prepare your text data for
 deep learning. Specifically, you learned:
@@ -312,18 +308,17 @@ deep learning. Specifically, you learned:
 and test documents.
 - The range of 4 different document encoding schemes offered by the Tokenizer API.
 
-7.7. Summary
+##### Run Notebook
+Click notebook `1_split_words.ipynb` in jupterLab UI and run jupyter notebook.
 
-7.7.1
+##### Run Notebook
+Click notebook `2_prepare_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
-60
+##### Run Notebook
+Click notebook `3_one_hot_encode.ipynb` in jupterLab UI and run jupyter notebook.
 
-Next
+##### Run Notebook
+Click notebook `4_hash_encode.ipynb` in jupterLab UI and run jupyter notebook.
 
-This is the last chapter in the data preparation part. In the next part, you will discover how to
-develop bag-of-words models.
-
-Part IV
-Bag-of-Words
-
-61
+##### Run Notebook
+Click notebook `5_example_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.

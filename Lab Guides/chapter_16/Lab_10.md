@@ -730,3 +730,16 @@ sentiment prediction on text movie review data. Specifically, you learned:
 - How to prepare movie review text data for modeling.
 - How to develop a multichannel convolutional neural network for text in Keras.
 - How to evaluate a fit model on unseen movie review data.
+
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_clean_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
+

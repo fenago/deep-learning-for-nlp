@@ -754,3 +754,12 @@ Specifically, you learned:
 - How to prepare text for character-based language modeling.
 - How to develop a character-based language model using LSTMs.
 - How to use a trained character-based language model to generate text.
+
+##### Run Notebook
+Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.

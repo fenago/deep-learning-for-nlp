@@ -1252,3 +1252,24 @@ Next
 
 In the next chapter, you will discover how you can develop a model for automatic caption
 generation.
+
+##### Run Notebook
+Click notebook `01_load_photos.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `02_pre_calculate_features.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `03_load_descriptions.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `04_clean_descriptions.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `05_whole_description_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `06_word_by_word.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `07_progressive_loading.ipynb` in jupterLab UI and run jupyter notebook.

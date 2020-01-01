@@ -505,9 +505,6 @@ https://radimrehurek.com/gensim/models/keyedvectors.html
 - scripts.glove2word2vec Gensim API.
 https://radimrehurek.com/gensim/scripts/glove2word2vec.html
 
-
-12.9. Summary
-
 Articles
 
 - Messing Around With Word2Vec, 2016.
@@ -525,3 +522,15 @@ Gensim. Specifically, you learned:
 - How to visualize a trained word embedding model using Principal Component Analysis.
 - How to load pre-trained Word2Vec and GloVe word embedding models from Google and
 Stanford.
+
+##### Run Notebook
+Click notebook `1_example_word2vec.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_plot_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_word_vector_arithmetic.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_example_glove.ipynb` in jupterLab UI and run jupyter notebook.

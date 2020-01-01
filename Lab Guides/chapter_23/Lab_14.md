@@ -411,3 +411,7 @@ classification. Specifically, you learned:
 - About the ImageNet dataset and competition and the VGG winning models.
 - How to load the VGG model in Keras and summarize its structure.
 - How to use the loaded VGG model to classifying objects in ad hoc photographs.
+
+
+##### Run Notebook
+Click notebook `1_classify_image.ipynb` in jupterLab UI and run jupyter notebook.

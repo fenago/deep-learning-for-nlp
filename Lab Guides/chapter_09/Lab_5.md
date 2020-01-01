@@ -13,9 +13,7 @@ to new files ready for modeling.
 
 Let's get started.
 
-9.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Movie Review Dataset
@@ -24,15 +22,8 @@ This tutorial is divided into the following parts:
 4. Develop Vocabulary
 5. Save Prepared Data
 
-69
 
-9.2. Movie Review Dataset
-
-9.2
-
-70
-
-Movie Review Dataset
+# Movie Review Dataset
 
 The Movie Review Data is a collection of movie reviews retrieved from the imdb.com website in
 the early 2000s by Bo Pang and Lillian Lee. The reviews were collected and made available
@@ -41,6 +32,7 @@ in 2002, but an updated and cleaned up version was released in 2004, referred to
 dataset is comprised of 1,000 positive and 1,000 negative movie reviews drawn from an archive
 of the rec.arts.movies.reviews newsgroup hosted at IMDB. The authors refer to this dataset as
 the polarity dataset.
+
 Our data contains 1000 positive and 1000 negative reviews all written before 2002,
 with a cap of 20 reviews per author (312 authors total) per category. We refer to
 this corpus as the polarity dataset.
@@ -830,3 +822,34 @@ to new files ready for modeling.
 
 In the next chapter, you will discover how you can develop a neural bag-of-words model for
 movie review sentiment analysis.
+
+
+##### Run Notebook
+Click notebook `01_load_file.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `02_load_all_files.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `03_load_all_files_with_func.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `04_load_and_split.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `05_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `06_clean_review_func.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `07_clean_and_build_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `08_build_vocabulary.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `09_load_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `10_save_clean_filtered_reviews.ipynb` in jupterLab UI and run jupyter notebook.

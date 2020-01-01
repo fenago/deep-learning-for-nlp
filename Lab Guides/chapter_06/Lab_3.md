@@ -306,9 +306,7 @@ text.TfidfTransformer.html
 http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.
 text.HashingVectorizer.html
 
-6.6
-
-Summary
+# Summary
 
 In this tutorial, you discovered how to prepare text documents for machine learning with
 scikit-learn for bag-of-words models. Specifically, you learned:
@@ -326,3 +324,12 @@ Next
 
 In the next chapter, you will discover how you can prepare text data using the Keras deep
 learning library.
+
+##### Run Notebook
+Click notebook `1_example_countvector.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_example_tfidf.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_example_hash.ipynb` in jupterLab UI and run jupyter notebook.

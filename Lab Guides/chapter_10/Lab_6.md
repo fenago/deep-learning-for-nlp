@@ -1513,14 +1513,26 @@ of movie reviews. Specifically, you learned:
 - How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
 on new review text data.
 
-10.10.1
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
 
-Next
+##### Run Notebook
+Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
-This is the final chapter in the bag-of-words part. In the next part, you will discover how to
-develop word embedding models.
+##### Run Notebook
+Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
-Part V
-Word Embeddings
+##### Run Notebook
+Click notebook `4_filter_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
 
-114
+##### Run Notebook
+Click notebook `5_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `6_mlp_bow_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `7_compare_encodings.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `8_prediction.ipynb` in jupterLab UI and run jupyter notebook.

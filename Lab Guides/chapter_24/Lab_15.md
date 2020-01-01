@@ -507,3 +507,43 @@ learned:
 documents.
 - How to can use a suite of small examples to develop an intuition for how differences
 between a candidate and reference text impact the final BLEU score.
+
+
+##### Run Notebook
+Click notebook `01_sentence_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `02_corpus_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `03_individual_1gram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `04_individual_ngram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `05_cumulative_4gram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `06_cumulative_ngram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `07_example_perfect.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `08_example_one_word_diff.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `09_example_two_words_diff.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `10_example_all_diff.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `11_example_shorter.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `12_example_longer.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `13_example_too_short.ipynb` in jupterLab UI and run jupyter notebook.
