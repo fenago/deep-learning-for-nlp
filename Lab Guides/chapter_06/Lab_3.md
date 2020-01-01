@@ -1,8 +1,6 @@
 
+# How to Prepare Text Data with scikit-learn
 
-Chapter 6
-How to Prepare Text Data with
-scikit-learn
 Text data requires special preparation before you can start using it for predictive modeling. The
 text must be parsed to remove words, called tokenization. Then the words need to be encoded
 as integers or floating point values for use as input to a machine learning algorithm, called
@@ -33,12 +31,6 @@ done by assigning each word a unique number. Then any document we see can be enc
 as a fixed-length vector with the length of the vocabulary of known words. The value in each
 position in the vector could be filled with a count or frequency of each word in the encoded
 document.
-
-48
-
-6.2. Word Counts with CountVectorizer
-
-49
 
 This is the bag-of-words model, where we are only concerned with encoding schemes that
 represent what words are present or the degree to which they are present in encoded documents

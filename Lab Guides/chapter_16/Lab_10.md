@@ -1,7 +1,4 @@
-
-Chapter 16
-Project: Develop an n-gram CNN
-Model for Sentiment Analysis
+# Project: Develop an n-gram CNN Model for Sentiment Analysis
 A standard deep learning model for text classification and sentiment analysis uses a word
 embedding layer and one-dimensional convolutional neural network. The model can be expanded
 by using multiple parallel convolutional neural networks that read the source document using
@@ -30,12 +27,7 @@ This tutorial is divided into the following parts:
 Movie Review Dataset
 
 In this tutorial, we will use the Movie Review Dataset. This dataset designed for sentiment
-analysis was described previously in Chapter 9. You can download the dataset from here:
-174
-
-16.3. Data Preparation
-
-175
+analysis was described previously . You can download the dataset from here:
 
 - Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
@@ -48,7 +40,7 @@ one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
 Data Preparation
 
-Note: The preparation of the movie review dataset was first described in Chapter 9. In this
+Note: The preparation of the movie review dataset was first described previously. In this
 section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.
@@ -386,8 +378,8 @@ model learns how to best integrate these interpretations.
 This approach was first described by Yoon Kim in his 2014 paper titled Convolutional Neural
 Networks for Sentence Classification. In the paper, Kim experimented with static and dynamic
 (updated) embedding layers, we can simplify the approach and instead focus only on the use of
-different kernel sizes. This approach is best understood with a diagram taken from Kim's paper,
-see Chapter 14.
+different kernel sizes. This approach is best understood with a diagram taken from Kim's paper.
+
 In Keras, a multiple-input model can be defined using the functional API. We will define a
 model with three input channels for processing 4-grams, 6-grams, and 8-grams of movie review
 text. Each channel is comprised of the following elements:

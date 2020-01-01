@@ -1,6 +1,5 @@
-Chapter 4
-How to Develop Deep Learning Models
-With Keras
+# How to Develop Deep Learning Models With Keras
+
 Deep learning neural networks are very easy to create and evaluate in Python with Keras, but
 you must follow a strict model life-cycle. In this chapter you will discover the step-by-step
 life-cycle for creating, training and evaluating deep learning neural networks in Keras and how

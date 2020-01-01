@@ -1,6 +1,4 @@
-Chapter 15
-Project: Develop an Embedding +
-CNN Model for Sentiment Analysis
+# Project: Develop an Embedding + CNN Model for Sentiment Analysis
 Word embeddings are a technique for representing text where different words with similar
 meaning have a similar real-valued vector representation. They are a key breakthrough that has
 led to great performance of neural network models on a suite of challenging natural language
@@ -27,7 +25,7 @@ This tutorial is divided into the following parts:
 # Movie Review Dataset
 
 In this tutorial, we will use the Movie Review Dataset. This dataset designed for sentiment
-analysis was described previously in Chapter 9. You can download the dataset from here:
+analysis was described previously. You can download the dataset from here:
 
 - Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
@@ -38,7 +36,7 @@ one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
 # Data Preparation
 
-Note: The preparation of the movie review dataset was first described in Chapter 9. In this
+Note: The preparation of the movie review dataset was first described previously. In this
 section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.

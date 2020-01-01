@@ -1,7 +1,5 @@
 
-
-Chapter 7
-How to Prepare Text Data With Keras
+# How to Prepare Text Data With Keras
 You cannot feed raw text directly into deep learning models. Text data must be encoded as
 numbers to be used as input or output for machine learning and deep learning models, such
 as word embeddings. The Keras deep learning library provides some basic tools to help you

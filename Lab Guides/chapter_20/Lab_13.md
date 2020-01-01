@@ -1,7 +1,4 @@
-
-Chapter 20
-Project: Develop a Neural Language
-Model for Text Generation
+# Project: Develop a Neural Language Model for Text Generation
 A language model can predict the probability of the next word in the sequence, based on the
 words already observed in the sequence. Neural network models are a preferred method for
 developing statistical language models because they can use a distributed representation where

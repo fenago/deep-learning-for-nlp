@@ -1,8 +1,4 @@
-
-
-Chapter 24
-How to Evaluate Generated Text With
-the BLEU Score
+# How to Evaluate Generated Text With the BLEU Score
 BLEU, or the Bilingual Evaluation Understudy, is a score for comparing a candidate translation
 of text to one or more reference translations. Although developed for translation, it can be used
 to evaluate text generated for a suite of natural language processing tasks. In this tutorial, you

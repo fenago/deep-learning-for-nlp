@@ -1,9 +1,4 @@
-
-
-Chapter 10
-Project: Develop a Neural
-Bag-of-Words Model for Sentiment
-Analysis
+# Project: Develop a Neural Bag-of-Words Model for Sentiment Analysis
 Movie reviews can be classified as either favorable or not. The evaluation of movie review text
 is a classification problem often called sentiment analysis. A popular technique for developing
 sentiment analysis models is to use a bag-of-words model that transforms documents into vectors
@@ -33,7 +28,7 @@ This tutorial is divided into the following parts:
 # Movie Review Dataset
 
 In this tutorial, we will use the Movie Review Dataset. This dataset designed for sentiment
-analysis was described previously in Chapter 9. You can download the dataset from here:
+analysis was described previously . You can download the dataset from here:
 - Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
@@ -46,7 +41,7 @@ at loading the text data.
 
 Data Preparation
 
-Note: The preparation of the movie review dataset was first described in Chapter 9. In this
+Note: The preparation of the movie review dataset was first described previously. In this
 section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.

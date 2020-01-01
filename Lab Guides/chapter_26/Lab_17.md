@@ -1,8 +1,4 @@
-
-
-Chapter 26
-Project: Develop a Neural Image
-Caption Generation Model
+# Project: Develop a Neural Image Caption Generation Model
 Caption generation is a challenging artificial intelligence problem where a textual description
 must be generated for a given photograph. It requires both methods from computer vision to
 understand the content of the image and a language model from the field of natural language
@@ -81,12 +77,14 @@ to choose from. In this case, we will use the Oxford Visual Geometry Group, or V
 that won the ImageNet competition in 2014. Keras provides this pre-trained model directly.
 Note, the first time you use this model, Keras will download the model weights from the Internet,
 which are about 500 Megabytes. This may take a few minutes depending on your internet
-connection. Note the use of the VGG pre-trained model was introduced in Chapter 23.
+connection.
+
 We could use this model as part of a broader image caption model. The problem is, it
 is a large model and running each photo through the network every time we want to test a
 new language model configuration (downstream) is redundant. Instead, we can pre-compute
 the photo features using the pre-trained model and save them to file. We can then load these
 features later and feed them into our model as the interpretation of a given photo in the dataset.
+
 It is no different to running the photo through the full VGG model; it is just we will have done
 it once in advance.
 This is an optimization that will make training our models faster and consume less memory.

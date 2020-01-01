@@ -1,8 +1,5 @@
 
-
-Chapter 25
-How to Prepare a Photo Caption
-Dataset For Modeling
+# How to Prepare a Photo Caption Dataset For Modeling
 Automatic photo captioning is a problem where a model must generate a human-readable textual
 description given a photograph. It is a challenging problem in artificial intelligence that requires
 both image understanding from the field of computer vision as well as language generation from

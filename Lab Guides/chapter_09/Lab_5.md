@@ -1,7 +1,5 @@
 
-Chapter 9
-How to Prepare Movie Review Data
-for Sentiment Analysis
+# How to Prepare Movie Review Data for Sentiment Analysis
 Text data preparation is different for each problem. Preparation starts with simple steps, like
 loading data, but quickly gets difficult with cleaning tasks that are very specific to the data you
 are working with. You need help as to where to begin and what order to work through the steps

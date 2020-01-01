@@ -1,6 +1,4 @@
-Chapter 12
-How to Develop Word Embeddings
-with Gensim
+# How to Develop Word Embeddings with Gensim
 Word embeddings are a modern approach for representing text in natural language processing.
 Embedding algorithms like Word2Vec and GloVe are key to the state-of-the-art results achieved
 by neural network models on natural language processing problems like machine translation.

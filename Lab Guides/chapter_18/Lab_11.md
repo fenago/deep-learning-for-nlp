@@ -1,6 +1,4 @@
-Chapter 18
-How to Develop a Character-Based
-Neural Language Model
+# How to Develop a Character-Based Neural Language Model
 A language model predicts the next word in the sequence based on the specific words that have
 come before it in the sequence. It is also possible to develop language models at the character
 level using neural networks. The benefit of character-based language models is their small
