@@ -671,7 +671,7 @@ model does at starting from the beginning of the rhyme. The second is a test to 
 does at beginning in the middle of a line. The final example is a test to see how well it does
 with a sequence of characters never seen before.
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 

@@ -267,7 +267,7 @@ _________________________________________________________________
 
 Finally, the accuracy of the trained model is printed, showing that it learned the training
 dataset perfectly (which is not surprising).
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```
@@ -469,7 +469,7 @@ print('Accuracy: %f' % (accuracy*100))
 Running the example may take a bit longer, but then demonstrates that it is just as capable
 of fitting this simple problem.
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

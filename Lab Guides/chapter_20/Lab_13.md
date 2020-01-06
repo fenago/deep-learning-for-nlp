@@ -856,7 +856,7 @@ therefore calculation and geometry and all the other elements of instruction whi
 
 Then 50 words of generated text are printed.
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

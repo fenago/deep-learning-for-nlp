@@ -12,7 +12,7 @@ problems.
 and recurrent neural networks.
 
 Let's get started.
-Note: It is assumed that you have a basic familiarity with deep learning and Keras, this chapter
+**Note:**  It is assumed that you have a basic familiarity with deep learning and Keras, this chapter
 should provide a refresher for the Keras API, and perhaps an introduction to the Keras
 functional API. See the Appendix for installation instructions. Most code snippets in this
 tutorial are just for reference and are not complete examples.

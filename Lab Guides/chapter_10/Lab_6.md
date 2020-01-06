@@ -37,7 +37,7 @@ at loading the text data.
 
 Data Preparation
 
-Note: The preparation of the movie review dataset was first described previously. In this
+**Note:**  The preparation of the movie review dataset was first described previously. In this
 section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.
@@ -952,7 +952,7 @@ original paper. Although, it is important to note that this is not an apples-to-
 as the original paper used 10-fold cross-validation to estimate model skill instead of a single
 train/test split.
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```
@@ -1180,7 +1180,7 @@ At the end of the run, summary statistics for each word scoring method are provi
 summarizing the distribution of model skill scores across each of the 10 runs per mode. We can
 see that the mean score of both the count and binary methods appear to be better than freq
 and tfidf.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

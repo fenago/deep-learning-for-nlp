@@ -381,7 +381,7 @@ jack => fell
 
 And so on. At the end of the run, Jack is passed in and a prediction or new sequence is
 generated. We get a reasonable sequence as output that has some elements of the source.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 Jack and jill came tumbling after down
 
@@ -626,7 +626,7 @@ strange. This makes sense, because the network only ever saw Jill within an inpu
 not at the beginning of the sequence, so it has forced an output to use the word Jill, i.e. the
 last line of the rhyme.
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```
@@ -750,7 +750,7 @@ print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
 ```
 
 Running the example again gets a good fit on the source text at around 95% accuracy.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

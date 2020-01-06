@@ -40,7 +40,7 @@ one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
 Data Preparation
 
-Note: The preparation of the movie review dataset was first described previously. In this
+**Note:**  The preparation of the movie review dataset was first described previously. In this
 section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.
@@ -642,7 +642,7 @@ can see that, as expected, the skill on the training dataset is excellent, here 
 We can also see that the skill of the model on the unseen test dataset is also very impressive,
 achieving 88.5%, which is above the skill of the model reported in the 2014 paper (although not
 a direct apples-to-apples comparison).
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

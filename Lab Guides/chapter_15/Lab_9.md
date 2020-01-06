@@ -29,12 +29,12 @@ analysis was described previously. You can download the dataset from here:
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
-Dataset is **already downloaded** , you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
+Dataset has been **downloaded already** , you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
 one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
 # Data Preparation
 
-Note: The preparation of the movie review dataset was first described previously. In this
+**Note:** The preparation of the movie review dataset was first described previously. In this
 section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.
@@ -958,7 +958,7 @@ Next, we can see that the model makes the correct prediction on two contrived mo
 We can see that the percentage or confidence of the prediction is close to 50% for both, this
 may be because the two contrived reviews are very short and the model is expecting sequences
 of 1,000 or more words.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:** Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

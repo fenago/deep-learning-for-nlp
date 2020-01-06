@@ -806,7 +806,7 @@ and mostly correct. For example: 'ich liebe dich' was correctly translated to 'i
 We can also see that the translations were not perfect, with 'ich konnte nicht gehen' translated
 to i cant go instead of the expected 'i couldnt walk '. We can also see the BLEU-4 score of 0.51,
 which provides an upper bound on what we might expect from this model.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```

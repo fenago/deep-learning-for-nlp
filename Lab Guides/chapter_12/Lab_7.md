@@ -182,7 +182,7 @@ print(new_model)
 ```
 
 Running the example prints the following output.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```
@@ -296,7 +296,7 @@ pyplot.show()
 
 Running the example creates a scatter plot with the dots annotated with the words. It is
 hard to pull much meaning out of the graph given such a tiny corpus was used to fit the model.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ![](./145-11.png)

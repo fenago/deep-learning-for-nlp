@@ -109,7 +109,7 @@ print(result)
 
 Running the example first prints the size of the vocabulary as 8. The encoded document is
 then printed as an array of integer encoded words.
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 ```
 8

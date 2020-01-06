@@ -1320,7 +1320,7 @@ Running the example prints the BLEU scores. We can see that the scores fit withi
 expected range of a skillful model on the problem. The chosen model configuration is by no
 means optimized.
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 ```
@@ -1575,7 +1575,7 @@ dog is running across the beach
 
 ```
 
-Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
+**Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
 
