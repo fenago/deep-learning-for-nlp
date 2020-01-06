@@ -46,7 +46,7 @@ of scenes and situations.
 The dataset is available for free. 
 
 #### Download Dataset
-Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 
 `curl -L  https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip -o Flickr8k_Dataset.zip`
 

@@ -289,7 +289,7 @@ word embeddings on their website released under a public domain license.
 The smallest package of embeddings is 822 Megabytes, called glove.6B.zip. 
 
 #### Download Dataset
-Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 `curl -L  http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip -o glove.6B.zip`
 
 `unzip glove.6B.zip`

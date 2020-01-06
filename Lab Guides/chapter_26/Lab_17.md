@@ -34,7 +34,7 @@ This tutorial is divided into the following parts:
 In this tutorial, we will use the Flickr8k dataset. This dataset was introduced in the previous lab.
 
 #### Download Dataset
-Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 
 `curl -L  https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip -o Flickr8k_Dataset.zip`
 

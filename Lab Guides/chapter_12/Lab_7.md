@@ -318,7 +318,7 @@ vectors. It is a 1.53 Gigabyte file. You can download it from here:
 
 
 #### Download Dataset
-Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 
 ```
 filename="GoogleNews-vectors-negative300.bin.gz"
@@ -412,7 +412,7 @@ direct download link is here:
 - glove.6B.zip: http://nlp.stanford.edu/data/glove.6B.zip
 
 #### Download Dataset
-Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 
 `curl -L  http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip -o glove.6B.zip`
 
