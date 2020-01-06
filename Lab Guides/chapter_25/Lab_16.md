@@ -45,13 +45,15 @@ The images were chosen from six different Flickr groups, and tend not to contain
 any well-known people or locations, but were manually selected to depict a variety
 of scenes and situations.
 — Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics, 2013.
-The dataset is available for free. You must complete a request form and the links to the
-dataset will be emailed to you. I would love to link to them for you, but the email address
-expressly requests: Please do not redistribute the dataset. You can use the link below to request
-the dataset:
-- Dataset Request Form.
-https://illinois.edu/fb/sec/1713398
+The dataset is available for free. 
 
+#### Download Dataset
+Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+
+`curl -L  https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip -o Flickr8k_Dataset.zip`
+
+`unzip Flickr8k_Dataset.zip`
+ 
 Within a short time, you will receive an email that contains links to two files:
 - Flickr8k Dataset.zip (1 Gigabyte) An archive of all photographs.
 - Flickr8k text.zip (2.2 Megabytes) An archive of all text descriptions for photographs.

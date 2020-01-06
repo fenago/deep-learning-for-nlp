@@ -12,9 +12,7 @@ Stanford.
 
 Let's get started.
 
-12.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Word Embeddings
@@ -328,15 +326,27 @@ A pre-trained model is nothing more than a file containing tokens and their asso
 vectors. The pre-trained Google Word2Vec model was trained on Google news data (about 100
 billion words); it contains 3 million words and phrases and was fit using 300-dimensional word
 vectors. It is a 1.53 Gigabyte file. You can download it from here:
-- GoogleNews-vectors-negative300.bin.gz.
-https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
+- GoogleNews-vectors-negative300.bin.gz: https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
+
+
+#### Download Dataset
+Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+
+```
+filename="GoogleNews-vectors-negative300.bin.gz"
+fileid="0B7XkCwpI5KDYNlNUTTlSS21pQmM"
+curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}" > /dev/null
+curl -Lb ./cookie "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" -o ${filename}
+```
+
+`gunzip GoogleNews-vectors-negative300.bin.gz`
 
 Unzipped, the binary file (GoogleNews-vectors-negative300.bin) is 3.4 Gigabytes. The
 Gensim library provides tools to load this file. Specifically, you can call the
 KeyedVectors.load word2vec format() function to load this model into memory, for example:
 from gensim.models import KeyedVectors
 
-12.7. Load Stanford's GloVe Embedding
+# Load Stanford's GloVe Embedding
 
 ```
 filename = 'GoogleNews-vectors-negative300.bin'
@@ -386,9 +396,7 @@ would expect, is queen.
 See some of the articles in the further reading section for more interesting arithmetic examples
 that you can explore.
 
-12.7
-
-Load Stanford's GloVe Embedding
+# Load Stanford's GloVe Embedding
 
 Stanford researchers also have their own word embedding algorithm like Word2Vec called Global
 Vectors for Word Representation, or GloVe for short. I won't get into the details of the differences
@@ -396,11 +404,6 @@ between Word2Vec and GloVe here, but generally, NLP practitioners seem to prefer
 the moment based on results.
 Like Word2Vec, the GloVe researchers also provide pre-trained word vectors, in this case, a
 great selection to choose from. You can download the GloVe pre-trained word vectors and load
-
-12.7. Load Stanford's GloVe Embedding
-
-130
-
 them easily with Gensim. The first step is to convert the GloVe file format to the Word2Vec file
 format. The only difference is the addition of a small header line. This can be done by calling
 the glove2word2vec() function. For example (note, this example is just a demonstration with
@@ -418,8 +421,14 @@ with an example. You can download the smallest GloVe pre-trained model from the 
 website. It an 822 Megabyte zip file with 4 different models (50, 100, 200 and 300-dimensional
 vectors) trained on Wikipedia data with 6 billion tokens and a 400,000 word vocabulary. The
 direct download link is here:
-- glove.6B.zip.
-http://nlp.stanford.edu/data/glove.6B.zip
+- glove.6B.zip: http://nlp.stanford.edu/data/glove.6B.zip
+
+#### Download Dataset
+Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+
+`curl -L  http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip -o glove.6B.zip`
+
+`unzip glove.6B.zip`
 
 Working with the 100-dimensional version of the model, we can convert the file to Word2Vec
 format as follows:
@@ -470,14 +479,9 @@ Running the example prints the same result of queen.
 
 ```
 
-
-12.8
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
-
-12.8.1
 
 Word Embeddings
 
@@ -489,8 +493,6 @@ https://en.wikipedia.org/wiki/Word2vec
 https://code.google.com/archive/p/word2vec/
 - Stanford GloVe project.
 https://nlp.stanford.edu/projects/glove/
-
-12.8.2
 
 Gensim
 

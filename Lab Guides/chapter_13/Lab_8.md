@@ -12,9 +12,7 @@ layer.
 
 Let’s get started.
 
-13.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Word Embedding
@@ -327,16 +325,21 @@ models. You could also use this model generally to classify other documents that
 same kind vocabulary seen in the test dataset. Next, let’s look at loading a pre-trained word
 embedding in Keras.
 
-13.5
-
-Example of Using Pre-Trained GloVe Embedding
+# Example of Using Pre-Trained GloVe Embedding
 
 The Keras Embedding layer can also use a word embedding learned elsewhere. It is common
 in the field of Natural Language Processing to learn, save, and make freely available word
 embeddings. For example, the researchers behind GloVe method provide a suite of pre-trained
 word embeddings on their website released under a public domain license.
-The smallest package of embeddings is 822 Megabytes, called glove.6B.zip. It was trained
-on a dataset of one billion tokens (words) with a vocabulary of 400 thousand words. There
+The smallest package of embeddings is 822 Megabytes, called glove.6B.zip. 
+
+#### Download Dataset
+Dataset is very huge. Before running the notebook, download the dataset and unzip it.
+`curl -L  http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip -o glove.6B.zip`
+
+`unzip glove.6B.zip`
+
+It was trained on a dataset of one billion tokens (words) with a vocabulary of 400 thousand words. There
 are a few different embedding vector sizes, including 50, 100, 200 and 300 dimensions. You
 can download this collection of embeddings and we can seed the Keras Embedding layer with
 weights from the pre-trained embedding for the words in your training dataset.
@@ -554,9 +557,7 @@ In short, you will understand all this much better if you will run experiments.
 — Tomas Mikolov, word2vec-toolkit: google groups thread., 2015.
 https://goo.gl/KtDGst
 
-13.7
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Word Embedding on Wikipedia.
@@ -564,7 +565,7 @@ https://en.wikipedia.org/wiki/Word_embedding
 - Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
 
-13.8. Summary
+# Summary
 
 - Using pre-trained word embeddings in a Keras model, 2016.
 https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html

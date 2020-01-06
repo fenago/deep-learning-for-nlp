@@ -28,23 +28,17 @@ This tutorial is divided into the following parts:
 4. Develop Deep Learning Model
 5. Evaluate Model
 6. Generate New Captions
-298
 
-26.2. Photo and Caption Dataset
+# Photo and Caption Dataset
 
-26.2
+In this tutorial, we will use the Flickr8k dataset. This dataset was introduced in the previous lab.
 
-299
+#### Download Dataset
+Dataset is very huge. Before running the notebook, download the dataset and unzip it.
 
-Photo and Caption Dataset
+`curl -L  https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip -o Flickr8k_Dataset.zip`
 
-In this tutorial, we will use the Flickr8k dataset. This dataset was introduced previously in
-Chapter 25. The dataset is available for free. You must complete a request form and the links to
-the dataset will be emailed to you. I would love to link to them for you, but the email address
-expressly requests: Please do not redistribute the dataset. You can use the link below to request
-the dataset:
-- Dataset Request Form.
-https://illinois.edu/fb/sec/1713398
+`unzip Flickr8k_Dataset.zip`
 
 Within a short time, you will receive an email that contains links to two files:
 - Flickr8k Dataset.zip (1 Gigabyte) An archive of all photographs.
