@@ -14,9 +14,7 @@ After completing this tutorial, you will know:
 
 Let's get started.
 
-6.1
-
-The Bag-of-Words Model
+## The Bag-of-Words Model
 
 We cannot work with text directly when using machine learning algorithms. Instead, we need
 to convert the text to numbers. We may want to perform classification of documents, so each
@@ -38,8 +36,6 @@ without any information about order. There are many ways to extend this simple m
 by better clarifying what a word is and in defining what to encode about each word in the
 vector. The scikit-learn library provides 3 different schemes that we can use, and we will briefly
 look at each.
-
-6.2
 
 Word Counts with CountVectorizer
 
@@ -85,11 +81,6 @@ calling:
 print(vectorizer.vocabulary_)
 ```
 
-
-6.3. Word Frequencies with TfidfVectorizer
-
-50
-
 We can see that all words were made lowercase by default and that the punctuation was
 ignored. These and other aspects of tokenizing can be configured and I encourage you to review
 all of the options in the API documentation. Running the example first prints the vocabulary,
@@ -129,9 +120,7 @@ occurrence of the one word in the vocab and the other word not in the vocab comp
 
 The encoded vectors can then be used directly with a machine learning algorithm.
 
-6.3
-
-Word Frequencies with TfidfVectorizer
+# Word Frequencies with TfidfVectorizer
 
 Word counts are a good starting point, but are very basic. One issue with simple counts is that
 some words like the will appear many times and their large counts will not be very meaningful
@@ -144,11 +133,6 @@ Document Frequency which are the components of the resulting scores assigned to 
 Without going into the math, TF-IDF are word frequency scores that try to highlight
 words that are more interesting, e.g. frequent in a document but not across documents.
 The TfidfVectorizer will tokenize documents, learn the vocabulary and inverse document
-
-6.4. Hashing with HashingVectorizer
-
-51
-
 frequency weightings, and allow you to encode new documents. Alternately, if you already have a
 learned CountVectorizer, you can use it with a TfidfTransformer to just calculate the inverse
 document frequencies and start encoding documents. The same create, fit, and transform process
@@ -197,20 +181,13 @@ words in the vocabulary.
 The scores are normalized to values between 0 and 1 and the encoded document vectors can
 then be used directly with most machine learning algorithms.
 
-6.4
-
-Hashing with HashingVectorizer
+# Hashing with HashingVectorizer
 
 Counts and frequencies can be very useful, but one limitation of these methods is that the
 vocabulary can become very large. This, in turn, will require large vectors for encoding
 documents and impose large requirements on memory and slow down algorithms. A clever work
 around is to use a one way hash of words to convert them to integers. The clever part is that
 no vocabulary is required and you can choose an arbitrary-long fixed length vector. A downside
-
-6.5. Further Reading
-
-52
-
 is that the hash is a one-way function so there is no way to convert the encoding back to a word
 (which may not matter for many supervised learning tasks).
 The HashingVectorizer class implements this approach that can be used to consistently
@@ -264,10 +241,16 @@ of the encoded document correspond to normalized word counts by default in the r
 
 ```
 
+##### Run Notebook
+Click notebook `1_example_countvector.ipynb` in jupterLab UI and run jupyter notebook.
 
-6.5
+##### Run Notebook
+Click notebook `2_example_tfidf.ipynb` in jupterLab UI and run jupyter notebook.
 
-Further Reading
+##### Run Notebook
+Click notebook `3_example_hash.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
@@ -288,8 +271,6 @@ extraction
 - Working With Text Data, scikit-learn Tutorial.
 http://scikit-learn.org/stable/tutorial/text_analytics/working_with_text_data.
 html
-
-6.5.3
 
 Class APIs
 
@@ -318,18 +299,7 @@ We have only scratched the surface in these examples and I want to highlight tha
 many configuration details for these classes to influence the tokenizing of documents that are
 worth exploring.
 
-6.6.1
-
-Next
+# Next
 
 In the next chapter, you will discover how you can prepare text data using the Keras deep
 learning library.
-
-##### Run Notebook
-Click notebook `1_example_countvector.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_example_tfidf.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_example_hash.ipynb` in jupterLab UI and run jupyter notebook.

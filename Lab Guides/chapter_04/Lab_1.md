@@ -17,9 +17,7 @@ should provide a refresher for the Keras API, and perhaps an introduction to the
 functional API. See the Appendix for installation instructions. Most code snippets in this
 tutorial are just for reference and are not complete examples.
 
-4.1
-
-Keras Model Life-Cycle
+# Keras Model Life-Cycle
 
 Below is an overview of the 5 steps in the neural network model life-cycle in Keras:
 1. Define Network.
@@ -193,6 +191,8 @@ loss, accuracy = model.evaluate(X, y)
 
 As with fitting the network, verbose output is provided to give an idea of the progress of
 evaluating the model. We can turn this off by setting the verbose argument to 0.
+
+```
 loss, accuracy = model.evaluate(X, y, verbose=0)
 ```
 
@@ -243,7 +243,6 @@ defined by creating instances of layers and connecting them directly to each oth
 defining a Model that specifies the layers to act as the input and output to the model. Let's
 look at the three unique aspects of Keras functional API in turn:
 
-
 Defining Input
 
 Unlike the Sequential model, you must create and define a standalone Input layer that specifies
@@ -258,8 +257,6 @@ Python, for example:
 from keras.layers import Input
 visible = Input(shape=(2,))
 ```
-
-
 
 Connecting Layers
 
@@ -313,12 +310,15 @@ Perceptron, convolutional neural network, and recurrent neural network. These ex
 provide a foundation for understanding the more elaborate examples later.
 
 
-Multilayer Perceptron
+# Multilayer Perceptron
 
 In this section, we define a Multilayer Perceptron model for binary classification. The model
 has 10 inputs, 3 hidden layers with 10, 20, and 10 neurons, and an output layer with 1 output.
 Rectified linear activation functions are used in each hidden layer and a sigmoid activation
 function is used in the output layer, for binary classification.
+
+##### Run Notebook
+Click notebook `1_functional_mlp.ipynb` in jupterLab UI and run jupyter notebook.
 
 ```
 # Multilayer Perceptron
@@ -390,6 +390,9 @@ receives black and white 64 x 64 images as input, then has a sequence of two con
 pooling layers as feature extractors, followed by a fully connected layer to interpret the features
 and an output layer with a sigmoid activation for two-class predictions.
 
+##### Run Notebook
+Click notebook `2_functional_cnn.ipynb` in jupterLab UI and run jupyter notebook.
+
 ```
 # Convolutional Neural Network
 from keras.utils import plot_model
@@ -454,12 +457,15 @@ A plot of the model graph is also created and saved to file.
 ![](./48-6.png)
 
 
-Recurrent Neural Network
+# Recurrent Neural Network
 
 In this section, we will define a long short-term memory recurrent neural network for sequence
 classification. The model expects 100 time steps of one feature as input. The model has a single
 LSTM hidden layer to extract features from the sequence, followed by a fully connected layer to
 interpret the LSTM output, followed by an output layer for making binary predictions.
+
+##### Run Notebook
+Click notebook `3_functional_rnn.ipynb` in jupterLab UI and run jupyter notebook.
 
 ```
 # Recurrent Neural Network
@@ -543,14 +549,3 @@ and recurrent neural networks.
 # Next
 In the next part, you will discover how you can prepare text data ready for modeling.
 
-
-##### Run Notebook
-Click notebook `1_functional_mlp.ipynb` in jupterLab UI and run jupyter notebook.
-
-
-##### Run Notebook
-Click notebook `2_functional_cnn.ipynb` in jupterLab UI and run jupyter notebook.
-
-
-##### Run Notebook
-Click notebook `3_functional_rnn.ipynb` in jupterLab UI and run jupyter notebook.

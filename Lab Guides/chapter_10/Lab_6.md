@@ -12,9 +12,7 @@ on new review text data.
 
 Let's get started.
 
-10.1
-
-Tutorial Overview
+#### Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Movie Review Dataset
@@ -37,8 +35,6 @@ After unzipping the file, you will have a directory called txt sentoken with two
 one per file with a naming convention cv000 to cv999 for each of neg and pos. Next, let's look
 at loading the text data.
 
-10.3
-
 Data Preparation
 
 Note: The preparation of the movie review dataset was first described previously. In this
@@ -46,8 +42,6 @@ section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.
 3. Defining a vocabulary of preferred words.
-
-10.3.1
 
 Split into Train and Test Sets
 
@@ -1476,7 +1470,7 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-10.10. Summary
+#### Summary
 
 - Movie Review Data.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/
@@ -1486,8 +1480,6 @@ http://xxx.lanl.gov/abs/cs/0409058
 - Movie Review Polarity Dataset.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
-
-10.9.2
 
 APIs
 
@@ -1501,8 +1493,6 @@ https://docs.python.org/3/library/os.html
 https://docs.python.org/3/library/collections.html
 - Tokenizer Keras API.
 https://keras.io/preprocessing/text/#tokenizer
-
-10.10
 
 Summary
 

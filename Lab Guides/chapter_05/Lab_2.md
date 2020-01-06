@@ -20,15 +20,8 @@ This tutorial is divided into the following parts:
 4. Tokenization and Cleaning with NLTK
 5. Additional Text Cleaning Considerations
 
-35
 
-5.2. Metamorphosis by Franz Kafka
-
-5.2
-
-36
-
-Metamorphosis by Franz Kafka
+# Metamorphosis by Franz Kafka
 
 Let's start off by selecting a dataset. In this tutorial, we will use the text from the book
 Metamorphosis by Franz Kafka. No specific reason, other than it's short, I like it, and you may
@@ -50,9 +43,7 @@ reached their destination Grete was the first to get up and stretch out her youn
 body.
 Poor Gregor...
 
-5.3
-
-Text Cleaning Is Task Specific
+# Text Cleaning Is Task Specific
 
 After actually getting a hold of your text data, the first step in cleaning up text data is to have
 a strong idea about what you're trying to achieve, and in that context review your text to see
@@ -66,11 +57,6 @@ I see:
 - There's hyphenated descriptions like armour-like.
 - There's a lot of use of the em dash (-) to continue sentences (maybe replace with commas?).
 - There are names (e.g. Mr. Samsa)
-
-5.4. Manual Tokenization
-
-37
-
 - There does not appear to be numbers that require handling (e.g. 1999)
 - There are section markers (e.g. II and III ).
 
@@ -84,16 +70,12 @@ want to strip case, punctuation, and even trim words back to their stem.
 
 Use your task as the lens by which to choose how to ready your text data.
 
-5.4
-
 Manual Tokenization
 
 Text cleaning is hard, but the text we have chosen to work with is pretty clean already. We
 could just write some Python code to clean it up manually, and this is a good exercise for those
 simple problems that you encounter. Tools like regular expressions and splitting strings can get
 you a long way.
-
-5.4.1
 
 Load Data
 
@@ -110,8 +92,6 @@ file = open(filename, 'rt')
 text = file.read()
 file.close()
 ```
-
-5.4.2
 
 Split by Whitespace
 
@@ -181,13 +161,7 @@ two words What and s (not great).
 'about', 'helplessly', 'as', 'he', 'looked', 'What', 's', 'happened', 'to', 'me', 'he',
 'thought', 'It', 'wasn', 't', 'a', 'dream', 'His', 'room']
 
-5.4. Manual Tokenization
-
-39
 ```
-
-
-5.4.4
 
 Split by Whitespace and Remove Punctuation
 
@@ -237,8 +211,6 @@ print(stripped[:100])
 We can see that this has had the desired effect, mostly. Contractions like What's have
 become Whats but armour-like has become armourlike.
 
-5.4. Manual Tokenization
-
 ```
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
@@ -261,8 +233,6 @@ For example:
 re_print = re.compile('[^%s]' % re.escape(string.printable))
 result = [re_print.sub('', w) for w in words]
 ```
-
-5.4.5
 
 Normalizing Case
 
@@ -299,7 +269,7 @@ Running the example, we can see that all words are now lowercase.
 ```
 
 
-5.5. Tokenization and Cleaning with NLTK
+
 
 Note on Cleaning Text
 
@@ -314,7 +284,7 @@ The Natural Language Toolkit, or NLTK for short, is a Python library written for
 modeling text. It provides good tools for loading and cleaning text that we can use to get our
 data ready for working with machine learning and deep learning algorithms.
 
-5.5.1
+
 
 Install NLTK
 
@@ -341,7 +311,7 @@ python -m nltk.downloader all
 ```
 
 
-5.5.2
+
 
 Split into Sentences
 
@@ -374,7 +344,7 @@ himself transformed in his bed into a horrible vermin.
 ```
 
 
-5.5.3
+
 
 Split into Words
 
@@ -412,7 +382,7 @@ specifically filter out.
 ```
 
 
-5.5.4
+
 
 Filter Out Punctuation
 
@@ -420,7 +390,7 @@ We can filter out all tokens that we are not interested in, such as all standalo
 can be done by iterating over all tokens and only keeping those tokens that are all alphabetic.
 Python has the function isalpha() that can be used. For example:
 
-5.5. Tokenization and Cleaning with NLTK
+
 
 ```
 from nltk.tokenize import word_tokenize
@@ -452,8 +422,6 @@ armour-like and 's were also filtered out.
 'His', 'room', 'a', 'proper', 'human', 'room']
 ```
 
-
-5.5.5
 
 Filter out Stop Words (and Pipeline)
 
@@ -590,9 +558,44 @@ the tokens to lowercase, likely for internal look-ups in word tables.
 There is a nice suite of stemming and lemmatization algorithms to choose from in NLTK, if
 reducing words to their root is something you need for your project.
 
-5.6
 
-Additional Text Cleaning Considerations
+##### Run Notebook
+Click notebook `01_manual_load_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `02_manual_split.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `03_manual_select_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `04_manual_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `05_manual_normalize_case.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `06_nltk_download.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `07_nltk_split_sentences.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `08_nltk_split_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `09_nltk_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `10_nltk_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `11_nltk_filter_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `12_nltk_stemming.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Additional Text Cleaning Considerations
 
 We are only getting started. Because the source text for this tutorial was reasonably clean to
 begin with, we skipped many concerns of text cleaning that you may need to deal with in your
@@ -650,40 +653,4 @@ Specifically, you learned:
 # Next
 In the next chapter, you will discover how you can encode text data using the scikit-learn
 Python library.
-
-##### Run Notebook
-Click notebook `01_manual_load_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `02_manual_split.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `03_manual_select_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `04_manual_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `05_manual_normalize_case.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `06_nltk_download.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `07_nltk_split_sentences.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `08_nltk_split_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `09_nltk_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `10_nltk_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `11_nltk_filter_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `12_nltk_stemming.ipynb` in jupterLab UI and run jupyter notebook.
 

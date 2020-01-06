@@ -20,9 +20,7 @@ This tutorial is divided into the following parts:
 3. Hash Encoding with hashing trick.
 4. Tokenizer API
 
-7.2
-
-Split Words with text to word sequence
+### Split Words with text to word sequence
 
 A good first step when working with text is to split it into words. Words are called tokens and the process of splitting text into tokens is called tokenization. Keras provides the
 text to word sequence() function that you can use to split text into a list of words. By
@@ -56,9 +54,7 @@ of words is printed for review.
 This is a good first step, but further pre-processing is required before you can work with the
 text.
 
-7.3
-
-Encoding with one hot
+#### Encoding with one hot
 
 It is popular to represent a document as a sequence of integer values, where each word in the
 document is represented as a unique integer. Keras provides the one hot() function that you
@@ -75,18 +71,16 @@ that contains additional words. The size of the vocabulary defines the hashing s
 words are hashed. By default, the hash function is used, although as we will see in the next
 section, alternate hash functions can be specified when calling the hashing trick() function
 directly.
+
 We can use the text to word sequence() function from the previous section to split the
 document into words and then use a set to represent only the unique words in the document.
 The size of this set can be used to estimate the size of the vocabulary for one document. For
 example:
+
+```
 from keras.preprocessing.text import text_to_word_sequence
 # define the document
 text = 'The quick brown fox jumped over the lazy dog.'
-
-7.4. Hash Encoding with hashing trick
-
-
-```
 # estimate the size of the vocabulary
 words = set(text_to_word_sequence(text))
 vocab_size = len(words)
@@ -124,9 +118,7 @@ running the example a few times.
 ```
 
 
-7.4
-
-Hash Encoding with hashing trick
+# Hash Encoding with hashing trick
 
 A limitation of integer and count base encodings is that they must maintain a vocabulary of
 words and their mapping to integers. An alternative to this approach is to use a one-way hash
@@ -164,10 +156,7 @@ for words as the one hot() function in the previous section.
 
 ```
 
-
-7.5
-
-Tokenizer API
+## Tokenizer API
 
 So far we have looked at one-off convenience methods for preparing text with Keras. Keras
 provides a more sophisticated API for preparing text that can be fit and reused to prepare
@@ -198,11 +187,6 @@ Tokenizer was fit.
 - word docs: A dictionary mapping of words and the number of documents that reach
 appears in.
 - word index: A dictionary of words and their uniquely assigned integers.
-
-7.5. Tokenizer API
-
-58
-
 - document count: A dictionary mapping and the number of documents they appear in
 calculated during the fit.
 
@@ -254,11 +238,6 @@ print(encoded_docs)
 
 ```
 
-
-7.6. Further Reading
-
-59
-
 Running the example fits the Tokenizer with 5 small documents. The details of the fit
 Tokenizer are printed. Then the 5 documents are encoded using a word count. Each document
 is encoded as a 9-element vector with one position for each word and the chosen encoding
@@ -281,11 +260,24 @@ OrderedDict([('well', 1), ('done', 1), ('good', 1), ('work', 2), ('great', 1), (
 ```
 
 The Tokenizer will be the key way we will prepare text for word embeddings throughout
-this book.
+this course.
 
-7.6
+##### Run Notebook
+Click notebook `1_split_words.ipynb` in jupterLab UI and run jupyter notebook.
 
-Further Reading
+##### Run Notebook
+Click notebook `2_prepare_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_one_hot_encode.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_hash_encode.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `5_example_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Text Preprocessing Keras API.
@@ -307,18 +299,3 @@ deep learning. Specifically, you learned:
 - The Tokenizer API that can be fit on training data and used to encode training, validation,
 and test documents.
 - The range of 4 different document encoding schemes offered by the Tokenizer API.
-
-##### Run Notebook
-Click notebook `1_split_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_prepare_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_one_hot_encode.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_hash_encode.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_example_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.

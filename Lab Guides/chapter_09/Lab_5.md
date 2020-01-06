@@ -53,22 +53,15 @@ if we were looking to use this dataset in experiments on modern methods.
 statistically significant improvement (from 82.8% to 86.4%)
 — A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based on
 Minimum Cuts, 2004.
-You can download the dataset from here:
-- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB).
-http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
-gz
+
+Dataset can be downloaded from here: 
+- Movie Review Polarity Dataset (review polarity.tar.gz, 3MB): http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.gz
 
 After unzipping the file, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
 one per file with a naming convention from cv000 to cv999 for each of neg and pos. Next, let's
 look at loading the text data.
 
-9.3. Load Text Data
-
-9.3
-
-71
-
-Load Text Data
+# Load Text Data
 
 In this section, we will look at loading individual text files, then processing the directories of
 files. We will assume that the review data is downloaded and available in the current working
@@ -140,18 +133,11 @@ Running this example prints the filename of each review after it is loaded.
 
 ```
 ...
-Loaded
-Loaded
-Loaded
-Loaded
-Loaded
-
-cv995_23113.txt
-cv996_12447.txt
-cv997_5152.txt
-cv998_15691.txt
-cv999_14636.txt
-
+Loaded cv995_23113.txt
+Loaded cv996_12447.txt
+Loaded cv997_5152.txt
+Loaded cv998_15691.txt
+Loaded cv999_14636.txt
 ```
 
 We can turn the processing of the documents into a function as well and use it as a template
@@ -190,15 +176,13 @@ process_docs(directory)
 Now that we know how to load the movie review text data, let's look at cleaning it.
 
 
-Clean Text Data
+### Clean Text Data
 
 In this section, we will look at what data cleaning we might want to do to the movie review
 data. We will assume that we will be using a bag-of-words model or perhaps a word embedding
 that does not require too much preparation.
 
-9.4.1
-
-Split into Tokens
+### Split into Tokens
 
 First, let's load one document and look at the raw tokens split by white space. We will use the
 load doc() function developed in the previous section. We can use the split() function to
@@ -619,9 +603,7 @@ buffoons
 Next, we can look at using the vocabulary to create a prepared version of the movie review
 dataset.
 
-9.6
-
-Save Prepared Data
+### Save Prepared Data
 
 We can use the data cleaning and chosen vocabulary to prepare each movie review and save the
 prepared versions of the reviews ready for modeling. This is a good practice as it decouples
@@ -693,7 +675,7 @@ return lines
 We can then call process docs() for both the directories of positive and negative reviews,
 then call save list() from the previous section to save each list of processed reviews to a file.
 
-9.6. Save Prepared Data
+# Save Prepared Data
 The complete code listing is provided below.
 
 ```
@@ -770,18 +752,45 @@ save_list(positive_lines, 'positive.txt')
 
 ```
 
-to file.
 Running the example saves two new files, negative.txt and positive.txt, that contain the
 prepared negative and positive reviews respectively. The data is ready for use in a bag-of-words
 or even word embedding model.
 
-9.7
 
-Further Reading
+
+##### Run Notebook
+Click notebook `01_load_file.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `02_load_all_files.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `03_load_all_files_with_func.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `04_load_and_split.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `05_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `06_clean_review_func.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `07_clean_and_build_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `08_build_vocabulary.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `09_load_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `10_save_clean_filtered_reviews.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
-
-9.7.1
 
 Dataset
 
@@ -822,34 +831,3 @@ to new files ready for modeling.
 
 In the next chapter, you will discover how you can develop a neural bag-of-words model for
 movie review sentiment analysis.
-
-
-##### Run Notebook
-Click notebook `01_load_file.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `02_load_all_files.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `03_load_all_files_with_func.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `04_load_and_split.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `05_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `06_clean_review_func.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `07_clean_and_build_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `08_build_vocabulary.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `09_load_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `10_save_clean_filtered_reviews.ipynb` in jupterLab UI and run jupyter notebook.
