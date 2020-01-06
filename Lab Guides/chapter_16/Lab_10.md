@@ -645,7 +645,7 @@ a direct apples-to-apples comparison).
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-```
+```
 Train Accuracy: 100.00
 Test Accuracy: 88.50
 

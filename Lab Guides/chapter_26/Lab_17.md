@@ -130,23 +130,14 @@ We can call this function to prepare the photo data for testing our models, then
 resulting dictionary to a file named features.pkl. The complete example is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-
-os import listdir
-os import path
-pickle import dump
-keras.applications.vgg16 import VGG16
-keras.preprocessing.image import load_img
-keras.preprocessing.image import img_to_array
-keras.applications.vgg16 import preprocess_input
-keras.models import Model
+from os import listdir
+from os import path
+from pickle import dump
+from keras.applications.vgg16 import VGG16
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.applications.vgg16 import preprocess_input
+from keras.models import Model
 
 # extract features from each photo in the directory
 def extract_features(directory):

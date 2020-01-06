@@ -15,9 +15,7 @@ each photo.
 
 Let's get started.
 
-25.1
-
-Tutorial Overview
+#### Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Download the Flickr8K Dataset
@@ -837,15 +835,10 @@ We can put all of this together into a complete example to prepare description d
 word-by-word model.
 
 ```
-from
-from
-from
-from
-
-numpy import array
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.utils import to_categorical
+from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
 
 # load doc into memory
 def load_doc(filename):

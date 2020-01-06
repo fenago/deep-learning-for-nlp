@@ -601,10 +601,7 @@ loss: 0.5023 - val_loss: 2.1823
 
 ```
 
-
-30.5
-
-Evaluate Neural Translation Model
+### Evaluate Neural Translation Model
 
 We will evaluate the model on the train and the test dataset. The model should perform very
 well on the train dataset and ideally have been generalized to perform well on the test dataset.
@@ -849,15 +846,11 @@ src=[hallo tom], target=[hi tom], predicted=[hello tom]
 src=[sei nicht nervos], target=[dont be nervous], predicted=[dont be crazy]
 src=[ich mag dich nicht], target=[i dont like you], predicted=[i dont like you]
 src=[tom stellte eine falle], target=[tom set a trap], predicted=[tom has a cough]
-BLEU-1:
-BLEU-2:
-BLEU-3:
-BLEU-4:
 
-0.082088
-0.006182
-0.046129
-0.076238
+BLEU-1: 0.082088
+BLEU-2: 0.006182
+BLEU-3: 0.046129
+BLEU-4: 0.076238
 
 ```
 

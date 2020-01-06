@@ -29,7 +29,7 @@ analysis was described previously. You can download the dataset from here:
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
-After unzipping the file, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
+Dataset is **already downloaded** , you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
 one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
 # Data Preparation
@@ -113,7 +113,7 @@ print(tokens)
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
 
-```
+```
 ...
 'creepy', 'place', 'even', 'acting', 'hell', 'solid', 'dreamy', 'depp', 'turning',
 'typically', 'strong', 'performance', 'deftly', 'handling', 'british', 'accent',
@@ -124,9 +124,6 @@ we may want to explore and I leave them as further exercises.
 'language', 'drug', 'content']
 
 ```
-
-
-
 # Define a Vocabulary
 
 It is important to define a vocabulary of known words when using a text model. The more
@@ -377,7 +374,7 @@ we are not interested in. If you have worked through the previous section, you s
 local file called vocab.txt with one word per line. We can load that file and build a vocabulary
 as a set for checking the validity of tokens.
 
-```
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -401,7 +398,7 @@ easy encoding as a sequence of integers later. Cleaning the document involves sp
 review based on white space, removing punctuation, and then filtering out all tokens not in the
 vocabulary. The updated clean doc() function is listed below.
 
-```
+```
 # turn a doc into clean tokens
 def clean_doc(doc, vocab):
 # split into tokens by white space
@@ -420,8 +417,7 @@ return tokens
 The updated process docs() can then call the clean doc() for each document in a given
 directory.
 
-```
-# load all docs in a directory
+```
 def process_docs(directory, vocab, is_train):
 documents = list()
 # walk through all files in the folder
@@ -440,7 +436,6 @@ tokens = clean_doc(doc, vocab)
 # add to list
 documents.append(tokens)
 return documents
-
 ```
 
 We can call the process docs function for both the neg and pos directories and combine
@@ -448,8 +443,7 @@ the reviews into a single train or test dataset. We also can define the class la
 The load clean dataset() function below will load all reviews and prepare class labels for the
 training or test dataset.
 
-```
-# load and clean a dataset
+```
 def load_clean_dataset(vocab, is_train):
 # load documents
 neg = process_docs('txt_sentoken/neg', vocab, is_train)
@@ -458,7 +452,6 @@ docs = neg + pos
 # prepare labels
 labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
 return docs, labels
-
 ```
 
 The next step is to encode each document as a sequence of integers. The Keras Embedding
@@ -472,7 +465,7 @@ a consistent mapping from words in the vocabulary to unique integers. We could j
 develop this mapping ourselves using our vocabulary file. The create tokenizer() function
 below will prepare a Tokenizer from the training data.
 
-```
+```
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
@@ -491,7 +484,8 @@ find the longest review using the max() function on the training dataset and tak
 We can then call the Keras function pad sequences() to pad the sequences to the maximum
 length by adding 0 values on the end.
 
-```
+```
+
 max_length = max([len(s.split()) for s in train_docs])
 print('Maximum length: %d' % max_length)
 
@@ -500,7 +494,7 @@ print('Maximum length: %d' % max_length)
 We can then use the maximum length as a parameter to a function to integer encode and
 pad the sequences.
 
-```
+```
 # integer encode and pad documents
 def encode_docs(tokenizer, max_length, docs):
 # integer encode
@@ -518,7 +512,7 @@ vocabulary size is the total number of words in our vocabulary, plus one for unk
 This could be the vocab set length or the size of the vocab within the tokenizer used to integer
 encode the documents, for example:
 
-```
+```
 # define vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary size: %d' % vocab_size)
@@ -539,7 +533,7 @@ represent the features extracted by the CNN. The back-end of the model is a stan
 Perceptron layers to interpret the CNN features. The output layer uses a sigmoid activation
 function to output a value between 0 and 1 for the negative and positive sentiment in the review.
 
-```
+```
 # define the model
 def define_model(vocab_size, max_length):
 model = Sequential()
@@ -562,7 +556,7 @@ Running just this piece provides a summary of the defined network. We can see th
 Embedding layer expects documents with a length of 1,317 words as input and encodes each
 word in the document as a 100 element vector.
 
-```
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -611,7 +605,7 @@ data. The network configuration and training schedule were found with a little t
 but are by no means optimal for this problem. If you can get better results with a different
 configuration, let me know.
 
-```
+```
 # fit network
 model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 
@@ -619,7 +613,7 @@ model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 
 After the model is fit, it is saved to a file named model.h5 for later evaluation.
 
-```
+```
 # save the model
 model.save('model.h5')
 
@@ -627,7 +621,7 @@ model.save('model.h5')
 
 We can tie all of this together. The complete code listing is provided below.
 
-```
+```
 import string
 import re
 from os import listdir
@@ -746,7 +740,7 @@ Running the example will first provide a summary of the training dataset vocabul
 and maximum input sequence length in words (1,317). The example should run in a few minutes
 and the fit model will be saved to file.
 
-```
+```
 ...
 Vocabulary size: 25768
 Maximum length: 1317
@@ -780,7 +774,7 @@ First, we can use the built-in evaluate() function to estimate the skill of the 
 the training and test dataset. This requires that we load and encode both the training and test
 datasets.
 
-```
+```
 # load all reviews
 train_docs, ytrain = load_clean_dataset(vocab, True)
 test_docs, ytest = load_clean_dataset(vocab, False)
@@ -800,7 +794,7 @@ Xtest = encode_docs(tokenizer, max_length, test_docs)
 
 We can then load the model and evaluate it on both datasets and print the accuracy.
 
-```
+```
 # load the model
 model = load_model('model.h5')
 # evaluate model on training dataset
@@ -817,7 +811,7 @@ used on the training dataset. Once prepared, a prediction can be made by calling
 function on the model. The function below named predict sentiment() will encode and pad
 a given movie review text and return a prediction in terms of both the percentage and a label.
 
-```
+```
 # classify a review as negative or positive
 def predict_sentiment(review, vocab, tokenizer, max_length, model):
 # clean review
@@ -837,7 +831,7 @@ return percent_pos, 'POSITIVE'
 We can test out this model with two ad hoc movie reviews. The complete example is listed
 below.
 
-```
+```
 import string
 import re
 from os import listdir
@@ -967,7 +961,7 @@ of 1,000 or more words.
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-```
+```
 Train Accuracy: 100.00
 Test Accuracy: 87.50
 Review: [Everyone will enjoy this film. I love it, recommended!]
@@ -1022,8 +1016,7 @@ on real ad hoc movie reviews from the internet.
 
 If you explore any of these extensions, I'd love to know.
 
-
-Further Reading
+## Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
