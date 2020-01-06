@@ -13,9 +13,7 @@ develop a character-based neural language model. After completing this tutorial,
 
 Let's get started.
 
-18.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Sing a Song of Sixpence
@@ -72,12 +70,6 @@ We will use an arbitrary length of 10 characters for this model. There is not a 
 10 characters is a few words. We can now transform the raw text into a form that our model
 can learn; specifically, input and output sequences of characters.
 
-18.3. Data Preparation
-
-18.3.2
-
-199
-
 Load Text
 
 We must load the text into memory so that we can work with it. Below is a function named
@@ -106,9 +98,6 @@ print(raw_text)
 
 ```
 
-
-18.3.3
-
 Clean Text
 
 Next, we need to clean the loaded text. We will not do much to it on this example. Specifically,
@@ -125,8 +114,6 @@ raw_text = ' '.join(tokens)
 You may want to explore other methods for data cleaning, such as normalizing the case to
 lowercase or removing punctuation in an effort to reduce the final vocabulary size and develop a
 smaller and leaner model.
-
-18.3.4
 
 Create Sequences
 
@@ -157,8 +144,6 @@ Total Sequences: 399
 ```
 
 
-18.3.5
-
 Save Sequences
 
 Finally, we can save the prepared data to file so that we can load it later when we develop our
@@ -184,9 +169,6 @@ out_filename = 'char_sequences.txt'
 save_doc(sequences, out_filename)
 
 ```
-
-
-18.3.6
 
 Complete Example
 
@@ -256,17 +238,10 @@ model will read encoded characters and predict the next character in the sequenc
 Short-Term Memory recurrent neural network hidden layer will be used to learn the context
 from the input sequence in order to make the predictions.
 
-18.4.1
-
 Load Data
 
 The first step is to load the prepared character sequence data from char sequences.txt. We
 can use the same load doc() function developed in the previous section. Once loaded, we split
-
-18.4. Train Language Model
-
-202
-
 the text by new line to give a list of sequences ready to be encoded.
 
 ```
@@ -285,9 +260,6 @@ raw_text = load_doc(in_filename)
 lines = raw_text.split('\n')
 
 ```
-
-
-18.4.2
 
 Encode Sequences
 
@@ -361,8 +333,6 @@ y = to_categorical(y, num_classes=vocab_size)
 
 We are now ready to fit the model.
 
-18.4.4
-
 Fit Model
 
 The model is defined with an input layer that takes sequences that have 10 time steps and 38
@@ -392,11 +362,6 @@ return model
 The model is learning a multiclass classification problem, therefore we use the categorical log
 loss intended for this type of problem. The efficient Adam implementation of gradient descent
 is used to optimize the model and accuracy is reported at the end of each batch update. The
-
-18.4. Train Language Model
-
-204
-
 model is fit for 100 training epochs, again found with a little trial and error. Running this prints
 a summary of the defined network as a sanity check.
 
@@ -424,8 +389,6 @@ _________________________________________________________________
 A plot the defined model is then saved to file with the name model.png.
 
 ![](./-.png)
-
-18.4.5
 
 Save Model
 
@@ -558,8 +521,6 @@ Generate Text
 We will use the learned language model to generate new sequences of text that have the same
 statistical properties.
 
-18.5.1
-
 Load Model
 
 The first step is to load the model saved to the file model.h5. We can use the load model()
@@ -658,26 +619,17 @@ return in_text
 
 ```
 
-
-18.5.3
-
-Complete Example
+##### Complete Example
 
 Tying all of this together, the complete example for generating text using the fit neural language
 model is listed below.
 
 ```
-from
-from
-from
-from
-from
-
-pickle import load
-numpy import array
-keras.models import load_model
-keras.utils import to_categorical
-keras.preprocessing.sequence import pad_sequences
+from pickle import load
+from numpy import array
+from keras.models import load_model
+from keras.utils import to_categorical
+from keras.preprocessing.sequence import pad_sequences
 
 # generate a sequence of characters with a language model
 def generate_seq(model, mapping, seq_length, seed_text, n_chars):
@@ -708,11 +660,6 @@ mapping = load(open('mapping.pkl', 'rb'))
 # test start of rhyme
 print(generate_seq(model, mapping, 10, 'Sing a son', 20))
 # test mid-line
-
-18.6. Further Reading
-
-209
-
 print(generate_seq(model, mapping, 10, 'king was i', 20))
 # test not in original
 print(generate_seq(model, mapping, 10, 'hello worl', 20))
@@ -728,7 +675,8 @@ Note: Given the stochastic nature of neural networks, your specific results may 
 running the example a few times.
 
 
-```Sing a song of sixpence, A poc
+```
+Sing a song of sixpence, A poc
 king was in his counting house
 hello worls e pake wofey. The
 
@@ -737,7 +685,17 @@ hello worls e pake wofey. The
 We can see that the model did very well with the first two examples, as we would expect.
 We can also see that the model still generated something for the new text, but it is nonsense.
 
-Further Reading
+##### Run Notebook
+Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Sing a Song of Sixpence on Wikipedia.
@@ -754,12 +712,3 @@ Specifically, you learned:
 - How to prepare text for character-based language modeling.
 - How to develop a character-based language model using LSTMs.
 - How to use a trained character-based language model to generate text.
-
-##### Run Notebook
-Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.

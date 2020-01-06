@@ -13,9 +13,7 @@ models.
 
 Let's get started.
 
-19.1
-
-Tutorial Overview
+### Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Framing Language Modeling
@@ -67,27 +65,16 @@ And Jill came tumbling after\n """
 
 ```
 
-
-Model 1: One-Word-In, One-Word-Out Sequences
+### Model 1: One-Word-In, One-Word-Out Sequences
 
 We can start with a very simple model. Given one word as input, the model will learn to predict
 the next word in the sequence. For example:
 
 ```
-X,
-Jack,
-and,
-Jill,
-
-y
-and
-Jill
-went
-
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
-
-212
-
+X, y
+Jack, and
+and, Jill
+Jill, went
 ...
 
 ```
@@ -508,8 +495,6 @@ yhat = model.predict_classes(encoded, verbose=0)
 out_word = ''
 for word, index in tokenizer.word_index.items():
 if index == yhat:
-
-19.5. Model 2: Line-by-Line Sequence
 out_word = word
 break
 # append to input
@@ -707,7 +692,6 @@ yhat = model.predict_classes(encoded, verbose=0)
 # map predicted word index to word
 out_word = ''
 
-19.6. Model 3: Two-Words-In, One-Word-Out Sequence
 for word, index in tokenizer.word_index.items():
 if index == yhat:
 out_word = word
@@ -791,6 +775,8 @@ Epoch 500/500
 ```
 
 We look at 4 generation examples, two start of line cases and two starting mid line.
+
+```
 Jack and jill
 And Jill went
 fell down and
@@ -811,6 +797,16 @@ We can see that the choice of how the language model is framed and the requireme
 how the model will be used must be compatible. That careful design is required when using
 language models in general, perhaps followed-up by spot testing with sequence generation to
 confirm model requirements have been met.
+
+
+##### Run Notebook
+Click notebook `1_model1.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_model2.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_model3.ipynb` in jupterLab UI and run jupyter notebook.
 
 # Further Reading
 
@@ -837,12 +833,3 @@ application.
 - How to develop one-word, two-word, and line-based framings for word-based language
 models.
 - How to generate sequences using a fit language model.
-
-##### Run Notebook
-Click notebook `1_model1.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_model2.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_model3.ipynb` in jupterLab UI and run jupyter notebook.

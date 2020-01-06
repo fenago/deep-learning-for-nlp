@@ -64,8 +64,6 @@ as a test set (100 reviews) and the remaining 1,800 reviews as the training data
 reviews where reviews named 000 to 899 are for training data and reviews named 900 onwards
 are for test.
 
-16.3.2
-
 Loading and Cleaning Reviews
 
 The text data is already pretty clean; not much preparation is required. Without getting bogged
@@ -76,14 +74,12 @@ down too much in the details, we will prepare the data using the following way:
 - Remove all words that are known stop words.
 - Remove all words that have a length ≤ 1 character.
 
-16.3. Data Preparation
-
-176
-
 We can put all of these steps into a function called clean doc() that takes as an argument
 the raw text loaded from a file and returns a list of cleaned tokens. We can also define a function
 load doc() that loads a document from file ready for use with the clean doc() function. An
 example of cleaning the first positive review is listed below.
+
+```
 from nltk.corpus import stopwords
 import string
 import re
@@ -122,6 +118,8 @@ print(tokens)
 
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
+
+```
 ...
 'creepy', 'place', 'even', 'acting', 'hell', 'solid', 'dreamy', 'depp', 'turning',
 'typically', 'strong', 'performance', 'deftly', 'handling', 'british', 'accent',
@@ -132,13 +130,6 @@ we may want to explore and I leave them as further exercises.
 'language', 'drug', 'content']
 
 ```
-
-
-16.3. Data Preparation
-
-16.3.3
-
-177
 
 Clean All Reviews and Save
 
@@ -191,24 +182,20 @@ Finally, we want to save the prepared train and test sets to file so that we can
 later for modeling and model evaluation. The function below-named save dataset() will save
 a given prepared dataset (X and y elements) to a file using the pickle API (this is the standard
 API for saving objects in Python).
+
+```
 # save a dataset to file
 def save_dataset(dataset, filename):
-
-16.3. Data Preparation
-
-178
-
 dump(dataset, open(filename, 'wb'))
 print('Saved: %s' % filename)
 
 ```
 
-
-16.3.4
-
-Complete Example
+# Complete Example
 
 We can tie all of these data preparation steps together. The complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -300,17 +287,12 @@ analysis prediction problem. This section is divided into 3 parts:
 2. Define Model.
 3. Complete Example.
 
-16.4.1
-
 Encode Data
 
 The first step is to load the cleaned training dataset. The function below-named load dataset()
 can be called to load the pickled training dataset.
 
-16.4. Develop Multichannel Model
-
-180
-
+```
 # load a clean dataset
 def load_dataset(filename):
 return load(open(filename, 'rb'))
@@ -321,6 +303,8 @@ trainLines, trainLabels = load_dataset('train.pkl')
 Next, we must fit a Keras Tokenizer on the training dataset. We will use this tokenizer to
 both define the vocabulary for the Embedding layer and encode the review documents as integers.
 The function create tokenizer() below will create a Tokenizer given a list of documents.
+
+```
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
@@ -332,6 +316,8 @@ return tokenizer
 We also need to know the maximum length of input sequences as input for the model and
 to pad all sequences to the fixed length. The function max length() below will calculate the
 maximum length (number of words) for all reviews in the training dataset.
+
+```
 # calculate the maximum document length
 def max_length(lines):
 return max([len(s.split()) for s in lines])
@@ -340,6 +326,8 @@ return max([len(s.split()) for s in lines])
 
 We also need to know the size of the vocabulary for the Embedding layer. This can be
 calculated from the prepared Tokenizer, as follows:
+
+```
 # calculate vocabulary size
 vocab_size = len(tokenizer.word_index) + 1
 
@@ -347,6 +335,8 @@ vocab_size = len(tokenizer.word_index) + 1
 
 Finally, we can integer encode and pad the clean movie review text. The function below
 named encode text() will both encode and pad text data to the maximum review length.
+
+```
 # encode a list of lines
 def encode_text(tokenizer, lines, length):
 # integer encode
@@ -357,19 +347,11 @@ return padded
 
 ```
 
-
-16.4.2
-
 Define Model
 
 A standard model for document classification is to use an Embedding layer as input, followed by
 a one-dimensional convolutional neural network, pooling layer, and then a prediction output
 layer. The kernel size in the convolutional layer defines the number of words to consider as
-
-16.4. Develop Multichannel Model
-
-181
-
 the convolution is passed across the input text document, providing a grouping parameter. A
 multi-channel convolutional neural network for document classification involves using multiple
 versions of the standard model with different sized kernels. This allows the document to be
@@ -393,6 +375,8 @@ The output from the three channels are concatenated into a single vector and pro
 Dense layer and an output layer. The function below defines and returns the model. As part of
 defining the model, a summary of the defined model is printed and a plot of the model graph is
 created and saved to file.
+
+```
 # define the model
 def define_model(length, vocab_size):
 # channel 1
@@ -416,8 +400,6 @@ conv3 = Conv1D(filters=32, kernel_size=8, activation='relu')(embedding3)
 drop3 = Dropout(0.5)(conv3)
 pool3 = MaxPooling1D(pool_size=2)(drop3)
 flat3 = Flatten()(pool3)
-
-16.4. Develop Multichannel Model
 # merge
 merged = concatenate([flat1, flat2, flat3])
 # interpretation
@@ -433,12 +415,11 @@ return model
 
 ```
 
-
-16.4.3
-
-Complete Example
+#### Complete Example
 
 Pulling all of this together, the complete example is listed below.
+
+```
 from
 from
 from
@@ -487,11 +468,6 @@ encoded = tokenizer.texts_to_sequences(lines)
 # pad encoded sequences
 padded = pad_sequences(encoded, maxlen=length, padding='post')
 return padded
-
-182
-
-16.4. Develop Multichannel Model
-
 # define the model
 def define_model(length, vocab_size):
 # channel 1
@@ -545,22 +521,19 @@ model = define_model(length, vocab_size)
 model.fit([trainX,trainX,trainX], array(trainLabels), epochs=7, batch_size=16)
 # save the model
 model.save('model.h5')
-
-183
-
-16.4. Develop Multichannel Model
-
-184
-
 ```
 
 Running the example first prints a summary of the prepared training dataset.
+
+```
 Max document length: 1380
 Vocabulary size: 44277
 
 ```
 
 The model is fit relatively quickly and appears to show good skill on the training dataset.
+
+```
 ...
 Epoch 3/7
 1800/1800
@@ -587,17 +560,13 @@ model.
 ![](./-.png)
 The model is fit for a number of epochs and saved to the file model.h5 for later evaluation.
 
-16.5. Evaluate Model
-
-16.5
-
-185
-
-Evaluate Model
+# Evaluate Model
 
 In this section, we can evaluate the fit model by predicting the sentiment on all reviews in the
 unseen test dataset. Using the data loading functions developed in the previous section, we can
 load and encode both the training and test datasets.
+
+```
 # load datasets
 trainLines, trainLabels = load_dataset('train.pkl')
 testLines, testLabels = load_dataset('test.pkl')
@@ -682,6 +651,17 @@ Test Accuracy: 88.50
 
 ```
 
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_clean_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
 
 # Extensions
 
@@ -730,16 +710,3 @@ sentiment prediction on text movie review data. Specifically, you learned:
 - How to prepare movie review text data for modeling.
 - How to develop a multichannel convolutional neural network for text in Keras.
 - How to evaluate a fit model on unseen movie review data.
-
-##### Run Notebook
-Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_clean_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
-

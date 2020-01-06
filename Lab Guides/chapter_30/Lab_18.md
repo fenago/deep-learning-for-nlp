@@ -11,9 +11,8 @@ skill.
 
 Let's get started.
 
-30.1
 
-Tutorial Overview
+##### Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. German to English Translation Dataset
@@ -21,54 +20,28 @@ This tutorial is divided into the following parts:
 3. Train Neural Translation Model
 4. Evaluate Neural Translation Model
 
-30.2
-
-German to English Translation Dataset
+###### German to English Translation Dataset
 
 In this tutorial, we will use a dataset of German to English terms used as the basis for flashcards
 for language learning. The dataset is available from the ManyThings.org website, with examples
 drawn from the Tatoeba Project. The dataset is comprised of German phrases and their English
 counterparts and is intended to be used with the Anki flashcard software.
-353
 
-30.3. Preparing the Text Data
-
-354
-
-- Download the English-German pairs dataset.
-http://www.manythings.org/anki/deu-eng.zip
-
-Download the dataset to your current working directory and decompress it; for example:
-
-```
-unzip deu-eng.zip
-
-```
-
-You will have a file called deu.txt that contains 152,820 pairs of English to German phases,
+You have a file called deu.txt that contains alot of  pairs of English to German phases,
 one pair per line with a tab separating the language. For example, the first 5 lines of the file
 look as follows:
 
 ```
-Hi.
-Hi.
-Run!
-Wow!
-Wow!
-
-Hallo!
-GruB Gott!
-Lauf!
-Potzdonner!
-Donnerwetter!
-
+Hi. Hallo!
+Hi. GruB Gott!
+Run! Lauf!
+Wow! Potzdonner!
+Wow! Donnerwetter!
 ```
 
 We will frame the prediction problem as given a sequence of words in German as input,
 translate or predict the sequence of words in English. The model we will develop will be suitable
 for some beginner German phrases.
-
-30.3
 
 Preparing the Text Data
 
@@ -85,9 +58,6 @@ A good text cleaning procedure may handle some or all of these observations. Dat
 preparation is divided into two subsections:
 1. Clean Text
 2. Split Text
-
-30.3. Preparing the Text Data
-
 
 Clean Text
 
@@ -234,8 +204,6 @@ Running the example creates a new file in the current working directory with the
 text called english-german.pkl. Some examples of the clean text are printed for us to evaluate
 at the end of the run to confirm that the clean operations were performed as expected.
 
-30.3.2
-
 Split Text
 
 The clean data contains a little over 150,000 phrase pairs and some of the pairs toward the end
@@ -249,10 +217,6 @@ hear how you do. We will simplify the problem by reducing the dataset to the fir
 examples in the file; these will be the shortest phrases in the dataset. Further, we will then
 stake the first 9,000 of those as examples for training and the remaining 1,000 examples to test
 the fit model.
-
-30.4. Train Neural Translation Model
-
-358
 
 Below is the complete example of loading the clean data, splitting it, and saving the split
 portions of data to new files.
@@ -289,8 +253,6 @@ all of the train and test examples that we can use to define the parameters of t
 such as max phrase lengths and the vocabulary, and the english-german-train.pkl and
 english-german-test.pkl files for the train and test dataset. We are now ready to start
 developing our translation model.
-
-30.4
 
 Train Neural Translation Model
 
@@ -497,8 +459,6 @@ def encode_sequences(tokenizer, length, lines):
 X = tokenizer.texts_to_sequences(lines)
 # pad sequences with 0 values
 X = pad_sequences(X, maxlen=length, padding='post')
-
-30.4. Train Neural Translation Model
 return X
 # one hot encode target sequence
 def encode_output(sequences, vocab_size):
@@ -754,17 +714,12 @@ We can tie all of this together and evaluate the loaded model on both the traini
 datasets. The complete code listing is provided below.
 
 ```
-from
-from
-from
-from
-from
 
-pickle import load
-numpy import argmax
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.models import load_model
+from pickle import load
+from numpy import argmax
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.models import load_model
 from nltk.translate.bleu_score import corpus_bleu
 # load a clean dataset
 def load_clean_sentences(filename):
@@ -813,38 +768,12 @@ if i < 10:
 print('src=[%s], target=[%s], predicted=[%s]' % (raw_src, raw_target, translation))
 actual.append(raw_target.split())
 predicted.append(translation.split())
+
 # calculate BLEU score
-
-print('BLEU-1:
-print('BLEU-2:
-print('BLEU-3:
-print('BLEU-4:
-
-%f'
-%f'
-%f'
-%f'
-
-%
-%
-%
-%
-
-corpus_bleu(actual,
-corpus_bleu(actual,
-corpus_bleu(actual,
-corpus_bleu(actual,
-
-368
-predicted,
-predicted,
-predicted,
-predicted,
-
-weights=(1.0, 0, 0, 0)))
-weights=(0.5, 0.5, 0, 0)))
-weights=(0.3, 0.3, 0.3, 0)))
-weights=(0.25, 0.25, 0.25, 0.25)))
+print('BLEU-1: %f' % corpus_bleu(actual, predicted, weights=(1.0, 0, 0, 0)))
+print('BLEU-2: %f' % corpus_bleu(actual, predicted, weights=(0.5, 0.5, 0, 0)))
+print('BLEU-3: %f' % corpus_bleu(actual, predicted, weights=(0.3, 0.3, 0.3, 0)))
+print('BLEU-4: %f' % corpus_bleu(actual, predicted, weights=(0.25, 0.25, 0.25, 0.25)))
 
 # load datasets
 dataset = load_clean_sentences('english-german-both.pkl')
@@ -896,16 +825,10 @@ src=[versucht es doch einfach], target=[just try it], predicted=[just try it]
 src=[sie sind jung], target=[youre young], predicted=[youre young]
 src=[er ging surfen], target=[he went surfing], predicted=[he went surfing]
 
-BLEU-1:
-BLEU-2:
-BLEU-3:
-BLEU-4:
-
-0.085682
-0.284191
-0.459090
-0.517571
-
+BLEU-1: 0.085682
+BLEU-2: 0.284191
+BLEU-3: 0.459090
+BLEU-4: 0.517571
 ```
 
 Looking at the results on the test set, do see readable translations, which is not an easy task.
@@ -938,10 +861,19 @@ BLEU-4:
 
 ```
 
+##### Run Notebook
+Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
 
-30.6
+##### Run Notebook
+Click notebook `2_split_data.ipynb` in jupterLab UI and run jupyter notebook.
 
-Extensions
+##### Run Notebook
+Click notebook `3_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_generate.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
 - Data Cleaning. Different data cleaning operations could be performed on the data, such
@@ -969,13 +901,9 @@ sequence generated so far.
 
 If you explore any of these extensions, I'd love to know.
 
-30.7
-
-Further Reading
+###### Further Reading
 
 This section provides more resources on the topic if you are looking to go deeper.
-
-30.7.1
 
 Dataset
 
@@ -983,8 +911,6 @@ Dataset
 http://www.manythings.org/anki/
 - German - English deu-eng.zip.
 http://www.manythings.org/anki/deu-eng.zip
-
-30.7.2
 
 Neural Machine Translation
 
@@ -1011,15 +937,3 @@ German phrases to English. Specifically, you learned:
 - How to develop an encoder-decoder model for machine translation.
 - How to use a trained model for inference on new input phrases and evaluate the model
 skill.
-
-##### Run Notebook
-Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_split_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_generate.ipynb` in jupterLab UI and run jupyter notebook.

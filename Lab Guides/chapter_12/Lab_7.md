@@ -22,14 +22,6 @@ This tutorial is divided into the following parts:
 5. Load Google's Word2Vec Embedding
 6. Load Stanford's GloVe Embedding
 
-122
-
-12.2. Word Embeddings
-
-12.2
-
-123
-
 Word Embeddings
 
 A word embedding is an approach to provide a dense vector representation of words that capture
@@ -82,9 +74,7 @@ that they generally look at a window of words for each target word to provide co
 turn meaning for words. The approach was developed by Tomas Mikolov, formerly at Google
 and currently at Facebook.
 
-12.4. Develop Word2Vec Embedding
-
-124
+## Develop Word2Vec Embedding
 
 Word2Vec models require a lot of text, e.g. the entire Wikipedia corpus. Nevertheless, we
 will demonstrate the principles using a small in-memory example of text. Gensim provides the
@@ -141,7 +131,7 @@ model.wv.save_word2vec_format('model.bin')
 ```
 
 
-12.4. Develop Word2Vec Embedding
+#### Develop Word2Vec Embedding
 
 When getting started, you can save the learned model in ASCII format and review the
 contents. You can do this by setting binary=False when calling the save word2vec format()
@@ -248,9 +238,7 @@ We can then train a projection method on the vectors, such as those methods offe
 scikit-learn, then use Matplotlib to plot the projection as a scatter plot. Let's look at an example
 with Principal Component Analysis or PCA.
 
-12.5.1
-
-Plot Word Vectors Using PCA
+### Plot Word Vectors Using PCA
 
 We can create a 2-dimensional PCA model of the word vectors using the scikit-learn PCA class
 as follows.
@@ -479,6 +467,20 @@ Running the example prints the same result of queen.
 
 ```
 
+
+##### Run Notebook
+Click notebook `1_example_word2vec.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_plot_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_word_vector_arithmetic.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_example_glove.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 # Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
@@ -524,15 +526,3 @@ Gensim. Specifically, you learned:
 - How to visualize a trained word embedding model using Principal Component Analysis.
 - How to load pre-trained Word2Vec and GloVe word embedding models from Google and
 Stanford.
-
-##### Run Notebook
-Click notebook `1_example_word2vec.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_plot_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_word_vector_arithmetic.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_example_glove.ipynb` in jupterLab UI and run jupyter notebook.

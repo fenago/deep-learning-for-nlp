@@ -63,11 +63,6 @@ arguments:
 - input dim: This is the size of the vocabulary in the text data. For example, if your data
 is integer encoded to values between 0-10, then the size of the vocabulary would be 11
 words.
-
-13.4. Example of Learning an Embedding
-
-135
-
 - output dim: This is the size of the vector space in which words will be embedded. It
 defines the size of the output vectors from this layer for each word. For example, it could
 be 32 or 100 or even larger. Test different values for your problem.
@@ -90,9 +85,7 @@ to connect a Dense layer directly to an Embedding layer, you must first flatten 
 matrix to a 1D vector using the Flatten layer. Now, let’s see how we can use an Embedding
 layer in practice.
 
-13.4
-
-Example of Learning an Embedding
+### Example of Learning an Embedding
 
 In this section, we will look at how we can learn a word embedding while fitting a neural
 network on a text classification problem. We will define a small problem where we have 10
@@ -122,8 +115,6 @@ will have sequences of integers. We could experiment with other more sophisticat
 model encoding like counts or TF-IDF. Keras provides the one hot() function that creates a
 hash of each word as an efficient integer encoding. We will estimate the vocabulary size of 50,
 which is much larger than needed to reduce the probability of collisions from the hash function.
-
-13.4. Example of Learning an Embedding
 
 ```
 # integer encode the documents
@@ -231,55 +222,19 @@ Running the example first prints the integer encoded documents.
 ```
 
 Then the padded versions of each document are printed, making them all uniform length.
-```
-[[ 6
-[42
-[ 2
-[42
-[18
-[17
-[22
-[27
-[22
-[49
-
-16
-24
-17
-24
-0
-0
-17
-42
-24
-46
-
-0
-0
-0
-0
-0
-0
-0
-0
-0
-16
-
-0]
-0]
-0]
-0]
-0]
-0]
-0]
-0]
-0]
-34]]
 
 ```
-
-
-13.5. Example of Using Pre-Trained GloVe Embedding
+[[ 6 16 0 0]
+[42 24 0 0]
+[ 2 17 0 0]
+[42 24 0 0]
+[18 0 0 0]
+[17 0 0 0]
+[22 17 0 0]
+[27 42 0 0]
+[22 24 0 0]
+[49 46 16 34]]
+```
 
 After the network is defined, a summary of the layers is printed. We can see that as expected,
 the output of the Embedding layer is a 4 × 8 matrix and this is squashed to a 32-element vector
@@ -526,9 +481,15 @@ In practice, I would encourage you to experiment with learning a word embedding 
 a pre-trained embedding that is fixed and trying to perform learning on top of a pre-trained
 embedding. See what works best for your specific problem.
 
-13.6
 
-Tips for Cleaning Text for Word Embedding
+##### Run Notebook
+Click notebook `1_embedding_example.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_pretrained_embedding.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+# Tips for Cleaning Text for Word Embedding
 
 Recently, the field of natural language processing has been moving away from bag-of-word
 models and word encoding toward word embeddings. The benefit of word embeddings is that
@@ -542,6 +503,7 @@ Tomas Mikolov is one of the developers of Word2Vec, a popular word embedding met
 He suggests only very minimal text cleaning is required when learning a word embedding model.
 Below is his response when pressed with the question about how to best prepare text data for
 Word2Vec.
+
 There is no universal answer. It all depends on what you plan to use the vectors
 for. In my experience, it is usually good to disconnect (or remove) punctuation from
 words, and sometimes also convert all characters to lowercase. One can also replace
@@ -588,10 +550,3 @@ Keras. Specifically, you learned:
 layer.
 - How to learn a word embedding while fitting a neural network.
 - How to use a pre-trained word embedding in a neural network.
-
-
-##### Run Notebook
-Click notebook `1_embedding_example.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_pretrained_embedding.ipynb` in jupterLab UI and run jupyter notebook.

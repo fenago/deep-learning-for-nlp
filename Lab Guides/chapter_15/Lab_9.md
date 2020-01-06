@@ -12,9 +12,7 @@ layers.
 
 Let's get started.
 
-15.1
-
-Tutorial Overview
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Movie Review Dataset
@@ -42,8 +40,6 @@ section, we will look at 3 things:
 2. Loading and cleaning the data to remove punctuation and numbers.
 3. Defining a vocabulary of preferred words.
 
-15.3.1
-
 Split into Train and Test Sets
 
 We are pretending that we are developing a system that can predict the sentiment of a textual
@@ -60,8 +56,6 @@ as a test set (100 reviews) and the remaining 1,800 reviews as the training data
 reviews where reviews named 000 to 899 are for training data and reviews named 900 onwards
 are for test.
 
-15.3.2
-
 Loading and Cleaning Reviews
 
 The text data is already pretty clean; not much preparation is required. Without getting bogged
@@ -72,9 +66,7 @@ down too much in the details, we will prepare the data using the following way:
 - Remove all words that are known stop words.
 - Remove all words that have a length ≤ 1 character.
 
-15.3. Data Preparation
-
-155
+Data Preparation
 
 We can put all of these steps into a function called clean doc() that takes as an argument
 the raw text loaded from a file and returns a list of cleaned tokens. We can also define a function
@@ -299,11 +291,6 @@ return tokens
 def add_doc_to_vocab(filename, vocab):
 # load doc
 doc = load_doc(filename)
-
-15.3. Data Preparation
-
-159
-
 # clean doc
 tokens = clean_doc(doc)
 # update counts
@@ -347,6 +334,8 @@ save_list(tokens, 'vocab.txt')
 
 Running the above example with this addition shows that the vocabulary size drops by a
 little more than half its size, from 44,276 to 25,767 words.
+
+```
 25767
 
 ```
@@ -354,13 +343,10 @@ little more than half its size, from 44,276 to 25,767 words.
 Running the min occurrence filter on the vocabulary and saving it to file, you should now
 have a new file called vocab.txt with only the words we are interested in. The order of words
 in your file will differ, but should look something like the following:
+
+```
 aberdeen
 dupe
-
-15.4. Train CNN With Embedding Layer
-
-160
-
 burt
 libido
 hamlet
@@ -374,8 +360,6 @@ columbia
 ```
 
 We are now ready to look at extracting features from the reviews ready for modeling.
-
-15.4
 
 Train CNN With Embedding Layer
 
@@ -789,10 +773,7 @@ Epoch 10/10
 
 ```
 
-
-15.5
-
-Evaluate Model
+#### Evaluate Model
 
 In this section, we will evaluate the trained model and use it to make predictions on new data.
 First, we can use the built-in evaluate() function to estimate the skill of the model on both
@@ -862,8 +843,6 @@ import re
 from os import listdir
 from numpy import array
 from keras.preprocessing.text import Tokenizer
-
-15.5. Evaluate Model
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 # load doc into memory
@@ -998,10 +977,23 @@ Sentiment: NEGATIVE (54.746%)
 
 ```
 
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
 
-15.6
+##### Run Notebook
+Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
-Extensions
+##### Run Notebook
+Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_cnn_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `5_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+# Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
 - Data Cleaning. Explore better data cleaning, perhaps leaving some punctuation in tact
@@ -1017,11 +1009,6 @@ skill and were not tuned. Explore tuning these two CNN parameters.
 - Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
 alternate configurations of the number of training epochs and batch size and use the test
 dataset as a validation set to pick a better stopping point for training the model.
-
-15.7. Further Reading
-
-172
-
 - Deeper Network. Explore whether a deeper network results in better skill, either in
 terms of CNN layers, MLP layers and both.
 - Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
@@ -1040,8 +1027,6 @@ Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
-15.7.1
-
 Dataset
 
 - Movie Review Data.
@@ -1052,8 +1037,6 @@ http://xxx.lanl.gov/abs/cs/0409058
 - Movie Review Polarity Dataset.
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
-
-15.7.2
 
 APIs
 
@@ -1072,19 +1055,3 @@ reviews. Specifically, you learned:
 - How to develop a neural classification model with word embedding and convolutional
 layers.
 - How to evaluate the developed a neural classification model.
-
-
-##### Run Notebook
-Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_cnn_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_evaluate.ipynb` in jupterLab UI and run jupyter notebook.

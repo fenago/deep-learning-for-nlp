@@ -53,9 +53,7 @@ Data Preparation
 
 We will start by preparing the data for modeling. The first step is to look at the data.
 
-20.3.1
-
-Review the Text
+###### Review the Text
 
 Open the text in an editor and just look at the text data. For example, here is the first piece of
 dialog:
@@ -71,9 +69,6 @@ were starting on our way home, and told his servant to run and bid us wait for h
 The servant took hold of me by the cloak behind, and said: Polemarchus desires you
 to wait.
 
-20.3. Data Preparation
-
-227
 
 I turned round, and asked him where his master was.
 There he is, said the youth, coming after you, if you will only wait.
@@ -96,9 +91,7 @@ These observations, and more, suggest at ways that we may wish to prepare the te
 The specific way we prepare the data really depends on how we intend to model it, which in
 turn depends on how we intend to use it.
 
-20.3.2
-
-Language Model Design
+###### Language Model Design
 
 In this tutorial, we will develop a model of the text that we can then use to generate new
 sequences of text. The language model will be statistical and will predict the probability of
@@ -118,7 +111,7 @@ model to predict the next word across sentences, paragraphs, and even books or c
 text. Now that we have a model design, we can look at transforming the raw text into sequences
 of 100 input words to 1 output word, ready to fit a model.
 
-Load Text
+###### Load Text
 
 The first step is to load the text into memory. We can develop a small function to load the
 entire text file into memory and return it. The function is called load doc() and is listed below.
@@ -158,9 +151,7 @@ Artemis.); and also because I wanted to see in what
 
 So far, so good. Next, let's clean the text.
 
-20.3.4
-
-Clean Text
+###### Clean Text
 
 We need to transform the raw text into a sequence of tokens or words that we can use as a
 source to train the model. Based on reviewing the raw text (above), below are some specific
@@ -171,11 +162,6 @@ yourself as an extension.
 - Remove all punctuation from words to reduce the vocabulary size (e.g. 'What?' becomes
 'What').
 - Remove all words that are not alphabetic to remove standalone punctuation tokens.
-
-20.3. Data Preparation
-
-229
-
 - Normalize all words to lowercase to reduce the vocabulary size.
 
 Vocabulary size is a big deal with language modeling. A smaller vocabulary results in a
@@ -248,8 +234,6 @@ Unique Tokens: 7409
 ```
 
 Next, we can look at shaping the tokens into sequences and saving them to file.
-
-20.3.5
 
 Save Clean Text
 
@@ -394,12 +378,6 @@ Specifically, we will use an Embedding Layer to learn the representation of word
 Long Short-Term Memory (LSTM) recurrent neural network to learn to predict words based on
 their context. Let's start by loading our training data.
 
-20.4. Train Language Model
-
-20.4.1
-
-233
-
 Load Sequences
 
 We can load our training data using the load doc() function we developed in the previous
@@ -424,8 +402,6 @@ lines = doc.split('\n')
 ```
 
 Next, we can encode the training data.
-
-20.4.2
 
 Encode Sequences
 
@@ -461,9 +437,6 @@ actual vocabulary.
 vocab_size = len(tokenizer.word_index) + 1
 ```
 
-
-20.4.3
-
 Sequence Inputs and Output
 
 Now that we have encoded the input sequences, we need to separate them into input (X) and
@@ -488,9 +461,6 @@ X, y = sequences[:,:-1], sequences[:,-1]
 y = to_categorical(y, num_classes=vocab_size)
 seq_length = X.shape[1]
 ```
-
-
-20.4.4
 
 Fit Model
 
@@ -590,9 +560,6 @@ Epoch 100/100
 118633/118633 [==============================] - 270s - loss: 1.9709 - acc: 0.5315
 ```
 
-
-20.4.5
-
 Save Model
 
 At the end of the run, the trained model is saved to file. Here, we use the Keras model API to
@@ -650,11 +617,6 @@ model.add(Embedding(vocab_size, 50, input_length=seq_length))
 model.add(LSTM(100, return_sequences=True))
 model.add(LSTM(100))
 model.add(Dense(100, activation='relu'))
-
-20.5. Use Language Model
-
-238
-
 model.add(Dense(vocab_size, activation='softmax'))
 # compile network
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -687,19 +649,14 @@ model.save('model.h5')
 dump(tokenizer, open('tokenizer.pkl', 'wb'))
 ```
 
-
-20.5
-
-Use Language Model
+###### Use Language Model
 
 Now that we have a trained language model, we can use it. In this case, we can use it to generate
 new sequences of text that have the same statistical properties as the source text. This is not
 practical, at least not for this example, but it gives a concrete example of what the language
 model has learned. We will start by loading the training sequences again.
 
-20.5.1
-
-Load Data
+###### Load Data
 
 We can use the same code from the previous section to load the training data sequences of text.
 Specifically, the load doc() function.
@@ -730,10 +687,7 @@ also on the same line.
 seq_length = len(lines[0].split()) - 1
 ```
 
-
-20.5.2
-
-Load Model
+###### Load Model
 
 We can now load the model from file. Keras provides the load model() function for loading
 the model, ready for use.
@@ -752,9 +706,7 @@ tokenizer = load(open('tokenizer.pkl', 'rb'))
 
 We are ready to use the loaded model.
 
-20.5.3
-
-Generate Text
+###### Generate Text
 
 The first step in generating text is preparing a seed input. We will select a random line of text
 from the input text for this purpose. Once selected, we will print it so that we have some idea
@@ -768,11 +720,6 @@ Next, we can generate new words, one at a time. First, the seed text must be enc
 integers using the same tokenizer that we used when training the model.
 encoded = tokenizer.texts_to_sequences([seed_text])[0]
 ```
-
-
-20.5. Use Language Model
-
-240
 
 The model can predict the next word directly by calling model.predict classes() that
 will return the index of the word with the highest probability.
@@ -923,9 +870,16 @@ help in interpreting the seed and the generated text. Nevertheless, the generate
 right kind of words in the right kind of order. Try running the example a few times to see other
 examples of generated text.
 
-20.6
+##### Run Notebook
+Click notebook `1_prepare_text.ipynb` in jupterLab UI and run jupyter notebook.
 
-Extensions
+##### Run Notebook
+Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
 - Contrived Seed Text. Hand craft or select seed text and evaluate how the seed text
@@ -939,11 +893,6 @@ these changes to the size of the vocabulary impact the generated text.
 cells in the hidden layer, to see if you can develop a better model.
 - Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
 dropout to see if you can develop a better model.
-
-20.7. Further Reading
-
-243
-
 - Develop Pre-Trained Embedding. Extend the model to use pre-trained Word2Vec
 vectors to see if it results in a better model.
 - Use GloVe Embedding. Use the GloVe word embedding vectors with and without fine
@@ -958,9 +907,7 @@ to a fixed length (e.g. the longest sentence length).
 
 If you explore any of these extensions, I'd love to know.
 
-20.7
-
-Further Reading
+#### Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - Project Gutenberg.
@@ -972,9 +919,7 @@ https://en.wikipedia.org/wiki/Republic_(Plato)
 - Language model on Wikipedia.
 https://en.wikipedia.org/wiki/Language_model
 
-20.8
-
-Summary
+#### Summary
 
 In this tutorial, you discovered how to develop a word-based language model using a word
 embedding and a recurrent neural network. Specifically, you learned:
@@ -983,14 +928,3 @@ embedding and a recurrent neural network. Specifically, you learned:
 hidden layer.
 - How to use the learned language model to generate new text with similar statistical
 properties as the source text.
-
-
-##### Run Notebook
-Click notebook `1_prepare_text.ipynb` in jupterLab UI and run jupyter notebook.
-
-
-##### Run Notebook
-Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.

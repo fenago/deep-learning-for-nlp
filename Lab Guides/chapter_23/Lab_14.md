@@ -216,7 +216,7 @@ plot_model(model, to_file='vgg.png')
 Again, because the model is large, the plot is a little too large and perhaps unreadable.
 Nevertheless, it is provided below.
 
-23.4. Load the VGG Model in Keras
+##### Load the VGG Model in Keras
 
 ![](./278-27.png)
 
@@ -303,13 +303,7 @@ image = preprocess_input(image)
 
 We are now ready to make a prediction for our loaded and prepared image.
 
-23.5. Develop a Simple Photo Classifier
-
-23.5.4
-
-264
-
-Make a Prediction
+##### Make a Prediction
 
 We can call the predict() function on the model in order to get a prediction of the probability
 of the image belonging to each of the 1,000 known object types.
@@ -319,9 +313,7 @@ yhat = model.predict(image)
 
 Nearly there, now we need to interpret the probabilities.
 
-23.5.5
-
-Interpret Prediction
+##### Interpret Prediction
 
 Keras provides a function to interpret the probabilities called decode predictions(). It can
 return a list of classes and their probabilities in case you would like to present the top 3 objects
@@ -339,9 +331,7 @@ print('%s (%.2f%%)' % (label[1], label[2]*100))
 
 And that's it.
 
-23.5.6
-
-Complete Example
+##### Complete Example
 
 Tying all of this together, the complete example is listed below:
 
@@ -374,6 +364,9 @@ print('%s (%.2f%%)' % (label[1], label[2]*100))
 Running the example, we can see that the image is correctly classified as a coffee mug with
 a 75% likelihood.
 
+##### Run Notebook
+Click notebook `1_classify_image.ipynb` in jupterLab UI and run jupyter notebook.
+
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
@@ -381,10 +374,7 @@ running the example a few times.
 coffee_mug (75.27%)
 ```
 
-
-23.6
-
-Further Reading
+# Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 - ImageNet.
@@ -411,7 +401,3 @@ classification. Specifically, you learned:
 - About the ImageNet dataset and competition and the VGG winning models.
 - How to load the VGG model in Keras and summarize its structure.
 - How to use the loaded VGG model to classifying objects in ad hoc photographs.
-
-
-##### Run Notebook
-Click notebook `1_classify_image.ipynb` in jupterLab UI and run jupyter notebook.

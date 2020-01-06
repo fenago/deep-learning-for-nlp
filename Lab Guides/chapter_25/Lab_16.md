@@ -29,7 +29,7 @@ This tutorial is divided into the following parts:
 7. Word-By-Word Model
 8. Progressive Loading
 
-25.2. Download the Flickr8K Dataset
+###### Download the Flickr8K Dataset
 
 A good dataset to use when getting started with image captioning is the Flickr8K dataset. The
 reason is that it is realistic and relatively small so that you can download it and build models on
@@ -133,24 +133,19 @@ image_id = filename.split('.')[0]
 ```
 
 
-25.4. Pre-Calculate Photo Features
+# Pre-Calculate Photo Features
 
 We can tie all of this together and develop a function that, given the name of the directory
 containing the photos, will load and pre-process all of the photos for the VGG model and return
 them in a dictionary keyed on their unique image identifiers.
 
 ```
-from
-from
-from
-from
-from
 
-os import listdir
-os import path
-keras.preprocessing.image import load_img
-keras.preprocessing.image import img_to_array
-keras.applications.vgg16 import preprocess_input
+from os import listdir
+from os import path
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.applications.vgg16 import preprocess_input
 
 def load_photos(directory):
 images = dict()
@@ -197,11 +192,6 @@ predictions on new photos. In this section, we will extend the photo loading beh
 in the previous section to load all photos, extract their features using a pre-trained VGG model,
 and store the extracted features to a new file that can be loaded and used to train the language
 model. The first step is to load the VGG model. This model is provided directly in Keras and
-
-25.4. Pre-Calculate Photo Features
-
-280
-
 can be loaded as follows. Note that this will download the 500-megabyte model weights to your
 computer, which may take a few minutes.
 
@@ -554,10 +544,7 @@ Vocabulary Size: 4484
 Open the new file descriptions.txt in a text editor and review the contents. You should
 see somewhat readable descriptions of photos ready for modeling.
 
-25.7. Whole Description Sequence Model
-
-286
-
+```
 ...
 3139118874_599b30b116 two girls pose for picture at christmastime
 2065875490_a46b58c12b person is walking on sidewalk and skeleton is on the left inside of
@@ -571,8 +558,6 @@ fence
 The vocabulary is still relatively large. To make modeling easier, especially the first time
 around, I would recommend further reducing the vocabulary by removing words that only
 appear once or twice across all descriptions.
-
-25.7
 
 Whole Description Sequence Model
 
@@ -593,6 +578,8 @@ would then need to be one hot encoded to represent the idealized probability dis
 over the vocabulary for each word in the sequence. We can use tools in Keras to prepare the
 descriptions for this type of model. The first step is to load the mapping of image identifiers to
 clean descriptions stored in descriptions.txt.
+
+```
 # load doc into memory
 def load_doc(filename):
 # open the file as read only
@@ -610,10 +597,6 @@ for line in doc.split('\n'):
 # split line by white space
 tokens = line.split()
 
-25.7. Whole Description Sequence Model
-
-287
-
 # split id from description
 image_id, image_desc = tokens[0], tokens[1:]
 # store
@@ -627,11 +610,15 @@ print('Loaded %d' % (len(descriptions)))
 Running this piece loads the 8,092 photo descriptions into a dictionary keyed on image
 identifiers. These identifiers can then be used to load each photo file for the corresponding
 inputs to the model.
+
+```
 Loaded 8092
 
 ```
 
 Next, we need to extract all of the description text so we can encode it.
+
+```
 # extract all text
 desc_text = list(descriptions.values())
 
@@ -640,6 +627,8 @@ desc_text = list(descriptions.values())
 We can use the Keras Tokenizer class to consistently map each word in the vocabulary to
 an integer. First, the object is created, then is fit on the description text. The fit tokenizer can
 later be saved to file for consistent decoding of the predictions back to vocabulary words.
+
+```
 from keras.preprocessing.text import Tokenizer
 # prepare tokenizer
 tokenizer = Tokenizer()
@@ -650,6 +639,8 @@ print('Vocabulary Size: %d' % vocab_size)
 ```
 
 Next, we can use the fit tokenizer to encode the photo descriptions into sequences of integers.
+
+```
 # integer encode descriptions
 sequences = tokenizer.texts_to_sequences(desc_text)
 
@@ -659,6 +650,8 @@ The model will require all output sequences to have the same length for training
 achieve this by padding all encoded sequences to have the same length as the longest encoded
 sequence. We can pad the sequences with 0 values after the list of words. Keras provides the
 pad sequences() function to pad the sequences.
+
+```
 from keras.preprocessing.sequence import pad_sequences
 # pad all sequences to a fixed length
 max_length = max(len(s) for s in sequences)
@@ -667,13 +660,10 @@ padded = pad_sequences(sequences, maxlen=max_length, padding='post')
 
 ```
 
-
-25.7. Whole Description Sequence Model
-
-288
-
 Finally, we can one hot encode the padded sequences to have one sparse vector for each word
 in the sequence. Keras provides the to categorical() function to perform this operation.
+
+```
 from keras.utils import to_categorical
 # one hot encode
 y = to_categorical(padded, num_classes=vocab_size)
@@ -682,12 +672,16 @@ y = to_categorical(padded, num_classes=vocab_size)
 
 Once encoded, we can ensure that the sequence output data has the right shape for the
 model.
+
+```
 y = y.reshape((len(descriptions), max_length, vocab_size))
 print(y.shape)
 
 ```
 
 Putting all of this together, the complete example is listed below.
+
+```
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
@@ -725,10 +719,6 @@ print('Vocabulary Size: %d' % vocab_size)
 sequences = tokenizer.texts_to_sequences(desc_text)
 # pad all sequences to a fixed length
 
-25.8. Word-By-Word Model
-
-289
-
 max_length = max(len(s) for s in sequences)
 print('Description Length: %d' % max_length)
 padded = pad_sequences(sequences, maxlen=max_length, padding='post')
@@ -743,6 +733,8 @@ Running the example first prints the number of loaded image descriptions (8,092 
 the dataset vocabulary size (4,485 words), the length of the longest description (28 words), then
 finally the shape of the data for fitting a prediction model in the form [samples, sequence length,
 features].
+
+```
 Loaded 8092
 Vocabulary Size: 4485
 Description Length: 28
@@ -752,8 +744,6 @@ Description Length: 28
 
 As mentioned, outputting the entire sequence may be challenging for the model. We will
 look at a simpler model in the next section.
-
-25.8
 
 Word-By-Word Model
 
@@ -781,18 +771,11 @@ STARTDESC boy rides horse ENDDESC
 And would be fed to the model with the same image input to result in the following
 input-output word sequence pairs:
 
-25.8. Word-By-Word Model
-
-290
-
-Input (X),
-Output (y)
-STARTDESC,
-boy
-STARTDESC, boy,
-rides
-STARTDESC, boy, rides,
-horse
+```
+Input (X), Output (y)
+STARTDESC, boy
+STARTDESC, boy, rides
+STARTDESC, boy, rides, horse
 STARTDESC, boy, rides, horse ENDDESC
 
 ```
@@ -802,6 +785,8 @@ Each description must be integer encoded. After encoding, the sequences are spli
 input and output pairs and only the output word (y) is one hot encoded. This is because the
 model is only required to predict the probability distribution of one word at a time. The code is
 the same up to the point where we calculate the maximum length of sequences.
+
+```
 ...
 descriptions = load_clean_descriptions('descriptions.txt')
 print('Loaded %d' % (len(descriptions)))
@@ -824,6 +809,8 @@ Next, we split the each integer encoded sequence into input and output pairs. Le
 through a single sequence called seq at the i'th word in the sequence, where i more than or
 equal to 1. First, we take the first i-1 words as the input sequence and the i'th word as the
 output word.
+
+```
 # split into input and output pair
 in_seq, out_seq = seq[:i], seq[i]
 
@@ -831,24 +818,25 @@ in_seq, out_seq = seq[:i], seq[i]
 
 Next, the input sequence is padded to the maximum length of the input sequences. Prepadding is used (the default) so that new words appear at the end of the sequence, instead of
 the input beginning.
+
+```
 # pad input sequence
 in_seq = pad_sequences([in_seq], maxlen=max_length)[0]
 
 ```
 
 The output word is one hot encoded, much like in the previous section.
+
+```
 # encode output sequence
 out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
 
 ```
 
-
-25.8. Word-By-Word Model
-
-291
-
 We can put all of this together into a complete example to prepare description data for the
 word-by-word model.
+
+```
 from
 from
 from
@@ -904,11 +892,6 @@ in_seq, out_seq = seq[:i], seq[i]
 in_seq = pad_sequences([in_seq], maxlen=max_length)[0]
 # encode output sequence
 out_seq = to_categorical([out_seq], num_classes=vocab_size)[0]
-
-25.9. Progressive Loading
-
-292
-
 # store
 X.append(in_seq)
 y.append(out_seq)
@@ -924,6 +907,8 @@ input and output sequences. Note that the input of images must follow the exact 
 where the same photo is shown for each example drawn from a single description. One way
 to do this would be to load the photo and store it for each example prepared from a single
 description.
+
+```
 Loaded 8092
 Vocabulary Size: 4485
 Description Length: 28
@@ -932,8 +917,6 @@ Description Length: 28
 
 ```
 
-
-25.9
 
 Progressive Loading
 
@@ -961,14 +944,12 @@ word. Let's design a data generator that given a loaded dictionary of image iden
 descriptions, a trained tokenizer, and a maximum sequence length will load one-image worth of
 examples for each batch.
 
-25.9. Progressive Loading
-
-293
-
 A generator must loop forever and yield each batch of samples. We can loop forever with
 a while loop and within this, loop over each image in the image directory. For each image
 filename, we can load the image and create all of the input-output sequence pairs from the
 image's description. Below is the data generator function.
+
+```
 def data_generator(mapping, tokenizer, max_length):
 # loop for ever over images
 directory = 'Flicker8k_Dataset'
@@ -990,6 +971,8 @@ of an array with two items for the input images and encoded word sequences. The 
 are one hot encoded words. You can see that it calls a function called load photo() to load a
 single photo and return the pixels and image identifier. This is a simplified version of the photo
 loading function developed at the beginning of this tutorial.
+
+```
 # load a single photo intended as input for the VGG feature extractor model
 def load_photo(filename):
 image = load_img(filename, target_size=(224, 224))
@@ -1009,6 +992,8 @@ Another function named create sequences() is called to create sequences of image
 sequences of words, and output words that we then yield to the caller. This is a function that
 includes everything discussed in the previous section, and also creates copies of the image pixels,
 one for each input-output pair created from the photo's description.
+
+```
 # create sequences of images, input sequences and output words for an image
 def create_sequences(tokenizer, max_length, descriptions, images):
 Ximages, XSeq, y = list(), list(),list()
@@ -1018,10 +1003,6 @@ seq = descriptions[j]
 image = images[j]
 # integer encode
 seq = tokenizer.texts_to_sequences([seq])[0]
-
-25.9. Progressive Loading
-
-294
 
 # split one sequence into multiple X,y pairs
 for i in range(1, len(seq)):
@@ -1046,6 +1027,8 @@ the data generator() as parameters. We use the same load clean descriptions() fu
 developed previously and a new create tokenizer() function that simplifies the creation of
 the tokenizer. Tying all of this together, the complete data generator is listed below, ready for
 use to train a model.
+
+```
 from
 from
 from
@@ -1087,9 +1070,6 @@ image_id, image_desc = tokens[0], tokens[1:]
 # store
 descriptions[image_id] = ' '.join(image_desc)
 return descriptions
-
-25.9. Progressive Loading
-
 # fit a tokenizer given caption descriptions
 def create_tokenizer(descriptions):
 lines = list(descriptions.values())
@@ -1141,13 +1121,6 @@ image, image_id = load_photo(filename)
 desc = descriptions[image_id]
 in_img, in_seq, out_word = create_sequences(tokenizer, max_length, desc, image)
 yield [[in_img, in_seq], out_word]
-
-295
-
-25.10. Further Reading
-
-296
-
 # load mapping of ids to descriptions
 descriptions = load_clean_descriptions('descriptions.txt')
 # integer encode sequences of words
@@ -1166,6 +1139,8 @@ print(outputs.shape)
 
 A data generator can be tested by calling the next() function. We can test the generator as
 follows.
+
+```
 # test the data generator
 generator = data_generator(descriptions, tokenizer, max_length)
 inputs, outputs = next(generator)
@@ -1177,6 +1152,8 @@ print(outputs.shape)
 
 Running the example prints the shape of the input and output example for a single batch
 (e.g. 13 input-output pairs):
+
+```
 (13, 224, 224, 3)
 (13, 28)
 (13, 4485)
@@ -1187,6 +1164,8 @@ The generator can be used to fit a model by calling the fit generator() function
 model (instead of fit()) and passing in the generator. We must also specify the number of
 steps or batches per epoch. We could estimate this as (10 x training dataset size), perhaps
 70,000 if 7,000 images are used for training.
+
+```
 # define model
 # ...
 # fit model
@@ -1194,66 +1173,6 @@ model.fit_generator(data_generator(descriptions, tokenizer, max_length),
 steps_per_epoch=70000, ...)
 
 ```
-
-model.
-
-25.10
-
-Further Reading
-
-This section provides more resources on the topic if you are looking go deeper.
-
-25.11. Summary
-
-25.10.1
-
-297
-
-Flickr8K Dataset
-
-- Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
-http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.
-html
-- Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics,
-013.
-https://www.jair.org/media/3994/live-3994-7274-jair.pdf
-- Dataset Request Form.
-https://illinois.edu/fb/sec/1713398
-- Old Flicrk8K Homepage.
-http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html
-
-25.10.2
-
-API
-
-- Python Generators.
-https://wiki.python.org/moin/Generators
-- Keras Model API.
-https://keras.io/models/model/
-- Keras pad sequences() API.
-https://keras.io/preprocessing/sequence/#pad_sequences
-- Keras Tokenizer API.
-https://keras.io/preprocessing/text/#tokenizer
-- Keras VGG16 API.
-https://keras.io/applications/#vgg16
-
-25.11
-
-Summary
-
-In this tutorial, you discovered how to prepare photos and textual descriptions ready for
-developing an automatic photo caption generation model. Specifically, you learned:
-- About the Flickr8K dataset comprised of more than 8,000 photos and up to 5 captions for
-each photo.
-- How to generally load and prepare photo and text data for modeling with deep learning.
-- How to specifically encode data for two different types of deep learning models in Keras.
-
-25.11.1
-
-Next
-
-In the next chapter, you will discover how you can develop a model for automatic caption
-generation.
 
 ##### Run Notebook
 Click notebook `01_load_photos.ipynb` in jupterLab UI and run jupyter notebook.
@@ -1275,3 +1194,43 @@ Click notebook `06_word_by_word.ipynb` in jupterLab UI and run jupyter notebook.
 
 ##### Run Notebook
 Click notebook `07_progressive_loading.ipynb` in jupterLab UI and run jupyter notebook.
+
+### Further Reading
+
+This section provides more resources on the topic if you are looking go deeper.
+
+Flickr8K Dataset
+
+- Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
+http://nlp.cs.illinois.edu/HockenmaierGroup/Framing_Image_Description/KCCA.
+html
+- Framing Image Description as a Ranking Task: Data, Models and Evaluation Metrics,
+013.
+https://www.jair.org/media/3994/live-3994-7274-jair.pdf
+- Dataset Request Form.
+https://illinois.edu/fb/sec/1713398
+- Old Flicrk8K Homepage.
+http://nlp.cs.illinois.edu/HockenmaierGroup/8k-pictures.html
+
+API
+
+- Python Generators.
+https://wiki.python.org/moin/Generators
+- Keras Model API.
+https://keras.io/models/model/
+- Keras pad sequences() API.
+https://keras.io/preprocessing/sequence/#pad_sequences
+- Keras Tokenizer API.
+https://keras.io/preprocessing/text/#tokenizer
+- Keras VGG16 API.
+https://keras.io/applications/#vgg16
+
+##### Summary
+
+In this tutorial, you discovered how to prepare photos and textual descriptions ready for
+developing an automatic photo caption generation model. Specifically, you learned:
+- About the Flickr8K dataset comprised of more than 8,000 photos and up to 5 captions for
+each photo.
+- How to generally load and prepare photo and text data for modeling with deep learning.
+- How to specifically encode data for two different types of deep learning models in Keras.
+

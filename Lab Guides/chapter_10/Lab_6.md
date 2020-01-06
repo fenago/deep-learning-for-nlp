@@ -59,7 +59,7 @@ positive reviews and the last 100 negative reviews as a test set (100 reviews) a
 be imposed easily by using the filenames of the reviews where reviews named 000 to 899 are for
 training data and reviews named 900 onwards are for testing the model.
 
-10.3.2
+2
 
 Loading and Cleaning Reviews
 
@@ -67,7 +67,7 @@ The text data is already pretty clean, so not much preparation is required. With
 much into the details, we will prepare the data using the following method:
 - Split tokens on white space.
 
-10.3. Data Preparation
+Data Preparation
 
 87
 
@@ -122,7 +122,7 @@ Running the example prints a long list of clean tokens. There are many more clea
 we may want to explore, and I leave them as further exercises. I'd love to see what you can
 come up with.
 
-10.3. Data Preparation
+Data Preparation
 
 ```
 ...
@@ -137,7 +137,7 @@ come up with.
 ```
 
 
-10.3.3
+3
 
 Define a Vocabulary
 
@@ -233,7 +233,7 @@ constructed based on only those reviews in the training dataset.
 ('director', 948), ('end', 946), ('something', 945), ('still', 936)]
 ```
 
-10.3. Data Preparation
+Data Preparation
 
 We can step through the vocabulary and remove all words that have a low occurrence, such
 as only being used once or twice in all reviews. For example, the following snippet will retrieve
@@ -346,7 +346,7 @@ save_list(tokens, 'vocab.txt')
 ```
 
 
-10.4. Bag-of-Words Representation
+Bag-of-Words Representation
 
 Running the above example with this addition shows that the vocabulary size drops by a
 little more than half its size, from about 44,000 to about 25,000 words.
@@ -395,7 +395,7 @@ network model. This section is divided into 2 steps:
 1. Converting reviews to lines of tokens.
 2. Encoding reviews with a bag-of-words model representation.
 
-10.4.1
+1
 
 Reviews to Lines of Tokens
 
@@ -403,7 +403,7 @@ Before we can convert reviews to vectors for modeling, we must first clean them 
 involves loading them, performing the cleaning operation developed above, filtering out words
 not in the chosen vocabulary, and converting the remaining tokens into a single string or line
 
-10.4. Bag-of-Words Representation
+Bag-of-Words Representation
 
 93
 
@@ -466,7 +466,7 @@ return docs, labels
 
 Finally, we need to load the vocabulary and turn it into a set for use in cleaning reviews.
 
-10.4. Bag-of-Words Representation
+Bag-of-Words Representation
 
 ```
 # load the vocabulary
@@ -561,10 +561,6 @@ Running this example loads and cleans the review text and returns the labels.
 1800 1800
 ```
 
-constrained vocabulary.
-
-10.4.2
-
 Movie Reviews to Bag-of-Words Vectors
 
 We will use the Keras API to convert reviews to encoded document vectors. Keras provides
@@ -580,7 +576,7 @@ negative lines arrays developed in the previous section.
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
 
-10.4. Bag-of-Words Representation
+Bag-of-Words Representation
 
 96
 
@@ -642,7 +638,7 @@ docs = neg + pos
 # prepare labels
 labels = array([0 for _ in range(len(neg))] + [1 for _ in range(len(pos))])
 
-10.4. Bag-of-Words Representation
+Bag-of-Words Representation
 return docs, labels
 
 ```
@@ -695,13 +691,6 @@ lines = list()
 for filename in listdir(directory):
 # skip any reviews in the test set
 if is_train and filename.startswith('cv9'):
-
-97
-
-10.5. Sentiment Analysis Models
-
-98
-
 continue
 if not is_train and not filename.startswith('cv9'):
 continue
@@ -745,35 +734,29 @@ print(Xtrain.shape, Xtest.shape)
 Running the example prints both the shape of the encoded training dataset and test dataset
 with 1,800 and 200 documents respectively, each with the same sized encoding vocabulary
 (vector length).
+
+```
 (1800, 25768) (200, 25768)
 
 ```
-
-
-10.5
 
 Sentiment Analysis Models
 
 In this section, we will develop Multilayer Perceptron (MLP) models to classify encoded
 documents as either positive or negative. The models will be simple feedforward network models
-
-10.5. Sentiment Analysis Models
-
-99
-
 with fully connected layers called Dense in the Keras deep learning library. This section is
 divided into 3 sections:
 1. First sentiment analysis model
 2. Comparing word scoring modes
 3. Making a prediction for new reviews
 
-10.5.1
-
 First Sentiment Analysis Model
 
 We can develop a simple MLP model to predict the sentiment of encoded reviews. The model
 will have an input layer that equals the number of words in the vocabulary, and in turn the
 length of the input documents. We can store this in a new variable called n words, as follows:
+
+```
 n_words = Xtest.shape[1]
 
 ```
@@ -785,6 +768,8 @@ with a sigmoid activation function for predicting 0 for negative and 1 for posit
 network will be trained using the efficient Adam implementation of gradient descent and the
 binary cross entropy loss function, suited to binary classification problems. We will keep track
 of accuracy when training and evaluating the model.
+
+```
 # define the model
 def define_model(n_words):
 # define network
@@ -802,6 +787,8 @@ return model
 
 Next, we can fit the model on the training data; in this case, the model is small and is easily
 fit in 10 epochs.
+
+```
 # fit network
 model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 
@@ -810,8 +797,9 @@ model.fit(Xtrain, ytrain, epochs=10, verbose=2)
 Finally, once the model is trained, we can evaluate its performance by making predictions in
 the test dataset and printing the accuracy.
 
-10.5. Sentiment Analysis Models
+Sentiment Analysis Models
 
+```
 # evaluate
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
@@ -819,6 +807,8 @@ print('Test Accuracy: %f' % (acc*100))
 ```
 
 The complete example is listed below.
+
+```
 import string
 import re
 from os import listdir
@@ -863,10 +853,6 @@ tokens = clean_doc(doc)
 tokens = [w for w in tokens if w in vocab]
 return ' '.join(tokens)
 # load all docs in a directory
-
-100
-
-10.5. Sentiment Analysis Models
 def process_docs(directory, vocab, is_train):
 lines = list()
 # walk through all files in the folder
@@ -919,13 +905,6 @@ test_docs, ytest = load_clean_dataset(vocab, False)
 # create the tokenizer
 tokenizer = create_tokenizer(train_docs)
 # encode data
-
-101
-
-10.5. Sentiment Analysis Models
-
-102
-
 Xtrain = tokenizer.texts_to_matrix(train_docs, mode='freq')
 Xtest = tokenizer.texts_to_matrix(test_docs, mode='freq')
 # define the model
@@ -940,6 +919,8 @@ print('Test Accuracy: %f' % (acc*100))
 ```
 
 Running the example first prints a summary of the defined model.
+
+```
 _________________________________________________________________
 Layer (type)
 Output Shape
@@ -971,12 +952,10 @@ original paper. Although, it is important to note that this is not an apples-to-
 as the original paper used 10-fold cross-validation to estimate model skill instead of a single
 train/test split.
 
-10.6. Comparing Word Scoring Methods
-
-103
-
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
+
+```
 ...
 Epoch 6/10
 0s - loss: 0.5319
@@ -1001,9 +980,7 @@ Test Accuracy: 87.000000
 
 Next, let's look at testing different word scoring methods for the bag-of-words model.
 
-10.6
-
-Comparing Word Scoring Methods
+#### Comparing Word Scoring Methods
 
 The texts to matrix() function for the Tokenizer in the Keras API provides 4 different
 methods for scoring words; they are:
@@ -1233,12 +1210,9 @@ A box and whisker plot of the results is also presented, summarizing the accurac
 per configuration. We can see that binary achieved the best results with a modest spread and
 might be the preferred approach for this dataset.
 
-
 ![](./125-9.png)
 
-10.7
-
-Predicting Sentiment for New Reviews
+# Predicting Sentiment for New Reviews
 
 Finally, we can develop and use a final model to make predictions for new textual reviews. This
 is why we wanted the model in the first place. First we will train a final model on all of the
@@ -1317,7 +1291,7 @@ def clean_doc(doc):
 # split into tokens by white space
 tokens = doc.split()
 
-10.7. Predicting Sentiment for New Reviews
+Predicting Sentiment for New Reviews
 # prepare regex for char filtering
 re_punc = re.compile('[%s]' % re.escape(string.punctuation))
 # remove punctuation from each word
@@ -1435,8 +1409,6 @@ Sentiment: NEGATIVE (64.404%)
 Ideally, we would fit the model on all available data (train and test) to create a final model
 and save the model and tokenizer to file so that they can be loaded and used in new software.
 
-10.8
-
 Extensions
 
 This section lists some extensions if you are looking to get more out of this tutorial.
@@ -1463,8 +1435,6 @@ ensembles of the models results in improves to model skill.
 reviews taken from the internet.
 
 If you explore any of these extensions, I'd love to know.
-
-10.9
 
 Further Reading
 

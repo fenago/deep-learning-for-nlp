@@ -12,9 +12,8 @@ between a candidate and reference text impact the final BLEU score.
 
 Let's get started.
 
-24.1
 
-Tutorial Overview
+#### Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Bilingual Evaluation Understudy Score
@@ -22,19 +21,11 @@ This tutorial is divided into the following parts:
 3. Cumulative and Individual BLEU Scores
 4. Worked Examples
 
-24.2
-
 Bilingual Evaluation Understudy Score
 
 The Bilingual Evaluation Understudy Score, or BLEU for short, is a metric for evaluating a
 generated sentence to a reference sentence. A perfect match results in a score of 1.0, whereas a
 perfect mismatch results in a score of 0.0. The score was developed for evaluating the predictions
-267
-
-24.2. Bilingual Evaluation Understudy Score
-
-268
-
 made by automatic machine translation systems. It is not perfect, but does offer 5 compelling
 benefits:
 - It is quick and inexpensive to calculate.
@@ -72,10 +63,6 @@ exactly. This is not even possible by human translators. The number and quality 
 references used to calculate the BLEU score means that comparing scores across datasets can
 be troublesome.
 
-24.3. Calculate BLEU Scores
-
-269
-
 The BLEU metric ranges from 0 to 1. Few translations will attain a score of 1
 unless they are identical to a reference translation. For this reason, even a human
 translator will not necessarily score 1. [...] on a test corpus of about 500 sentences
@@ -90,14 +77,10 @@ with deep learning methods such as:
 - Speech recognition.
 - And much more.
 
-24.3
-
 Calculate BLEU Scores
 
 The Python Natural Language Toolkit library, or NLTK, provides an implementation of the
 BLEU score that you can use to evaluate your generated text against a reference.
-
-24.3.1
 
 Sentence BLEU Score
 
@@ -150,16 +133,12 @@ Running the example prints a perfect score as before.
 
 ```
 
-
-24.4
-
 Cumulative and Individual BLEU Scores
 
 The BLEU score calculations in NLTK allow you to specify the weighting of different n-grams
 in the calculation of the BLEU score. This gives you the flexibility to calculate different types
 of BLEU score, such as individual and cumulative n-gram scores. Let's take a look.
 
-24.4.1
 
 Individual n-gram Scores
 
@@ -248,8 +227,6 @@ Individual
 
 Although we can calculate the individual BLEU scores, this is not how the method was
 intended to be used and the scores do not carry a lot of meaning, or seem that interpretable.
-
-24.4.2
 
 Cumulative n-gram Scores
 
@@ -485,30 +462,6 @@ also encourage you to read the paper and explore calculating the sentence-level 
 a spreadsheet.
 
 
-# Further Reading
-
-This section provides more resources on the topic if you are looking go deeper.
-- BLEU on Wikipedia.
-https://en.wikipedia.org/wiki/BLEU
-- BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
-http://www.aclweb.org/anthology/P02-1040.pdf
-- Source code for nltk.translate.bleu score.
-http://www.nltk.org/_modules/nltk/translate/bleu_score.html
-- nltk.translate package API Documentation.
-http://www.nltk.org/api/nltk.translate.html
-
-# Summary
-
-In this tutorial, you discovered the BLEU score for evaluating and scoring candidate text to
-reference text in machine translation and other language generation tasks. Specifically, you
-learned:
-- A gentle introduction to the BLEU score and an intuition for what is being calculated.
-- How you can calculate BLEU scores in Python using the NLTK library for sentences and
-documents.
-- How to can use a suite of small examples to develop an intuition for how differences
-between a candidate and reference text impact the final BLEU score.
-
-
 ##### Run Notebook
 Click notebook `01_sentence_bleu.ipynb` in jupterLab UI and run jupyter notebook.
 
@@ -547,3 +500,26 @@ Click notebook `12_example_longer.ipynb` in jupterLab UI and run jupyter noteboo
 
 ##### Run Notebook
 Click notebook `13_example_too_short.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Further Reading
+
+This section provides more resources on the topic if you are looking go deeper.
+- BLEU on Wikipedia.
+https://en.wikipedia.org/wiki/BLEU
+- BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
+http://www.aclweb.org/anthology/P02-1040.pdf
+- Source code for nltk.translate.bleu score.
+http://www.nltk.org/_modules/nltk/translate/bleu_score.html
+- nltk.translate package API Documentation.
+http://www.nltk.org/api/nltk.translate.html
+
+# Summary
+
+In this tutorial, you discovered the BLEU score for evaluating and scoring candidate text to
+reference text in machine translation and other language generation tasks. Specifically, you
+learned:
+- A gentle introduction to the BLEU score and an intuition for what is being calculated.
+- How you can calculate BLEU scores in Python using the NLTK library for sentences and
+documents.
+- How to can use a suite of small examples to develop an intuition for how differences
+between a candidate and reference text impact the final BLEU score.

@@ -346,7 +346,6 @@ mapping = dict()
 for line in doc.split('\n'):
 # split line by white space
 
-26.4. Prepare Text Data
 tokens = line.split()
 if len(line) < 2:
 continue
@@ -453,8 +452,6 @@ section is divided into the following parts:
 2. Defining the Model.
 3. Fitting the Model.
 4. Complete Example.
-
-26.5.1
 
 Loading Data
 
@@ -737,8 +734,6 @@ return max(len(d.split()) for d in lines)
 We now have enough to load the data for the training and development datasets and
 transform the loaded data into input-output pairs for fitting a deep learning model.
 
-26.5.2
-
 Defining the Model
 
 We will define a deep learning based on the merge-model described by Marc Tanti, et al. in
@@ -749,11 +744,6 @@ dataset. We have pre-processed the photos with the VGG model (without the output
 layer) and will use the extracted features predicted by this model as input.
 - Sequence Processor. This is a word embedding layer for handling the text input,
 followed by a Long Short-Term Memory (LSTM) recurrent neural network layer.
-
-26.5. Develop Deep Learning Model
-
-312
-
 - Decoder (for lack of a better name). Both the feature extractor and sequence processor
 output a fixed-length vector. These are merged together and processed by a Dense layer
 to make a final prediction.
@@ -1187,7 +1177,6 @@ return text
 # load a pre-defined list of photo identifiers
 def load_set(filename):
 
-26.6. Evaluate Model
 doc = load_doc(filename)
 dataset = list()
 # process line by line
@@ -1297,18 +1286,12 @@ yhat = cleanup_summary(yhat)
 references = [cleanup_summary(d).split() for d in
 actual.append(references)
 predicted.append(yhat.split())
+
 # calculate BLEU score
-print('BLEU-1: %f' % corpus_bleu(actual, predicted,
-print('BLEU-2: %f' % corpus_bleu(actual, predicted,
-print('BLEU-3: %f' % corpus_bleu(actual, predicted,
-print('BLEU-4: %f' % corpus_bleu(actual, predicted,
-
-desc_list]
-
-weights=(1.0, 0, 0, 0)))
-weights=(0.5, 0.5, 0, 0)))
-weights=(0.3, 0.3, 0.3, 0)))
-weights=(0.25, 0.25, 0.25, 0.25)))
+print('BLEU-1: %f' % corpus_bleu(actual, predicted, weights=(1.0, 0, 0, 0)))
+print('BLEU-2: %f' % corpus_bleu(actual, predicted, weights=(0.5, 0.5, 0, 0)))
+print('BLEU-3: %f' % corpus_bleu(actual, predicted, weights=(0.3, 0.3, 0.3, 0)))
+print('BLEU-4: %f' % corpus_bleu(actual, predicted, weights=(0.25, 0.25, 0.25, 0.25)))
 
 # load training dataset (6K)
 filename = 'Flickr8k_text/Flickr_8k.trainImages.txt'
@@ -1450,8 +1433,6 @@ photograph that I chose randomly on Flickr (available under a permissive license
 
 https://www.flickr.com/photos/bambe1964/7837618434/
 
-26.7. Generate New Captions
-
 
 ![](./330-29.png)
 
@@ -1511,25 +1492,15 @@ evaluating the model. The complete example for generating a description for an e
 standalone photograph is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-
-pickle import load
-numpy import argmax
-keras.preprocessing.sequence import pad_sequences
-keras.applications.vgg16 import VGG16
-keras.preprocessing.image import load_img
-keras.preprocessing.image import img_to_array
-keras.applications.vgg16 import preprocess_input
-keras.models import Model
-keras.models import load_model
+from pickle import load
+from numpy import argmax
+from keras.preprocessing.sequence import pad_sequences
+from keras.applications.vgg16 import VGG16
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.applications.vgg16 import preprocess_input
+from keras.models import Model
+from keras.models import load_model
 
 # extract features from each photo in the directory
 def extract_features(filename):
@@ -1560,11 +1531,6 @@ def cleanup_summary(summary):
 # remove start of sequence token
 index = summary.find('startseq ')
 if index > -1:
-
-26.7. Generate New Captions
-
-327
-
 summary = summary[len('startseq '):]
 # remove end of sequence token
 index = summary.find(' endseq')
@@ -1612,6 +1578,8 @@ print(description)
 ```
 
 In this case, the description generated was as follows:
+
+```
 dog is running across the beach
 
 ```
@@ -1619,7 +1587,30 @@ dog is running across the beach
 Note: Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
-Extensions
+
+##### Run Notebook
+Click notebook `1_extract_features.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_data_prep.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_load_prepared_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `5_evaluate_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `6_save_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `7_generate_description.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+# Extensions
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
 - Alternate Pre-Trained Image Models. A small 16-layer VGG model was used for
@@ -1673,8 +1664,6 @@ https://arxiv.org/abs/1708.02043
 Evaluation Measures, 2016.
 https://arxiv.org/abs/1601.03896
 
-26.9.2
-
 Flickr8K Dataset
 
 - Framing image description as a ranking task: data, models and evaluation metrics (Homepage).
@@ -1708,24 +1697,3 @@ scratch. Specifically, you learned:
 - How to design and train a deep learning caption generation model.
 - How to evaluate a train caption generation model and use it to caption entirely new
 photographs.
-
-##### Run Notebook
-Click notebook `1_extract_features.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_data_prep.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_load_prepared_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_evaluate_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `6_save_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `7_generate_description.ipynb` in jupterLab UI and run jupyter notebook.
