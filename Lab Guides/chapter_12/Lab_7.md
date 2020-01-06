@@ -463,6 +463,8 @@ print(result)
 ```
 
 Running the example prints the same result of queen.
+
+```
 [('queen', 0.7698540687561035)]
 
 ```

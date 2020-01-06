@@ -210,23 +210,14 @@ function on the model for each prepared image to get the extracted features. The
 then be stored in a dictionary keyed on the image id. The complete example is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-
-os import listdir
-os import path
-pickle import dump
-keras.applications.vgg16 import VGG16
-keras.preprocessing.image import load_img
-keras.preprocessing.image import img_to_array
-keras.applications.vgg16 import preprocess_input
-keras.layers import Input
+from os import listdir
+from os import path
+from pickle import dump
+from keras.applications.vgg16 import VGG16
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.applications.vgg16 import preprocess_input
+from keras.layers import Input
 
 # extract features from each photo in the directory
 def extract_features(directory):
@@ -1022,25 +1013,15 @@ the tokenizer. Tying all of this together, the complete data generator is listed
 use to train a model.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-
-os import listdir
-os import path
-numpy import array
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.utils import to_categorical
-keras.preprocessing.image import load_img
-keras.preprocessing.image import img_to_array
-keras.applications.vgg16 import preprocess_input
+from os import listdir
+from os import path
+from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.applications.vgg16 import preprocess_input
 
 # load doc into memory
 def load_doc(filename):

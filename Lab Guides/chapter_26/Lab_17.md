@@ -825,35 +825,21 @@ this example may require a machine with 8 or more Gigabytes of RAM. See the appe
 using AWS, if needed.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
 
-numpy import array
-pickle import load
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.utils import to_categorical
-keras.utils import plot_model
-keras.models import Model
-keras.layers import Input
-keras.layers import Dense
-keras.layers import LSTM
-keras.layers import Embedding
-keras.layers import Dropout
-keras.layers.merge import add
-keras.callbacks import ModelCheckpoint
+from numpy import array
+from pickle import load
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
+from keras.utils import plot_model
+from keras.models import Model
+from keras.layers import Input
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Embedding
+from keras.layers import Dropout
+from keras.layers.merge import add
+from eras.callbacks import ModelCheckpoint
 
 # load doc into memory
 def load_doc(filename):
@@ -1142,19 +1128,12 @@ generated words using exactly the same encoding scheme as was used when training
 We then use these functions for loading the test dataset. The complete example is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-
-numpy import argmax
-pickle import load
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.models import load_model
-nltk.translate.bleu_score import corpus_bleu
+from numpy import argmax
+from pickle import load
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.models import load_model
+from nltk.translate.bleu_score import corpus_bleu
 
 # load doc into memory
 def load_doc(filename):

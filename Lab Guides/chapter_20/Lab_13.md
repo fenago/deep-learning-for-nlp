@@ -581,25 +581,15 @@ We can put all of this together; the complete example for fitting the language m
 below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-
-numpy import array
-pickle import dump
-keras.preprocessing.text import Tokenizer
-keras.utils.vis_utils import plot_model
-keras.utils import to_categorical
-keras.models import Sequential
-keras.layers import Dense
-keras.layers import LSTM
-keras.layers import Embedding
+from numpy import array
+from pickle import dump
+from keras.preprocessing.text import Tokenizer
+from keras.utils.vis_utils import plot_model
+from keras.utils import to_categorical
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Embedding
 
 # load doc into memory
 def load_doc(filename):
@@ -788,15 +778,11 @@ print(generated)
 Putting this all together, the complete code listing for generating text from the learnedlanguage model is listed below.
 
 ```
-from
-from
-from
-from
 
-random import randint
-pickle import load
-keras.models import load_model
-keras.preprocessing.sequence import pad_sequences
+from random import randint
+from pickle import load
+from keras.models import load_model
+from keras.preprocessing.sequence import pad_sequences
 
 # load doc into memory
 def load_doc(filename):

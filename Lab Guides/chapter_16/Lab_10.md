@@ -12,17 +12,13 @@ on text movie review data. After completing this tutorial, you will know:
 
 Let's get started.
 
-16.1
-
-Tutorial Overview
+#### Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Movie Review Dataset.
 2. Data Preparation.
 3. Develop Multichannel Model.
 4. Evaluate Model.
-
-16.2
 
 Movie Review Dataset
 
@@ -33,7 +29,7 @@ analysis was described previously . You can download the dataset from here:
 http://www.cs.cornell.edu/people/pabo/movie-review-data/review_polarity.tar.
 gz
 
-After unzipping the file, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
+Dataset is **already downloaded**, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
 one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
 16.3
@@ -139,6 +135,8 @@ directory, clean them, and return them as a list. We will also add an argument t
 to indicate whether the function is processing train or test reviews, that way the filenames can
 be filtered (as described above) and only those train or test reviews requested will be cleaned
 and returned. The full function is listed below.
+
+```
 # load all docs in a directory
 def process_docs(directory, is_train):
 documents = list()
@@ -166,6 +164,8 @@ and test documents. We know that we have 900 training documents and 100 test doc
 We can use a Python list comprehension to create the labels for the negative (0) and positive
 (1) reviews for both train and test sets. The function below named load clean dataset() will
 load and clean the movie review text and also create the labels for the reviews.
+
+```
 # load and clean a dataset
 def load_clean_dataset(is_train):
 # load documents
@@ -420,35 +420,21 @@ return model
 Pulling all of this together, the complete example is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
 
-pickle import load
-numpy import array
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.utils.vis_utils import plot_model
-keras.models import Model
-keras.layers import Input
-keras.layers import Dense
-keras.layers import Flatten
-keras.layers import Dropout
-keras.layers import Embedding
-keras.layers.convolutional import Conv1D
-keras.layers.convolutional import MaxPooling1D
-keras.layers.merge import concatenate
+from pickle import load
+from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils.vis_utils import plot_model
+from keras.models import Model
+from keras.layers import Input
+from keras.layers import Dense
+from keras.layers import Flatten
+from keras.layers import Dropout
+from keras.layers import Embedding
+from keras.layers.convolutional import Conv1D
+from keras.layers.convolutional import MaxPooling1D
+from keras.layers.merge import concatenate
 
 # load a clean dataset
 def load_dataset(filename):

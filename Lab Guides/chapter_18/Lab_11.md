@@ -418,21 +418,13 @@ Tying all of this together, the complete code listing for fitting the character-
 language model is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-
-numpy import array
-pickle import dump
-keras.utils import to_categorical
-keras.utils.vis_utils import plot_model
-keras.models import Sequential
-keras.layers import Dense
-keras.layers import LSTM
+from numpy import array
+from pickle import dump
+from keras.utils import to_categorical
+from keras.utils.vis_utils import plot_model
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
 
 # load doc into memory
 def load_doc(filename):

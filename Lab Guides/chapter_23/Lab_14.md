@@ -284,6 +284,8 @@ image = img_to_array(image)
 The network expects one or more images as input; that means the input array will need to
 be 4-dimensional: samples, rows, columns, and channels. We only have one sample (one image).
 We can reshape the array by calling reshape() and adding the extra dimension.
+
+```
 # reshape data for the model
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 ```
@@ -307,6 +309,8 @@ We are now ready to make a prediction for our loaded and prepared image.
 
 We can call the predict() function on the model in order to get a prediction of the probability
 of the image belonging to each of the 1,000 known object types.
+
+```
 # predict the probability across all output classes
 yhat = model.predict(image)
 ```
@@ -385,7 +389,6 @@ https://en.wikipedia.org/wiki/ImageNet
 https://arxiv.org/abs/1409.1556
 - Very Deep Convolutional Networks for Large-Scale Visual Recognition, at Oxford.
 http://www.robots.ox.ac.uk/~vgg/research/very_deep/
-
 - Building powerful image classification models using very little data, 2016.
 https://blog.keras.io/building-powerful-image-classification-models-using-very-litt
 html

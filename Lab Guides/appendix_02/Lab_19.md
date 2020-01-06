@@ -6,17 +6,21 @@ for beginners. In this tutorial, you will discover how to setup a Python machine
 development environment.
 
 After completing this tutorial, you will have a working Python environment to begin learning,
-practicing, and developing machine learning and deep learning software
+practicing, and developing machine learning and deep learning softwares.
+
+**Note:** Terminal is already running. You can also open new terminal by clicking:
+`File` > `New` > `Terminal`.
+
+To copy and paste: use **Control-C** and to paste inside of a terminal, use **Control-V**
 
 #### Python
 In this environment you can check that Python is already installed by running `python3 --version`
-
 
 To locally develop and run Python code, it is recommended to use a Python virtual environment. Run the following commands to create and activate a virtual environment named `.venv`.
 
 `apt-get update`
 
-`yes | apt-get install python3-venv`
+`apt-get install -y python3-venv`
 
 `python3 -m venv .venv`
 
@@ -67,7 +71,8 @@ import sklearn
 print('sklearn: %s' % sklearn.__version__)
 ```
 
-Now, run the python script by running: `python python_versions.py`
+##### Run Notebook
+Click notebook `python_versions.ipynb` in jupterLab UI and run jupyter notebook.
 
 You should see output like the following:
 
@@ -112,7 +117,9 @@ import keras
 print('keras: %s' % keras.__version__)
 ```
 
-Now, run the python script by running: `python deep_versions.py`
+##### Run Notebook
+Click notebook `deep_versions.ipynb` in jupterLab UI and run jupyter notebook.
+
 
 You should see output like the following:
 

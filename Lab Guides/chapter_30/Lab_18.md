@@ -414,33 +414,19 @@ We can tie all of this together and fit the neural translation model. The comple
 example is listed below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-from
-
-pickle import load
-numpy import array
-keras.preprocessing.text import Tokenizer
-keras.preprocessing.sequence import pad_sequences
-keras.utils import to_categorical
-keras.utils.vis_utils import plot_model
-keras.models import Sequential
-keras.layers import LSTM
-keras.layers import Dense
-keras.layers import Embedding
-keras.layers import RepeatVector
-keras.layers import TimeDistributed
-keras.callbacks import ModelCheckpoint
+from pickle import load
+from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
+from keras.utils.vis_utils import plot_model
+from keras.models import Sequential
+from keras.layers import LSTM
+from keras.layers import Dense
+from keras.layers import Embedding
+from keras.layers import RepeatVector
+from keras.layers import TimeDistributed
+from keras.callbacks import ModelCheckpoint
 
 # load a clean dataset
 def load_clean_sentences(filename):

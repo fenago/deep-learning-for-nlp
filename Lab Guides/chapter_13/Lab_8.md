@@ -41,8 +41,6 @@ In addition to these carefully designed methods, a word embedding can be learned
 of a deep learning model. This can be a slower approach, but tailors the model to a specific
 training dataset.
 
-13.3
-
 Keras Embedding Layer
 
 Keras offers an Embedding layer that can be used for neural networks on text data. It requires
@@ -526,9 +524,6 @@ This section provides more resources on the topic if you are looking go deeper.
 https://en.wikipedia.org/wiki/Word_embedding
 - Keras Embedding Layer API.
 https://keras.io/layers/embeddings/#embedding
-
-# Summary
-
 - Using pre-trained word embeddings in a Keras model, 2016.
 https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html
 - Example of using a pre-trained GloVe Embedding in Keras.

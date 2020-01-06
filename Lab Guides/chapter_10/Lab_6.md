@@ -395,18 +395,11 @@ network model. This section is divided into 2 steps:
 1. Converting reviews to lines of tokens.
 2. Encoding reviews with a bag-of-words model representation.
 
-1
-
-Reviews to Lines of Tokens
+### Reviews to Lines of Tokens
 
 Before we can convert reviews to vectors for modeling, we must first clean them up. This
 involves loading them, performing the cleaning operation developed above, filtering out words
 not in the chosen vocabulary, and converting the remaining tokens into a single string or line
-
-Bag-of-Words Representation
-
-93
-
 ready for encoding. First, we need a function to prepare one document. Below lists the function
 doc to line() that will load a document, clean it, filter out tokens not in the vocabulary, then
 return the document as a string of white space separated tokens.
@@ -575,11 +568,6 @@ negative lines arrays developed in the previous section.
 # fit a tokenizer
 def create_tokenizer(lines):
 tokenizer = Tokenizer()
-
-Bag-of-Words Representation
-
-96
-
 tokenizer.fit_on_texts(lines)
 return tokenizer
 
@@ -1409,7 +1397,32 @@ Sentiment: NEGATIVE (64.404%)
 Ideally, we would fit the model on all available data (train and test) to create a final model
 and save the model and tokenizer to file so that they can be loaded and used in new software.
 
-Extensions
+
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `4_filter_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `5_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `6_mlp_bow_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `7_compare_encodings.ipynb` in jupterLab UI and run jupyter notebook.
+
+##### Run Notebook
+Click notebook `8_prediction.ipynb` in jupterLab UI and run jupyter notebook.
+
+# Extensions
 
 This section lists some extensions if you are looking to get more out of this tutorial.
 - Manage Vocabulary. Explore using a larger or smaller vocabulary. Perhaps you can
@@ -1436,7 +1449,7 @@ reviews taken from the internet.
 
 If you explore any of these extensions, I'd love to know.
 
-Further Reading
+#### Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
 
@@ -1472,27 +1485,3 @@ of movie reviews. Specifically, you learned:
 - How to use the bag-of-words model to prepare train and test data.
 - How to develop a Multilayer Perceptron bag-of-words model and use it to make predictions
 on new review text data.
-
-##### Run Notebook
-Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_filter_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `6_mlp_bow_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `7_compare_encodings.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `8_prediction.ipynb` in jupterLab UI and run jupyter notebook.

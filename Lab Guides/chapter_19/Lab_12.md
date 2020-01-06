@@ -41,7 +41,7 @@ from a source text for language modeling. In this tutorial, we will explore 3 di
 developing word-based language models in the Keras deep learning library. There is no single
 best approach, just different framings that may suit different applications.
 
-# Jack and Jill Nursery Rhyme
+#### Jack and Jill Nursery Rhyme
 
 Jack and Jill is a simple nursery rhyme. It is comprised of 4 lines, as follows:
 
@@ -136,8 +136,7 @@ X, y = sequences[:,0],sequences[:,1]
 
 ```
 
-
-19.4. Model 1: One-Word-In, One-Word-Out Sequences
+### Model 1: One-Word-In, One-Word-Out Sequences
 
 We will fit our model to predict a probability distribution across all words in the vocabulary.
 That means that we need to turn the output element from a single integer into a one hot
@@ -266,15 +265,6 @@ return result
 We can tie all of this together. The complete code listing is provided below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-
 numpy import array
 keras.preprocessing.text import Tokenizer
 keras.utils import to_categorical
@@ -506,16 +496,6 @@ return in_text
 Tying all of this together, the complete code example is provided below.
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-
 numpy import array
 keras.preprocessing.text import Tokenizer
 keras.utils import to_categorical
@@ -658,16 +638,6 @@ sequences.append(sequence)
 The complete example is listed below
 
 ```
-from
-from
-from
-from
-from
-from
-from
-from
-from
-
 numpy import array
 keras.preprocessing.text import Tokenizer
 keras.utils import to_categorical
