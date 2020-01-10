@@ -12,10 +12,24 @@ problems.
 and recurrent neural networks.
 
 Let's get started.
+
 **Note:**  It is assumed that you have a basic familiarity with deep learning and Keras, this chapter
 should provide a refresher for the Keras API, and perhaps an introduction to the Keras
 functional API. See the Appendix for installation instructions. Most code snippets in this
 tutorial are just for reference and are not complete examples.
+
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
+
+**Note:** Elev8ed Notebooks (powered by Jupyter) will be accessible at the port given to you by your instructor. Password for jupyterLab : `1234`
+
+All Notebooks are present in `work/deep-learning-for-nlp` folder.
+
+You can access jupyter lab at `<host-ip>:<port>/lab/workspaces/lab1_Deep_Learning_Models_Keras`
+
 
 # Keras Model Life-Cycle
 

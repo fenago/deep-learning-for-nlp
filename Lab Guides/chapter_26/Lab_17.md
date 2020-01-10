@@ -17,9 +17,20 @@ photographs.
 
 Let's get started.
 
-26.1
+#### Pre-reqs:
+- Google Chrome (Recommended)
 
-Tutorial Overview
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup. Please download datasets specified in instructions to run notebooks in this lab.
+
+**Note:** Elev8ed Notebooks (powered by Jupyter) will be accessible at the port given to you by your instructor. Password for jupyterLab : `1234`
+
+All Notebooks are present in `work/deep-learning-for-nlp` folder.
+
+You can access jupyter lab at `<host-ip>:<port>/lab/workspaces/`
+
+
+# Tutorial Overview
 
 This tutorial is divided into the following parts:
 1. Photo and Caption Dataset

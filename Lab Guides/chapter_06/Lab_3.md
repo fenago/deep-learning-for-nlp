@@ -14,6 +14,18 @@ After completing this tutorial, you will know:
 
 Let's get started.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
+
+**Note:** Elev8ed Notebooks (powered by Jupyter) will be accessible at the port given to you by your instructor. Password for jupyterLab : `1234`
+
+All Notebooks are present in `work/deep-learning-for-nlp` folder.
+
+You can access jupyter lab at `<host-ip>:<port>/lab/workspaces/lab3_Prepare_Text_Data_scikit_learn`
+
 ## The Bag-of-Words Model
 
 We cannot work with text directly when using machine learning algorithms. Instead, we need

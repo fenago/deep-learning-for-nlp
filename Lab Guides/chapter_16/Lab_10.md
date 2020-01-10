@@ -12,6 +12,19 @@ on text movie review data. After completing this tutorial, you will know:
 
 Let's get started.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Notebooks are ready to run. All packages have been installed. There is no requirement for any setup.
+
+**Note:** Elev8ed Notebooks (powered by Jupyter) will be accessible at the port given to you by your instructor. Password for jupyterLab : `1234`
+
+All Notebooks are present in `work/deep-learning-for-nlp` folder.
+
+You can access jupyter lab at `<host-ip>:<port>/lab/workspaces/lab10_ngram_CNN_Model_Sentiment_Analysis`
+
+
 #### Tutorial Overview
 
 This tutorial is divided into the following parts:
@@ -32,8 +45,6 @@ gz
 Dataset is **already downloaded**, you will have a directory called txt sentoken with two subdirectories containing the text neg and pos for negative and positive reviews. Reviews are stored
 one per file with a naming convention cv000 to cv999 for each of neg and pos.
 
-16.3
-
 Data Preparation
 
 **Note:**  The preparation of the movie review dataset was first described previously. In this
@@ -41,8 +52,6 @@ section, we will look at 3 things:
 1. Separation of data into training and test sets.
 2. Loading and cleaning the data to remove punctuation and numbers.
 3. Clean All Reviews and Save.
-
-16.3.1
 
 Split into Train and Test Sets
 
