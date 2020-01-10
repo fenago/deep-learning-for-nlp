@@ -83,14 +83,14 @@ want to strip case, punctuation, and even trim words back to their stem.
 
 Use your task as the lens by which to choose how to ready your text data.
 
-Manual Tokenization
+**Manual Tokenization**
 
 Text cleaning is hard, but the text we have chosen to work with is pretty clean already. We
 could just write some Python code to clean it up manually, and this is a good exercise for those
 simple problems that you encounter. Tools like regular expressions and splitting strings can get
 you a long way.
 
-Load Data
+**Load Data**
 
 Let's load the text data so that we can work with it. The text is small and will load quickly
 and easily fit into memory. This will not always be the case and you may need to write code
@@ -106,7 +106,10 @@ text = file.read()
 file.close()
 ```
 
-Split by Whitespace
+##### Run Notebook
+Click notebook `01_manual_load_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+**Split by Whitespace**
 
 Clean text often means a list of words or tokens that we can work with in our machine learning
 models. This means converting the raw text into a list of words and saving it again. A very
@@ -123,6 +126,9 @@ file.close()
 words = text.split()
 print(words[:100])
 ```
+
+##### Run Notebook
+Click notebook `02_manual_split.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example splits the document into a long list of words and prints the first 100 for
 us to review. We can see that punctuation is preserved (e.g. wasn't and armour-like), which is
@@ -160,9 +166,14 @@ words = re.split(r'\W+', text)
 print(words[:100])
 ```
 
+##### Run Notebook
+Click notebook `03_manual_select_words.ipynb` in jupterLab UI and run jupyter notebook.
+
 Again, running the example we can see that we get our list of words. This time, we can see
 that armour-like is now two words armour and like (fine) but contractions like What's is also
 two words What and s (not great).
+
+```
 ['One', 'morning', 'when', 'Gregor', 'Samsa', 'woke', 'from', 'troubled', 'dreams', 'he',
 'found', 'himself', 'transformed', 'in', 'his', 'bed', 'into', 'a', 'horrible',
 'vermin', 'He', 'lay', 'on', 'his', 'armour', 'like', 'back', 'and', 'if', 'he',
@@ -176,7 +187,7 @@ two words What and s (not great).
 
 ```
 
-Split by Whitespace and Remove Punctuation
+**Split by Whitespace and Remove Punctuation**
 
 We may want the words, but without the punctuation like commas and quotes. We also want to
 keep contractions together. One way would be to split the document into words by white space
@@ -196,6 +207,8 @@ Results in:
 
 We can use regular expressions to select for the punctuation characters and use the sub()
 function to replace them with nothing. For example:
+
+```
 re_punc = re.compile('[%s]' % re.escape(string.punctuation))
 # remove punctuation from each word
 stripped = [re_punc.sub('', w) for w in words]
@@ -242,12 +255,15 @@ filter out all non-printable characters by selecting the inverse of the string.p
 For example:
 
 ```
-...
 re_print = re.compile('[^%s]' % re.escape(string.printable))
 result = [re_print.sub('', w) for w in words]
 ```
 
-Normalizing Case
+##### Run Notebook
+Click notebook `04_manual_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+**Normalizing Case**
 
 It is common to convert all words to one case. This means that the vocabulary will shrink in
 size, but some distinctions are lost (e.g. Apple the company vs apple the fruit is a commonly
@@ -266,6 +282,10 @@ words = [word.lower() for word in words]
 print(words[:100])
 ```
 
+##### Run Notebook
+Click notebook `05_manual_normalize_case.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example, we can see that all words are now lowercase.
 
 ```
@@ -281,25 +301,20 @@ Running the example, we can see that all words are now lowercase.
 'he', 'thought.', 'it', "wasn't", 'a', 'dream.', 'his', 'room,', 'a', 'proper', 'human']
 ```
 
-
-
-
-Note on Cleaning Text
+**Note on Cleaning Text**
 
 Cleaning text is really hard, problem specific, and full of tradeoffs. Remember, simple is better.
 Simpler text data, simpler models, smaller vocabularies. You can always make things more
 complex later to see if it results in better model skill. Next, we'll look at some of the tools in
 the NLTK library that offer more than simple string splitting.
 
-Tokenization and Cleaning with NLTK
+**Tokenization and Cleaning with NLTK**
 
 The Natural Language Toolkit, or NLTK for short, is a Python library written for working and
 modeling text. It provides good tools for loading and cleaning text that we can use to get our
 data ready for working with machine learning and deep learning algorithms.
 
-
-
-Install NLTK
+**Install NLTK**
 
 You can install NLTK using your favorite package manager, such as pip. On a POSIX-compatible
 machine, this would be:
@@ -317,16 +332,18 @@ import nltk
 nltk.download()
 ```
 
+##### Run Notebook
+Click notebook `06_nltk_download.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+
 Or from the command line:
 
 ```
 python -m nltk.downloader all
 ```
 
-
-
-
-Split into Sentences
+**Split into Sentences**
 
 A good useful first step is to split the text into sentences. Some modeling tasks prefer input
 to be in the form of paragraphs or sentences, such as Word2Vec. You could first split your
@@ -356,10 +373,7 @@ One morning, when Gregor Samsa woke from troubled dreams, he found
 himself transformed in his bed into a horrible vermin.
 ```
 
-
-
-
-Split into Words
+**Split into Words**
 
 NLTK provides a function called word tokenize() for splitting strings into tokens (nominally
 words). It splits tokens based on white space and punctuation. For example, commas and
@@ -394,16 +408,11 @@ specifically filter out.
 '.', '``', 'What', "'s", 'happened', 'to']
 ```
 
-
-
-
-Filter Out Punctuation
+**Filter Out Punctuation**
 
 We can filter out all tokens that we are not interested in, such as all standalone punctuation. This
 can be done by iterating over all tokens and only keeping those tokens that are all alphabetic.
 Python has the function isalpha() that can be used. For example:
-
-
 
 ```
 from nltk.tokenize import word_tokenize
@@ -436,7 +445,7 @@ armour-like and 's were also filtered out.
 ```
 
 
-Filter out Stop Words (and Pipeline)
+**Filter out Stop Words (and Pipeline)**
 
 Stop words are those words that do not contribute to the deeper meaning of the phrase. They
 are the most common words such as: the, a, and is. For some applications like documentation
@@ -527,7 +536,7 @@ hole is deep; there's always more we can do.
 ```
 
 
-Stem Words
+**Stem Words**
 
 Stemming refers to the process of reducing each word to its root or base. For example fishing,
 fished, fisher all reduce to the stem fish. Some applications, like document classification, may
@@ -535,10 +544,11 @@ benefit from stemming in order to both reduce the vocabulary and to focus on the
 sentiment of a document rather than deeper meaning. There are many stemming algorithms,
 although a popular and long-standing method is the Porter Stemming algorithm. This method
 is available in NLTK via the PorterStemmer class. For example:
+
+```
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 
-```
 # load data
 filename = 'metamorphosis_clean.txt'
 file = open(filename, 'rt')
@@ -573,24 +583,6 @@ reducing words to their root is something you need for your project.
 
 
 ##### Run Notebook
-Click notebook `01_manual_load_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `02_manual_split.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `03_manual_select_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `04_manual_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `05_manual_normalize_case.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `06_nltk_download.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
 Click notebook `07_nltk_split_sentences.ipynb` in jupterLab UI and run jupyter notebook.
 
 ##### Run Notebook
@@ -607,6 +599,13 @@ Click notebook `11_nltk_filter_stop_words.ipynb` in jupterLab UI and run jupyter
 
 ##### Run Notebook
 Click notebook `12_nltk_stemming.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+### Exercise
+Clean text : Convert the raw text into a list of words and saving it again. Split the document by `,` and display first 50 words. Text file `exercise.txt` is already present in the lab directory.
+
+**Note:** Solution for the exercise is available in jupyter notebook `exercise_01.ipynb`. Open and run the notebook to verify your solution.
+
 
 # Additional Text Cleaning Considerations
 
@@ -664,6 +663,6 @@ Specifically, you learned:
 - Considerations when preparing text for natural language processing models.
 
 # Next
-In the next chapter, you will discover how you can encode text data using the scikit-learn
+In the next lab, you will discover how you can encode text data using the scikit-learn
 Python library.
 

@@ -842,5 +842,5 @@ to new files ready for modeling.
 
 # Next
 
-In the next chapter, you will discover how you can develop a neural bag-of-words model for
+In the next lab, you will discover how you can develop a neural bag-of-words model for
 movie review sentiment analysis.

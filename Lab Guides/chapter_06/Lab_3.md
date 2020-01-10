@@ -49,7 +49,7 @@ by better clarifying what a word is and in defining what to encode about each wo
 vector. The scikit-learn library provides 3 different schemes that we can use, and we will briefly
 look at each.
 
-Word Counts with CountVectorizer
+#### Word Counts with CountVectorizer
 
 The CountVectorizer provides a simple way to both tokenize a collection of text documents
 and build a vocabulary of known words, but also to encode new documents using that vocabulary.
@@ -122,6 +122,11 @@ print(vector.toarray())
 
 ```
 
+
+##### Run Notebook
+Click notebook `1_example_countvector.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running this example prints the array version of the encoded sparse vector showing one
 occurrence of the one word in the vocab and the other word not in the vocab completely ignored.
 
@@ -190,6 +195,9 @@ words in the vocabulary.
 
 ```
 
+##### Run Notebook
+Click notebook `2_example_tfidf.ipynb` in jupterLab UI and run jupyter notebook.
+
 The scores are normalized to values between 0 and 1 and the encoded document vectors can
 then be used directly with most machine learning algorithms.
 
@@ -238,12 +246,6 @@ of the encoded document correspond to normalized word counts by default in the r
 -0.66666667 0. ]]
 
 ```
-
-##### Run Notebook
-Click notebook `1_example_countvector.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_example_tfidf.ipynb` in jupterLab UI and run jupyter notebook.
 
 ##### Run Notebook
 Click notebook `3_example_hash.ipynb` in jupterLab UI and run jupyter notebook.
@@ -299,5 +301,5 @@ worth exploring.
 
 # Next
 
-In the next chapter, you will discover how you can prepare text data using the Keras deep
+In the next lab, you will discover how you can prepare text data using the Keras deep
 learning library.

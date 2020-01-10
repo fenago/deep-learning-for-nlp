@@ -130,6 +130,7 @@ print(tokens)
 
 ```
 
+### Exercise
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore, and I leave them as further exercises. I'd love to see what you can
 come up with.

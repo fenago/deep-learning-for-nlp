@@ -533,6 +533,9 @@ A plot of the model graph is also created and saved to file.
 ![](./48-7.png)
 
 
+### Exercise
+Try above notebooks with different number of `epochs` and see the results.
+
 # Further Reading
 
 This section provides more resources on the topic if you are looking go deeper.
