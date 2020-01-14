@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # How to Use Deep Learning in the Cloud
 
 Large deep learning models require a lot of compute time to run. You can run them on your

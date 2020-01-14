@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # How to Clean Text Manually and with NLTK
 You cannot go straight from raw text to fitting a machine learning or deep learning model. You
 must clean your text first, which means splitting it into words and handling punctuation and

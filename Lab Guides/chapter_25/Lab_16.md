@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 
 # How to Prepare a Photo Caption Dataset For Modeling
 Automatic photo captioning is a problem where a model must generate a human-readable textual

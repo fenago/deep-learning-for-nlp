@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # How to Learn and Load Word Embeddings in Keras
 Word embeddings provide a dense representation of words and their relative meanings. They are
 an improvement over sparse representations used in simpler bag of word model representations.

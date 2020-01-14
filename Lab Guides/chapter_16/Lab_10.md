@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # Project: Develop an n-gram CNN Model for Sentiment Analysis
 A standard deep learning model for text classification and sentiment analysis uses a word
 embedding layer and one-dimensional convolutional neural network. The model can be expanded

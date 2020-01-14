@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 
 # How to Prepare Movie Review Data for Sentiment Analysis
 Text data preparation is different for each problem. Preparation starts with simple steps, like

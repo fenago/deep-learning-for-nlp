@@ -1,3 +1,6 @@
+<img align="right" src="./logo-small.png">
+
+
 # Deep Learning for Natural Language Processing
 
 ### Overview

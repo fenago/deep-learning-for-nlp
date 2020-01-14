@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # Project: Develop a Neural Machine Translation Model
 Machine translation is a challenging task that traditionally involves large statistical models
 developed using highly sophisticated linguistic knowledge. Neural machine translation is the

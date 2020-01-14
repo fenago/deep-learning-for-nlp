@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # How to Load and Use a Pre-Trained Object Recognition Model
 Convolutional neural networks are now capable of outperforming humans on some computer
 vision tasks, such as classifying images. That is, given a photograph of an object, answer the

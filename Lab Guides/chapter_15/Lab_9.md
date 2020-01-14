@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # Project: Develop an Embedding + CNN Model for Sentiment Analysis
 Word embeddings are a technique for representing text where different words with similar
 meaning have a similar real-valued vector representation. They are a key breakthrough that has

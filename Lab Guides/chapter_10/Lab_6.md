@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # Project: Develop a Neural Bag-of-Words Model for Sentiment Analysis
 Movie reviews can be classified as either favorable or not. The evaluation of movie review text
 is a classification problem often called sentiment analysis. A popular technique for developing

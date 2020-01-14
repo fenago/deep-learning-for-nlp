@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 
 # How to Prepare Text Data with scikit-learn
 

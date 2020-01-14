@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 
 # How to Prepare Text Data With Keras
 You cannot feed raw text directly into deep learning models. Text data must be encoded as

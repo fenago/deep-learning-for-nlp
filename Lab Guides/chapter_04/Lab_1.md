@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # How to Develop Deep Learning Models With Keras
 
 Deep learning neural networks are very easy to create and evaluate in Python with Keras, but

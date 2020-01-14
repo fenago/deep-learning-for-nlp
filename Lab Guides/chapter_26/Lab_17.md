@@ -1,3 +1,6 @@
+<img align="right" src="../logo-small.png">
+
+
 # Project: Develop a Neural Image Caption Generation Model
 Caption generation is a challenging artificial intelligence problem where a textual description
 must be generated for a given photograph. It requires both methods from computer vision to
