@@ -1005,34 +1005,34 @@ Click notebook `4_cnn_model.ipynb` in jupterLab UI and run jupyter notebook.
 Click notebook `5_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
 
 
-# Extensions
+## Exercises
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
-- Data Cleaning. Explore better data cleaning, perhaps leaving some punctuation in tact
+
+- **Data Cleaning.** Explore better data cleaning, perhaps leaving some punctuation in tact
 or normalizing contractions.
-- Truncated Sequences. Padding all sequences to the length of the longest sequence
-might be extreme if the longest sequence is very different to all other reviews. Study the
+- **Truncated Sequences.** Padding all sequences to the length of the longest sequence
+might be extreme if the longest sequence is very different to all other reviews.** Study the
 distribution of review lengths and truncate reviews to a mean length.
-- Truncated Vocabulary. We removed infrequently occurring words, but still had a large
-vocabulary of more than 25,000 words. Explore further reducing the size of the vocabulary
+- **Truncated Vocabulary.** We removed infrequently occurring words, but still had a large
+vocabulary of more than 25,000 words.** Explore further reducing the size of the vocabulary
 and the effect on model skill.
-- Filters and Kernel Size. The number of filters and kernel size are important to model
-skill and were not tuned. Explore tuning these two CNN parameters.
-- Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
+- **Filters and Kernel Size.** The number of filters and kernel size are important to model
+skill and were not tuned.** Explore tuning these two CNN parameters.
+- **Epochs and Batch Size.** The model appears to fit the training dataset quickly.** Explore
 alternate configurations of the number of training epochs and batch size and use the test
 dataset as a validation set to pick a better stopping point for training the model.
-- Deeper Network. Explore whether a deeper network results in better skill, either in
+- **Deeper Network.** Explore whether a deeper network results in better skill, either in
 terms of CNN layers, MLP layers and both.
-- Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
+- **Pre-Train an Embedding.** Explore pre-training a Word2Vec word embedding in the
 model and the impact on model skill with and without further fine tuning during training.
-- Use GloVe Embedding. Explore loading the pre-trained GloVe embedding and the
+- **Use GloVe Embedding.** Explore loading the pre-trained GloVe embedding and the
 impact on model skill with and without further fine tuning during training.
-- Longer Test Reviews. Explore whether the skill of model predictions is dependent on
+- **Longer Test Reviews.** Explore whether the skill of model predictions is dependent on
 the length of movie reviews as suspected in the final section on evaluating the model.
-- Train Final Model. Train a final model on all available data and use it make predictions
+- **Train Final Model.** Train a final model on all available data and use it make predictions
 on real ad hoc movie reviews from the internet.
 
-If you explore any of these extensions, I'd love to know.
 
 ## Further Reading
 

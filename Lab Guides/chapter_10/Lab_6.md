@@ -1435,32 +1435,31 @@ Click notebook `7_compare_encodings.ipynb` in jupterLab UI and run jupyter noteb
 ##### Run Notebook
 Click notebook `8_prediction.ipynb` in jupterLab UI and run jupyter notebook.
 
-# Extensions
+## Exercises
 
 This section lists some extensions if you are looking to get more out of this tutorial.
-- Manage Vocabulary. Explore using a larger or smaller vocabulary. Perhaps you can
+
+- **Manage Vocabulary.** Explore using a larger or smaller vocabulary. Perhaps you can
 get better performance with a smaller set of words.
-- Tune the Network Topology. Explore alternate network topologies such as deeper or
-wider networks. Perhaps you can get better performance with a more suited network.
-- Use Regularization. Explore the use of regularization techniques, such as dropout.
+- **Tune the Network Topology.** Explore alternate network topologies such as deeper or
+wider networks.** Perhaps you can get better performance with a more suited network.
+- **Use Regularization.** Explore the use of regularization techniques, such as dropout.
 Perhaps you can delay the convergence of the model and achieve better test set performance.
-- More Data Cleaning. Explore more or less cleaning of the review text and see how it
+- **More Data Cleaning.** Explore more or less cleaning of the review text and see how it
 impacts the model skill.
-- Training Diagnostics. Use the test dataset as a validation dataset during training and
+- **Training Diagnostics.** Use the test dataset as a validation dataset during training and
 create plots of train and test loss. Use these diagnostics to tune the batch size and number
 of training epochs.
-- Trigger Words. Explore whether there are specific words in reviews that are highly
+- **Trigger Words.** Explore whether there are specific words in reviews that are highly
 predictive of the sentiment.
-- Use Bigrams. Prepare the model to score bigrams of words and evaluate the performance
+- **Use Bigrams.** Prepare the model to score bigrams of words and evaluate the performance
 under different scoring schemes.
-- Truncated Reviews. Explore how using a truncated version of the movie reviews results
+- **Truncated Reviews.** Explore how using a truncated version of the movie reviews results
 impacts model skill, try truncating the start, end and middle of reviews.
-- Ensemble Models. Create models with different word scoring schemes and see if using
+- **Ensemble Models.** Create models with different word scoring schemes and see if using
 ensembles of the models results in improves to model skill.
-- Real Reviews. Train a final model on all data and evaluate the model on real movie
+- **Real Reviews.** Train a final model on all data and evaluate the model on real movie
 reviews taken from the internet.
-
-If you explore any of these extensions, I'd love to know.
 
 #### Further Reading
 

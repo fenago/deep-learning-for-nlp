@@ -1594,40 +1594,40 @@ Click notebook `6_save_tokenizer.ipynb` in jupterLab UI and run jupyter notebook
 Click notebook `7_generate_description.ipynb` in jupterLab UI and run jupyter notebook.
 
 
-# Extensions
+## Exercises
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
-- Alternate Pre-Trained Image Models. A small 16-layer VGG model was used for
+
+- **Alternate Pre-Trained Image Models.** A small 16-layer VGG model was used for
 feature extraction. Consider exploring larger models that offer better performance on the
 ImageNet dataset, such as Inception.
-- Smaller Vocabulary. A larger vocabulary of nearly eight thousand words was used in
+- **Smaller Vocabulary.** A larger vocabulary of nearly eight thousand words was used in
 the development of the model. Many of the words supported may be misspellings or only
 used once in the entire dataset. Refine the vocabulary and reduce the size, perhaps by
 half.
-- Pre-trained Word Vectors. The model learned the word vectors as part of fitting the
+- **Pre-trained Word Vectors.** The model learned the word vectors as part of fitting the
 model. Better performance may be achieved by using word vectors either pre-trained on
 the training dataset or trained on a much larger corpus of text, such as news articles or
 Wikipedia.
-- Train Word2Vec Vectors. Pre-train word vectors using Word2Vec on the description
+- **Train Word2Vec Vectors.** Pre-train word vectors using Word2Vec on the description
 data and explore models that allow and don't allow fine tuning of the vectors during
 training, then compare skill.
-- Tune Model. The configuration of the model was not tuned on the problem. Explore
+- **Tune Model.** The configuration of the model was not tuned on the problem. Explore
 alternate configurations and see if you can achieve better performance.
-- Inject Architecture. Explore the inject architecture for caption generation and compare
+- **Inject Architecture.** Explore the inject architecture for caption generation and compare
 performance to the merge architecture used in this tutorial.
-- Alternate Framings. Explore alternate framings of the problems such as generating the
+- **Alternate Framings.** Explore alternate framings of the problems such as generating the
 entire sequence from the photo alone.
-- Pre-Train Language Model. Pre-train a language model for generating description
+- **Pre-Train Language Model.** Pre-train a language model for generating description
 text, then use it in the caption generation model and evaluate the impact on model
 training time and skill.
-- Truncate Descriptions. Only train the model on description at or below a specific
+- **Truncate Descriptions.** Only train the model on description at or below a specific
 number of words and explore truncating long descriptions to a preferred length. Evaluate
 the impact on training time and model skill.
-- Alternate Measure. Explore alternate performance measures beside BLEU such as
+- **Alternate Measure.** Explore alternate performance measures beside BLEU such as
 ROGUE. Compare scores for the same descriptions to develop an intuition for how the
 measures differ in practice.
 
-If you explore any of these extensions, I'd love to know.
 
 # Further Reading
 

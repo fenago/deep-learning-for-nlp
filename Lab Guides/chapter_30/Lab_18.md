@@ -866,33 +866,32 @@ Click notebook `3_train_model.ipynb` in jupterLab UI and run jupyter notebook.
 ##### Run Notebook
 Click notebook `4_generate.ipynb` in jupterLab UI and run jupyter notebook.
 
-# Extensions
+## Exercises
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
-- Data Cleaning. Different data cleaning operations could be performed on the data, such
+
+- **Data Cleaning.** Different data cleaning operations could be performed on the data, such
 as not removing punctuation or normalizing case, or perhaps removing duplicate English
 phrases.
-- Vocabulary. The vocabulary could be refined, perhaps removing words used less than 5
+- **Vocabulary.** The vocabulary could be refined, perhaps removing words used less than 5
 or 10 times in the dataset and replaced with unk.
-- More Data. The dataset used to fit the model could be expanded to 50,000, 100,000
+- **More Data.** The dataset used to fit the model could be expanded to 50,000, 100,000
 phrases, or more.
-- Input Order. The order of input phrases could be reversed, which has been reported to
+- **Input Order.** The order of input phrases could be reversed, which has been reported to
 lift skill, or a Bidirectional input layer could be used.
-- Layers. The encoder and/or the decoder models could be expanded with additional layers
+- **Layers.** The encoder and/or the decoder models could be expanded with additional layers
 and trained for more epochs, providing more representational capacity for the model.
-- Units. The number of memory units in the encoder and decoder could be increased,
+- **Units.** The number of memory units in the encoder and decoder could be increased,
 providing more representational capacity for the model.
-- Regularization. The model could use regularization, such as weight or activation
+- **Regularization.** The model could use regularization, such as weight or activation
 regularization, or the use of dropout on the LSTM layers.
-- Pre-Trained Word Vectors. Pre-trained word vectors could be used in the model.
-- Alternate Measure. Explore alternate performance measures beside BLEU such as
-ROGUE. Compare scores for the same translations to develop an intuition for how the
+- **Pre-Trained Word Vectors.** Pre-trained word vectors could be used in the model.
+- **Alternate Measure.** Explore alternate performance measures beside BLEU such as
+ROGUE.** Compare scores for the same translations to develop an intuition for how the
 measures differ in practice.
-- Recursive Model. A recursive formulation of the model could be used where the next
+- **Recursive Model.** A recursive formulation of the model could be used where the next
 word in the output sequence could be conditional on the input sequence and the output
 sequence generated so far.
-
-If you explore any of these extensions, I'd love to know.
 
 ###### Further Reading
 

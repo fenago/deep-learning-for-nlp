@@ -879,33 +879,32 @@ Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
 ##### Run Notebook
 Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
 
-# Extensions
+## Exercises
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
-- Contrived Seed Text. Hand craft or select seed text and evaluate how the seed text
+
+- **Contrived Seed Text. Hand craft or select seed text and evaluate how the seed text
 impacts the generated text, specifically the initial words or sentences generated.
-- Simplify Vocabulary. Explore a simpler vocabulary, perhaps with stemmed words or
+- **Simplify Vocabulary. Explore a simpler vocabulary, perhaps with stemmed words or
 stop words removed.
-- Data Cleaning. Consider using more or less cleaning of the text, perhaps leave in some
+- **Data Cleaning. Consider using more or less cleaning of the text, perhaps leave in some
 punctuation or perhaps replacing all fancy names with one or a handful. Evaluate how
 these changes to the size of the vocabulary impact the generated text.
-- Tune Model. Tune the model, such as the size of the embedding or number of memory
+- **Tune Model. Tune the model, such as the size of the embedding or number of memory
 cells in the hidden layer, to see if you can develop a better model.
-- Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
+- **Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
 dropout to see if you can develop a better model.
-- Develop Pre-Trained Embedding. Extend the model to use pre-trained Word2Vec
+- **Develop Pre-Trained Embedding. Extend the model to use pre-trained Word2Vec
 vectors to see if it results in a better model.
-- Use GloVe Embedding. Use the GloVe word embedding vectors with and without fine
+- **Use GloVe Embedding. Use the GloVe word embedding vectors with and without fine
 tuning by the network and evaluate how it impacts training and the generated words.
-- Sequence Length. Explore training the model with different length input sequences,
+- **Sequence Length. Explore training the model with different length input sequences,
 both shorter and longer, and evaluate how it impacts the quality of the generated text.
-- Reduce Scope. Consider training the model on one book (chapter) or a subset of
+- **Reduce Scope. Consider training the model on one book (chapter) or a subset of
 the original text and evaluate the impact on training, training speed and the resulting
 generated text.
-- Sentence-Wise Model. Split the raw data based on sentences and pad each sentence
+- **Sentence-Wise Model. Split the raw data based on sentences and pad each sentence
 to a fixed length (e.g. the longest sentence length).
-
-If you explore any of these extensions, I'd love to know.
 
 #### Further Reading
 

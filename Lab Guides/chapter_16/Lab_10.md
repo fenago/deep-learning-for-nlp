@@ -663,35 +663,35 @@ Click notebook `3_model.ipynb` in jupterLab UI and run jupyter notebook.
 ##### Run Notebook
 Click notebook `4_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
 
-# Extensions
+## Exercises
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
-- Different n-grams. Explore the model by changing the kernel size (number of n-grams)
+
+- **Different n-grams** Explore the model by changing the kernel size (number of n-grams)
 used by the channels in the model to see how it impacts model skill.
-- More or Fewer Channels. Explore using more or fewer channels in the model and see
+- **More or Fewer Channels** Explore using more or fewer channels in the model and see
 how it impacts model skill.
-- Shared Embedding. Explore configurations where each channel shares the same word
+- **Shared Embedding** Explore configurations where each channel shares the same word
 embedding and report on the impact on model skill.
-- Deeper Network. Convolutional neural networks perform better in computer vision
-when they are deeper. Explore using deeper models here and see how it impacts model
+- **Deeper Network** Convolutional neural networks perform better in computer vision
+when they are deeper** Explore using deeper models here and see how it impacts model
 skill.
-- Truncated Sequences. Padding all sequences to the length of the longest sequence
-might be extreme if the longest sequence is very different to all other reviews. Study the
+- **Truncated Sequences** Padding all sequences to the length of the longest sequence
+might be extreme if the longest sequence is very different to all other reviews** Study the
 distribution of review lengths and truncate reviews to a mean length.
-- Truncated Vocabulary. We removed infrequently occurring words, but still had a large
-vocabulary of more than 25,000 words. Explore further reducing the size of the vocabulary
+- **Truncated Vocabulary** We removed infrequently occurring words, but still had a large
+vocabulary of more than 25,000 words** Explore further reducing the size of the vocabulary
 and the effect on model skill.
-- Epochs and Batch Size. The model appears to fit the training dataset quickly. Explore
+- **Epochs and Batch Size** The model appears to fit the training dataset quickly** Explore
 alternate configurations of the number of training epochs and batch size and use the test
 dataset as a validation set to pick a better stopping point for training the model.
-- Pre-Train an Embedding. Explore pre-training a Word2Vec word embedding in the
+- **Pre-Train an Embedding** Explore pre-training a Word2Vec word embedding in the
 model and the impact on model skill with and without further fine tuning during training.
-- Use GloVe Embedding. Explore loading the pre-trained GloVe embedding and the
+- **Use GloVe Embedding** Explore loading the pre-trained GloVe embedding and the
 impact on model skill with and without further fine tuning during training.
-- Train Final Model. Train a final model on all available data and use it make predictions
+- **Train Final Model** Train a final model on all available data and use it make predictions
 on real ad hoc movie reviews from the internet.
 
-If you explore any of these extensions, I'd love to know.
 
 # Further Reading
 
