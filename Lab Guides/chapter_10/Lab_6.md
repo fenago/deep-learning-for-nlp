@@ -58,13 +58,14 @@ section, we will look at 3 things:
 2. Loading and cleaning the data to remove punctuation and numbers.
 3. Defining a vocabulary of preferred words.
 
-Split into Train and Test Sets
+### Split into Train and Test Sets
 
 We are pretending that we are developing a system that can predict the sentiment of a textual
 movie review as either positive or negative. This means that after the model is developed, we
 will need to make predictions on new textual reviews. This will require all of the same data
 preparation to be performed on those new reviews as is performed on the training data for the
 model.
+
 We will ensure that this constraint is built into the evaluation of our models by splitting the
 training and test datasets prior to any data preparation. This means that any knowledge in the
 test set that could help us better prepare the data (e.g. the words used) is unavailable during
@@ -74,17 +75,13 @@ positive reviews and the last 100 negative reviews as a test set (100 reviews) a
 be imposed easily by using the filenames of the reviews where reviews named 000 to 899 are for
 training data and reviews named 900 onwards are for testing the model.
 
-2
-
-Loading and Cleaning Reviews
+### Loading and Cleaning Reviews
 
 The text data is already pretty clean, so not much preparation is required. Without getting too
 much into the details, we will prepare the data using the following method:
 - Split tokens on white space.
 
-Data Preparation
-
-87
+### Data Preparation
 
 - Remove all punctuation from words.
 - Remove all words that are not purely comprised of alphabetical characters.
@@ -358,8 +355,7 @@ save_list(tokens, 'vocab.txt')
 
 ```
 
-
-Bag-of-Words Representation
+### Bag-of-Words Representation
 
 Running the above example with this addition shows that the vocabulary size drops by a
 little more than half its size, from about 44,000 to about 25,000 words.
@@ -630,6 +626,9 @@ return lines
 
 Similarly, the load clean dataset() dataset must be updated to load either train or test
 data and ensure it returns an NumPy array.
+
+
+```
 # load and clean a dataset
 def load_clean_dataset(vocab, is_train):
 # load documents
@@ -645,6 +644,9 @@ return docs, labels
 ```
 
 We can put all of this together in a single example.
+
+
+```
 import string
 import re
 from os import listdir
@@ -1489,7 +1491,7 @@ https://docs.python.org/3/library/collections.html
 - Tokenizer Keras API.
 https://keras.io/preprocessing/text/#tokenizer
 
-Summary
+## Summary
 
 In this tutorial, you discovered how to develop a bag-of-words model for predicting the sentiment
 of movie reviews. Specifically, you learned:
