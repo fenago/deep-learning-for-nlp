@@ -50,6 +50,12 @@ In this tutorial, we will use the Flickr8k dataset. This dataset was introduced 
 #### Download Dataset
 Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 
+There should be terminal opened already. You can also open New terminal by Clicking `File` > `New` > `Terminal` from the top menu. Run following command in the terminal:
+
+**Terminal:** `cd ~/work/deep-learning-for-nlp/chapter_26` 
+
+Then, download the dataset(s) by running:
+
 `curl -L  https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip -o Flickr8k_Dataset.zip`
 
 `unzip Flickr8k_Dataset.zip`
@@ -191,14 +197,15 @@ dump(features, open('features.pkl', 'wb'))
 
 ```
 
+##### Run Notebook
+Click notebook `1_extract_features.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this data preparation step may take a while depending on your hardware, perhaps
 one hour on the CPU with a modern workstation. At the end of the run, you will have
 the extracted features stored in features.pkl for later use. This file will be a few hundred
 Megabytes in size.
 
-26.4
-
-Prepare Text Data
+### Prepare Text Data
 
 The dataset contains multiple descriptions for each photograph and the text of the descriptions
 requires some minimal cleaning. Note, a fuller investigation into how this text data can
@@ -417,6 +424,10 @@ save_descriptions(descriptions, 'descriptions.txt')
 
 ```
 
+##### Run Notebook
+Click notebook `2_data_prep.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example first prints the number of loaded photo descriptions (8,092) and the
 size of the clean vocabulary (8,763 words).
 
@@ -447,9 +458,7 @@ stadium full of people watch game
 ```
 
 
-26.5
-
-Develop Deep Learning Model
+# Develop Deep Learning Model
 
 In this section, we will define the deep learning model and fit it on the training dataset. This
 section is divided into the following parts:
@@ -614,6 +623,9 @@ print('Photos: train=%d' % len(train_features))
 
 ```
 
+##### Run Notebook
+Click notebook `3_load_prepared_data.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this example first loads the 6,000 photo identifiers in the test dataset. These
 features are then used to filter and load the cleaned description text and the pre-computed
 photo features. We are nearly there.
@@ -685,7 +697,6 @@ endseq
 
 ```
 
-sequences
 Later, when the model is used to generate descriptions, the generated words will be concatenated and recursively provided as input to generate a caption for an image. The function
 below named create sequences(), given the tokenizer, a maximum sequence length, and the
 dictionary of all descriptions and photos, will transform the data into input-output pairs of data
@@ -799,9 +810,7 @@ and the two streams of input.
 
 ![](./342-30.png)
 
-26.5.3
-
-Fitting the Model
+**Fitting the Model**
 
 Now that we know how to define the model, we can fit it on the training dataset. The model
 learns fast and quickly overfits the training dataset. For this reason, we will monitor the skill
@@ -1008,6 +1017,9 @@ model.fit([X1train, X2train], ytrain, epochs=20, verbose=2, callbacks=[checkpoin
 validation_data=([X1test, X2test], ytest))
 
 ```
+
+##### Run Notebook
+Click notebook `4_train_model.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example first prints a summary of the loaded training and development datasets.
 
@@ -1309,6 +1321,9 @@ evaluate_model(model, test_descriptions, test_features, tokenizer, max_length)
 
 ```
 
+##### Run Notebook
+Click notebook `5_evaluate_model.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints the BLEU scores. We can see that the scores fit within the
 expected range of a skillful model on the problem. The chosen model configuration is by no
 means optimized.
@@ -1325,15 +1340,14 @@ BLEU-4: 0.062847
 ```
 
 
-26.7
-
-Generate New Captions
+# Generate New Captions
 
 Now that we know how to develop and evaluate a caption generation model, how can we use it?
 Almost everything we need to generate captions for entirely new photographs is in the model
 file. We also need the Tokenizer for encoding generated words for the model while generating
 a sequence, and the maximum length of input sequences, used when we defined the model (e.g.
 34).
+
 We can hard code the maximum sequence length. With the encoding of text, we can create
 the tokenizer and save it to a file so that we can load it quickly whenever we need it without
 needing the entire Flickr8K dataset. An alternative would be to use our own vocabulary file
@@ -1410,6 +1424,9 @@ tokenizer = create_tokenizer(train_descriptions)
 dump(tokenizer, open('tokenizer.pkl', 'wb'))
 
 ```
+
+##### Run Notebook
+Click notebook `6_save_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
 
 We can now load the tokenizer whenever we need it without having to load the entire training
 dataset of annotations. Now, let's generate a description for a new photograph. Below is a new
@@ -1561,6 +1578,9 @@ print(description)
 
 ```
 
+##### Run Notebook
+Click notebook `7_generate_description.ipynb` in jupterLab UI and run jupyter notebook.
+
 In this case, the description generated was as follows:
 
 ```
@@ -1570,29 +1590,6 @@ dog is running across the beach
 
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
-
-
-##### Run Notebook
-Click notebook `1_extract_features.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_data_prep.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_load_prepared_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_evaluate_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `6_save_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `7_generate_description.ipynb` in jupterLab UI and run jupyter notebook.
-
 
 ## Exercises
 

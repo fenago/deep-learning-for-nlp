@@ -97,6 +97,9 @@ file.close()
 
 ```
 
+##### Run Notebook
+Click notebook `01_load_file.ipynb` in jupterLab UI and run jupyter notebook.
+
 This loads the document as ASCII and preserves any white space, like new lines. We can
 turn this into a function called load doc() that takes a filename of the document to load and
 returns the text.
@@ -145,6 +148,10 @@ print('Loaded %s' % filename)
 
 ```
 
+
+##### Run Notebook
+Click notebook `02_load_all_files.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this example prints the filename of each review after it is loaded.
 
 ```
@@ -189,6 +196,9 @@ process_docs(directory)
 
 ```
 
+##### Run Notebook
+Click notebook `03_load_all_files_with_func.ipynb` in jupterLab UI and run jupyter notebook.
+
 Now that we know how to load the movie review text data, let's look at cleaning it.
 
 
@@ -222,6 +232,10 @@ tokens = text.split()
 print(tokens)
 
 ```
+
+
+##### Run Notebook
+Click notebook `04_load_and_split.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example gives a nice long list of raw tokens from the document.
 
@@ -287,6 +301,9 @@ print(tokens)
 
 ```
 
+##### Run Notebook
+Click notebook `05_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example gives a much cleaner looking list of tokens.
 
 ```
@@ -340,6 +357,9 @@ print(tokens)
 
 ```
 
+##### Run Notebook
+Click notebook `06_clean_review_func.ipynb` in jupterLab UI and run jupyter notebook.
+
 Again, the cleaning procedure seems to produce a good set of tokens, at least as a first cut.
 
 ```
@@ -387,6 +407,7 @@ tokens = clean_doc(doc)
 vocab.update(tokens)
 
 ```
+
 
 Finally, we can use our template above for processing all documents in a directory called
 process docs() and update it to call add doc to vocab().
@@ -470,6 +491,9 @@ print(len(vocab))
 print(vocab.most_common(50))
 
 ```
+
+##### Run Notebook
+Click notebook `07_clean_and_build_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example creates a vocabulary with all documents in the dataset, including
 positive and negative reviews. We can see that there are a little over 46,000 unique words across
@@ -597,6 +621,10 @@ save_list(tokens, 'vocab.txt')
 
 ```
 
+
+##### Run Notebook
+Click notebook `08_build_vocabulary.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this final snippet after creating the vocabulary will save the chosen words to file. It
 is a good idea to take a look at, and even study, your chosen vocabulary in order to get ideas
 for better preparing this data, or text data in the future.
@@ -642,6 +670,10 @@ vocab = load_doc(vocab_filename)
 vocab = vocab.split()
 vocab = set(vocab)
 ```
+
+##### Run Notebook
+Click notebook `09_load_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
 
 Next, we can clean the reviews, use the loaded vocab to filter out unwanted tokens, and
 save the clean reviews in a new file. One approach could be to save all the positive reviews
@@ -772,34 +804,6 @@ Running the example saves two new files, negative.txt and positive.txt, that con
 prepared negative and positive reviews respectively. The data is ready for use in a bag-of-words
 or even word embedding model.
 
-
-
-##### Run Notebook
-Click notebook `01_load_file.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `02_load_all_files.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `03_load_all_files_with_func.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `04_load_and_split.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `05_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `06_clean_review_func.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `07_clean_and_build_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `08_build_vocabulary.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `09_load_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
 ##### Run Notebook
 Click notebook `10_save_clean_filtered_reviews.ipynb` in jupterLab UI and run jupyter notebook.

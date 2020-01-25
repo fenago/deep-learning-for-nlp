@@ -56,9 +56,7 @@ has led to breakthrough performance with deep neural networks on problems like m
 translation. In this tutorial, we are going to look at how to use two different word embedding
 methods called Word2Vec by researchers at Google and GloVe by researchers at Stanford.
 
-12.3
-
-Gensim Python Library
+### Gensim Python Library
 
 Gensim is an open source Python library for natural language processing, with a focus on topic
 modeling. It is billed as “topic modeling for humans”. Gensim was developed and is maintained
@@ -79,9 +77,7 @@ sudo pip install -U gensim
 If you need help installing Gensim on your system, you can see the Gensim Installation
 Instructions (linked at the end of the chapter).
 
-12.4
-
-Develop Word2Vec Embedding
+### Develop Word2Vec Embedding
 
 Word2Vec is one algorithm for learning a word embedding from a text corpus. There are two
 main training algorithms that can be used to learn the embedding from text; they are Continuous
@@ -197,6 +193,10 @@ print(new_model)
 
 ```
 
+##### Run Notebook
+Click notebook `1_example_word2vec.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example prints the following output.
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
@@ -237,9 +237,7 @@ Word2Vec(vocab=14, size=100, alpha=0.025)
 You can see that with a little work to prepare your text document, you can create your own
 word embedding very easily with Gensim.
 
-12.5
-
-Visualize Word Embedding
+### Visualize Word Embedding
 
 After you learn word embedding for your text data, it can be nice to explore it with visualization.
 You can use classical projection methods to reduce the high-dimensional word vectors to twodimensional plots and plot them on a graph. The visualizations can provide a qualitative
@@ -310,6 +308,10 @@ pyplot.show()
 
 ```
 
+
+##### Run Notebook
+Click notebook `2_plot_model.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example creates a scatter plot with the dots annotated with the words. It is
 hard to pull much meaning out of the graph given such a tiny corpus was used to fit the model.
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
@@ -317,9 +319,7 @@ running the example a few times.
 
 ![](./145-11.png)
 
-12.6
-
-Load Google's Word2Vec Embedding
+**Load Google's Word2Vec Embedding**
 
 Training your own word vectors may be the best approach for a given NLP problem. But it
 can take a long time, a fast computer with a lot of RAM and disk space, and perhaps some
@@ -335,6 +335,12 @@ vectors. It is a 1.53 Gigabyte file. You can download it from here:
 
 #### Download Dataset
 Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
+
+There should be terminal opened already. You can also open New terminal by Clicking `File` > `New` > `Terminal` from the top menu. Run following command in the terminal:
+
+**Terminal:** `cd ~/work/deep-learning-for-nlp/chapter_12` 
+
+Then, download the dataset(s) by running:
 
 ```
 filename="GoogleNews-vectors-negative300.bin.gz"
@@ -389,6 +395,9 @@ result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1
 print(result)
 ```
 
+##### Run Notebook
+Click notebook `3_word_vector_arithmetic.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example loads the Google pre-trained Word2Vec model and then calculates the
 (king - man) + woman = ? operation on the word vectors for those words. The answer, as we
 would expect, is queen.
@@ -429,6 +438,12 @@ direct download link is here:
 
 #### Download Dataset
 Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
+
+There should be terminal opened already. You can also open New terminal by Clicking `File` > `New` > `Terminal` from the top menu. Run following command in the terminal:
+
+**Terminal:** `cd ~/work/deep-learning-for-nlp/chapter_12` 
+
+Then, download the dataset(s) by running:
 
 `curl -L  http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip -o glove.6B.zip`
 
@@ -478,26 +493,15 @@ print(result)
 
 ```
 
+##### Run Notebook
+Click notebook `4_example_glove.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints the same result of queen.
 
 ```
 [('queen', 0.7698540687561035)]
 
 ```
-
-
-##### Run Notebook
-Click notebook `1_example_word2vec.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_plot_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_word_vector_arithmetic.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_example_glove.ipynb` in jupterLab UI and run jupyter notebook.
-
 
 # Further Reading
 

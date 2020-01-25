@@ -214,11 +214,14 @@ print('[%s] => [%s]' % (clean_pairs[i,0], clean_pairs[i,1]))
 
 ```
 
+##### Run Notebook
+Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example creates a new file in the current working directory with the cleaned
 text called english-german.pkl. Some examples of the clean text are printed for us to evaluate
 at the end of the run to confirm that the clean operations were performed as expected.
 
-Split Text
+### Split Text
 
 The clean data contains a little over 150,000 phrase pairs and some of the pairs toward the end
 of the file are very long. This is a good number of examples for developing a small translation
@@ -262,13 +265,18 @@ save_clean_data(test, 'english-german-test.pkl')
 
 ```
 
+
+##### Run Notebook
+Click notebook `2_split_data.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example creates three new files: the english-german-both.pkl that contains
 all of the train and test examples that we can use to define the parameters of the problem,
 such as max phrase lengths and the vocabulary, and the english-german-train.pkl and
 english-german-test.pkl files for the train and test dataset. We are now ready to start
 developing our translation model.
 
-Train Neural Translation Model
+### Train Neural Translation Model
 
 In this section, we will develop the translation model. This involves both loading and preparing
 the clean text data ready for modeling and defining and training the model on the prepared
@@ -516,6 +524,10 @@ model.fit(trainX, trainY, epochs=30, batch_size=64, validation_data=(testX, test
 callbacks=[checkpoint], verbose=2)
 
 ```
+
+##### Run Notebook
+Click notebook `3_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
 
 Running the example first prints a summary of the parameters of the dataset such as
 vocabulary size and maximum phrase lengths.
@@ -798,6 +810,9 @@ evaluate_model(model, testX, test)
 
 ```
 
+##### Run Notebook
+Click notebook `4_generate.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example first prints examples of source text, expected and predicted translations,
 as well as scores for the training dataset, followed by the test dataset. Your specific results will
 differ given the random shuffling of the dataset and the stochastic nature of neural networks.
@@ -806,6 +821,7 @@ and mostly correct. For example: 'ich liebe dich' was correctly translated to 'i
 We can also see that the translations were not perfect, with 'ich konnte nicht gehen' translated
 to i cant go instead of the expected 'i couldnt walk '. We can also see the BLEU-4 score of 0.51,
 which provides an upper bound on what we might expect from this model.
+
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
 
@@ -853,18 +869,6 @@ BLEU-3: 0.046129
 BLEU-4: 0.076238
 
 ```
-
-##### Run Notebook
-Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_split_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_generate.ipynb` in jupterLab UI and run jupyter notebook.
 
 ## Exercises
 

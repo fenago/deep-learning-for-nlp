@@ -54,17 +54,20 @@ Method for Automatic Evaluation of Machine Translation. The approach works by co
 matching n-grams in the candidate translation to n-grams in the reference text, where 1-gram
 or unigram would be each token and a bigram comparison would be each word pair. The
 comparison is made regardless of word order.
+
 The primary programming task for a BLEU implementor is to compare n-grams of
 the candidate with the n-grams of the reference translation and count the number
 of matches. These matches are position-independent. The more the matches, the
 better the candidate translation is.
 — BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
+
 The counting of matching n-grams is modified to ensure that it takes the occurrence of the
 words in the reference text into account, not rewarding a candidate translation that generates
 an abundance of reasonable words. This is referred to in the paper as modified n-gram precision.
 Unfortunately, MT systems can overgenerate “reasonable” words, resulting in improbable, but high-precision, translations [...] Intuitively the problem is clear: a
 reference word should be considered exhausted after a matching candidate word is
 identified. We formalize this intuition as the modified unigram precision.
+
 — BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
 The score is for comparing sentences, but a modified version that normalizes n-grams by
 their occurrence is also proposed for better scoring blocks of multiple sentences.
@@ -83,6 +86,7 @@ unless they are identical to a reference translation. For this reason, even a hu
 translator will not necessarily score 1. [...] on a test corpus of about 500 sentences
 (40 general news stories), a human translator scored 0.3468 against four references
 and scored 0.2571 against two references.
+
 — BLEU: a Method for Automatic Evaluation of Machine Translation, 2002.
 In addition to translation, we can use the BLEU score for other language generation problems
 with deep learning methods such as:
@@ -92,12 +96,12 @@ with deep learning methods such as:
 - Speech recognition.
 - And much more.
 
-Calculate BLEU Scores
+**Calculate BLEU Scores**
 
 The Python Natural Language Toolkit library, or NLTK, provides an implementation of the
 BLEU score that you can use to evaluate your generated text against a reference.
 
-Sentence BLEU Score
+**Sentence BLEU Score**
 
 NLTK provides the sentence bleu() function for evaluating a candidate sentence against one
 or more reference sentences. The reference sentences must be provided as a list of sentences
@@ -112,6 +116,9 @@ score = sentence_bleu(reference, candidate)
 print(score)
 
 ```
+
+##### Run Notebook
+Click notebook `01_sentence_bleu.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running this example prints a perfect score as the candidate matches one of the references
 exactly.
@@ -141,6 +148,9 @@ print(score)
 
 ```
 
+##### Run Notebook
+Click notebook `02_corpus_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints a perfect score as before.
 
 ```
@@ -148,14 +158,14 @@ Running the example prints a perfect score as before.
 
 ```
 
-Cumulative and Individual BLEU Scores
+**Cumulative and Individual BLEU Scores**
 
 The BLEU score calculations in NLTK allow you to specify the weighting of different n-grams
 in the calculation of the BLEU score. This gives you the flexibility to calculate different types
 of BLEU score, such as individual and cumulative n-gram scores. Let's take a look.
 
 
-Individual n-gram Scores
+**Individual n-gram Scores**
 
 An individual n-gram score is the evaluation of just matching grams of a specific order, such
 as single words (1-gram) or word pairs (2-gram or bigram). The weights are specified as a
@@ -172,6 +182,9 @@ print(score)
 
 ```
 
+##### Run Notebook
+Click notebook `03_individual_1gram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this example prints a score of 0.5.
 
 ```
@@ -186,64 +199,32 @@ We can repeat this example for individual n-grams from 1 to 4 as follows:
 from nltk.translate.bleu_score import sentence_bleu
 reference = [['this', 'is', 'a', 'test']]
 candidate = ['this', 'is', 'a', 'test']
-print('Individual 1-gram: %f' % sentence_bleu(reference,
-print('Individual 2-gram: %f' % sentence_bleu(reference,
-print('Individual 3-gram: %f' % sentence_bleu(reference,
-print('Individual 4-gram: %f' % sentence_bleu(reference,
-
-271
-
-candidate,
-candidate,
-candidate,
-candidate,
-
-weights=(1,
-weights=(0,
-weights=(0,
-weights=(0,
-
-0,
-1,
-0,
-0,
-
-0,
-0,
-1,
-0,
-
-0)))
-0)))
-0)))
-1)))
+print('Individual 1-gram: %f' % sentence_bleu(reference, candidate, weights=(1, 0, 0, 0)))
+print('Individual 2-gram: %f' % sentence_bleu(reference, candidate, weights=(0, 1, 0, 0)))
+print('Individual 3-gram: %f' % sentence_bleu(reference, candidate, weights=(0, 0, 1, 0)))
+print('Individual 4-gram: %f' % sentence_bleu(reference, candidate, weights=(0, 0, 0, 1)))
 
 ```
+
+
+##### Run Notebook
+Click notebook `04_individual_ngram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example gives the following results.
 
 ```
-Individual
-Individual
-Individual
-Individual
 
-1-gram:
-2-gram:
-3-gram:
-4-gram:
-
-1.000000
-1.000000
-1.000000
-1.000000
+Individual 1-gram: 1.000000
+Individual 2-gram: 1.000000
+Individual 3-gram: 1.000000
+Individual 4-gram: 1.000000
 
 ```
 
 Although we can calculate the individual BLEU scores, this is not how the method was
 intended to be used and the scores do not carry a lot of meaning, or seem that interpretable.
 
-Cumulative n-gram Scores
+# Cumulative n-gram Scores
 
 Cumulative scores refer to the calculation of individual n-gram scores at all orders from 1 to n and
 weighting them by calculating the weighted geometric mean. By default, the sentence bleu()
@@ -260,6 +241,9 @@ score = sentence_bleu(reference, candidate, weights=(0.25, 0.25, 0.25, 0.25))
 print(score)
 
 ```
+
+##### Run Notebook
+Click notebook `05_cumulative_4gram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running this example prints the following score:
 
@@ -288,34 +272,25 @@ print('Cumulative 4-gram: %f' % sentence_bleu(reference, candidate, weights=(0.2
 
 ```
 
+##### Run Notebook
+Click notebook `06_cumulative_ngram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints the following scores. They are quite different and more expressive
 than the They are quite different and more expressive than the standalone individual n-gram
 scores.
 
 ```
-Cumulative
-Cumulative
-Cumulative
-Cumulative
-
-1-gram:
-2-gram:
-3-gram:
-4-gram:
-
-0.750000
-0.500000
-0.632878
-0.707107
+Cumulative 1-gram: 0.750000
+Cumulative 2-gram: 0.500000
+Cumulative 3-gram: 0.632878
+Cumulative 4-gram: 0.707107
 
 ```
 
 It is common to report the cumulative BLEU-1 to BLEU-4 scores when describing the skill
 of a text generation system.
 
-24.5
-
-Worked Examples
+# Worked Examples
 
 In this section, we try to develop further intuition for the BLEU score with some examples. We
 work at the sentence level with a single reference sentence of the following:
@@ -337,6 +312,9 @@ print(score)
 
 ```
 
+##### Run Notebook
+Click notebook `07_example_perfect.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints a perfect match.
 
 ```
@@ -355,6 +333,9 @@ score = sentence_bleu(reference, candidate)
 print(score)
 
 ```
+
+##### Run Notebook
+Click notebook `08_example_one_word_diff.ipynb` in jupterLab UI and run jupyter notebook.
 
 This result is a slight drop in score.
 
@@ -375,6 +356,9 @@ print(score)
 
 ```
 
+##### Run Notebook
+Click notebook `09_example_two_words_diff.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example, we can see a linear drop in skill.
 
 ```
@@ -393,6 +377,9 @@ score = sentence_bleu(reference, candidate)
 print(score)
 
 ```
+
+##### Run Notebook
+Click notebook `10_example_all_diff.ipynb` in jupterLab UI and run jupyter notebook.
 
 We get the worse possible score.
 
@@ -414,6 +401,9 @@ print(score)
 
 ```
 
+##### Run Notebook
+Click notebook `11_example_shorter.ipynb` in jupterLab UI and run jupyter notebook.
+
 The score is much like the score when two words were wrong above.
 
 ```
@@ -434,6 +424,9 @@ print(score)
 
 ```
 
+##### Run Notebook
+Click notebook `12_example_longer.ipynb` in jupterLab UI and run jupyter notebook.
+
 Again, we can see that our intuition holds and the score is something like two words wrong.
 
 ```
@@ -452,6 +445,9 @@ score = sentence_bleu(reference, candidate)
 print(score)
 
 ```
+
+##### Run Notebook
+Click notebook `13_example_too_short.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running this example first prints a warning message indicating that the 3-gram and above
 part of the evaluation (up to 4-gram) cannot be performed. This is fair given we only have
@@ -475,46 +471,6 @@ Next, we can a score that is very low indeed.
 I encourage you to continue to play with examples. The math is pretty simple and I would
 also encourage you to read the paper and explore calculating the sentence-level score yourself in
 a spreadsheet.
-
-
-##### Run Notebook
-Click notebook `01_sentence_bleu.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `02_corpus_bleu.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `03_individual_1gram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `04_individual_ngram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `05_cumulative_4gram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `06_cumulative_ngram_bleu.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `07_example_perfect.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `08_example_one_word_diff.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `09_example_two_words_diff.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `10_example_all_diff.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `11_example_shorter.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `12_example_longer.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `13_example_too_short.ipynb` in jupterLab UI and run jupyter notebook.
 
 # Further Reading
 

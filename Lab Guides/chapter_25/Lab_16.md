@@ -64,6 +64,12 @@ The dataset is available for free.
 #### Download Dataset
 Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
 
+There should be terminal opened already. You can also open New terminal by Clicking `File` > `New` > `Terminal` from the top menu. Run following command in the terminal:
+
+**Terminal:** `cd ~/work/deep-learning-for-nlp/chapter_25` 
+
+Then, download the dataset(s) by running:
+
 `curl -L  https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_Dataset.zip -o Flickr8k_Dataset.zip`
 
 `unzip Flickr8k_Dataset.zip`
@@ -184,6 +190,9 @@ print('Loaded Images: %d' % len(images))
 
 ```
 
+##### Run Notebook
+Click notebook `01_load_photos.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this example prints the number of loaded images. It takes a few minutes to run.
 
 ```
@@ -270,14 +279,16 @@ dump(features, open('features.pkl', 'wb'))
 
 ```
 
+
+##### Run Notebook
+Click notebook `02_pre_calculate_features.ipynb` in jupterLab UI and run jupyter notebook.
+
 The example may take some time to complete, perhaps one hour. After all features are
 extracted, the dictionary is stored in the file features.pkl in the current working directory.
 These features can then be loaded later and used as input for training a language model. You
 could experiment with other types of pre-trained models in Keras.
 
-25.5
-
-How to Load Descriptions
+**How to Load Descriptions**
 
 It is important to take a moment to talk about the descriptions; there are a number available.
 The file Flickr8k.token.txt contains a list of image identifiers (used in the image filenames)
@@ -398,6 +409,10 @@ descriptions = load_descriptions(doc)
 print('Loaded: %d ' % len(descriptions))
 
 ```
+
+##### Run Notebook
+Click notebook `03_load_descriptions.ipynb` in jupterLab UI and run jupyter notebook.
+
 
 Running the example prints the number of loaded image descriptions.
 
@@ -536,6 +551,9 @@ print('Vocabulary Size: %d' % len(vocabulary))
 save_doc(descriptions, 'descriptions.txt')
 
 ```
+
+##### Run Notebook
+Click notebook `04_clean_descriptions.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example first loads 8,092 descriptions, cleans them, summarizes the vocabulary
 of 4,484 unique words, then saves them to a new file called descriptions.txt.
@@ -734,6 +752,9 @@ print(y.shape)
 
 ```
 
+##### Run Notebook
+Click notebook `05_whole_description_model.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example first prints the number of loaded image descriptions (8,092 photos),
 the dataset vocabulary size (4,485 words), the length of the longest description (28 words), then
 finally the shape of the data for fitting a prediction model in the form [samples, sequence length,
@@ -750,7 +771,7 @@ Description Length: 28
 As mentioned, outputting the entire sequence may be challenging for the model. We will
 look at a simpler model in the next section.
 
-Word-By-Word Model
+## Word-By-Word Model
 
 A simpler model for generating a caption for photographs is to generate one word given both
 the image as input and the last word generated. This model would then have to be called
@@ -760,6 +781,7 @@ This is the model used in prior research, such as: Show and Tell: A Neural Image
 Generator, 2015. A word embedding layer can be used to represent the input words. Like the
 feature extraction model for the photos, this too can be pre-trained either on a large corpus or
 on the dataset of all descriptions.
+
 The model would take a full sequence of words as input; the length of the sequence would be
 the maximum length of descriptions in the dataset. The model must be started with something.
 One approach is to surround each photo description with special tags to signal the start and
@@ -902,6 +924,9 @@ print(y.shape)
 
 ```
 
+##### Run Notebook
+Click notebook `06_word_by_word.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints the same statistics, but prints the size of the resulting encoded
 input and output sequences. Note that the input of images must follow the exact same ordering
 where the same photo is shown for each example drawn from a single description. One way
@@ -917,14 +942,14 @@ Description Length: 28
 
 ```
 
-
-Progressive Loading
+### Progressive Loading
 
 The Flicr8K dataset of photos and descriptions can fit into RAM, if you have a lot of RAM
 (e.g. 8 Gigabytes or more), and most modern systems do. This is fine if you want to fit a deep
 learning model using the CPU. Alternately, if you want to fit a model using a GPU, then you
 will not be able to fit the data into memory of an average GPU video card. One solution is to
 progressively load the photos and descriptions as-needed by the model.
+
 Keras supports progressively loaded datasets by using the fit generator() function on the
 model. A generator is the term used to describe a function used to return batches of samples
 for the model to train on. This can be as simple as a standalone function, the name of which is
@@ -932,11 +957,13 @@ passed to the fit generator() function when fitting the model. As a reminder, a 
 for multiple epochs, where one epoch is one pass through the entire training dataset, such as all
 photos. One epoch is comprised of multiple batches of examples where the model weights are
 updated at the end of each batch.
+
 A generator must create and yield one batch of examples. For example, the average sentence
 length in the dataset is 11 words; that means that each photo will result in 11 examples for
 fitting the model and two photos will result in about 22 examples on average. A good default
 batch size for modern hardware may be 32 examples, so that is about 2-3 photos worth of
 examples.
+
 We can write a custom generator to load a few photos and return the samples as a single
 batch. Let's assume we are working with a word-by-word model described in the previous
 section that expects a sequence of words and a prepared image as input and predicts a single
@@ -1140,6 +1167,10 @@ print(outputs.shape)
 
 ```
 
+##### Run Notebook
+Click notebook `07_progressive_loading.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example prints the shape of the input and output example for a single batch
 (e.g. 13 input-output pairs):
 
@@ -1163,27 +1194,6 @@ model.fit_generator(data_generator(descriptions, tokenizer, max_length),
 steps_per_epoch=70000, ...)
 
 ```
-
-##### Run Notebook
-Click notebook `01_load_photos.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `02_pre_calculate_features.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `03_load_descriptions.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `04_clean_descriptions.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `05_whole_description_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `06_word_by_word.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `07_progressive_loading.ipynb` in jupterLab UI and run jupyter notebook.
 
 ### Further Reading
 

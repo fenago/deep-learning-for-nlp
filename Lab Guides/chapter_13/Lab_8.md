@@ -228,7 +228,13 @@ print('Accuracy: %f' % (accuracy*100))
 
 ```
 
+
+##### Run Notebook
+Click notebook `1_embedding_example.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example first prints the integer encoded documents.
+
 ```
 [[6, 16], [42, 24], [2, 17], [42, 24], [18], [17], [22, 17], [27, 42], [22, 24], [49, 46,
 16, 34]]
@@ -304,6 +310,13 @@ The smallest package of embeddings is 822 Megabytes, called glove.6B.zip.
 
 #### Download Dataset
 Dataset is very huge. Before running the notebook, **download** the dataset and unzip it.
+
+There should be terminal opened already. You can also open New terminal by Clicking `File` > `New` > `Terminal` from the top menu. Run following command in the terminal:
+
+**Terminal:** `cd ~/work/deep-learning-for-nlp/chapter_13` 
+
+Then, download the dataset(s) by running:
+
 `curl -L  http://downloads.cs.stanford.edu/nlp/data/glove.6B.zip -o glove.6B.zip`
 
 `unzip glove.6B.zip`
@@ -480,6 +493,10 @@ print('Accuracy: %f' % (accuracy*100))
 
 ```
 
+##### Run Notebook
+Click notebook `2_pretrained_embedding.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example may take a bit longer, but then demonstrates that it is just as capable
 of fitting this simple problem.
 
@@ -494,13 +511,6 @@ Accuracy: 100.000000
 In practice, I would encourage you to experiment with learning a word embedding using
 a pre-trained embedding that is fixed and trying to perform learning on top of a pre-trained
 embedding. See what works best for your specific problem.
-
-
-##### Run Notebook
-Click notebook `1_embedding_example.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_pretrained_embedding.ipynb` in jupterLab UI and run jupyter notebook.
 
 
 # Tips for Cleaning Text for Word Embedding

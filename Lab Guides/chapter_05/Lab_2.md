@@ -367,6 +367,9 @@ sentences = sent_tokenize(text)
 print(sentences[0])
 ```
 
+##### Run Notebook
+Click notebook `07_nltk_split_sentences.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example, we can see that although the document is split into sentences, that
 each sentence still preserves the new line from the artificial wrap of the lines in the original
 document.
@@ -394,6 +397,10 @@ file.close()
 tokens = word_tokenize(text)
 print(tokens[:100])
 ```
+
+
+##### Run Notebook
+Click notebook `08_nltk_split_words.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the code, we can see that punctuation are now tokens that we could then decide to
 specifically filter out.
@@ -431,6 +438,9 @@ words = [word for word in tokens if word.isalpha()]
 print(words[:100])
 ```
 
+##### Run Notebook
+Click notebook `09_nltk_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example, you can see that not only punctuation tokens, but examples like
 armour-like and 's were also filtered out.
 
@@ -461,6 +471,11 @@ from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 print(stop_words)
 ```
+
+
+##### Run Notebook
+Click notebook `10_nltk_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
+
 
 You can see the full list as follows:
 
@@ -518,6 +533,9 @@ words = [w for w in words if not w in stop_words]
 print(words[:100])
 ```
 
+##### Run Notebook
+Click notebook `11_nltk_filter_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this example, we can see that in addition to all of the other transforms, stop words
 like a and to have been removed. I note that we are still left with tokens like nt. The rabbit
 hole is deep; there's always more we can do.
@@ -565,6 +583,10 @@ stemmed = [porter.stem(word) for word in tokens]
 print(stemmed[:100])
 ```
 
+
+##### Run Notebook
+Click notebook `12_nltk_stemming.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example, you can see that words have been reduced to their stems, such as
 trouble has become troubl. You can also see that the stemming implementation has also reduced
 the tokens to lowercase, likely for internal look-ups in word tables.
@@ -583,25 +605,6 @@ the tokens to lowercase, likely for internal look-ups in word tables.
 
 There is a nice suite of stemming and lemmatization algorithms to choose from in NLTK, if
 reducing words to their root is something you need for your project.
-
-
-##### Run Notebook
-Click notebook `07_nltk_split_sentences.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `08_nltk_split_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `09_nltk_remove_punctuation.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `10_nltk_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `11_nltk_filter_stop_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `12_nltk_stemming.ipynb` in jupterLab UI and run jupyter notebook.
 
 
 ### Exercise

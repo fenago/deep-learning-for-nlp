@@ -61,9 +61,7 @@ years which we have been describing.
 Save the cleaned version as republic clean.txt in your current working directory. The
 file should be about 15,802 lines of text. Now we can develop a language model from this text.
 
-20.3
-
-Data Preparation
+## Data Preparation
 
 We will start by preparing the data for modeling. The first step is to look at the data.
 
@@ -373,12 +371,13 @@ out_filename = 'republic_sequences.txt'
 save_doc(sequences, out_filename)
 ```
 
+##### Run Notebook
+Click notebook `1_prepare_text.ipynb` in jupterLab UI and run jupyter notebook.
+
 You should now have training data stored in the file republic sequences.txt in your
 current working directory. Next, let's look at how to fit a language model to this data.
 
-20.4
-
-Train Language Model
+**Train Language Model**
 
 We can now train a statistical language model from the prepared data. The model we will train
 is a neural language model. It has a few unique characteristics:
@@ -589,7 +588,11 @@ dump(tokenizer, open('tokenizer.pkl', 'wb'))
 ```
 
 
-Complete Example
+##### Run Notebook
+Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+
+## Complete Example
 
 We can put all of this together; the complete example for fitting the language model is listed
 below.
@@ -846,6 +849,10 @@ generated = generate_seq(model, tokenizer, seq_length, seed_text, 50)
 print(generated)
 ```
 
+##### Run Notebook
+Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example first prints the seed text.
 
 ```
@@ -870,40 +877,31 @@ help in interpreting the seed and the generated text. Nevertheless, the generate
 right kind of words in the right kind of order. Try running the example a few times to see other
 examples of generated text.
 
-##### Run Notebook
-Click notebook `1_prepare_text.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
-
 ## Exercises
 
 This section lists some ideas for extending the tutorial that you may wish to explore.
 
-- **Contrived Seed Text. Hand craft or select seed text and evaluate how the seed text
+- **Contrived Seed Text.** Hand craft or select seed text and evaluate how the seed text
 impacts the generated text, specifically the initial words or sentences generated.
-- **Simplify Vocabulary. Explore a simpler vocabulary, perhaps with stemmed words or
+- **Simplify Vocabulary.** Explore a simpler vocabulary, perhaps with stemmed words or
 stop words removed.
-- **Data Cleaning. Consider using more or less cleaning of the text, perhaps leave in some
+- **Data Cleaning.** Consider using more or less cleaning of the text, perhaps leave in some
 punctuation or perhaps replacing all fancy names with one or a handful. Evaluate how
 these changes to the size of the vocabulary impact the generated text.
-- **Tune Model. Tune the model, such as the size of the embedding or number of memory
+- **Tune Model.** Tune the model, such as the size of the embedding or number of memory
 cells in the hidden layer, to see if you can develop a better model.
-- **Deeper Model. Extend the model to have multiple LSTM hidden layers, perhaps with
+- **Deeper Model.** Extend the model to have multiple LSTM hidden layers, perhaps with
 dropout to see if you can develop a better model.
-- **Develop Pre-Trained Embedding. Extend the model to use pre-trained Word2Vec
+- **Develop Pre-Trained Embedding.** Extend the model to use pre-trained Word2Vec
 vectors to see if it results in a better model.
-- **Use GloVe Embedding. Use the GloVe word embedding vectors with and without fine
+- **Use GloVe Embedding.** Use the GloVe word embedding vectors with and without fine
 tuning by the network and evaluate how it impacts training and the generated words.
-- **Sequence Length. Explore training the model with different length input sequences,
+- **Sequence Length.** Explore training the model with different length input sequences,
 both shorter and longer, and evaluate how it impacts the quality of the generated text.
-- **Reduce Scope. Consider training the model on one book (chapter) or a subset of
+- **Reduce Scope.** Consider training the model on one book (chapter) or a subset of
 the original text and evaluate the impact on training, training speed and the resulting
 generated text.
-- **Sentence-Wise Model. Split the raw data based on sentences and pad each sentence
+- **Sentence-Wise Model.** Split the raw data based on sentences and pad each sentence
 to a fixed length (e.g. the longest sentence length).
 
 #### Further Reading

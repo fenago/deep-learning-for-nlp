@@ -125,6 +125,9 @@ print(tokens)
 ```
 
 
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
 ### Exercise
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
@@ -205,6 +208,11 @@ print('Saved: %s' % filename)
 
 ```
 
+
+##### Run Notebook
+Click notebook `2_clean_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 # Complete Example
 
 We can tie all of these data preparation steps together. The complete example is listed below.
@@ -253,11 +261,6 @@ if not is_train and not filename.startswith('cv9'):
 continue
 # create the full path of the file to open
 path = directory + '/' + filename
-
-16.4. Develop Multichannel Model
-
-179
-
 # load the doc
 doc = load_doc(path)
 # clean doc
@@ -291,9 +294,7 @@ Running the example cleans the text movie review documents, creates labels, and 
 prepared data for both train and test datasets in train.pkl and test.pkl respectively. Now
 we are ready to develop our model.
 
-16.4
-
-Develop Multichannel Model
+## Develop Multichannel Model
 
 In this section, we will develop a multichannel convolutional neural network for the sentiment
 analysis prediction problem. This section is divided into 3 parts:
@@ -361,7 +362,7 @@ return padded
 
 ```
 
-Define Model
+## Define Model
 
 A standard model for document classification is to use an Embedding layer as input, followed by
 a one-dimensional convolutional neural network, pooling layer, and then a prediction output
@@ -523,6 +524,10 @@ model.fit([trainX,trainX,trainX], array(trainLabels), epochs=7, batch_size=16)
 model.save('model.h5')
 ```
 
+
+##### Run Notebook
+Click notebook `3_model.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example first prints a summary of the prepared training dataset.
 
 ```
@@ -637,6 +642,10 @@ print('Test Accuracy: %.2f' % (acc*100))
 
 ```
 
+##### Run Notebook
+Click notebook `4_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example prints the skill of the model on both the training and test datasets. We
 can see that, as expected, the skill on the training dataset is excellent, here at 100% accuracy.
 We can also see that the skill of the model on the unseen test dataset is also very impressive,
@@ -651,17 +660,6 @@ Test Accuracy: 88.50
 
 ```
 
-##### Run Notebook
-Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_clean_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
 
 ## Exercises
 

@@ -160,7 +160,7 @@ Total Sequences: 399
 ```
 
 
-Save Sequences
+**Save Sequences**
 
 Finally, we can save the prepared data to file so that we can load it later when we develop our
 model. Below is a function save doc() that, given a list of strings and a filename, will save the
@@ -186,7 +186,7 @@ save_doc(sequences, out_filename)
 
 ```
 
-Complete Example
+#### Complete Example
 
 Tying all of this together, the complete code listing is provided below.
 
@@ -227,6 +227,10 @@ save_doc(sequences, out_filename)
 
 ```
 
+
+##### Run Notebook
+Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
+
 Run the example to create the char sequences.txt file. Take a look inside you should see
 something like the following:
 
@@ -247,14 +251,14 @@ ng of sixpe
 
 We are now ready to train our character-based neural language model.
 
-Train Language Model
+**Train Language Model**
 
 In this section, we will develop a neural language model for the prepared sequence data. The
 model will read encoded characters and predict the next character in the sequence. A Long
 Short-Term Memory recurrent neural network hidden layer will be used to learn the context
 from the input sequence in order to make the predictions.
 
-Load Data
+**Load Data**
 
 The first step is to load the prepared character sequence data from char sequences.txt. We
 can use the same load doc() function developed in the previous section. Once loaded, we split
@@ -277,7 +281,7 @@ lines = raw_text.split('\n')
 
 ```
 
-Encode Sequences
+**Encode Sequences**
 
 The sequences of characters must be encoded as integers. This means that each unique character
 will be assigned a specific integer value and each sequence of characters will be encoded as a
@@ -495,6 +499,10 @@ dump(mapping, open('mapping.pkl', 'wb'))
 
 ```
 
+##### Run Notebook
+Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example might take one minute. You will see that the model learns the problem
 well, perhaps too well for generating surprising sequences of characters.
 
@@ -674,6 +682,9 @@ print(generate_seq(model, mapping, 10, 'hello worl', 20))
 
 ```
 
+##### Run Notebook
+Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example generates three sequences of text. The first is a test to see how the
 model does at starting from the beginning of the rhyme. The second is a test to see how well it
 does at beginning in the middle of a line. The final example is a test to see how well it does
@@ -692,16 +703,6 @@ hello worls e pake wofey. The
 
 We can see that the model did very well with the first two examples, as we would expect.
 We can also see that the model still generated something for the new text, but it is nonsense.
-
-##### Run Notebook
-Click notebook `1_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_train_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_generate.ipynb` in jupterLab UI and run jupyter notebook.
-
 
 # Further Reading
 

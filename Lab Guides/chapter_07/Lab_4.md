@@ -58,6 +58,9 @@ print(result)
 
 ```
 
+##### Run Notebook
+Click notebook `1_split_words.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example creates an array containing all of the words in the document. The list
 of words is printed for review.
 
@@ -65,6 +68,11 @@ of words is printed for review.
 ['the', 'quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog']
 
 ```
+
+
+##### Run Notebook
+Click notebook `2_prepare_vocab.ipynb` in jupterLab UI and run jupyter notebook.
+
 
 This is a good first step, but further pre-processing is required before you can work with the
 text.
@@ -122,6 +130,10 @@ print(result)
 
 ```
 
+##### Run Notebook
+Click notebook `3_one_hot_encode.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example first prints the size of the vocabulary as 8. The encoded document is
 then printed as an array of integer encoded words.
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
@@ -160,6 +172,9 @@ result = hashing_trick(text, round(vocab_size*1.3), hash_function='md5')
 print(result)
 
 ```
+
+##### Run Notebook
+Click notebook `4_hash_encode.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example prints the size of the vocabulary and the integer encoded document.
 We can see that the use of a different hash function results in consistent, but different integers
@@ -253,6 +268,10 @@ print(encoded_docs)
 
 ```
 
+##### Run Notebook
+Click notebook `5_example_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example fits the Tokenizer with 5 small documents. The details of the fit
 Tokenizer are printed. Then the 5 documents are encoded using a word count. Each document
 is encoded as a 9-element vector with one position for each word and the chosen encoding
@@ -277,20 +296,6 @@ OrderedDict([('well', 1), ('done', 1), ('good', 1), ('work', 2), ('great', 1), (
 The Tokenizer will be the key way we will prepare text for word embeddings throughout
 this course.
 
-##### Run Notebook
-Click notebook `1_split_words.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_prepare_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_one_hot_encode.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_hash_encode.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_example_tokenizer.ipynb` in jupterLab UI and run jupyter notebook.
 
 # Further Reading
 

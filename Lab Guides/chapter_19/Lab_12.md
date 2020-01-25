@@ -353,6 +353,10 @@ print(generate_seq(model, tokenizer, 'Jack', 6))
 
 ```
 
+
+##### Run Notebook
+Click notebook `1_model1.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example prints the loss and accuracy each training epoch.
 
 ```
@@ -591,6 +595,9 @@ print(generate_seq(model, tokenizer, max_length-1, 'Jill', 4))
 
 ```
 
+##### Run Notebook
+Click notebook `2_model2.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running the example achieves a better fit on the source data. The added context has allowed
 the model to disambiguate some of the examples. There are still two lines of text that start
 with “Jack ” that may still be a problem for the network.
@@ -735,6 +742,11 @@ print(generate_seq(model, tokenizer, max_length-1, 'pail of', 5))
 
 ```
 
+
+##### Run Notebook
+Click notebook `3_model3.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example again gets a good fit on the source text at around 95% accuracy.
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.
@@ -784,15 +796,6 @@ how the model will be used must be compatible. That careful design is required w
 language models in general, perhaps followed-up by spot testing with sequence generation to
 confirm model requirements have been met.
 
-
-##### Run Notebook
-Click notebook `1_model1.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_model2.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_model3.ipynb` in jupterLab UI and run jupyter notebook.
 
 # Further Reading
 

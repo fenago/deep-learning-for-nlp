@@ -378,11 +378,11 @@ label = label[0][0]
 print('%s (%.2f%%)' % (label[1], label[2]*100))
 ```
 
-Running the example, we can see that the image is correctly classified as a coffee mug with
-a 75% likelihood.
-
 ##### Run Notebook
 Click notebook `1_classify_image.ipynb` in jupterLab UI and run jupyter notebook.
+
+Running the example, we can see that the image is correctly classified as a coffee mug with
+a 75% likelihood.
 
 **Note:**  Given the stochastic nature of neural networks, your specific results may vary. Consider
 running the example a few times.

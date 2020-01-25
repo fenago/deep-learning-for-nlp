@@ -130,6 +130,11 @@ print(tokens)
 
 ```
 
+
+
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
 ### Exercise
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore, and I leave them as further exercises. I'd love to see what you can
@@ -224,6 +229,10 @@ print(len(vocab))
 print(vocab.most_common(50))
 
 ```
+
+
+##### Run Notebook
+Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example shows that we have a vocabulary of 44,276 words. We also can see
 a sample of the top 50 most used words in the movie reviews. Note that this vocabulary was
@@ -354,6 +363,10 @@ print(len(tokens))
 save_list(tokens, 'vocab.txt')
 
 ```
+
+
+##### Run Notebook
+Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
 ### Bag-of-Words Representation
 
@@ -557,6 +570,10 @@ print(len(docs), len(labels))
 
 ```
 
+
+##### Run Notebook
+Click notebook `4_filter_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
+
 Running this example loads and cleans the review text and returns the labels.
 
 ```
@@ -733,6 +750,10 @@ Xtest = tokenizer.texts_to_matrix(test_docs, mode='freq')
 print(Xtrain.shape, Xtest.shape)
 
 ```
+
+
+##### Run Notebook
+Click notebook `5_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example prints both the shape of the encoded training dataset and test dataset
 with 1,800 and 200 documents respectively, each with the same sized encoding vocabulary
@@ -920,6 +941,9 @@ loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
 
 ```
+
+##### Run Notebook
+Click notebook `6_mlp_bow_model.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example first prints a summary of the defined model.
 
@@ -1179,6 +1203,10 @@ pyplot.show()
 
 ```
 
+##### Run Notebook
+Click notebook `7_compare_encodings.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 At the end of the run, summary statistics for each word scoring method are provided,
 summarizing the distribution of model skill scores across each of the 10 runs per mode. We can
 see that the mean score of both the count and binary methods appear to be better than freq
@@ -1399,6 +1427,10 @@ print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
 ```
 
+##### Run Notebook
+Click notebook `8_prediction.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example correctly classifies these reviews.
 
 ```
@@ -1412,30 +1444,6 @@ Sentiment: NEGATIVE (64.404%)
 Ideally, we would fit the model on all available data (train and test) to create a final model
 and save the model and tokenizer to file so that they can be loaded and used in new software.
 
-
-##### Run Notebook
-Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_filter_all_reviews.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_prepare_data.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `6_mlp_bow_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `7_compare_encodings.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `8_prediction.ipynb` in jupterLab UI and run jupyter notebook.
 
 ## Exercises
 

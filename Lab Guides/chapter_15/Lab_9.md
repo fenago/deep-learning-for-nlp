@@ -127,6 +127,9 @@ print(tokens)
 ```
 
 
+##### Run Notebook
+Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
+
 ### Exercise
 Running the example prints a long list of clean tokens. There are many more cleaning steps
 we may want to explore and I leave them as further exercises.
@@ -217,6 +220,10 @@ print(len(vocab))
 print(vocab.most_common(50))
 
 ```
+
+
+##### Run Notebook
+Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the example shows that we have a vocabulary of 44,276 words. We also can see
 a sample of the top 50 most used words in the movie reviews. Note that this vocabulary was
@@ -346,6 +353,10 @@ print(len(tokens))
 save_list(tokens, 'vocab.txt')
 
 ```
+
+
+##### Run Notebook
+Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
 
 Running the above example with this addition shows that the vocabulary size drops by a
 little more than half its size, from 44,276 to 25,767 words.
@@ -754,6 +765,10 @@ model.save('model.h5')
 
 ```
 
+##### Run Notebook
+Click notebook `4_cnn_model.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example will first provide a summary of the training dataset vocabulary (25,768)
 and maximum input sequence length in words (1,317). The example should run in a few minutes
 and the fit model will be saved to file.
@@ -968,6 +983,11 @@ print('Review: [%s]\nSentiment: %s (%.3f%%)' % (text, sentiment, percent*100))
 
 ```
 
+
+##### Run Notebook
+Click notebook `5_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
+
+
 Running the example first prints the skill of the model on the training and test dataset. We
 can see that the model achieves 100% accuracy on the training dataset and 87.5% on the test
 dataset, an impressive score.
@@ -988,22 +1008,6 @@ Review: [This is a bad movie. Do not watch it. It sucks.]
 Sentiment: NEGATIVE (54.746%)
 
 ```
-
-##### Run Notebook
-Click notebook `1_clean_review.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `2_select_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `3_filter_vocab.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `4_cnn_model.ipynb` in jupterLab UI and run jupyter notebook.
-
-##### Run Notebook
-Click notebook `5_evaluate.ipynb` in jupterLab UI and run jupyter notebook.
-
 
 ## Exercises
 
